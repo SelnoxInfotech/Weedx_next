@@ -26,7 +26,7 @@ export default function Home({initialData}) {
   return (
     <>
     {state.permission===false && <Currentlocation></Currentlocation>} 
-        <HomePageBanner props={initialData.topbanner}></HomePageBanner>
+        <HomePageBanner props={initialData.topbanner}> </HomePageBanner>
         <CategoryProduct Category={initialData.category} ShowCategoryProduct={ShowCategoryProduct} Skeleton={false}></CategoryProduct>
         <DeliveryServices Skeleton={Skeleton} link={"weed-deliveries"} title={"Delivery services"}></DeliveryServices>
         <HomePageWeedBanner></HomePageWeedBanner>

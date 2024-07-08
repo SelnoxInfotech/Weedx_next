@@ -8378,3 +8378,1513 @@ background: #FFF;
 }
   }
   /* **************************End*************************** */
+
+
+
+  /* *******************Media Query ************************* */
+
+  @media(max-width:1024px) {
+
+    .sellerName_date {
+      font-size: 16px;
+    }
+  }
+  @media(max-width:1400px) {
+    .MyOrder_list {
+      gap: 105px;
+    }
+   
+  }
+  @media(max-width:1084px) {
+    .deliverySkeletonBox {
+      overflow-y: hidden;
+      height: 290px;
+    }
+  }
+  @media(max-width:900px) {
+    .descriptionContainer {
+      padding: 0px 8px;
+    }
+  }
+  @media only screen and (min-width: 992px) and (max-width:1199px) {
+    .CategorySliderImageBlock {
+      width:150px;
+      height: 200px;
+    }
+  }
+  
+  @media(max-width:1400px) {
+    .StoreDetailSideMenu_listItems {
+      font-size: 14px;
+    }
+  }
+  @media(max-width:1020px) {
+    .productCat_cont {
+      display: block;
+  
+  
+    }
+  
+    .prod_filter_icon {
+      display: none;
+    }
+    .filter_manu_items{
+      width: 16%;
+    }
+    .product_category_dropdown {
+      z-index: 1;
+      cursor: pointer;
+      border: 1px solid #E7E7E7;
+      margin-top: 0px;
+      background-color: #FFFFFF;
+      position: absolute;
+      /* max-width:fit-content */
+    }
+  
+    .product_Sorted_filter_dropdown {
+      position: absolute;
+      right: 10px;
+      width: 200px;
+      margin-top: 4px;
+      cursor: pointer;
+      border: 1px solid #E7E7E7;
+      background-color: #FFFFFF;
+    }
+  
+    .productFilter_sortedList li {
+      cursor: pointer;
+  
+    }
+  
+    .prodfilterSortedListGap {
+      display: flex;
+      gap: 10px;
+      height: 45px;
+    }
+  
+    .product_search_and_select {
+      display: block;
+    }
+  
+    /* .prod_cat_left_sec {
+      display: flex;
+    } */
+    .product_select {
+      display: flex;
+      justify-content: flex-start !important;
+      margin-left: -8px;
+    }
+  
+    .product_search_bar {
+      width: 99% !important;
+    }
+  
+    .prod_cat_left_sec {
+      overflow-x: scroll;
+      display: -webkit-box;
+      min-width: 100%;
+  
+    }
+  
+    .prod_cat_right_sec {
+      margin-top: 50px;
+    }
+  }
+  @media(max-width:1270px) {
+    .add_prod_Quant_btn {
+      width: 55px !important;
+    }
+  }
+  @media(max-width:1100px) {
+    .add_product_main_cont {
+      display: block;
+    }
+  
+    .add_product_img_continer {
+      width: 100% !important;
+    }
+  
+    .add_product_content_cont {
+      width: 100% !important;
+    }
+  
+  
+  }
+  @media(max-width:820px) {
+    .StoreDetailMenuItem_container {
+      overflow-y: hidden;
+      overflow-x: scroll;
+    }
+  
+    .store_detail_order_list {
+      gap: 5%;
+    }
+  
+    .store_detail_list {
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .amenities_list {
+      gap: 7%;
+  
+    }
+  }
+  @media(max-width:850px) {
+   
+    .Add_prod_btn_div {
+      width: 12% !important;
+    }
+  
+    .add_prod_para_font h5 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+  @media(max-width:875px) {
+    .add_prod_Quant_btn {
+      width: 46px !important;
+    }
+  }
+  @media(max-width:800px) {
+    .four_zero_three_message {
+      font-size: 12px;
+    }
+  
+    .five_zero_three_message {
+      font-size: 12px;
+    }
+    .four_zero_message {
+      font-size: 12px;
+    }
+  }
+  @media(max-width:625px) {
+    .add_product_content_cont {
+      padding: 15px;
+    }
+  
+  }
+  
+  
+  /**********************   PERFECT CSS   ******************************/
+  
+  @media(max-width:1536px) {
+    .add_prod_plus_sub {
+     
+      font-size: 26px;
+    }
+  }
+  @media(max-width:1440px) {
+    .StoreDetailSideMenu_listItems {
+      font-size: 14px;
+    }
+    .term_condition .tc_content .tc_main-centent .question{
+      font-size: 18px;
+    }
+    .term_condition .tc_content .tc_main-centent li .answer{
+      font-size: 16px;
+    }
+    .term_condition .tc_content .tc_main-centent li{
+      margin-bottom: 25px;
+    }
+    .term_condition .tc_topic_list ul li{
+      font-size: 14px;
+    }
+    .sellerName_date{
+      font-size: 16px;
+    }
+    .AllOrder_heading{
+      font-size: 16px;
+    }
+  }
+  @media(max-width:1330px) {
+    .prod_inc_dec_quant_heading h1 {
+      font-size: 18px;
+  
+    }
+  
+    .prod_inc_dec_quant_heading h2 {
+      font-size: 18px;
+  
+    }
+  
+    .prod_price_font {
+      height: 16px;
+    }
+  }
+  @media (max-width:1200px) {
+    .amenities_list {
+        gap: 3%;
+    }
+    .dispensoriesAddressSkeletonPadding {
+      overflow-y: hidden;
+      height: 514px;
+  
+    }
+    .featuredBrandPadding {
+      height: 267px;
+      overflow-y: hidden;
+    }
+    .StrainTypeCardSkeleton {
+      height: 200px;
+      overflow-y: hidden;
+    }
+    .LatestServiceskeleton {
+      height: 350px;
+      overflow-y: hidden;
+    }
+    .col_xl_width {
+      width: 22% !important;
+    }
+    .newProductDetailsContainer .newProductDetailsCardLeftCol .newProductDetails_upper_image {
+      width: 100%;
+    }
+    .allOrder_Card_Image_section {
+      width: 30%;
+    }
+    .allOrder_Card_Content_section {
+      width: 70%;
+    }
+    .law_Inner_OPtionList_Ol {
+      flex-direction: column;
+    }
+    .law_Inner_OPtionList_Ol li {
+      border-bottom: 1px solid #E9E9E9;
+      width: 100%;
+    }
+    .MyOrder_tabs_list {
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+    .prod_inc_dec_image {
+      height: 120px;
+      width: 100px;
+    }
+    .prod_price_font {
+      height: 16px;
+    }
+  }
+  @media(max-width:1076px) {
+    .Login_Sigup_button {
+      gap: 13%;
+    }
+  }
+  @media (max-width:992px) {
+    .learn_banner_header {
+      height: 180px;
+    }
+    .learn_banner_text {
+      font-size: 26px;
+    }
+    
+    .allOrderCard_container {
+       height: auto;
+    }
+    .noReview .noreview_description{
+      width: 100%;
+    }
+    .feature_brands .FeaturedBrandContainer  .FeaturedBrandImageContainer {
+      width: 180px;
+      height: 180px;
+  }
+    .newProductAboutUs_headings {
+      font-size: 18px;
+    }
+    .newProductAboutUs_description{
+      font-size: 15px;
+    }
+    .strainType_container{
+      width: 160px;
+      padding: 10px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      border-radius: 8px;
+      transition: all .3s ease;
+    }
+    
+  
+    .strainType_container .strainTypeInner_container{
+    
+      height: 140px;
+    }
+    .NumberText_container {
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+    .weedx_number_container {
+      overflow-y: hidden;
+      overflow-x: scroll;
+    }
+    .weedx_number_container ol li {
+      min-width: 27%;
+    }
+  
+    .NumberText_container ol li {
+      font-size: 11px;
+      min-width: 17%;
+    }
+    .newProductDetailsContainer {
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+    .newProductDetailsContainer .newProductDetailsCardLeftCol .newProductDetails_upper_image {
+      width: 80%;
+    }
+    .newProductdetails_rightSideContent_container {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .newProductDetailsContainer .newProductDetailsCardLeftCol {
+      width:100% ;
+      padding: 30px;
+      border-right:none;
+    }
+  
+    .recentPostBox_width1 {
+      width: 18%;
+    }
+  
+    .recentPostBox_width2 {
+      width: 18%;
+    }
+  
+    .lawStateDescription_Laws_Content {
+      display: block;
+    }
+  
+    .LawStateContentsContainer {
+      margin-left: 0px;
+    }
+    .StoreDetailSidemenuBarList {
+      min-width: 30%;
+    }
+  
+    
+    
+  
+  }
+  @media (max-width:768px) {
+    .blogCommentEachCards{
+      width: 100%;
+    }
+    .feature_brands .FeaturedBrandContainer .FeaturedBrandImageContainer {
+      width: 150px;
+      height: 90px;
+  }
+    .mobile_view{
+      display: block;
+    }
+    .StoreDetailSidemenuBarList {
+      min-width: 47%;
+    }
+    .prod_cat_left_sec {
+      width: 100%;
+      overflow-x: scroll;
+  
+    }
+  
+    .prod_filter_icon {
+     display: none;
+    }
+    .add_prod_inner_div {
+      min-width: 19% !important;
+    }
+    .recentPostBox_width1 {
+      width: 24%;
+    }
+  
+    .recentPostBox_width2 {
+      width: 24%;
+    }
+    .strainProduct_images {
+      height: 40%;
+      width: 92%;
+    }
+    .StrainHomeSlider_scrollContainerRelative {
+      left: 17px;
+    }
+  
+    .StrainHomeDes_heading {
+      margin-left: 8px;
+    }
+    .allOrder_Card_Content_section {
+      width: 75%;
+    }
+  
+    .allOrder_Card_Content_section {
+      width: 75%;
+      height: auto;
+      padding-top: 10px;
+      padding-left: 20px;
+    }
+  
+    .allOrder_span_quantity {
+      font-size: 14px;
+    }
+  
+    .allOrder_spanName {
+      font-size: 14px;
+    }
+  
+    .Amount_price {
+      font-size: 14px;
+    }
+  
+    .Allorder_img {
+      width: 121px;
+      height: 100px;
+    }
+  
+    .allOrder_Card_Image_section {
+      width: 25%;
+      height: auto;
+    }
+  
+    .Allorder_img_container {
+      width: 122px;
+      height: 113px;
+    }
+  
+    .newProductDetailsContainer .newProductDetailsCardLeftCol .newProductDetails_upper_image {
+      width: 100%;
+    }
+    .newProductDetailsContainer .newProductDetailsCardLeftCol {
+      padding: 0px;
+    }
+    .newProductdetails_rightSideContent_container {
+      width: 100%;
+      padding:20px 0px;
+    }
+  
+    .verify_brand_image {
+      width: 196px;
+      height: 123px;
+    }
+  
+    .newProductAboutUs_headings {
+      font-size: 17px;
+    }
+    .newProductAboutUs_description{
+      font-size: 14px;
+    }
+    .DeliveryServicesRatingTitle {
+      font-size: 16px;
+    }
+   
+    .dispensoriesHeadings {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    .Dispensaries_card_discription p {
+      font-size: 14px;
+  }
+    .NumberText_container ol li {
+      font-size: 9px;
+      min-width: 18%;
+    }
+    .weedx_number_container ol li {
+      font-size: 12px;
+    }
+    .NumberText_container ol {
+      gap: 4%;
+    }
+    .homePageSignupBtnMargin {
+      margin-top: 20px;
+    }
+    .Category_title {
+      font-size: 16px;
+      margin-top: 15px;
+    }
+    .catagoriesTabImg{
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+    }
+  }
+  @media (max-width:600px) {
+  
+    .prod_cat_cont{
+      height: auto;
+    }
+  
+    .prod_cat_img img {
+      width: 87%;
+      font-size: 8px;
+      min-height: 120px !important;
+      display: block;
+      margin: 0 auto;
+      height: unset;
+    }
+  
+    .cat_prod_inner_btn {
+      font-size: 7px;
+    }
+    .delivery_item_paragraph {
+      font-size: .8rem;
+    }
+   
+  
+    .amenities_list {
+      gap: 6%;
+  
+    }
+    .addtocart_textfield_flex {
+      display: block;
+      gap: 10px;
+    }
+  
+    .addtocart_textfield {
+      width: 60% !important;
+  
+    }
+    .weed_cart_btn {
+      margin-left: 10px;
+      margin-top: 50px;
+    }
+    .dispensoriesBannerHeading h5 {
+      height: 16px;
+    }
+  
+    .strainPopular_heading {
+      font-size: 14px;
+    }
+  
+    .dispensoriesBannerSubHeading p {
+      height: 16px;
+  
+    }
+    .mobile_view_weigth{
+      width: 100%;
+      overflow-x: scroll;
+    }
+   
+  
+    .allProductCategoryContainer_height {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+  
+    .brandHeading h1 {
+      font-size: 16px;
+    }
+  
+    .editProfile_name {
+      font-size: 14px;
+    }
+    
+    .newProductSearchResult_ScrollContainerRelative {
+      left: 0px;
+      gap: 20px;
+      padding: 0 10px;
+    }
+  
+    .bestDealsCard_ScrollContainerRelative {
+      left: 0px;
+    }
+  
+    .featuredBrandHeading {
+      font-size: 16px;
+      margin-left: 20px;
+    }
+  }
+  @media (max-width:576px) {
+    .learn_banner_header {
+      height: 120px;
+    }
+    .canabisLawMainHeadings{
+      font-size: 16px;
+    }
+    .learn_banner_text {
+      font-size: 18px;
+    }
+    .listCountryName{
+      font-size: 16px;
+    }
+    .law_Inner_OPtionList_Ol li{
+      padding: 10px 0;
+    }
+    .law_Inner_OPtionList_Ol li span{
+      font-size: 14px;
+    }
+    .lawsListStyle {
+      height: 30px;
+    }
+    .dispensories_name {
+      font-size: 20px;
+    }
+  
+    .dispensories_city {
+      font-size: 20px;
+      margin-left: 0;
+    }
+    .newFlavourimage_div {
+      height: 70px;
+      width: 70px;
+    }
+    .newFlavour_container {
+      height: auto;
+      padding: 20px 0 10px;
+    }
+    
+    .newFlavour_image_container_height {
+      height: auto;
+    }
+    .newFlavourContent_height {
+      height: auto;
+   
+    }
+    .newFlavour_image {
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+    }
+    .brandMoreLess .band_shlebtn{
+      right: 5px;
+      bottom: 0;
+    }
+   .brandMoreLess p{
+     font-size: 14px;
+   }
+    .whislistCard_wrapper{
+      justify-content: center;
+    }
+    .destop_view{
+      display: none;
+    }
+    .delivery_item_paragraph {
+      font-size: .8rem;
+      white-space: none !important;
+    }
+  
+    .featuredBrandPadding {
+      height: 267px;
+      overflow-y: hidden;
+      padding: 0px 10px;
+    }
+  
+    .deliverySkeletonBox {
+      height: 300px;
+      overflow-y: hidden;
+    }
+  
+    .DeliveryServicesSkeleton {
+      padding: 0px 10px;
+    }
+    .deliveryItemRightSide {
+      display: none;
+    }
+  
+    .DeliveryItemsCardRightSkeletonBtn {
+      justify-content: flex-start;
+    }
+    .straintype_card_wrapper{
+    flex-wrap: wrap;
+    justify-content: center;
+    }
+    .StrainTypeCardSkeleton {
+      height: 333px;
+      padding: 0px 10px;
+      overflow-y: hidden;
+    }
+  
+    .dispensoriesAddressSkeletonPadding {
+      padding: 0px 10px;
+    }
+  
+    .dispensoriesAddressSkeletonPadding {
+      height: 514px;
+    }
+  
+    .dispensoriesAddressSkeletonPadding {
+      overflow-y: hidden;
+  
+    }
+    .LatestServiceskeleton {
+      height: 350px;
+      padding: 0px 10px;
+      overflow-y: hidden;
+    }
+  }
+  @media (max-width:480px) {
+    
+    .addtocart_textfield{
+      width: 100% !important;
+    }
+    .delivery_items_cards_container{
+      width: 100%;
+      padding: 25px 10px 10px;
+    }
+    .notificationList{
+      min-width: 300px;
+      z-index: 10;
+      right: -50px;
+    }
+    .nodatafoundcontainer p{
+       width: 90%;
+    }
+    .writeReviewHeadings {
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .secRatingHeadings{
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .writeReviewLabel{
+      margin: 0;
+      font-size: 12px;
+    }
+    .reviewImage .Reviewimagebox{
+      font-size: 12px;
+      min-height: 100px !important;
+    }
+    .Slider_inner_profile_imgs{
+      width: 30px;
+      height: 30px;
+    }
+    .commentCradContentSection{
+      padding: 10px;
+    }
+    .blogsCommentCardDate {
+      font-size: 12px;
+    }
+    .commentCardImages .imageContainer{
+      width: 50px;
+      height: 50px;
+    }
+    .commentCradContentSection {
+      padding-left: 10px;
+    }
+    .loginParagraphFontSize{
+      font-size: 10px;
+      font-weight: 500;
+    }
+    .loginCkBtn:hover{
+      font-size: 12px;
+    }
+    .feature_brands .FeaturedBrandContainer .FeaturedBrandImageContainer {
+      width: 120px;
+      height: 80px;
+  }
+  .newProductDetailsContainer .newProductDetailsCardLeftCol .newProductDetails_upper_image{
+    height: auto;
+  }
+    .search_bar_box{
+      width: 100%;
+    }
+    .prod_cat_btn_cont{
+     min-width: 80px;
+    }
+    .prod_cat_cont_btn {
+      height: auto;
+      flex-wrap: nowrap;
+    }
+    .amenties_nameHeading {
+      margin-left: 20px;
+    }
+    .product_card_wrapper{
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+  }
+    .place_order_product_cart h4{
+      font-size: 14px;
+    }
+    .place_order_product_cart p{
+      font-size: 14px;
+    }
+    .place-order_address p{
+      font-size: 14px;
+    }
+    .place-order_address h4{
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .product_Sorted_filter_dropdown {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      margin-top: 4px;
+      cursor: pointer;
+      border: 1px solid #E7E7E7;
+      background-color: #FFFFFF;
+      left: 0;
+      z-index: 10;
+  }
+  .cartProductHeadings {
+    width: 200% !important;
+  }
+  .order_conform_card .card_message{
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .BackPageBtn {
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  .newProductAboutUs_container{
+    padding: 10px;
+  }
+  .readmorebtn{
+    font-size: 14px;
+  }
+  .product_category_dropdown_cursor p{
+    font-size: 18px;
+  }
+  .product_Sorted_filter_dropdown .productFilter_sortedList li{
+    padding: 10px 0;
+    font-size: 18px;
+  }
+  .prodfilterSortedListGap{
+    margin-bottom: 0;
+    padding: 0;
+    height: 100%;
+    align-items: center;
+    height: 45px;
+  }
+    .product_category_dropdown{
+      z-index: 5;
+      margin-top: 0px;
+      background-color: #FFFFFF;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+      padding: 10px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      border-radius: 16px 16px 0 0;
+      min-height: 300px;
+    }
+  .related_review_container .review_date{
+     position: unset ;
+  }
+  .filter_manu_items{
+    width: 120px;
+    border: 1px solid gainsboro;
+    color: rgba(0, 0, 0);
+    line-height: 30px;
+    font-size: 14px;
+  }
+  .prod_filter_icon{
+    display: none;
+  }
+  .floatingbtn{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    padding: 10px;
+    width: 100%;
+  }
+    .flav_img_height {
+      height: 100%;
+      width: 40%;
+    }
+  
+    .flavour_New_container {
+      height: 300px;
+  
+    }
+    .EditProfilOnlineOrder_name_flelds {
+      height: 50px;
+    }
+    .editProfileLogin_emailField_container{
+      height: 70px;
+    }
+    .newProduct_category_slider_image {
+      width: 80px;
+      height: 80px;
+      border-radius: 40px;
+    }
+    .newProductCategory_image {
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+    }
+    .editProfileLoginParaStyle{
+      font-size: 12px;
+    }
+    .newProductCategorySliderName p {
+      font-size: 10px;
+    }
+    .editProfile_label {
+      font-size: 12px;
+    }
+    .newProductAboutUs_headings {
+      font-size: 16px;
+    }
+    .newProductAboutUs_description{
+      font-size: 13px;
+    }
+    .learnCardRelatedCotent_headings ,.Enabling_heading {
+      font-size: 18px;
+    }
+  
+    .learnCardRelatedContent_paragraphs ,.learnCardRelatedPageContent_sec_paragraph {
+      font-size: 14px;
+    }
+    .profile_user_name {
+      font-size: 12px;
+    }
+    
+    .email_notification_headings {
+      font-size: 14px;
+    }
+  
+    .email_saving_sub_heading {
+      font-size: 11px;
+    }
+  
+    .medicalCard_heading {
+      font-size: 16px;
+    }
+    .bestDeals h1 {
+      font-size: 24px;
+    }
+  
+    .bestDealsCard_Heading_offers {
+      font-size: 14px;
+    }
+  
+    .bestDealsHead_container {
+      font-size: 14px;
+    }
+  
+    .bestDeal_subHeading p {
+      font-size: 14px;
+    }
+  
+    .weed_main_Div {
+      display: flex;
+      height: 230px;
+      min-width: 100%;
+      margin: 0px;
+      /* border: 1px solid lightgray; */
+      border-top: 1px solid lightgray;
+      border-bottom: 1px solid lightgray;
+      border-left: 0px;
+      border-right: 0px;
+  
+  
+      border-radius: 0px;
+      box-shadow: none;
+  
+    }
+  
+    .weed_img_cont {
+      min-width: 30%;
+    }
+  
+    .weed_btns_cont {
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      flex-direction: row;
+    }
+  
+    .weed_img_div img {
+      width: 91%;
+      height: 100px;
+    }
+  
+    .weed_btn {
+      font-size: 10px;
+      width: 50px;
+  
+    }
+  
+    .content_cont {
+      overflow-x: scroll;
+      overflow-y: hidden;
+  
+    }
+    .flavCont {
+      flex-direction: column;
+      height: 358px;
+  
+    }
+  
+    .flav_content_div {
+      width: 96% !important;
+    }
+  
+    .flav_image_col_two {
+      width: 100% !important;
+      height: 100px;
+      /* background-color: #989898; */
+    }
+  
+    .flav_img_div {
+      display: flex;
+      justify-content: center;
+      height: 100px !important;
+    }
+  
+    .flav_img_div img {
+      width: 70%;
+      height: 126px;
+    }
+   
+    .AddProductCartContainerinner{
+      overflow-x: scroll;
+    }
+    .AddProductCartContainerinner .Add_product_cart_left_container_item{
+      width: 200%;
+    }
+    .shopByCategoryHeading {
+      font-size: 16px;
+      margin-left: 0px;
+    }
+    .CategoryBordrr{
+     padding: 0 16px;
+    }
+    .common_sub_head {
+      font-size: 12px;
+      margin-bottom: 0;
+    }
+    .prod_inner_cont{
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: 20px;
+      padding: 10px;
+    }
+    .productListHeadings{
+      font-size: 14px;
+    }
+    .DeliveryServicesRatingTitle{
+       font-size: 14px;
+    }
+    .strainTypeInner_container {
+      height: 160px;
+  }
+    .catagoriesTabImg{
+      width: 75px;
+      height: 75px;
+      cursor: pointer;
+  }
+   
+  
+    .dispensoriesContentContainer {
+      padding: 10px;
+  }
+  .dispensoriesHeadings {
+    font-size: 16px;
+  }
+  
+  .DeliveryServicesRatingTitle {
+    
+    font-size: 14px;
+  }
+  
+    .section_main_title {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+    .section_main_subtitle { 
+        font-size: 12px;
+    }
+    .viewallbtn{
+      font-size: 14px;
+    }
+    .homePageBanner_container{
+      margin-bottom: 0;
+    }
+   
+    .backwoodar_heading {
+      font-size: 16px;
+    }
+    .NumberText_container ol li {
+      font-size: 9px;
+      min-width: 21%;
+    }
+  
+    .NumberText_container ol {
+      gap: 3%;
+    }
+    .homePageSignipLink P {
+      font-size: 20px;
+  
+    }
+  
+    .popularStrain_heading {
+      font-size: 14px;
+      margin-left: 40px;
+    }
+  
+    .popularStrainName {
+      font-size: 12px;
+    }
+  
+    .newProductDetailsHeading {
+      font-size: 14px;
+      margin-left: 3px;
+    }
+  
+    .allProductCategory_image_container {
+      height: 80px;
+      width: 80px;
+      border-radius: 40px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #31B665;
+    }
+  
+    .allProduct_imageHeight {
+      height: 70px;
+      width: 70px;
+      border-radius: 35px;
+    }
+    .allProductCategoryParagraph {
+      font-size: 10px;
+    }
+    .Deliveries_Heading {
+      font-size: 16px;
+    }
+  
+    .deliveries_sub_heading {
+      font-size: 12px;
+    }
+  
+    .delivery_items_card_img_container {
+     width: 80px;
+     max-width: 80px;
+     min-width: 80px;
+    }
+    .delivery_items_card_info_container{
+      width: calc(100% - 90px);
+    }
+    .DeliveryItem_heading {
+      font-size: .8rem;
+    }
+    .height_empty_div_paragraph p {
+      font-size: 11px;
+    }
+    .productSearchResultParagraph {
+      font-size: 14px;
+    }
+    .flavCont {
+      height: 340px;
+    }
+    .AllProd_fWidth {
+      width: 100% !important;
+      height: auto;
+    }
+  
+    .add_prod_inner_div {
+      min-width: 26% !important;
+    }
+  
+    .add_prod_Quant_btn {
+      width: 42px !important;
+    }
+  
+    .add_product_content_cont {
+      border: 1px solid #dee2e6;
+      padding: 15px;
+    }
+  
+    .add_prod_para {
+      font-size: 15px !important;
+    }
+  
+    .add_prod_first_img img {
+      width: 100%;
+      height: 210px;
+      font-size: 10px;
+    }
+    .StoreDetailSidemenuBarList {
+      min-width: 50%;
+      gap: 10px;
+    }
+  
+    .StoreDetailSideMenu_listItems {
+      font-size: 13px;
+    }
+    .Add_prod_btn_div {
+      width: 16% !important;
+    }
+    .HeadingTypeReview_subLabel {
+      font-size: 12px;
+    }
+  
+    .reportReviewfirstLabel {
+      font-size: 12px;
+    }
+  
+    .reportReviewFirstLAbelDiv {
+      padding-top: 17px;
+  
+    }
+  
+    .headingTypeLabelContainer {
+      padding-top: 38px;
+    }
+  
+    .headingTypeLabelContainerThirdFourth {
+      padding-top: 42px;
+    }
+    .LawStateDescriptionHeading {
+      font-size: 24px;
+    }
+    .promocode_headings {
+      font-size: 14px;
+      margin-left: 4px;
+    }
+  
+    .verify_brand_image {
+      width: 120px;
+      height: 80px;
+  
+    }
+  
+    .verify_brands_heading {
+      font-size: 14px;
+    }
+    .recentpost_headings {
+      font-size: 14px;
+    }
+  
+    .recentPost_para {
+      font-size: 10px;
+    }
+  
+    .recentPostBox_width1 {
+      width: 40%;
+    }
+  
+    .recentPostBox_width2 {
+      width: 40%;
+    }
+  
+    .dob_heading {
+      font-size: 16px;
+    }
+    .five_zero_three_message {
+      font-size: 10px;
+    }
+    .four_zero_message {
+      font-size: 10px;
+    }
+  
+    .fourZero_sub_heading {
+      font-size: 14px;
+    }
+    .fiveZero_sub_heading {
+      font-size: 14px;
+    }
+    .four_zero_three_message {
+      font-size: 10px;
+    }
+  
+    .fourZero_Three_sub_heading {
+      font-size: 14px;
+    }
+  
+    .yourOrder_search {
+      font-size: 12px;
+    }
+  
+    .MyOrder_searchBar {
+      padding-left: 10px;
+  
+      gap: 10px;
+    }
+    .MyOrder_list {
+      gap: 20px;
+      padding-left: 17px;
+    }
+  
+    .allOrder_Card_Content_section {
+      padding-top: 0px;
+      padding-left: 0px;
+    }
+  
+    .allOrder_icons_container {
+      gap: 15px;
+    }
+  
+    .Amount_price {
+      font-size: 12px;
+    }
+  
+    .allOrder_spanName {
+      font-size: 12px;
+    }
+  
+    .allOrder_span_quantity {
+      font-size: 12px;
+    }
+  
+    .AllOrder_heading {
+      font-size: 14px;
+    }
+  
+    .sellerName_date {
+      font-size: 12px;
+    }
+  
+    .Allorder_img_container {
+      width: 80px;
+      height: 90px;
+    }
+  
+    .Allorder_img {
+      width: 80px;
+      height: 75px;
+    }
+  
+   
+    .orderId_span {
+      font-size: 14px;
+    }
+    .newProductDetails_heading {
+      font-size: 16px;
+    }
+  
+    .newProductDetails_subHeadingss {
+      font-size: 14px;
+  
+    }
+  
+    .newProduct_doller_price {
+      font-size: 16px;
+    }
+  
+    .newProduct_Weight {
+      font-size: 16px;
+  
+    }
+  
+    .newProduct_Gms {
+      font-size: 16px;
+    }
+    .store_detail_order_list{
+      padding: 0;
+    }
+    .store_detail_list{
+      min-width: unset;
+    }
+    .New_flav_btn{
+      width: 50%;
+    }
+    .New_flav_btn a{
+      width: 100%;
+    }
+   
+    .dispensories_image {
+      height: 140px;
+    }
+    .dispensoriesContainer{
+      min-width: 180px;
+    } 
+    .contentarea .thankforsubscribe {
+      font-size: 20px;
+      word-spacing: 7px;
+    }
+  }
+  @media (max-width:425px) {
+    .order_conform_card{
+      width: 100%;
+    }
+    .NumberText_container ol li {
+      font-size: 8px;
+      min-width: 22%;
+    }
+  
+    .NumberText_container ol {
+      gap: 7%;
+    }
+  
+    .Category_title {
+      font-size: 12px;
+    }
+   .login_signup_reset_container {
+      width: 100%;
+   }
+  }
+  @media (max-width:408px) {
+    .weedx_number_container ol li {
+      min-width: 29%;
+      font-size: 10px;
+    }
+  }
+  @media (max-width:400px) {
+    .prod_cat_img img {
+     height: 120px;
+    }
+  
+    .dispensories_result_head {
+      font-size: 12px;
+    }
+  
+    .disOPenResRating {
+      font-size: 12px;
+    }
+  
+    .dispensorieAddressNames {
+      font-size: 12px;
+    }
+  
+    .dispensoriesHeadingName {
+      font-size: 12px;
+    }
+  
+    .dispensories_open_res_btns {
+      font-size: 10px;
+    }
+  
+    .dispensories_open_res_btns2 {
+      font-size: 10px;
+    }
+  
+    .dispensories_pickup_btn {
+      font-size: 10px
+    }
+  }
+  @media(max-width:375px) {
+    .headingTypeLabelContainerThirdFourth {
+      padding-top: 54px;
+    }
+    .NumberText_container ol li {
+      font-size: 7px;
+      min-width: 26%;
+    }
+    .Category_title {
+      font-size: 10px;
+    }
+    .qty_selector{
+      width: 120px;
+      font-size: 14px;
+    }
+    .newProd_grms {
+      font-size: 16px;
+    }
+  }
+  @media(max-width:350px) {
+    
+    .delivery_items_card_flex .deliverItemCard_icons{
+      flex-wrap: wrap;
+    }
+    .dispensories_content_paragraphs span:last-child{
+      display: none;
+    }
+  }
+  @media(max-width:320px) {
+    
+   .prod_cat_right_sec .row>*{
+      padding-left: 5px  !important;
+      padding-right: 5px !important;
+   }
+   .addToCartHeadingss {
+    font-size: 18px !important;
+   }
+  }
+
+
+
+  /* *********************************End***************************** */

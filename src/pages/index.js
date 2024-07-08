@@ -2,7 +2,9 @@ import React from "react";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import dynamic from 'next/dynamic'
+import { useRouter } from "next/router";
 const inter = Inter({ subsets: ["latin"] });
+import { HomePageSco } from "../component/ScoPage/HomePageSco"
 const HomePageBanner = dynamic(() => import('../component/home/homepagebanner'));
 const CategoryProduct = dynamic(() => import('../component/category/category'));
 const DeliveryServices = dynamic(() => import('../component/home/deliveryservice'));
@@ -13,30 +15,32 @@ const NewsBlog = dynamic(() => import('../component/home/Newsblog'));
 const HomePageDealsSignup = dynamic(() => import('../component/home/HomePageDealsSignup'));
 const Currentlocation = dynamic(() => import('../component/currentlocation/CurrentLocation'));
 import Createcontext from "../hooks/context"
-import  Axios  from "axios";
-export default function Home({initialData}) {
+import Axios from "axios";
+export default function Home({ initialData }) {
   const { state } = React.useContext(Createcontext)
   const [Category, SetCategory] = React.useState([])
   const [Skeleton, SetSkeleton] = React.useState(true)
+
   function ShowCategoryProduct(id, name) {
 
     Navigate(`/products/${name.replace(/%20| /g, "-").toLowerCase()}/${id}`);
-}
+  }
 
   return (
     <>
-    {state.permission===false && <Currentlocation></Currentlocation>} 
-        <HomePageBanner props={initialData.topbanner}> </HomePageBanner>
-        <CategoryProduct Category={initialData.category} ShowCategoryProduct={ShowCategoryProduct} Skeleton={false}></CategoryProduct>
-        <DeliveryServices Skeleton={Skeleton} link={"weed-deliveries"} title={"Delivery services"}></DeliveryServices>
-        <HomePageWeedBanner></HomePageWeedBanner>
-        <DeliveryServices Skeleton={Skeleton} link={"weed-dispensaries"} title={"Shop Dispensaries Near You"} ></DeliveryServices> 
-        <div className="col-12 border" style={{ height: "300px", position: "relative", top: "15px" }}>
-                <Map height={"297px"} width={"100%"}></Map>
-            </div>  
-            <Staticcontent></Staticcontent>
-            <NewsBlog></NewsBlog>
-            <HomePageDealsSignup></HomePageDealsSignup>
+      <HomePageSco location={useRouter().pathname}></HomePageSco>
+      {state.permission === false && <Currentlocation></Currentlocation>}
+      <HomePageBanner props={initialData.topbanner}> </HomePageBanner>
+      <CategoryProduct Category={initialData.category} ShowCategoryProduct={ShowCategoryProduct} Skeleton={false}></CategoryProduct>
+      <DeliveryServices Skeleton={Skeleton} link={"weed-deliveries"} title={"Delivery services"}></DeliveryServices>
+      <HomePageWeedBanner></HomePageWeedBanner>
+      <DeliveryServices Skeleton={Skeleton} link={"weed-dispensaries"} title={"Shop Dispensaries Near You"} ></DeliveryServices>
+      <div className="col-12 border" style={{ height: "300px", position: "relative", top: "15px" }}>
+        <Map height={"297px"} width={"100%"}></Map>
+      </div>
+      <Staticcontent></Staticcontent>
+      <NewsBlog></NewsBlog>
+      <HomePageDealsSignup></HomePageDealsSignup>
     </>
   );
 }
@@ -61,7 +65,7 @@ export async function getStaticProps() {
 
     ]);
 
-    const [topbanner , category, bottembannner] = await Promise.all([
+    const [topbanner, category, bottembannner] = await Promise.all([
       banner.json().catch(handleError),
       callcategory.json().catch(handleError),
       bannner2.json().catch(handleError),

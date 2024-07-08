@@ -39,9 +39,9 @@ const Zipcode = () => {
         <div className='d-flex flex-wrap ' style={{ gap: "5px" }}>
         {
             AllZipcode?.length === 0 ? <p>no zip code  {state.Location}</p> :
-            AllZipcode?.map((data) => {
+            AllZipcode?.map((data , index) => {
                 // console.log(data)
-                return <p> { data.zip} |</p>
+                return <p key={index}> { data.zip} |</p>
             })
         }
 

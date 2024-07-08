@@ -8,13 +8,13 @@ import Link from 'next/link';
 import { Rating } from '@mui/material';
 import { modifystr , isShopOpen } from '../../hooks/utilis/commonfunction';
 import Image from 'next/image';
-const Dispensoriescart = ({index ,ele }) => {
+const Dispensoriescart = ({ ele }) => {
  
     const classes = useStyles()
 
 
   return (
-    <div className="row mt-4" key={index}>
+    <div className="row mt-4">
         <div className=" col-11  mx-auto despensories_card_container">
         
             <div className="row">

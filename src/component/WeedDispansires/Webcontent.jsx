@@ -55,16 +55,16 @@ const WebContent = ({ state, Store = [], modifystr, from , url }) => {
                     <p>{`Explore top-rated weed ${from} in {state.Location} with Weedx.io. Our platform simplifies the search for trusted recreational and medical ${from} conveniently located near you in ${state.Location} `}</p>
                     <h3>{`Top Weed  ${from} in ${state.Location}:`}</h3>
                     {Boolean(Store?.length) && <ul>
-                        {   Store?.filter((item) => item.rating >= 4)?.map((items) => {
-                                return <li><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
+                        {   Store?.filter((item ) => item.rating >= 4)?.map((items , index) => {
+                                return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
                             }).length ===0
                             ?
-                            Store?.map((items) => {
-                                return <li><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
+                            Store?.map((items , index) => {
+                                return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
                             })
                             :
-                            Store?.filter((item) => item.rating >= 4)?.map((items) => {
-                                return <li><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
+                            Store?.filter((item) => item.rating >= 4)?.map((items , index) => {
+                                return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
                             })
                         }
 
@@ -72,8 +72,8 @@ const WebContent = ({ state, Store = [], modifystr, from , url }) => {
                     }
                     {Boolean(Product?.length) && <>
                             <h3>{`Top Selling Weed ${from} Products in ${state.Location}:`}</h3>
-                            <ul> { Product?.slice(0,10)?.map((items) => {
-                                return <li><Link href={`/products/${modifystr(items.category_name)}/${modifystr(items.SubcategoryName)}/${modifystr(items.Product_Name)}/${items.id}`}>{items.Product_Name}</Link></li>
+                            <ul> { Product?.slice(0,10)?.map((items , index) => {
+                                return <li key={index}><Link href={`/products/${modifystr(items.category_name)}/${modifystr(items.SubcategoryName)}/${modifystr(items.Product_Name)}/${items.id}`}>{items.Product_Name}</Link></li>
                             }) } </ul>
                     </>
                     }

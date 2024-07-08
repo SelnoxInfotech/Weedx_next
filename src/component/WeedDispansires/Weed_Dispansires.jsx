@@ -41,7 +41,7 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata }) => 
                         {Store?.map((ele, index) => {
                             return (
                                 <div key={index}>
-                                    <Dispensoriescart index={index} ele={ele} />
+                                    <Dispensoriescart ele={ele} />
                                 </div>
                             )
                         })}
@@ -56,8 +56,8 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata }) => 
 
                             <div className="row">
                                 {
-                                    contentdata?.Faq?.map((item) => {
-                                        return <div className="col-lg-6 webContent my-2"> <Accordion>
+                                    contentdata?.Faq?.map((item, index) => {
+                                        return <div key={index} className="col-lg-6 webContent my-2"> <Accordion>
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon />}
                                                 aria-controls="panel1-content"
@@ -73,8 +73,8 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata }) => 
                                 }
 
                             </div>
-                            </>
-                            }
+                        </>
+                    }
                     <WebContent modifystr={modifystr} Store={Store} state={state} from={"dispensary"} url={'dispensaries'}></WebContent>
 
                 </div>

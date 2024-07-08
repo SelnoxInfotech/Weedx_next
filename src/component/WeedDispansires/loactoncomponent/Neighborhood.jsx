@@ -30,8 +30,8 @@ const Neighborhood = () => {
     return (
         <div className='d-flex flex-wrap ' style={{ gap: "5px" }}>
             {
-              AllCity.length === 0 ?   <p> no location found in  {state.Location}</p> :  AllCity?.map((data) => {
-                    return <p> {data.display_name || data.name} |</p>
+              AllCity.length === 0 ?   <p> no location found in  {state.Location}</p> :  AllCity?.map((data , index) => {
+                    return <p key={index}> {data.display_name || data.name} |</p>
                 })
             }
 

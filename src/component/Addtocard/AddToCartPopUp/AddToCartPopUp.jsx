@@ -11,11 +11,11 @@ import Createcontext from "../../../hooks/context"
 import Cookies from 'universal-cookie';
 import axios from "axios";
 // import "./Cartpopup.css";
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 const AddToCartPopUp = ({ CartClean, SetCartClean, NewData, SetAddToCard }) => {
     const classes = useStyles()
-    const Navigate = useNavigate()
+    const Navigate = useRouter()
     const cookies = new Cookies();
        let token_data = cookies.get('User_Token_access')
     let accessToken = localStorage.getItem('User_Token_access');

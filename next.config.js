@@ -7,4 +7,14 @@ module.exports = {
       },
     ],
   },
+  // async redirects() {
+  //   return [
+
+  //     {
+  //       source: '/weed-deliveries/:details*',
+  //       destination: '/weed-dispensaries/:details*',
+  //       permanent: false,
+  //     },
+  //   ]
+  // },
 };

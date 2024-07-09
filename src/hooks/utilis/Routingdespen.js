@@ -8,7 +8,6 @@ export default function RoutingDespen({ children }) {
     const params = useRouter();
     const Location = useRouter();
     const location = params?.query?.location;
-    console.log(location)
     return (
         <div>
             {(state.permission === false && location &&

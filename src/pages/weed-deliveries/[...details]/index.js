@@ -492,7 +492,10 @@ export default function DispensoriesDetails(props) {
 
 export async function getServerSideProps(context) {
  
+     console.log(context.params)
      const index = _.findIndex(context.params.details, item => !isNaN(parseInt(item)));
+    // Pass data to the component as props
+    console.log( !isNaN(parseInt(context.params.details[1]))  , context.params.details[1])
 
     return {
       props: {

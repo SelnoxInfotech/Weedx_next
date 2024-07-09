@@ -144,18 +144,17 @@ function Context(props) {
                 .catch((error) => {
                     console.error(error)
                 })
-            WishListget().then((res) => {
-                let object = {};
-                res.data.map((data) => {
-                    const l = data.id
-                    object[l] = true
-                    return data
-
-                })
-                dispatch({ type: 'WishList', WishList: object })
-
-
-            }).catch((err) => { });
+                //     WishListget().then((res) => {
+                //     let object = {};
+                //     res.data.map((data) => {
+                //     const l = data.id
+                //     object[l] = true
+                //     return data
+                //       })
+                //     dispatch({ type: 'WishList', WishList: object })
+                //    }
+       
+                // ).catch((err) => { });
         }
         else {
             const data = localStorage?.getItem("items")

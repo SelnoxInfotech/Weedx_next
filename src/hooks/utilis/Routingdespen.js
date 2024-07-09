@@ -8,19 +8,19 @@ export default function RoutingDespen({ children }) {
     const params = useRouter();
     const Location = useRouter();
     const location = params?.query?.location;
-
+    console.log(location)
     return (
         <div>
             {(state.permission === false && location &&
-                (location[3]?.toLowerCase() !== state?.City?.toLowerCase() ||
-                    location[2]?.toLowerCase() !== state?.State?.toLowerCase() ||
-                    location[1]?.toLowerCase() !== state?.Country?.toLowerCase() ||
-                    location[4]?.toLowerCase() !== state?.route?.toLowerCase())) &&
+                (location[2]?.toLowerCase() !== state?.City?.toLowerCase() ||
+                    location[1]?.toLowerCase() !== state?.State?.toLowerCase() ||
+                    location[0]?.toLowerCase() !== state?.Country?.toLowerCase() ||
+                    location[3]?.toLowerCase() !== state?.route?.toLowerCase())) &&
                 <RoutingSearch
-                    city={location[3]}
-                    State={location[2]}
-                    country={location[1]}
-                    route={location[4]}
+                    city={location[2]}
+                    State={location[1]}
+                    country={location[0]}
+                    route={location[3]}
                     pathname={Location.pathname.slice(0, 18) === '/weed-dispensaries' ? "/weed-dispensaries" : "/weed-deliveries"}
                 />
             }

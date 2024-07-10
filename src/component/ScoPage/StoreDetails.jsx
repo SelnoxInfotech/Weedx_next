@@ -1,11 +1,11 @@
-import { Helmet } from "react-helmet-async"
-import { useLocation, useParams } from "react-router-dom"
+import Head from "next/head"
+import { useRouter } from "next/router"
 import React from "react"
 function StoreDetails({ Despen, locationStore  }) {
     const [MetaTag, SetMetaTag] = React.useState({ title: "", discription: "" })
-    const location = useLocation()
-    const params = useParams()
-    const { tab, Category, SubCategory } = params;
+    const location = useRouter()
+    // const { tab, Category, SubCategory } = location;
+    const tab =  location.query.details[1]
     const reviewSchema = {
         "@context": "https://schema.org",
         "@type": "store",
@@ -183,10 +183,10 @@ function StoreDetails({ Despen, locationStore  }) {
             }
         }
 
-    }, [params, Despen])
+    }, [location, Despen])
 
     return (
-        <Helmet>
+        <Head>
             <title>{MetaTag.title}</title>
             <meta name="title" content={`Marijuana Dispensaries & Delivery Near Me | weedx.io |`} />
             <meta name='description' content={MetaTag.discription} />
@@ -207,7 +207,7 @@ function StoreDetails({ Despen, locationStore  }) {
            {Despen[0].TotalRating !== 0 &&  <script type="application/ld+json">
                 {JSON.stringify(reviewSchema)}
             </script>}
-        </Helmet>
+        </Head>
     )
 }
 export { StoreDetails }

@@ -2135,6 +2135,7 @@ scrollbar-width: none;  /* Firefox */
 
 /* signup */
 .login_signup_reset_container {
+  margin: 0 auto;
   background: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
@@ -3092,7 +3093,7 @@ scrollbar-width: none;  /* Firefox */
 
 
 .newFlavour_row {
-  display: grid;
+  /* display: grid; */
   place-content: center;
 }
 
@@ -9888,3 +9889,495 @@ background: #FFF;
 
 
   /* *********************************End***************************** */
+
+
+
+
+  /************************************** Product card **************************/
+  .product_card_wrapper{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+.productSearch_result_container{
+    width: 220px;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 8px;
+    padding: 10px;
+    position: relative;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+.productSearch_result_container:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.productSearchResultImage_container{
+    position: relative;
+}
+.discountTag{
+    padding: 4px;
+    color: white;
+    background-color: #31B665;
+    font-size: 12px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+}
+.productSearchResultImage_container .product_search_result_image{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    display: block;
+}
+.product_search_result_content_div{
+   margin-top: 10px;
+}
+.product_search_result_content_div .productSearchResultParagraph{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0;
+    color: rgb(82, 82, 82);
+}
+.product_search_result_content_div .product_search_result_sub_heading{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    color: rgb(82, 82, 82);
+}
+.product_search_rating_star{
+    margin: 0 2px;
+}
+.productSearch{
+ margin-bottom: 10px;
+ font-size: 12px;
+}
+.productSearchPrice{
+    font-size: 14px;
+    font-weight: 700;
+}
+.product_cart_review{
+    display: flex;
+    gap: 2px;
+}
+
+.productPriceDivHeight{
+    color: black;
+}
+.product_category_list{
+    color: rgba(0, 0, 0, 0.623);
+}
+
+@media only screen and (max-width: 768px){
+    .productSearch_result_container{
+        width: 45%;
+        padding: 10px;
+    }
+    .similerproduxt .productSearch_result_container{
+        width: 100%;
+        padding: 10px;
+    }
+    .productSearchResultImage_container .product_search_result_image {
+        width: 100%;
+        height: 130px;
+    }
+    .product_search_result_content_div .productSearchResultParagraph{
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .product_search_result_content_div .product_search_result_sub_heading{
+        font-size: 12px;
+    }
+    .product_category_list .product_search_result_span1{
+     font-size: 14px;
+    }
+    .productSearchPrice{
+        font-size: 14px;
+    }
+    .product_card_wrapper{
+        padding: 0;
+        gap: 10px;
+    }
+}
+  /* ************************************end*********************************** */
+
+
+  /* ***************Add TO card ***************** */
+
+  .addToCartPopUpImage_background {
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    border: 1px solid #FFFFFF;
+  }
+  
+  .marginRow {
+    margin-top: 100px;
+  }
+  
+  .AddToCartHeading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+  }
+  
+  .AddToCartHeading p {
+    color: rgb(74, 74, 74);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.0625rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  
+  .AddToCartParagraphHeight {
+    height: 100px;
+  }
+  
+  .AddToCartParagraphHeight p {
+    color: rgb(124, 124, 124);
+    font-size: 1rem;
+    text-align: center;
+  }
+
+
+  /* **************End***************** */
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+.review_secton{
+    position: relative;
+}
+.reviews_writer{
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: left;
+  margin: 0;
+}
+.reviews_description {
+    position: sticky;
+    top: 150px;
+    height: fit-content;
+}
+.related_review_content{
+    position: relative;
+    display: contents;
+    width: -webkit-fill-available;
+    word-break: break-all;
+}
+.related_review_container{
+  margin-bottom: 20px;
+  border-bottom: 2px solid  #F8F7F4;
+  position: relative;
+}
+.reviewdateTexyt{
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  text-align: left;
+  color: #858585;
+  margin-bottom: 12px;
+}
+ .related_review_image{
+ width: 36px;
+ height: 36px;
+ border-radius: 50%;
+ overflow: hidden;
+}
+.related_review_image img{
+    width: 100%;
+    height: 100%;
+   }
+.reviwerName_rating{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+   
+   .reviwerName_rating .userName{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 0;
+    color: #0000003f;
+   }
+   .reviewSectionRating{
+    display: flex;
+    align-items: center;
+    gap: 1px;
+   
+   }
+   .reviewSectionRating p{
+     font-size: 14px;
+     font-weight: 600;
+     margin: 0;
+   }
+   .review_date{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+   }
+   .reviews_title{
+    word-wrap: break-word;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: left;
+    color: #858585;
+    margin-top: 15px;
+   }
+   .more_less_btn{
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+   }
+   .review_description{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: rgb(65, 65, 65);
+   }
+   .review_description_container p{
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    word-wrap: break-word;
+    color: #a5a5a5;
+    margin: 0;
+   }
+   .reviewImagewrapper{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+   }
+   .reviewImagewrapper .reviewimagebox{
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+   }
+   .reviewImagewrapper .reviewvideobox{
+    width: 120px;
+    max-height: 100px;
+   }
+   .reviewImagewrapper .reviewvideobox video{
+    width: 100%;
+    cursor: pointer;
+   }
+
+   .reviewImagewrapper .reviewimagebox  .reviewImage{
+    width: 100%;
+    height: 100%;
+   }
+   .related_review_footer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0;
+   }
+   .review_reply{
+    border-left: 1px solid gray;
+    margin-top: 20px;
+    position: relative;
+   }
+   .review_reply .related_review_content{
+    position: relative;
+    display: block;
+    width: -webkit-fill-available;
+    word-break: break-all;
+   }
+   .review_reply .review_date{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+   }
+   .review_reply .review_date p{
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+   }
+   .review_reply .reviews_title{
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: left;
+    color: #858585;
+    margin-top: 0;
+    margin: 0;
+   }
+   .customteatfsdfg.MuiRating-root .MuiRating-iconEmpty{
+    color: red;
+   }
+   .media_list{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 30px 0;
+   }
+   .media_list .crossbtn{
+      position: absolute;
+      top: 0%;
+      right: 0%;
+      transform: translate(0% , -50%);
+      z-index: 100;
+       cursor: pointer;
+   }
+   .media_list .uploadedImage{
+    width:70px;
+    height: 70px;
+    position: relative;
+   }
+   .media_list .uploadedImage img{
+    width: 100%;
+    height: 100%;
+   }
+   .media_list .uploadedVideo{
+    width: 100px;
+    height: 70px;
+    position: relative;
+   }
+   .media_list .uploadedVideo video{
+    width: 100%;
+    height: 100%;
+   }
+   .related_review_footer_paragraph{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s ease;
+   }
+   .related_review_footer_paragraph:active {
+    filter: drop-shadow(0 0 0 #15111a);
+    transform: translate(0, 5px);
+  }
+  .reviewImage .Reviewimagebox{
+    margin-top: 20px;
+    min-height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #727CA4;
+    width: 100%;
+    border-radius: 20px;
+    background-color: hsla(229, 21%, 85%, 0.2);
+    gap: 10px;
+  }
+  .Reviewimageslidewrapper .mySwiper{
+   height: unset !important;
+  }
+  .Reviewimageslidewrapper .mySwiper .swiper-slide{
+    min-height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .Reviewimageslidewrapper .mySwiper .Reviewimageslidebox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 30px;
+    height: 100%;
+  }
+  .Reviewimageslidewrapper .mySwiper .swiper-button-prev, .Reviewimageslidewrapper .mySwiper .swiper-button-next {
+    position: absolute;
+    width: 50px;
+    height:50px ;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    z-index: 10;
+    color: #31B655;
+}
+.Reviewimageslidewrapper .mySwiper .swiper-button-prev:after,   .Reviewimageslidewrapper .mySwiper .swiper-button-next:after {
+  font-size:24px;
+  font-weight: 700;
+}
+  .Reviewimageslidewrapper .mySwiper .Reviewimageslidebox img{
+    max-width: 100%;
+
+  }
+  .Reviewimageslidewrapper .mySwiper .Reviewimageslidebox video{
+    max-width: 100%;
+  }
+   @media screen and (max-width: 1024px){
+       .reviews_title{
+        font-size: 18px;
+        width: 100%;
+       }
+     
+       .more_less_btn{
+        font-size: 12px;
+       }
+       .review_description{
+        font-size: 14px;
+       }
+       .reviwerName_rating .userName{
+        font-size: 12px;
+      
+       }
+   
+      .related_review_container .related_review_image{
+        width: 50px;
+        height: 50px;
+      }
+   }
+   @media screen and (max-width: 768px){
+    .reviews_description{
+        position: unset;
+        margin-bottom: 20px;
+    }
+   }
+   @media screen and (max-width: 480px){
+    .related_review_container{
+      padding: 10px;
+    }
+      .userreviewaction{
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .reviews_title{
+        font-size: 16px;
+        width: 100%;
+       }
+      .reviews_writer{
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        color: #2f2f2f;
+      }
+      .replyByvenderreview .review_date{
+        position: unset;
+      }
+      .review_description_container{
+        padding: 0;
+      }
+   }

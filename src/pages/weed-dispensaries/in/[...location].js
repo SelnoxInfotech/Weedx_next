@@ -4,19 +4,19 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import useStyles from "../../styles/style";
+import useStyles from "../../../styles/style";
 import dynamic from 'next/dynamic'
-const WeedDispansires = dynamic(() => import('../../component/WeedDispansires/Weed_Dispansires'));
-import Createcontext from "../../hooks/context"
+const WeedDispansires = dynamic(() => import('../../../component/WeedDispansires/Weed_Dispansires'));
+import Createcontext from "../../../hooks/context"
 // import { useLocation, useParams, usenavigate.push } from "react-router-dom";
 
 import { useRouter } from 'next/router';
 import axios, { Axios } from "axios";
-import { DespensioriesItem } from '../../hooks/apicall/api';
-import Wronglocation from "../../component/skeleton/Wronglocation";
-import { modifystr } from "../../hooks/utilis/commonfunction";
-import Loader from "../../component/Loader/Loader";
-import RoutingDespen from '../../hooks/utilis/Routingdespen';
+import { DespensioriesItem } from '../../../hooks/apicall/api';
+import Wronglocation from "../../../component/skeleton/Wronglocation";
+import { modifystr } from "../../../hooks/utilis/commonfunction";
+import Loader from "../../../component/Loader/Loader";
+import RoutingDespen from '../../../hooks/utilis/Routingdespen';
 
 
 

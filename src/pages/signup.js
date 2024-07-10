@@ -13,7 +13,7 @@ import Createcontext from "../hooks/context"
 import LoginWithGoogle from '../component/LoginWithGoogle/LoginWithGoogle'
 import React,{useState} from 'react';
 import Axios from 'axios'
-const signup = () => {
+const Signup = () => {
     const { state } = React.useContext(Createcontext)
     const [emailvalid,setemailvalid]=useState(false)
     // const location =useLocation()
@@ -128,4 +128,4 @@ const signup = () => {
   )
 }
 
-export default signup
+export default Signup

@@ -1,9 +1,10 @@
-import { Helmet } from 'react-helmet-async';
-import Createcontext from "../../../Hooks/Context"
+
+import Head from "next/head"
+import Createcontext from "@/hooks/context"
 import React from "react"
 function DealsSeo() {
     return (
-        <Helmet>
+        <Head>
             <title> {`Get the best marijuana Deals Near You | weedx.io  `}</title>
             <meta name="title" content={`Get the best marijuana Deals Near You | weedx.io `}/>
             <meta name='description' content={`Get the best marijuana Deals Near You on weedx.io. Find special sales, promo codes, coupons, and discounts from cannabis dispensaries in your neighborhood`} />
@@ -19,7 +20,7 @@ function DealsSeo() {
             <meta name="twitter:card" content={"website Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={"Get the best marijuana Deals Near You | weedx.io "} />
             <meta name="twitter:description" content={"Get the best marijuana Deals Near You on weedx.io. Find special sales, promo codes, coupons, and discounts from cannabis dispensaries in your neighborhood"} />
-        </Helmet>
+        </Head>
     )
 }
 

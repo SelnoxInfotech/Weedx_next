@@ -218,16 +218,16 @@ const Product = () => {
                         
                                                     </div>
                                                     <div className="col-12 center height_empty_div_heading">
-                                                        <h2>No Product Found</h2>
+                                                        <h2>{`No Product Found`}</h2>
                                                     </div>
                                                     <div className="col-md-6 col-12 center height_empty_div_paragraph mx-auto text-center my-3 ">
-                                                        <p>Apologies, this page is currently empty, but stay tuned as we're working to bring you exciting products soon!</p>
+                                                        <p>{`Apologies, this page is currently empty, but stay tuned as we're working to bring you exciting products soon!`}</p>
                         
                                                     </div>
                                                    
                                                     <div className="col-12 center height_Empty_btnDiv mt-2">
                                                         <Box  className={`${classes.loadingBtnTextAndBack}`}  >
-                                                            <LoadingButton  style={{width:"100%",height:"100%"}} variant="outlined" loading={false} type={'submit'}>Shop now</LoadingButton>
+                                                            <LoadingButton  style={{width:"100%",height:"100%"}} variant="outlined" loading={false} type={'submit'}>{`Shop now`}</LoadingButton>
                                                         </Box>
                                                     </div>
                                                     

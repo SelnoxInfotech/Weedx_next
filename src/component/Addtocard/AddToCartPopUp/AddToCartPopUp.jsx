@@ -70,13 +70,8 @@ const AddToCartPopUp = ({ CartClean, SetCartClean, NewData, SetAddToCard }) => {
 
             </Stack>
             <Modal open={!!layout} onClose={() => {  SetCartClean(false) }}>
-                <ModalDialog
-                    aria-labelledby="layout-modal-title"
-                    aria-describedby="layout-modal-description"
-                    layout={layout}
-                    sx={{ width: "32rem", height: "40rem" }}
-                >
-                    <ModalClose />
+           
+                
                     <div className='container-fluid marginRow'>
                         <div className='row '>
                             <div className='col-12 AddToCartImageContainer'>
@@ -122,7 +117,7 @@ const AddToCartPopUp = ({ CartClean, SetCartClean, NewData, SetAddToCard }) => {
                     </div>
 
 
-                </ModalDialog>
+            
             </Modal>
         </React.Fragment>
     )

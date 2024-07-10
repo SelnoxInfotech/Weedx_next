@@ -15,6 +15,7 @@ import Createcontext from "../../../hooks/context";
 import { useRouter } from "next/router";
 import CustomAlert from "../../CustomAlert/CustomAlert";
 import { Menuintegration_login } from "../../../component/Login/menu-integration_login";
+import Image from "next/image";
   const WriteReviewPopup = ({
     reviewloading,
     onSubmit,
@@ -232,10 +233,10 @@ import { Menuintegration_login } from "../../../component/Login/menu-integration
                           mediaurls.length !==0 && <div className="media_list">{
                             mediaurls.map((item, index)=>{
                               if(Boolean(images[index]?.type?.includes('image'))){
-                                return <span className="uploadedImage"> <span onClick={()=>{removemedia(index)}} className="crossbtn"><RxCross2 />
-                                </span> <img src={item} width={100} alt="adkgfdg" /> </span>
+                                return <span key={index} className="uploadedImage"> <span onClick={()=>{removemedia(index)}} className="crossbtn"><RxCross2 />
+                                </span> <Image width={100} height={100} src={item} alt="adkgfdg" /> </span>
                               }else{
-                                return <span className="uploadedVideo"> <span onClick={()=>{removemedia(index)}} className="crossbtn"><RxCross2 />
+                                return <span key={index}className="uploadedVideo"> <span onClick={()=>{removemedia(index)}} className="crossbtn"><RxCross2 />
                                 </span> <video src={item} width="320" height="240" muted controls autoplay />   </span>
                               }
                             })}

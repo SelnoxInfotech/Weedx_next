@@ -179,8 +179,8 @@ const Deliveries = () => {
 
                             <div className="row">
                                 {
-                                    contentdata?.Faq?.map((item) => {
-                                        return <div className="col-lg-6 webContent my-2"> <Accordion>
+                                    contentdata?.Faq?.map((item , index) => {
+                                        return <div className="col-lg-6 webContent my-2" key={index}> <Accordion>
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon />}
                                                 aria-controls="panel1-content"

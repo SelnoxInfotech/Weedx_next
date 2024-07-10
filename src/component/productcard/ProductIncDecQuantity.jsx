@@ -104,12 +104,12 @@ const ProductIncDecQuantity = ({ popup, SetPopup, items, AddToCart, setadding, a
 
                                 </div>
                                 <div className="product_cart_review my-3">
-                                    { new Array(items.rating).fill(null).map(() => (
-                                        <BsStarFill size={16} color="#31B665" className="product_search_rating_star" />
+                                    { new Array(items.rating).fill(null).map((data, index) => (
+                                        <BsStarFill key={index} size={16} color="#31B665" className="product_search_rating_star" />
                                     ))}
 
-                                    {new Array(5 - items.rating).fill(null).map(() => (
-                                        <BsStar size={16} color="#31B665" className="product_search_rating_star" />
+                                    {new Array(5 - items.rating).fill(null).map((data, index) => (
+                                        <BsStar key ={index} size={16} color="#31B665" className="product_search_rating_star" />
                                     ))}
                                 </div>
                                 <div className='weight_font my-3'>
@@ -189,12 +189,12 @@ const ProductIncDecQuantity = ({ popup, SetPopup, items, AddToCart, setadding, a
                                     } */}
                                     {
                                         // SelectWeight === items.id &&
-                                        items?.Prices[0].Price.map((data) => {
+                                        items?.Prices[0].Price.map((data , index) => {
                                           if(data.id === SelectWeight){
                                             if (data.Stock === "IN Stock" && adding === items.id ) {
 
                                                 return (
-                                                    <LoadingButton style={{ width: "100%", height: "30px", fontSize: "14px" }}
+                                                    <LoadingButton key={index} style={{ width: "100%", height: "30px", fontSize: "14px" }}
                                                         onClick={() => { AddToCart(items, counter, SelectWeight, handleClose) }} >
                                                         Add To Cart
                                                     </LoadingButton>
@@ -202,7 +202,7 @@ const ProductIncDecQuantity = ({ popup, SetPopup, items, AddToCart, setadding, a
                                             }
                                             else {
                                                 return (
-                                                    <LoadingButton className={classes.outofstockbtn} >
+                                                    <LoadingButton key={index} className={classes.outofstockbtn} >
                                                         Out of Stock
                                                     </LoadingButton>
                                                 )

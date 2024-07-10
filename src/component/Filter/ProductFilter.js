@@ -413,20 +413,20 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
 
                                                         {
                                                             Filter.length !== 0 ?
-                                                                Filter?.map((data) => {
+                                                                Filter?.map((data , index) => {
                                                                 
                                                                     return (
-                                                                        <div>
+                                                                        <div key={index}>
                                                                             <div className="col-10 product_category_dropdown_cursor">
                                                                             {ele.Name === "Category" ? <p  className="m-0" onClick={() => { Category_Drop(data.id, ele.Name) }}>{data.name}</p> : <div>  <input type="checkbox" onChange={()=>{Category_Drop(data.id, ele.Name , data )}} id={data.name} name={data.name} value={data.name} /> <label htmlFor={data.name} className="m-0" >{data.name}</label> </div>}
                                                                             </div>
                                                                             {
-                                                                                SubCategory?.map((SubCategory) => {
+                                                                                SubCategory?.map((SubCategory ,index) => {
                                                                                   
                                                                                     return (
                                                                                         SubCategory.CatgoryId === data.id
                                                                                         &&
-                                                                                        <div onClick={() => { FilterSubCategorydata(SubCategory.id, SubCategory.SubCategory_name, data.name, SubCategory.Store_id) }} className="col-10 px-2 py-0 product_sub_category_dropDown_cursor"  >
+                                                                                        <div key={index} onClick={() => { FilterSubCategorydata(SubCategory.id, SubCategory.SubCategory_name, data.name, SubCategory.Store_id) }} className="col-10 px-2 py-0 product_sub_category_dropDown_cursor"  >
                                                                                             <input type="radio" id={SubCategory.SubCategory_name} name={data.name} value={SubCategory.SubCategory_name} />  <label htmlFor={SubCategory.SubCategory_name}>{SubCategory.SubCategory_name}</label>
                                                                                         </div>
                                                                                     )

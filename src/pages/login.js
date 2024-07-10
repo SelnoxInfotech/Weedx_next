@@ -19,7 +19,7 @@ import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { CiLock } from "react-icons/ci"
 import LoginWithGoogle from '../component/LoginWithGoogle/LoginWithGoogle';
 import Createcontext from "../hooks/context"
-const login = () => {
+const Login = () => {
     const cookies = new Cookies();
     const pathname = usePathname()
     const method = useForm()
@@ -252,4 +252,4 @@ const login = () => {
     )
 }
 
-export default login
+export default Login

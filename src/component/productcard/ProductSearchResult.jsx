@@ -283,8 +283,8 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                             showdata?.map((items, index) => {
                                 if (items.id !== currentProductID) {
                                     return (
-                                        <SwiperSlide>
-                                            <div className="productSearch_result_container" key={index}>
+                                        <SwiperSlide key={index}>
+                                            <div className="productSearch_result_container" >
                                                 {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <span className="discountTag">{((parseInt(items.Prices[0].Price[0].Price) - parseInt(items.Prices[0].Price[0].SalePrice)) / parseInt(items.Prices[0].Price[0].Price) * 100).toFixed(1)}% OFF</span>}
                                                 <div className="productSearchResultImage_container">
                                                     <div className="product_whish_list">
@@ -477,7 +477,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                     </div>
                 }
             </div>
-            {Whishlist && <WhisList open1={Whishlist} SetWishList={SetWishList}></WhisList>}
+            {/* {Whishlist && <WhisList open1={Whishlist} SetWishList={SetWishList}></WhisList>} */}
             <PreCheckout />
         </React.Fragment>
     )

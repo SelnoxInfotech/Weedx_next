@@ -179,12 +179,12 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
                                         <div className="reviwerName_rating">
 
                                             <div className='reviewSectionRating'>
-                                                {ele.rating && new Array(ele.rating).fill(null).map(() => (
-                                                    <BsStarFill size={16} color="#31B665" className="product_search_rating_star" />
+                                                {ele.rating && new Array(ele.rating).fill(null).map(( data , index) => (
+                                                    <BsStarFill key={index} size={16} color="#31B665" className="product_search_rating_star" />
                                                 ))}
 
-                                                {new Array(5 - ele.rating).fill(null).map(() => (
-                                                    <BsStar size={16} color="#31B665" className="product_search_rating_star" />
+                                                {new Array(5 - ele.rating).fill(null).map(( data , index) => (
+                                                    <BsStar  key={index} size={16} color="#31B665" className="product_search_rating_star" />
                                                 ))}
                                             </div>
                                         </div>
@@ -225,14 +225,14 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
                                             ele.images.length !== 0 &&  <div className='reviewImagewrapper'>
                                                 {
                                                     ele.images.map((item , index)=>{
-                                                         return     <div className='reviewimagebox' onClick={()=>openimageslider(ele , 'image' ,index)}>
-                                                                        <img src={item.image} className='reviewImage' alt='review image' title='review image'/>
+                                                         return     <div key={index} className='reviewimagebox' onClick={()=>openimageslider(ele , 'image' ,index)}>
+                                                                        <Image width={100} height={100} src={item.image} className='reviewImage' alt='review image' title='review image'/>
                                                                     </div>
                                                     })
                                                 }
                                                 {
                                                     ele.videos.map((item , index)=>{
-                                                         return     <div className='reviewvideobox' >
+                                                         return     <div key={index} className='reviewvideobox' >
                                                                         <video  autoPlay={false} onClick={()=>{  openimageslider(ele , 'video' , index)}} muted  src={item.video} className='reviewVideo' alt='video'/>
                                                                     </div>
                                                     })
@@ -247,11 +247,9 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
                                                 <div className="d-flex gap-2">
                                                     <div className="related_img_container">
                                                         <div className="related_review_image">
-                                                            <LazyLoadImage
-                                                                onError={event => {
-                                                                    event.target.src = "/image/user.webp"
-                                                                    event.onerror = null
-                                                                }}
+                                                            <Image
+                                                               width={100} 
+                                                               height={100}
                                                                 className='realted_review_images'
                                                                 src={`${storeDetails?.Store_Image}`}
                                                                 alt={storeDetails?.Store_Image}
@@ -321,12 +319,12 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
                    >
                     {
                         sliderdata?.image?.map((item , index)=>{
-                            return  <SwiperSlide> <div className='Reviewimageslidebox'><img src={item.image} alt='review image' title='review image'/></div></SwiperSlide>
+                            return  <SwiperSlide key={index}> <div className='Reviewimageslidebox'><Image width={100} height={100} src={item.image} alt='review image' title='review image'/></div></SwiperSlide>
                         })
                     }
                      {
                         sliderdata?.video?.map((item, index )=>{
-                            return  <SwiperSlide> <div className='Reviewimageslidebox'>  <video  autoPlay={true} muted controls src={item.video} className='reviewVideo' alt='video'/></div></SwiperSlide>
+                            return  <SwiperSlide  key={index} > <div className='Reviewimageslidebox'>  <video  autoPlay={true} muted controls src={item.video} className='reviewVideo' alt='video'/></div></SwiperSlide>
                         })
                     }
                         {/* <SwiperSlide> <div className='Reviewimageslidebox'></div></SwiperSlide> */}

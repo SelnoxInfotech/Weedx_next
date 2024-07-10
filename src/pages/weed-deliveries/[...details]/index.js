@@ -32,6 +32,7 @@ import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Swal from 'sweetalert2';
 import Link from "next/link";
 import { useParams } from 'next/navigation'
+import Image from "next/image";
 export default function DispensoriesDetails(props) {
     const {id , tab} =  props.params
     const  data  = false
@@ -382,7 +383,8 @@ export default function DispensoriesDetails(props) {
                     ?
                     <StoreDetails Despen={Despen} locationStore={location.pathname}></StoreDetails>
                     :
-                    <Embedded Despen={Despen} locationStore={location.pathname}></Embedded>
+                    // <Embedded Despen={Despen} locationStore={location.pathname}></Embedded>
+                    ""
 
                 }
                 <div className="container-fluid product_container" >
@@ -414,10 +416,10 @@ export default function DispensoriesDetails(props) {
                                     :
                                       <div id='oopss'>
                                         <div id='error-text'>
-                                            <img src="/image/gif.svg" alt="no product"/>
-                                            <span>Menu Not Available</span>
-                                            <p class="p-a">This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses</p>
-                                            <span onClick={()=>{navigate.push(-1)}} class="back">VIEW OTHER BUSINESSES</span>
+                                            <Image width={100} height={100} src="/image/gif.svg" alt="no product"/>
+                                            <span>{`Menu Not Available`}</span>
+                                            <p class="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses`}</p>
+                                            <span onClick={()=>{navigate.push(-1)}} class="back">{`VIEW OTHER BUSINESSES`}</span>
                                         </div>
                                       </div>
                                  ):
@@ -436,10 +438,10 @@ export default function DispensoriesDetails(props) {
                                     :
                                     <div id='oopss'>
                                         <div id='error-text'>
-                                            <img src="/image/gif.svg" alt="no product"/>
-                                            <span>Menu Not Available</span>
-                                            <p class="p-a">This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses </p>
-                                            <span class="back">VIEW OTHER BUSINESSES</span>
+                                            <Image width={100} height={100} src="/image/gif.svg" alt="no product"/>
+                                            <span>{`Menu Not Available`}</span>
+                                            <p class="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses `}</p>
+                                            <span class="back">{`VIEW OTHER BUSINESSES`}</span>
                                         </div>
                                     </div>)
                                     :
@@ -473,11 +475,11 @@ export default function DispensoriesDetails(props) {
                         {
                             tab === 'deals' && <div className="noReview">
                                 <div className="noreviewicon">
-                                    <div className="iconcircl"><img src={'/image/nodeal.png'} className="nodealsicon" alt="no Deals" title="no Deals" /></div>
+                                    <div className="iconcircl"> <Image width={100} height={100} src={'/image/nodeal.png'} className="nodealsicon" alt="no Deals" title="no Deals" /></div>
                                 </div>
-                                <h3 className="noreview_title">Discover More Savings Soon!</h3>
-                                <p className="noreview_description w-lg-50 ">It looks like there are no active deals at the moment at <Link target="_blank" href={`/weed-dispensaries/${Despen[0]?.Store_Name.toLowerCase().replaceAll(" ", "-")}/${Despen[0]?.id}`}><b>{Despen[0]?.Store_Name}</b></Link>. Don't worry, though – our partnered stores frequently update their promotions. Be sure to check back regularly for exciting discounts and special offers on your favorite products.</p>
-                                <p className="noreview_description w-lg-50">In the meantime, explore the diverse range of products available at <Link target="_blank" href={`/weed-dispensaries/${Despen[0]?.Store_Name.toLowerCase().replaceAll(" ", "-")}/${Despen[0]?.id}`}><b>{Despen[0]?.Store_Name}</b></Link>. We're constantly working to bring you the best deals, so stay tuned for upcoming promotions.</p>
+                                <h3 className="noreview_title">{`Discover More Savings Soon!`}</h3>
+                                <p className="noreview_description w-lg-50 ">{`It looks like there are no active deals at the moment at `}<Link target="_blank" href={`/weed-dispensaries/${Despen[0]?.Store_Name.toLowerCase().replaceAll(" ", "-")}/${Despen[0]?.id}`}><b>{Despen[0]?.Store_Name}</b></Link>{`. Don't worry, though – our partnered stores frequently update their promotions. Be sure to check back regularly for exciting discounts and special offers on your favorite products.`}</p>
+                                <p className="noreview_description w-lg-50">{`In the meantime, explore the diverse range of products available at `}<Link target="_blank" href={`/weed-dispensaries/${Despen[0]?.Store_Name.toLowerCase().replaceAll(" ", "-")}/${Despen[0]?.id}`}><b>{Despen[0]?.Store_Name}</b></Link>{`. We're constantly working to bring you the best deals, so stay tuned for upcoming promotions.`}</p>
                             </div>
                         }
                     </div>

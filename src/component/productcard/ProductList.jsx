@@ -491,9 +491,10 @@ const ProductList = ({ arr , link="products" }) => {
                                   />
                                 ))}
 
-                            {new Array(5 - ele.rating).fill(null).map(() => {
+                            {new Array(5 - ele.rating).fill(null).map((data, index) => {
                               return (
                                 <BsStar
+                                key={index}
                                   size={16}
                                   color="#31B665"
                                   className="product_search_rating_star"
@@ -540,7 +541,7 @@ const ProductList = ({ arr , link="products" }) => {
                         
                         {CartClean && (
                           <AddToCartPopUp
-                            CartClean={"center"}
+                            CartClean={CartClean}
                             SetCartClean={SetCartClean}
                             NewData={NewData}
                             SetAddToCard={SetAddToCard}
@@ -556,9 +557,9 @@ const ProductList = ({ arr , link="products" }) => {
               (showdata.length > productperpage && location.pathname.includes('/menu-integration')) && <div className="d-flex justify-content-center"><Pagination count={showdata.length%productperpage===0?parseInt(showdata.length/productperpage):(parseInt(showdata.length/productperpage)+1)} page={page} onChange={pagechanges} /></div>
             }
             </div>
-            {Whishlist && (
-              <WhisList open1={Whishlist} SetWishList={SetWishList}></WhisList>
-            )}
+            {/* {Whishlist && (
+              // <WhisList open1={Whishlist} SetWishList={SetWishList}></WhisList>
+            )} */}
             <PreCheckout />
           </React.Fragment>
         ) : (

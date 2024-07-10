@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react"
-import { useLocation } from "react-router-dom"
+import { useRouter } from "next/router";
 function ProductDetailsSeo({ Productname, Productnm, ProductCategory, StoreName, TotalRating , image, rating, City, State, location,sellername,price, robot, Description,category,id,Subcategorge }) {
   
     const reviewSchema = {
@@ -46,19 +46,19 @@ function ProductDetailsSeo({ Productname, Productnm, ProductCategory, StoreName,
         <Head>
             <title> {`${Productname}  `}</title>
             <meta name="title" content={`${Productname}`} />
-            <meta name='description' content={`${Productnm} - ${ProductCategory} at ${StoreName} - Your Ultimate Cannabis ${useLocation().pathname.slice(0, 16) === "/weed-deliveries" ? `Delivery` : `Dispensary`} in ${City}, ${State}.`} />
+            <meta name='description' content={`${Productnm} - ${ProductCategory} at ${StoreName} - Your Ultimate Cannabis ${useRouter().pathname.slice(0, 16) === "/weed-deliveries" ? `Delivery` : `Dispensary`} in ${City}, ${State}.`} />
             <link rel="canonical" href={`https://www.weedx.io${location}`} />
             <meta name="robots" content={robot}></meta>
             {/* Facebook tags */}
             <meta property="og:type" content="website" />
             <meta property="og:title" content={`${Productname}`} />
-            <meta property="og:description" content={`${Productnm} - ${ProductCategory} at ${StoreName} - Your Ultimate Cannabis ${useLocation().pathname.slice(0, 16) === "/weed-deliveries" ? `Delivery` : `Dispensary`} in ${City}, ${State}.`} />
+            <meta property="og:description" content={`${Productnm} - ${ProductCategory} at ${StoreName} - Your Ultimate Cannabis ${useRouter().pathname.slice(0, 16) === "/weed-deliveries" ? `Delivery` : `Dispensary`} in ${City}, ${State}.`} />
             { /* End Facebook tags */}
             { /* Twitter tags */}
             <meta name="twitter:creator" content={"website"} />
             <meta name="twitter:card" content={"website Dispensaries & `Delivery` Near Me"} />
             <meta name="twitter:title" content={`${Productname}`} />
-            <meta name="twitter:description" content={`${Productnm} - ${ProductCategory} at ${StoreName} - Your Ultimate Cannabis ${useLocation().pathname.slice(0, 16) === "/weed-deliveries" ? `Delivery` : `Dispensary`} in ${City}, ${State}.`} />
+            <meta name="twitter:description" content={`${Productnm} - ${ProductCategory} at ${StoreName} - Your Ultimate Cannabis ${useRouter().pathname.slice(0, 16) === "/weed-deliveries" ? `Delivery` : `Dispensary`} in ${City}, ${State}.`} />
 
            { rating !== 0 &&  <script type="application/ld+json">
                 {JSON.stringify(reviewSchema)}

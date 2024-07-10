@@ -20,8 +20,8 @@ import _ from "lodash";
 import AddToCartPopUp from "../Addtocard/AddToCartPopUp/AddToCartPopUp";
 import Link from "next/link";
 import { useRouter } from "next/router";
-// import { WishListPost } from "../../../Component/Whishlist/WishListApi_"
-// import { WhisList } from "../../../Component/Whishlist/WhisList"
+import { WishListPost } from "@/component/Whishlist/WishListApi_"
+import { WhisList } from "@/component/Whishlist/WhisList"
 import { Navigation } from 'swiper/modules';
 import { modifystr } from "../../hooks/utilis/commonfunction";
 import Image from "next/image";

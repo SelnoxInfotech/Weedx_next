@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import useStyles from "../../styles/style";
-import  ClickAwayListener  from '@mui/base/ClickAwayListener';
+import  {ClickAwayListener}  from '@mui/base/ClickAwayListener';
 import Axios from "axios";
 import _ from "lodash";
 import { FormControl, Grid, MenuItem, Select } from "@mui/material";
@@ -391,12 +391,11 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
             </div>
             <div className=" col-lg-3 col-xxl-2 col-md-12 gap-sm-0 gap-2 prod_cat_left_sec  center">
                 {ProductFilterData?.map((ele, index) => {
-                    console.log(ele)
                     const { Id, Name, Icons } = ele;
                     return (
                         <div key={index} className={ location.pathname.includes('/menu-integration')?"integrated-filter_manu_items":"filter_manu_items"}>
                             <div className="col-12 d-flex align-items-center prodCat_gap product_category_border "
-                            //   onClick={() => HandleOpenEvent(Id, Name)}
+                              onClick={() => HandleOpenEvent(Id, Name)}
                               >
                                     <p className="m-0 prod_filter_icon" >{Icons}</p>
                                     <p className="m-0 product_filter_name">{Name}</p>

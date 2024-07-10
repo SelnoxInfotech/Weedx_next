@@ -1,10 +1,10 @@
-import { Helmet } from 'react-helmet-async';
-import Createcontext from "../../../Hooks/Context"
+import Head from "next/head"
+import Createcontext from "@/hooks/context"
 import React from "react"
 function BrandSeo({ location }) {
     const { state } = React.useContext(Createcontext)
     return (
-        <Helmet>
+        <Head>
             <title> {`Shop from Top Marijuana Brands Near You | weedx.io |  `}</title>
             <meta name="title" content={`Shop from Top Marijuana Brands Near You | weedx.io | `} />
             <meta name='description' content={`Shop high-quality Recreational and Medical Marijuana from top brands Near you. Order online and get the best delivery, dispensaries, and deals on weedx.io`} />
@@ -20,14 +20,14 @@ function BrandSeo({ location }) {
             <meta name="twitter:card" content={"website Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={"Shop from Top Marijuana Brands Near You | weedx.io | "} />
             <meta name="twitter:description" content={"Shop high-quality Recreational and Medical Marijuana from top brands Near you. Order online and get the best delivery, dispensaries, and deals on weedx.io"} />
-        </Helmet>
+        </Head>
     )
 }
 
 function BrandDetailsSeo({ brandname, location }) {
     const { state } = React.useContext(Createcontext)
     return (
-        <Helmet>
+        <Head>
             <title> {` ${brandname} | Top Marijuana Brand Near You | weedx.io |  `}</title>
             <meta name="title" content={`${brandname} | Top Marijuana Brand Near You | weedx.io |`} />
             <meta name='description' content={`Shop high-quality Recreational and Medical Marijuana from top Brands Near you from ${brandname}. Online Order, delivery, dispensaries, and deals on weedx.io.`} />
@@ -45,7 +45,7 @@ function BrandDetailsSeo({ brandname, location }) {
             <meta name="twitter:description" content={`Shop high-quality Recreational and Medical Marijuana from top Brands Near you from ${brandname}. Online Order, delivery, dispensaries, and deals on weedx.io.`} />
 
          
-        </Helmet>
+        </Head>
     )
 }
 

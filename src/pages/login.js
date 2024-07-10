@@ -32,75 +32,22 @@ const Login = () => {
     const classes = useStyles()
     const [showPassword, setShowPassword] = React.useState(false);
     const router = useRouter()
+    const { query } = router;
     const [dulicate] = React.useState([])
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     function Submit(data) {
+
         Setloading(true)
-        // axios.post("https://api.cannabaze.com/UserPanel/Login/", {
+        axios.post("https://api.cannabaze.com/UserPanel/Login/", {
 
-        //     email: data.email,
-        //     password: data.password
+            email: data.email,
+            password: data.password
 
-        // },
-        // ).then(response => {
-
-
-
-        //         if(response.data !== "Not Authorised"){
-        //             let date = new Date();
-        //             date.setTime(date.getTime() + 60*60*24*365)
-        //             localStorage.setItem('User_Token_access',  response?.data?.tokens?.access);
-        //             cookies.set('User_Token_access', response?.data?.tokens?.access, { expires: date })
-        //             dispatch({ type: 'Login', login: true })
-        //             dispatch({ type: 'ApiProduct', ApiProduct: !state.ApiProduct })
-
-        //             if(location.state=== null || location.state.location.pathname==='/cart'){
-        //                 Navigate(-1)
-        //             }else{
-        //                 Navigate('/')
-
-        //             }
+        },
+        ).then(response => {
 
 
-        //         Setloading(false)
-        //         }
-        //         else{
 
-        //             Swal.fire({
-        //                 imageUrl: "/image/cross.png",
-        //                 imageClass: "loginsweetimg",
-        //                 imageWidth: 60,
-        //                 imageHeight: 60,
-        //                 title: "Oops...",
-        //                 text: "Login Credentials Incorrect     ",
-        //                 footer:"Invalid email or password. Please check and try again. If not registered, use the correct email or sign up for a new account.",
-        //                 customClass: {
-        //                     confirmButton: 'loginSweetbtn',
-        //                     title: 'title-class',
-        //                     icon: 'loginSweeticon'
-        //                 },
-        //             });
-        //             Setloading(false) 
-        //         }
-        // }).catch(
-        //     function (error) {
-        //         Setloading(false)
-        //         Swal.fire({
-        //             icon: "error",
-        //             title: "Oops...",
-        //             text: error.response.data.message,
-
-        //           });
-        // })
-
-
-        fetch('https://api.cannabaze.com/UserPanel/Login/', {
-            method: 'post',
-            body: JSON.stringify({
-                email: data.email,
-                password: data.password
-            })
-        }).then((response) => {
             if (response.data !== "Not Authorised") {
                 let date = new Date();
                 date.setTime(date.getTime() + 60 * 60 * 24 * 365)
@@ -108,12 +55,15 @@ const Login = () => {
                 cookies.set('User_Token_access', response?.data?.tokens?.access, { expires: date })
                 dispatch({ type: 'Login', login: true })
                 dispatch({ type: 'ApiProduct', ApiProduct: !state.ApiProduct })
-                // if(location.state=== null || location.state.location.pathname==='/cart'){
-                //     Navigate(-1)
-                // }else{
-                //     Navigate('/')
+
+                // if (state === null || location.state.location.pathname === '/cart') {
+                //     router.push(-1)
+                // } else {
+                    router.push('/')
+
                 // }
-                router.back()
+
+
                 Setloading(false)
             }
             else {
@@ -134,26 +84,22 @@ const Login = () => {
                 });
                 Setloading(false)
             }
-        }).catch((error) => {
-            Setloading(false)
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.response.data.message,
+        }).catch(
+            function (error) {
+                Setloading(false)
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error?.response?.data?.error,
 
-            });
-        })
+                });
+            }
+        )
     }
-    React.useEffect(() => {
-        document.documentElement.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "instant",
-        });
-    }, [])
+
     return (
         <div className="login_signup_reset_container ">
-               {state.permission === false && <Currentlocation></Currentlocation>}
+            {state.permission === false && <Currentlocation></Currentlocation>}
             <div className='col-12 fontStyle signup_head'>
                 <h1>Log In</h1>
             </div>

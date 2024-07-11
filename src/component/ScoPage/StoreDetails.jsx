@@ -191,8 +191,8 @@ function StoreDetails({ Despen, locationStore  }) {
             <meta name="title" content={`Marijuana Dispensaries & Delivery Near Me | weedx.io |`} />
             <meta name='description' content={MetaTag.discription} />
             <link rel="canonical" href={`https://www.weedx.io${locationStore}`} />
-            <meta itemprop="name" content="WeedX" />
-            <meta itemprop="description" content={MetaTag.discription} />
+            <meta itemProp="name" content="WeedX" />
+            <meta itemProp="description" content={MetaTag.discription} />
             <meta name="robots" content="INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"></meta>
             {/* Facebook tags */}
             <meta property="og:type" content={"website"} />

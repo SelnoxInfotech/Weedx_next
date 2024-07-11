@@ -2,6 +2,9 @@ import React, { useReducer, createContext } from 'react';
 import Reducer from './reduser'
 import Cookies from 'universal-cookie';
 import axios from 'axios';
+
+import { WishListget } from '@/component/Whishlist/WishListApi_';
+// import { StaticImages } from '../Api/Api';
 const Createcontext = createContext();
 const cookies = new Cookies();
 const login = cookies.get("User_Token_access")
@@ -139,17 +142,17 @@ function Context(props) {
                 .catch((error) => {
                     console.error(error)
                 })
-                //     WishListget().then((res) => {
-                //     let object = {};
-                //     res.data.map((data) => {
-                //     const l = data.id
-                //     object[l] = true
-                //     return data
-                //       })
-                //     dispatch({ type: 'WishList', WishList: object })
-                //    }
+                    WishListget().then((res) => {
+                    let object = {};
+                    res.data.map((data) => {
+                    const l = data.id
+                    object[l] = true
+                    return data
+                      })
+                    dispatch({ type: 'WishList', WishList: object })
+                   }
        
-                // ).catch((err) => { });
+                ).catch((err) => { });
         }
         else {
             const data = localStorage?.getItem("items")

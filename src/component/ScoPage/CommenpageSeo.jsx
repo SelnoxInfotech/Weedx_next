@@ -1,8 +1,8 @@
-import { Helmet } from "react-helmet-async"
+import Head from "next/head"
 
 function AboutusSeo() {
     return (
-        <Helmet>
+        <Head>
             <title>{` About Us-weedx.io | Weed Dispensary & Delivery Near Me | `}</title>
             <meta name="title" content={` About Us-weedx.io | Weed Dispensary & Delivery Near Me | `}/>
             <meta name='description' content={`weedx.io discover cannabis products and order them from best delivery and dispensary services near you. Explore the best dispensary and get the best weed`} />
@@ -19,14 +19,14 @@ function AboutusSeo() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={` About Us-weedx.io | Weed Dispensary & Delivery Near Me | `} />
             <meta name="twitter:description" content={`weedx.io discover cannabis products and order them from best delivery and dispensary services near you. Explore the best dispensary and get the best weed`} />
-        </Helmet>
+        </Head>
     )
 }
 
 
 function TermsAndConditions() {
     return (
-        <Helmet>
+        <Head>
             <title>{` Terms And Conditions - weedx.io | `}</title>
             <meta name="title" content={` Terms And Conditions - weedx.io | `}/>
             <meta name='description' content={`Terms & Conditions weedx.io. Recreational and Medical Marijuana Dispensaries & Delivery Near you. Explore the best dispensary and get the best weed. `} />
@@ -43,12 +43,12 @@ function TermsAndConditions() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={` Terms And Conditions - weedx.io | `} />
             <meta name="twitter:description" content={`Terms & Conditions weedx.io. Recreational and Medical Marijuana Dispensaries & Delivery Near you. Explore the best dispensary and get the best weed. `} />
-        </Helmet>
+        </Head>
     )
 }
 function PrivacyPolicy() {
     return (
-        <Helmet>
+        <Head>
             <title>{`Privacy And Policy - weedx.io |`}</title>
             <meta name="title" content={` Privacy And Policy - weedx.io |`}/>
             <meta name='description' content={`Privacy And Policy weedx.io. Recreational and Medical Marijuana Dispensaries & Delivery Near you. Explore the best dispensary and get the best weed`} />
@@ -65,12 +65,12 @@ function PrivacyPolicy() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={` Privacy And Policy - weedx.io |`} />
             <meta name="twitter:description" content={`Privacy And Policy weedx.io. Recreational and Medical Marijuana Dispensaries & Delivery Near you. Explore the best dispensary and get the best weed`} />
-        </Helmet>
+        </Head>
     )
 }
 function CookiesPolicy() {
     return (
-        <Helmet>
+        <Head>
             <title>{`Cookies Policy | weedx.io`}</title>
             <meta name="title" content={` Cookies Policy | weedx.io`}/>
             <meta name='description' content={`Cookies Policy weedx.io. Recreational and Medical Marijuana Dispensaries & Delivery Near you. Explore the best dispensary and get the best weed. `} />
@@ -87,12 +87,12 @@ function CookiesPolicy() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={` Cookies Policy | weedx.io`} />
             <meta name="twitter:description" content={`Cookies Policy weedx.io. Recreational and Medical Marijuana Dispensaries & Delivery Near you. Explore the best dispensary and get the best weed. `} />
-        </Helmet>
+        </Head>
     )
 }
 function LoginSeo() {
     return (
-        <Helmet>
+        <Head>
             <title>{` Log In to Weedx.io| Weed Dispensary & Delivery Near You |`}</title>
             <meta name="title" content={` Log In to Weedx.io| Weed Dispensary & Delivery Near You |`}/>
             <meta name='description' content={` Access your account on the Weedx.io login page. Enjoy convenient weed delivery near you and explore our menu. Log in now on Weedx.io!`} />
@@ -109,12 +109,12 @@ function LoginSeo() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={`  Login | weedx.io`} />
             <meta name="twitter:description" content={`Welcome to weedx.io. Your secure gateway to premium cannabis. Explore high-quality strains, edibles, and more with confidence`} />
-        </Helmet>
+        </Head>
     )
 }
 function SignupSeo() {
     return (
-        <Helmet>
+        <Head>
             <title>{`Sign Up for Weedx.io | Weed Dispensary & Delivery Near You`}</title>
             <meta name="title" content={`Sign Up for Weedx.io | Weed Dispensary & Delivery Near You`}/>
             <meta name='description' content={`Create your account on Weedx.io and enjoy convenient weed delivery near you. Explore our menu and start your cannabis journey today!`} />
@@ -131,12 +131,12 @@ function SignupSeo() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={` Sign Up | weedx.io`} />
             <meta name="twitter:description" content={`Create your account on Weedx.io and enjoy convenient weed delivery near you. Explore our menu and start your cannabis journey today!`} />
-        </Helmet>
+        </Head>
     )
 }
 function WhislistSeo() {
     return (
-        <Helmet>
+        <Head>
             <title>{`Your WeedX.io Wishlist | Save Your Favorites`}</title>
             <meta name="title" content={`Your WeedX.io Wishlist | Save Your Favorites`}/>
             <meta name='description' content={`View and manage your wishlist on WeedX.io. Save your favorite products, stores, dispensaries, and delivery services for easy access and future reference.`} />
@@ -153,12 +153,12 @@ function WhislistSeo() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={`Your WeedX.io Wishlist | Save Your Favorites`} />
             <meta name="twitter:description" content={`View and manage your wishlist on WeedX.io. Save your favorite products, stores, dispensaries, and delivery services for easy access and future reference.`} />
-        </Helmet>
+        </Head>
     )
 }
 function Forgot() {
     return (
-        <Helmet>
+        <Head>
             <title>{`Forgot Password | Weedx.io | Reset Your Account Password`}</title>
             <meta name="title" content={`Forgot Password | Weedx.io | Reset Your Account Password`}/>
             <meta name='description' content={`Reset your Weedx.io account password. Follow the steps to regain access to your account. Get back to exploring our menu and enjoying convenient weed delivery`} />
@@ -175,12 +175,12 @@ function Forgot() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={`Forgot Password | Weedx.io | Reset Your Account Password`} />
             <meta name="twitter:description" content={`Reset your Weedx.io account password. Follow the steps to regain access to your account. Get back to exploring our menu and enjoying convenient weed delivery`} />
-        </Helmet>
+        </Head>
     )
 }
 function Cart() {
     return (
-        <Helmet>
+        <Head>
             <title>{`Your WeedX.io Cart | Checkout Your Cannabis Selections`}</title>
             <meta name="title" content={`Forgot Password | Weedx.io | Reset Your Account Password`}/>
             <meta name='description' content={`View and manage your selections in your WeedX.io cart. Proceed to checkout for convenient weed delivery and enjoy your chosen cannabis products`} />
@@ -197,13 +197,13 @@ function Cart() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={`Forgot Password | Weedx.io | Reset Your Account Password`} />
             <meta name="twitter:description" content={`View and manage your selections in your WeedX.io cart. Proceed to checkout for convenient weed delivery and enjoy your chosen cannabis products`} />
-        </Helmet>
+        </Head>
     )
 }
 
 function MyOrderSeo() {
     return (
-        <Helmet>
+        <Head>
             <title>{`Your WeedX.io Orders | Track Your Cannabis Deliveries`}</title>
             <meta name="title" content={`Your WeedX.io Orders | Track Your Cannabis Deliveries`}/>
             <meta name='description' content={`View and track your WeedX.io orders. Stay updated on the status of your cannabis deliveries and ensure a seamless experience with us.`} />
@@ -220,13 +220,13 @@ function MyOrderSeo() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={`Forgot Password | Weedx.io | Reset Your Account Password`} />
             <meta name="twitter:description" content={`View and track your WeedX.io orders. Stay updated on the status of your cannabis deliveries and ensure a seamless experience with us.`} />
-        </Helmet>
+        </Head>
     )
 }
 
 function MyOrderSeoDetail() {
     return (
-        <Helmet>
+        <Head>
             <title>{` WeedX.io Product Details | Explore Your Cannabis Selection`}</title>
             <meta name="title" content={` WeedX.io Product Details | Explore Your Cannabis Selection`}/>
             <meta name='description' content={`Discover detailed information about your ordered products on WeedX.io. Get insights into your cannabis selection before delivery`} />
@@ -243,7 +243,7 @@ function MyOrderSeoDetail() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={`Forgot Password | Weedx.io | Reset Your Account Password`} />
             <meta name="twitter:description" content={`Discover detailed information about your ordered products on WeedX.io. Get insights into your cannabis selection before delivery`} />
-        </Helmet>
+        </Head>
     )
 }
 

@@ -299,19 +299,7 @@ export default function DispensoriesDetails(props) {
 
         })
     };
-    const [scroll, SetScroll] = React.useState(true)
-    React.useEffect(() => {
-        if (scroll) {
-            document.documentElement.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: "instant",
-            });
-            SetScroll(() => false)
-        }
 
-    }, [])
-    // const Swal = require('sweetalert2')
     function handleDelete(id) {
         Swal.fire({
             title: "Are you sure?",

@@ -14,8 +14,8 @@ const Staticcontent = dynamic(() => import('../component/home/staticcontent'));
 const NewsBlog = dynamic(() => import('../component/home/Newsblog'));
 const HomePageDealsSignup = dynamic(() => import('../component/home/HomePageDealsSignup'));
 const Currentlocation = dynamic(() => import('../component/currentlocation/CurrentLocation'));
+const FeaturedBrand = dynamic(() => import('@/component/home/FeaturedBrand'));
 import Createcontext from "../hooks/context"
-import Axios from "axios";
 export default function Home({ initialData }) {
   const { state } = React.useContext(Createcontext)
   const [Category, SetCategory] = React.useState([])
@@ -25,7 +25,7 @@ export default function Home({ initialData }) {
 
     Navigate(`/products/${name.replace(/%20| /g, "-").toLowerCase()}/${id}`);
   }
-
+// console.log(initialData.brand)
   return (
     <>
       <HomePageSco location={useRouter().pathname}></HomePageSco>
@@ -35,6 +35,7 @@ export default function Home({ initialData }) {
       <DeliveryServices Skeleton={Skeleton} link={"weed-deliveries"} title={"Delivery services"}></DeliveryServices>
       <HomePageWeedBanner></HomePageWeedBanner>
       <DeliveryServices Skeleton={Skeleton} link={"weed-dispensaries"} title={"Shop Dispensaries Near You"} ></DeliveryServices>
+      <FeaturedBrand CardDataArray={initialData.brand} />
       <div className="col-12 border" style={{ height: "300px", position: "relative", top: "15px" }}>
         <Map height={"297px"} width={"100%"}></Map>
       </div>
@@ -58,18 +59,18 @@ export async function getStaticProps() {
   };
 
   try {
-    const [banner, callcategory, bannner2] = await Promise.all([
+    const [banner, callcategory, bannner2 , brand] = await Promise.all([
       fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
       fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
       fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
-
+      fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
     ]);
 
-    const [topbanner, category, bottembannner] = await Promise.all([
+    const [topbanner, category, bottembannner , getbrand] = await Promise.all([
       banner.json().catch(handleError),
       callcategory.json().catch(handleError),
       bannner2.json().catch(handleError),
-
+      brand.json().catch(handleError)
     ]);
 
     // Assuming breaking news is the first item in topNews array
@@ -77,7 +78,7 @@ export async function getStaticProps() {
       topbanner: topbanner,
       category: category,
       bottembannner: bottembannner,
-
+      brand:getbrand
     };
 
     return {

@@ -10384,6 +10384,139 @@ background: #FFF;
 
 
 
+   /* ***************************Brand***************************** */
+
+   .relatedVerifyBrand_Banner {
+    height: auto;
+    background: #FFFFFF;
+    border: 1px solid #DEDCDC;
+    position: relative;
+    padding: 40px;
+  }
+  
+  .brandMoreLess{
+    overflow: hidden;
+    position: relative;
+  }
+
+  .relatedVerifyBrand_icons{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+  .related_verifyBrandBanner_maincol {
+    display: flex;
+  }
+  
+  .RelatedVerifyBrandBanner_image_box {
+    width: 30%;
+   height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .related_verify_banner_img {
+    max-width: 90%;
+    max-height: 200px;
+    width: auto;
+  }
+  
+  .RelatedVerifyBanner_content_box {
+    width: 70%;
+    height: 100%;
+  }
+  
+  
+  .realtedVerifyBanner_image_inner_container {
+  
+    display: flex;
+    justify-content: center;
+  }
+  
+
+  .relatedVerifyBrand_heading h2 {
+    font-weight: 700;
+    font-size: 28px;
+    color: #3F3F3F;
+  }
+  
+
+  .related_verify_paragraph p {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #505050;
+  }
+  @media(max-width:992px){
+    .relatedVerifyBrand_Banner{
+        padding: 20px;
+    }
+    .RelatedVerifyBrandBanner_image_box{
+        width: 40%;
+    }
+    .RelatedVerifyBanner_content_box{
+        width: 60%;
+    }
+    .relatedVerifyBrand_heading h2{
+        font-size: 24px;
+    }
+    .related_verify_paragraph p{
+        font-size: 16px;
+    }
+  }
+  @media(max-width:768px) {
+    .related_verifyBrandBanner_maincol {
+      display: block;
+    }
+  
+    .RelatedVerifyBrandBanner_image_box {
+      width: 100%;
+    }
+  
+    .RelatedVerifyBanner_content_box {
+      width: 100%;
+      margin-top: 20px;
+    }
+  
+    .related_verify_banner_img {
+      width: 100%;
+    }
+    .relatedVerifyBrand_icons {
+        right: 10px;
+        top: 0;
+    }
+  }
+  @media(max-width:575px) {
+    .relatedVerifyBrand_heading h1 {
+        font-size: 24px;
+    
+      }
+    .relatedVerifyBrand_heading h1 {
+      font-size: 24px;
+  
+    }
+  
+    .related_verify_paragraph p {
+      font-size: 12px;
+  
+    }
+   
+  }
+  @media(max-width:380px) {
+    .realtedVerifyBanner_image_inner_container {
+      height: 121px;
+      width: 224px;
+    }
+  
+    .related_verify_banner_img {
+      width: 100%;
+    }
+  }
+   /* ***************************end************************** */
+
+
+
 
 
    /* Term and .term_condition */

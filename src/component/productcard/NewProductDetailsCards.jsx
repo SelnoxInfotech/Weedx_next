@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 import { BsShareFill } from "react-icons/bs";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import MenuItem from '@mui/material/MenuItem';
-// import { WishListPost } from "../../../../Component/Whishlist/WishListApi_"
+import { WishListPost } from "@/component/Whishlist/WishListApi_"
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -26,7 +26,7 @@ import Box from '@mui/material/Box';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import AddToCartPopUp from "../../component/Addtocard/AddToCartPopUp/AddToCartPopUp";
-// import { WhisList } from '../../../../Component/Whishlist/WhisList'
+import { WhisList } from '@/component/Whishlist/WhisList'
 import Loader from "../../component/Loader/Loader";
 import { modifystr } from "../../hooks/utilis/commonfunction";
 
@@ -225,6 +225,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
             return vl[0]
         })
     }
+    console.log(Whishlist)
     const handleWhishList = (id) => {
         if (state.login === false) {
             SetWishList(!Whishlist)
@@ -580,7 +581,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
 
                     {(startload && !location?.pathname?.includes('/menu-integration')) && <Loader/>
                     }
-                    {/* {Whishlist && <WhisList open1={Whishlist} SetWishList={SetWishList}></WhisList>} */}
+                    {Whishlist && <WhisList open1={Whishlist} SetWishList={SetWishList}></WhisList>}
                 </div >
             }
         </React.Fragment>

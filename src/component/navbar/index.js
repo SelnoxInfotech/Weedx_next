@@ -14,7 +14,7 @@ import { FaHandsHelping } from "react-icons/fa";
 import SearchBar from "../navbar/component/searchbar"
 import { AiFillHeart } from "react-icons/ai"
 import Image from 'next/image';
-
+import { ErrorBoundary } from 'react-error-boundary';
 import { IoIosNotifications } from "react-icons/io"
 import { MdOutlineShoppingCart } from "react-icons/md"
 // import {  Link } from "react-router-dom";
@@ -25,7 +25,7 @@ import Cookies from 'universal-cookie';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import { useRouter } from 'next/router';
-// import Notification from './Notification'
+import Notification from './component/Notification'
 // import './Navbar.css'
 // import logo from ""
 const Navbar = () => {
@@ -138,7 +138,9 @@ const Navbar = () => {
             return !DropDownState;
         })
     }
-
+    const DefaultImage = () => (
+        <img src="/image/user.webp" alt="Default Profile" width={100} height={100} />
+      );
 
     return (
         <React.Fragment>
@@ -199,13 +201,13 @@ const Navbar = () => {
 
                                         <IconButton className={classes.navBarButton_icons} aria-label='notification'><IoIosNotifications color="#858585" size={22}></IoIosNotifications></IconButton>
                                     </Badge>
-                                    {/* <Notification
+                                    <Notification
                           notify={notify}
                           setnotify={setnotify}
                           notificationdata={notificationdata}
                           Setnotificationdata={Setnotificationdata}
                           Settotalnotify={Settotalnotify}
-                        ></Notification> */}
+                        ></Notification>
 
                                 </div>
                                 <Link href="/cart">
@@ -224,6 +226,7 @@ const Navbar = () => {
                                     <div className='navbarProfileDropDown_container' ref={profileRef}>
                                         <Grid display={{ xs: "none", md: "flex" }} justifyContent="flex-end">
                                             <div className='Navbar_profile_logo_container'>
+                                            {/* <ErrorBoundary fallback={<DefaultImage />}> */}
                                                 <Image
                                                     // onError={event => {
                                                     //     event.target.src = "/image/user.webp"
@@ -237,6 +240,7 @@ const Navbar = () => {
                                                     className="Navbar_logo_imgs"
                                                     onClick={handleClickDropdown}
                                                 />
+                                                 {/* </ErrorBoundary> */}
                                             </div>
                                         </Grid>
                                         {DropDownState && (
@@ -253,13 +257,13 @@ const Navbar = () => {
                                                 <section className=' navbarProfileDropDownSection'>
                                                     <ol className='navbar_profile_orderList px-0'>
 
-                                                        <Link href={'/EditProfile'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list'>  <span><TbEdit /></span> EDIT PROFILE</li></Link>
-                                                        <Link href={'/myorder'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list' > <span><FiShoppingBag /></span> MY ORDER</li></Link>
-                                                        <Link href={'/whislists'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list'> <span><FaHeart /></span> FAVORITES </li></Link>
-                                                        <Link href={'/myreviews'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list' >  <span><MdReviews /></span>MY REVIEW </li></Link>
-                                                        <Link href={'/helpcenter'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list'>  <span><FaHandsHelping /></span> HELP</li></Link>
+                                                        <Link href={'/EditProfile'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list'>  <span><TbEdit /></span> {`EDIT PROFILE`}</li></Link>
+                                                        <Link href={'/myorder'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list' > <span><FiShoppingBag /></span> {`MY ORDER`}</li></Link>
+                                                        <Link href={'/whislists'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list'> <span><FaHeart /></span> {`FAVORITES`} </li></Link>
+                                                        <Link href={'/myreviews'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list' >  <span><MdReviews /></span>{`MY REVIEW`} </li></Link>
+                                                        <Link href={'/helpcenter'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list'>  <span><FaHandsHelping /></span> {`HELP`}</li></Link>
 
-                                                        <li className='profile_list' onClick={() => { Logout() }}>  <span><TbLogout /></span> LOGOUT</li>
+                                                        <li className='profile_list' onClick={() => { Logout() }}>  <span><TbLogout /></span> {`LOGOUT`}</li>
 
 
 
@@ -276,12 +280,12 @@ const Navbar = () => {
                                     <div className=' col-12 Login_Sigup_button justify-content-end  Sapceing'>
                                         <div className='col-lg-4 col-sm-4'>
                                             <Grid display={{ xs: "none", md: "block", lg: "block", }} >
-                                                <Link href="/login" >   <Button className={classes.muiBtn} >Log In</Button></Link>
+                                                <Link href="/login" >   <Button className={classes.muiBtn} >{`Log In`}</Button></Link>
                                             </Grid>
                                         </div>
                                         <div className='col-lg-4 col-sm-4'>
                                             <Grid display={{ xs: "none", md: "block", lg: "block" }}>
-                                                <Link href="/signup" >    <Button sx={{ boxShadow: 3 }} className={classes.muiBtn_Signup} >Sign Up</Button></Link>
+                                                <Link href="/signup" >    <Button sx={{ boxShadow: 3 }} className={classes.muiBtn_Signup} >{`Sign Up`}</Button></Link>
                                             </Grid>
                                         </div>
                                     </div>

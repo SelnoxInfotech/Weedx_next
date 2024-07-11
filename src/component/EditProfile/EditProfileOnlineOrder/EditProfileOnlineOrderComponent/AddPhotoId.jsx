@@ -17,7 +17,12 @@ const AddPhotoId = ({ image, Api, SetApi }) => {
     const classes = useStyles()
     const cookies = new Cookies();
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const [selectedImage, setSelectedImage] = React.useState(null);
     const [image1, Setimage] = React.useState(null)

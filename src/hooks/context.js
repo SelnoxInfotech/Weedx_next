@@ -75,7 +75,12 @@ function Context(props) {
     React.useEffect(() => {
         const cookies = new Cookies();
         let logi = cookies.get("User_Token_access")
-        let accessToken = localStorage.getItem('User_Token_access');
+        let accessToken 
+        if (typeof window !== 'undefined') {
+    
+             accessToken = localStorage.getItem('User_Token_access');
+    
+        }
         if(  Boolean(accessToken) ){ logi  =  accessToken}
         dispatch({ type: 'DefalutLocation', DefalutLocation: cookies.get("Location") })
         dispatch({ type: 'LoadingApi', LoadingApi: true })
@@ -152,7 +157,7 @@ function Context(props) {
                     dispatch({ type: 'WishList', WishList: object })
                    }
        
-                ).catch((err) => { });
+                ).catch((err) => { console.log("contect")});
         }
         else {
             const data = localStorage?.getItem("items")

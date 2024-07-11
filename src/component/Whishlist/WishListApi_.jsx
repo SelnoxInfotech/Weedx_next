@@ -6,7 +6,12 @@ import Cookies from 'universal-cookie';
 function WishListPost(id) {
   const cookies = new Cookies();
      let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+     let accessToken 
+     if (typeof window !== 'undefined') {
+ 
+          accessToken = localStorage.getItem('User_Token_access');
+ 
+     }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
 
 
@@ -21,7 +26,12 @@ function WishListPost(id) {
 async function WishListget() {
   const cookies = new Cookies();
      let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+     let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
   const config = {
     headers: { Authorization: `Bearer ${token_data}` }

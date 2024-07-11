@@ -1,10 +1,16 @@
 import React from "react";
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
+import ReactSwitch from "react-switch";
 const Notification = ({ Profile, Api, SetApi }) => {
     const cookies = new Cookies();
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const [Checked, SetChecked] = React.useState({
         Email: false,
@@ -127,7 +133,7 @@ const Notification = ({ Profile, Api, SetApi }) => {
             })
     }, [Checked])
     React.useState(() => {
-        const config = {
+     if(Boolean(token_data))  { const config = {
             headers: { Authorization: `Bearer ${token_data}` }
         };
       
@@ -145,7 +151,7 @@ const Notification = ({ Profile, Api, SetApi }) => {
             })
             .catch((error) => {
                 console.error(error)    
-            })
+            })}
     },[])
     const EmailNotification = [{ heading: "News Letter", subHeading: "Weekly newsletter on the hottest topics and trends in the cannabis community.", Value: "News_Letter" },
     { Value: "Review_Suggestions", heading: "Review Suggestions", subHeading: "Reminders for you to share your experiences about the products and businesses you found on backaroma" }
@@ -160,7 +166,7 @@ const Notification = ({ Profile, Api, SetApi }) => {
                     <div className="notification_col_height2">
 
                         <section className="notification_content_section">
-                            <span className="email_notification_headings">Email</span>
+                            <span className="email_notification_headings">{`Email`}</span>
 
                         </section>
 
@@ -208,7 +214,7 @@ const Notification = ({ Profile, Api, SetApi }) => {
                         <div className="mt-4 notification_col_height2">
 
                             <section className="notification_content_section">
-                                <span className="email_notification_headings">Push Notification</span>
+                                <span className="email_notification_headings">{`Push Notification`}</span>
 
                             </section>
 
@@ -223,8 +229,8 @@ const Notification = ({ Profile, Api, SetApi }) => {
                             <div className="col-10 center justify-content-start">
 
                                 <section className="notification_content_section">
-                                    <span className="editProfile_name">Recommendations</span>
-                                    <p className="editProfileLoginParaStyle ellips">Recommendations of products we think you'll love.</p>
+                                    <span className="editProfile_name">{`Recommendations`}</span>
+                                    <p className="editProfileLoginParaStyle ellips">{`Recommendations of products we think you'll love.`}</p>
 
                                 </section>
 
@@ -251,8 +257,8 @@ const Notification = ({ Profile, Api, SetApi }) => {
                    
                             <div className="mt-4 notification_col_height2">
                                 <section className="notification_content_section">
-                                    <span className="email_notification_headings">Savings</span>
-                                    <p className="email_saving_sub_heading">Daily updates about savings nearby.</p>
+                                    <span className="email_notification_headings">{`Savings`}</span>
+                                    <p className="email_saving_sub_heading">{`Daily updates about savings nearby.`}</p>
 
                                 </section>
                             </div>

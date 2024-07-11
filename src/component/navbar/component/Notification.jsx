@@ -1,15 +1,21 @@
 import React from 'react'
-import ClickAwayListener from '@mui/base/ClickAwayListener';
+import {ClickAwayListener} from '@mui/base/ClickAwayListener';
 import axios from 'axios';
 import _ from 'lodash';
 import Cookies from 'universal-cookie';
 import { RxCross2 } from "react-icons/rx";
 import Createcontext from "@/hooks/context"
 import Link from 'next/link';
+import Image from 'next/image';
 export default function Notification({ notify, setnotify,Settotalnotify, Setnotificationdata, notificationdata }) {
     const cookies = new Cookies();
     let token_data = cookies.get('User_Token_access')
-    let accessToken = '';
+    let accessToken 
+    if (typeof window !== 'undefined') {
+
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const { state , dispatch } = React.useContext(Createcontext)
     function calculateTImefromDate(value) {
@@ -191,7 +197,7 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
 
 
                 <div className='notificationHeader'>
-                    <h4 className='notifytitle'>Notification</h4>
+                    <h4 className='notifytitle'>{`Notification`}</h4>
                   { ( Boolean(notificationdata?.length > state?.Profile?.RemovedNotification?.length ) && state.login ) && <span className='clearNotify' onClick={() => ClearAll()}> <RxCross2 /> </span>}
                 </div>
                 {
@@ -203,24 +209,24 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
                             notificationdata?.map((data, index) => {
                                     if(Boolean(!state.Profile.RemovedNotification.includes(data.Id))){
                                         return (
-                                            <div className='notification_box'>
+                                            <div key={index} className='notification_box'>
 
-                                                <Link to={data.link} onClick={()=>{setnotify(false)}}>
+                                                <Link href={data.link} onClick={()=>{setnotify(false)}}>
                                                     <div className="notification_img">
                                                         <div className="notiimgCircle">
-                                                            <img src={data.Image} alt={data.title} title={data.title} />
+                                                            <Image width={100} height={100} src={data.Image} alt={data.title} title={data.title} />
                                                         </div>
                                                     </div>
                                                 </Link>
                                                 <div className="notifytext w-100" >
                                                     <div className='d-flex justify-content-between align-items-center'> 
-                                                     <Link to={data.link} onClick={()=>{setnotify(false)}}> <div className="d-flex align-items-center justify-content-between gap-5"> <h4 className="notititle">{data.title} </h4></div></Link>
+                                                     <Link href={data.link} onClick={()=>{setnotify(false)}}> <div className="d-flex align-items-center justify-content-between gap-5"> <h4 className="notititle">{data.title} </h4></div></Link>
                                                            <span className='cursor-pointer' onClick={(e) => Clear(data)}><RxCross2 size={15} color={"#000"} /></span>
                                                     </div>
 
 
 
-                                                    <Link to={data.link} onClick={()=>{setnotify(false)}}>
+                                                    <Link href={data.link} onClick={()=>{setnotify(false)}}>
                                                           <div className="d-flex align-items-center justify-content-between gap-5">
                                                             <span className="notify_date ">{calculateTImefromDate(data.date)}</span>
                                                           </div>  
@@ -233,7 +239,7 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
                                     }
                             })
                         :
-                        <div className='w-100 h-100 d-flex align-items-center justify-content-center '>No New Notification</div>
+                        <div className='w-100 h-100 d-flex align-items-center justify-content-center '>{`No New Notification`}</div>
                     }
                     </div>
                     :
@@ -245,18 +251,18 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
                             
                         
                                 return (
-                                        <div className='notification_box'>
+                                        <div key={index} className='notification_box'>
 
-                                            <Link to={data.link} onClick={()=>{setnotify(false) ; removenotify(data)}}>
+                                            <Link href={data.link} onClick={()=>{setnotify(false) ; removenotify(data)}}>
                                                 <div className="notification_img">
                                                     <div className="notiimgCircle">
-                                                        <img src={data?.image} alt={data.title} title={data.title} onError={() => this.img.src = '/image/weedx.io logo.png'} />
+                                                        <Image width={100} height={100} src={data?.image} alt={data.title} title={data.title} onError={() => this.img.src = '/image/weedx.io logo.png'} />
                                                     </div>
                                                 </div>
                                             </Link>
                                             <div className="notifytext w-100" >
-                                                <div className='d-flex justify-content-between align-items-center'> <Link to={data.link} onClick={()=>{setnotify(false); removenotify(data)}}>    <span className="notify_date ">{calculateTImefromDate(data.date)}</span> </Link> </div>
-                                                <Link to={data.link} onClick={()=>{setnotify(false); removenotify(data)}}>  <div className="d-flex align-items-center justify-content-between gap-5"><h4 className="notititle">{data.title} </h4> </div>  </Link>
+                                                <div className='d-flex justify-content-between align-items-center'> <Link href={data.link} onClick={()=>{setnotify(false); removenotify(data)}}>    <span className="notify_date ">{calculateTImefromDate(data.date)}</span> </Link> </div>
+                                                <Link href={data.link} onClick={()=>{setnotify(false); removenotify(data)}}>  <div className="d-flex align-items-center justify-content-between gap-5"><h4 className="notititle">{data.title} </h4> </div>  </Link>
 
                                             </div>
 
@@ -266,7 +272,7 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
                             
                             })
                         :
-                        <div className='w-100 h-100 d-flex align-items-center justify-content-center '>No New Notification</div>
+                        <div className='w-100 h-100 d-flex align-items-center justify-content-center '>{`No New Notification`}</div>
                     }
                     </div>
                 }

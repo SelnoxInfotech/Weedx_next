@@ -1,5 +1,5 @@
 import React from "react";
-import Newsletter from "@/Component/Home/HomePageDealsSignup/";
+import Newsletter from "@/component/home/HomePageDealsSignup/";
 // import { CookiesPolicy } from '../../Component/ScoPage/CommenpageSeo';
 // import { Link , useLocation} from 'react-router-dom';
 import Link from "next/link";

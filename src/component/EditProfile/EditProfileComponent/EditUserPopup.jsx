@@ -19,7 +19,12 @@ const EditUserPopup = ({ username, Api, SetApi }) => {
     const cookies = new Cookies();
     const { register, handleSubmit, errors, reset, setError } = useForm();
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const [open, setOpen] = React.useState(false);
     const [user, Setusername] = React.useState('')

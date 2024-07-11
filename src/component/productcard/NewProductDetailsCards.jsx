@@ -38,7 +38,12 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
     let p = Product?.images === undefined ? "" : Product?.images[0].image;
     const classes = useStyles();
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken};
     const [CartClean, SetCartClean] = React.useState(false)
     const [productdescription, setproductdescription] = React.useState(false)

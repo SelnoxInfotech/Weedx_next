@@ -10,7 +10,7 @@ const EditProfileLogin = ({Profile, Api, SetApi}) => {
     return (
         <div className="col-12 EditProfileLogin_mainColumns">
             <div className="w-100">
-                <h2 className=" email_notification_headings">Login</h2>
+                <h2 className=" email_notification_headings">{`Login`}</h2>
             </div>
             <div className="row mx-0">
                 <div className="col-12 col-lg-8 EditProfileOnlineOrder_container py-4">
@@ -18,7 +18,7 @@ const EditProfileLogin = ({Profile, Api, SetApi}) => {
                         <div className="row">
                             <div className="col-6 editProfileLogin_emailField_container">
                                 <div className="EditEmail_inner_container ">
-                                    <span><MdEmail color="#707070" size={20} /></span><span className="editProfileLogin_padding_left editProfile_label"><label>Email</label></span>
+                                    <span><MdEmail color="#707070" size={20} /></span><span className="editProfileLogin_padding_left editProfile_label"><label>{`Email`}</label></span>
                                 </div>
                                 <div className="EditProfileLoginParagraph">
                                     <p className="editProfileLoginParaStyle ellipsis">{Profile?.email}</p>
@@ -35,7 +35,7 @@ const EditProfileLogin = ({Profile, Api, SetApi}) => {
                             <div className="col-6 editProfileLogin_emailField_container">
                                 <div className="EditEmail_inner_container ">
                                     <span><FaUser color="#707070" size={20} /></span>
-                                    <span className="editProfileLogin_padding_left editProfile_label"><label>User Name</label></span>
+                                    <span className="editProfileLogin_padding_left editProfile_label"><label>{`User Name`}</label></span>
                                 </div>
                                 <div className=" EditProfileLoginParagraph">
                                     <p className="editProfileLoginParaStyle ellipsis">{Profile?.username}</p>
@@ -53,10 +53,10 @@ const EditProfileLogin = ({Profile, Api, SetApi}) => {
                             <div className="col-6 editProfileLogin_emailField_container">
                                 <div className="EditEmail_inner_container ">
                                     <span><AiFillEye color="#707070" size={20} /></span>
-                                    <span className="editProfileLogin_padding_left editProfile_label"><label>Password</label></span>
+                                    <span className="editProfileLogin_padding_left editProfile_label"><label>{`Password`}</label></span>
                                 </div>
                                 <div className=" EditProfileLoginParagraph">
-                                    <p className="editProfileLoginParaStyle">Password</p>
+                                    <p className="editProfileLoginParaStyle">{`Password`}</p>
                                 </div>
                             </div>
                             <div className="col-6  editProfileLogin_emailField_container_edit">

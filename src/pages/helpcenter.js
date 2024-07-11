@@ -4,7 +4,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Bgheader from '@/Component/bgheader/Bgheader/';
+import Bgheader from '@/component/bgheader/Bgheader/';
 import useStyles from "@/styles/style";
 // import {HelpcenterSeo} from "../../Component/ScoPage/Faq"
 const Helpcenter = () => {
@@ -26,11 +26,11 @@ const Helpcenter = () => {
         window.scrollTo(0, a);
     }
     React.useEffect(() => {
-        document.documentElement.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "instant", // Optional if you want to skip the scrolling animation
-        });
+        // document.documentElement.scrollTo({
+        //     top: 0,
+        //     left: 0,
+        //     behavior: "instant", // Optional if you want to skip the scrolling animation
+        // });
         // window.scrollTo(0, 0);
     }, [])
     return (
@@ -57,14 +57,14 @@ const Helpcenter = () => {
                         </div>
                         <div className="help_contentBox" id='help3'>
                             <h3 className="helpTitle">
-                                Updating Your Profile
+                               {` Updating Your Profile`}
                             </h3>
                             <p className='helpDescription'>{`Keep your profile statistics current by navigating to the "My Profile" section.
                                 You can change your email, password, and personal info here.`}</p>
                         </div>
 
 
-                        <h2 className='helpHeading'>   {`2. Online Ordering and Delivery Services`}</h2>
+                        <h2 className='helpHeading'> {`  2. Online Ordering and Delivery Services`}</h2>
                         <div className="help_contentBox" id='help4'>
                             <h3 className="helpTitle">{`Placing an Order`}</h3>
                             <p className='helpDescription'>{`Our platform offers the benefit of ordering cannabis products online. Browsethe listings, upload your desired gadgets in your
@@ -116,7 +116,8 @@ const Helpcenter = () => {
                             </p>
                         </div>
                         <div className="help_contentBox" id='help12'>
-                            <h3 className="helpTitle">{`Reporting Compliance Concerns`}</h3>
+                            <h3 className="helpTitle">{`Reporting Compliance Concerns`}
+                            </h3>
                             <p className='helpDescription'>{`If you come upon any content material or hobby that you accept as accurate that can violate neighbourhood laws or our
                                 terms of the carrier, please file it to us. We check all reports well and make suitable movements to preserve a compliant
                                 environment.`}

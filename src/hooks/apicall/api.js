@@ -25,7 +25,14 @@ export function StaticImages() {
 
 // blog Api
 export function BlogLike(ID) {
+    const cookies = new Cookies();
+    let token_data = cookies.get('User_Token_access')
+    let accessToken 
+    if (typeof window !== 'undefined') {
 
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     if (token_data) {
         let data = axios.get(`https://api.cannabaze.com/UserPanel/Get-BlogLike/${ID}`,
@@ -43,8 +50,14 @@ export function BlogLike(ID) {
 }
 
 export function Post_BlogLike(id, like) {
-  
-    let accessToken = localStorage.getItem('User_Token_access');
+    const cookies = new Cookies();
+    let token_data = cookies.get('User_Token_access')
+    let accessToken 
+    if (typeof window !== 'undefined') {
+
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     let data = axios.post('https://api.cannabaze.com/UserPanel/Add-BlogLike/',
         {
@@ -58,7 +71,14 @@ export function Post_BlogLike(id, like) {
     return data;
 }
 export function Get_Comment(ID) {
-   
+    const cookies = new Cookies();
+    let token_data = cookies.get('User_Token_access')
+    let accessToken 
+    if (typeof window !== 'undefined') {
+
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     if (token_data) {
         let data = axios.get(`https://api.cannabaze.com/UserPanel/Get-Comment/${ID}`,
@@ -75,7 +95,14 @@ export function Get_Comment(ID) {
     }
 }
 export function Post_Comment(id, Comment) {
-   
+    const cookies = new Cookies();
+    let token_data = cookies.get('User_Token_access')
+    let accessToken 
+    if (typeof window !== 'undefined') {
+
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     let data = axios.post('https://api.cannabaze.com/UserPanel/Add-Comment/',
         {
@@ -124,6 +151,15 @@ export function Store_OverAllGet_Review(id) {
 }
 
 export function Store_Add_Review(Review) {
+
+    const cookies = new Cookies();
+    let token_data = cookies.get('User_Token_access')
+    let accessToken 
+    if (typeof window !== 'undefined') {
+
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     let data = axios.post(`https://api.cannabaze.com/UserPanel/Add-StoreReview/`,
         Review,
@@ -139,6 +175,14 @@ export function Store_Add_Review(Review) {
     return data
 }
 export function Delete_StoreReview(id) {
+    const cookies = new Cookies();
+    let token_data = cookies.get('User_Token_access')
+    let accessToken 
+    if (typeof window !== 'undefined') {
+
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     let data = axios.delete(`https://api.cannabaze.com/UserPanel/Delete-StoreReview/${id}`,
         {
@@ -154,7 +198,14 @@ export function Delete_StoreReview(id) {
 }
 
 export async function Store_Get_UserComment(id, storeId) {
-   
+    const cookies = new Cookies();
+    let token_data = cookies.get('User_Token_access')
+    let accessToken 
+    if (typeof window !== 'undefined') {
+
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     let res = await axios.get(`https://api.cannabaze.com/UserPanel/Get-getStoreReviewbyId/${id}/${storeId}`,
         {
@@ -329,7 +380,14 @@ export function PriceFilter(value, Store_id) {
 
 }
 export function StoreHelpFull(ReviewID, USerID) {
-   
+    const cookies = new Cookies();
+    let token_data = cookies.get('User_Token_access')
+    let accessToken 
+    if (typeof window !== 'undefined') {
+
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const config = {
         headers: { Authorization: `Bearer ${token_data}` }

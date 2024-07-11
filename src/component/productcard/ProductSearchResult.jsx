@@ -32,7 +32,12 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
     const cookies = new Cookies();
     const location = useRouter()
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const [CartClean, SetCartClean] = useState(false)
     const [adding, setadding] = React.useState('')

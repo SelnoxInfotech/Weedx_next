@@ -10,7 +10,12 @@ async function product_OverAllGet_Review (id) {
 function Product_Add_Review(data) {
     const cookies = new Cookies();
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     let res = axios.post(` https://api.cannabaze.com/UserPanel/Add-Review/`,
       data,
@@ -24,7 +29,12 @@ function Product_Add_Review(data) {
   async function Product_Get_UserComment(id,ProductId) {
     const cookies = new Cookies();
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     let res = await axios.get(`https://api.cannabaze.com/UserPanel/Get-getReviewbyId/${id}/${ProductId}`,
     {
@@ -42,7 +52,12 @@ function Product_Add_Review(data) {
   async function Delete_Review(id) {
     const cookies = new Cookies();
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     let res = await axios.delete(` https://api.cannabaze.com/UserPanel/Delete-Review/${id}`,
     {
@@ -54,7 +69,12 @@ function Product_Add_Review(data) {
    function ProductHelpFull(ReviewID, USerID) {
     const cookies = new Cookies();
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const config = {
       headers: { Authorization: `Bearer ${token_data}` }

@@ -3,7 +3,7 @@ import React from 'react';
 import Createcontext from '@/hooks/context';
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
 
-const orderplaced = (props) => {
+const Orderplaced = (props) => {
 const {state} = React.useContext(Createcontext)
     return (
       <>
@@ -15,7 +15,7 @@ const {state} = React.useContext(Createcontext)
 
 
 
-export default orderplaced;
+export default Orderplaced;
 
 
 export async function getServerSideProps(context) {

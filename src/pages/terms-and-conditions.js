@@ -1,5 +1,5 @@
 import React from 'react'
-import Newsletter from '@/Component/home/HomePageDealsSignup/';
+import Newsletter from '@/component/home/HomePageDealsSignup/';
 // import { TermsAndConditions } from '../../Component/ScoPage/CommenpageSeo';
 import { useRef } from 'react';
 // import { Link } from 'react-router-dom';

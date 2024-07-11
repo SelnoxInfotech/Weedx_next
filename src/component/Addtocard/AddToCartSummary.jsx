@@ -16,7 +16,6 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
   const { state, dispatch } = React.useContext(Createcontext);
   const [anyoutstock, setanyoutstock] = React.useState([])
   const navigate = useRouter()
-  const location = useRouter();
   const [OpenDelivery, SetOpenDelivery] = React.useState(false);
   const [OpenPickup, SetOpenPickup] = React.useState(false);
   const [InputValues, SetInputValues] = React.useState({
@@ -58,19 +57,19 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
   };
   // console.log(state)
   const CheckoutProcess = (event, j) => {
-    console.log(location.pathname);
+    console.log(navigate.pathname);
   
     if (!state.login) {
-      if (location.pathname === '/carts') {
+      if (navigate.pathname === '/carts') {
         setOpen(true);
       } else {
-        navigate.push("/login", { query: { location } });
+        navigate.push("/login", { query: { navigate } });
       }
       return;
     }
   
-    const isCartPage = location.pathname === "/cart" || location.pathname === "/carts";
-    const isCheckoutPage = location.pathname === "/checkout" || location.pathname === "/menu-integration/checkout";
+    const isCartPage = navigate.pathname === "/cart" || navigate.pathname === "/carts";
+    const isCheckoutPage = navigate.pathname === "/checkout" || navigate.pathname === "/menu-integration/checkout";
   
     if (state.selectDeliveryoptions === "delivery_btn") {
       if (!state.DeliveryAddress) {
@@ -86,7 +85,7 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
         //   pathname: location.pathname === "/carts" ? '/menu-integration/checkout' : "/checkout",
         //   query: { InputValues, abc: state.Cart_subTotal, orderBtn: state.selectDeliveryoptions },
         // });
-        navigate.push(location.pathname === "/carts" ? '/menu-integration/checkout' : "/checkout", undefined, { shallow: true, state:  { InputValues, abc: state.Cart_subTotal, orderBtn: state.selectDeliveryoptions } });
+        navigate.push(navigate.pathname === "/carts" ? '/menu-integration/checkout' : "/checkout", undefined, { shallow: true, state:  { InputValues, abc: state.Cart_subTotal, orderBtn: state.selectDeliveryoptions } });
         // navigate.push('/about', undefined,  { InputValues, abc: state.Cart_subTotal, orderBtn: state.selectDeliveryoptions });
 
 
@@ -105,7 +104,7 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
         //   query: { InputValues, abc: state.Cart_subTotal, orderBtn: state.selectDeliveryoptions },
         // });
         navigate.push({
-          pathname: location.pathname === "/carts" ? '/menu-integration/checkout' : "/checkout",
+          pathname: navigate.pathname === "/carts" ? '/menu-integration/checkout' : "/checkout",
           query: { InputValues, abc: state.Cart_subTotal, orderBtn: state.selectDeliveryoptions },
         });
         // navigate.push(location.pathname === "/carts" ? '/menu-integration/checkout' : "/checkout",{ state:   { InputValues, abc: state.Cart_subTotal, orderBtn: state.selectDeliveryoptions } });
@@ -124,7 +123,7 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
 
   
   React.useEffect(() => {
-    if (location.pathname === "/cart") {
+    if (navigate.pathname === "/cart") {
       if (state.selectDeliveryoptions === "pickup_btn") {
         SetOpenDelivery(false);
         SetOpenPickup(true);
@@ -154,7 +153,7 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
       <div className="col-12 fontStyle AddProdCartFont_weight">
         <h5>Order Summary</h5>
       </div>
-      {(Boolean(location.pathname !== "/checkout") || Boolean(location.pathname !== "/checkout")) ? (
+      {(Boolean(navigate.pathname !== "/checkout") || Boolean(navigate.pathname !== "/checkout")) ? (
         <div className="col-12 d-flex addToCart_deliver">
           {state.AllProduct[0]?.StoreDelivery && (
             <div className="col-6">
@@ -311,7 +310,7 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
       </div>
       <PromoCode />
       <div className="col-12 AddProd_cart_center_btn">
-        {location.pathname === "/cart" ? (
+        {navigate.pathname === "/cart" ? (
           (OpenDelivery || OpenPickup) && (
             <Box
               className={` add_product_btn floatingbtn AddProduct_Cart_Btn `}

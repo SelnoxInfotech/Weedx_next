@@ -1,8 +1,8 @@
 import React from "react";
 import { ScrollContainer } from 'react-indiana-drag-scroll';
 import 'react-indiana-drag-scroll/dist/style.css'
-import { LazyLoadImage } from "react-lazy-load-image-component";
-
+// import { LazyLoadImage } from "react-lazy-load-image-component";
+import Image from 'next/image'
 const WeedDealsByProduct = ({ArrayData,heading}) => {
   
     const ref = React.useRef(null);
@@ -22,23 +22,18 @@ const WeedDealsByProduct = ({ArrayData,heading}) => {
                                 <div className="w-100 center">
                                     <div className="popularStrainImageContainer">
 
-                                        <LazyLoadImage
-                                          
+                                        <Image
+                                            width={100}
+                                            height={100}
                                             className="popularStrain_Image"
                                              src={items.imgUrl}
                                              alt={items.name}
                                              title={items.name}
                                              />
-                                             
                                     </div>
-
-                                    
                                 </div>
                                 <div className="w-100  popularStrainContent ">
                                     <p className="my-0 popularStrainName ellipsis">{items.name}</p>
-                                    {/* <p className="popularSttrainSecName ellipsis">{items.secName}</p> */}
-
-                                    
                                 </div>
 
                             </div>

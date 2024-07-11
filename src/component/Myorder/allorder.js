@@ -4,18 +4,14 @@ import React from "react";
 import { LoadingButton } from "@mui/lab";
 import Box from '@mui/material/Box';
 import Link from "next/link";
-import useReducer  from "next/router";
 import useStyles from '@/styles/style'
-import Loader from "@/component/Loader/Loader";
+import { useRouter } from "next/router";
 const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
-  const location = useReducer();
+  const router = useRouter()
   const classes = useStyles()
-  const [Loading, SetLoading] = React.useState(false)
   return (
     <div className="container-fluid">
-      {loading?
-         <Loader/>
-            :
+    
           <div className="row center  ">
             {AllOrder_data?.map((val, index) => {
               return (
@@ -68,7 +64,7 @@ const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
                     </div>
                     <div className="row mx-0 py-2 ">
                       <div className="viewOrderDetals d-flex align-items-center justify-content-end gap-3">
-                        {location.pathname.slice(0, 21) ===
+                        {router.pathname.slice(0, 21) ===
                         "/MyOrderProductDetail" ? (
                           ""
                         ) : (
@@ -80,7 +76,7 @@ const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
                           </div>
                           {
                             val.Order_Status !=="Cancel" &&
-                             <div><LoadingButton loading={Loading} className={classes.cncelbtnorder}  onClick={() => { CencelOrder(val.OrderId) }}>{`Cancel`} </LoadingButton></div>}
+                             <div><LoadingButton loading={false} className={classes.cncelbtnorder}  onClick={() => { CencelOrder(val.OrderId) }}>{`Cancel`} </LoadingButton></div>}
                          </>
                         )}
                       </div>
@@ -95,7 +91,7 @@ const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
                         justifyContent: "flex-end",
                         marginTop: "10px"
 
-                    }}   >  <LoadingButton loading={Loading} onClick={() => { CencelOrder(val.OrderId) }}>{`Cancel`} </LoadingButton> </Box>
+                    }}   >  <LoadingButton loading={false} onClick={() => { CencelOrder(val.OrderId) }}>{`Cancel`} </LoadingButton> </Box>
                     </div>
                   }
                 </React.Fragment>
@@ -103,7 +99,7 @@ const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
             })}
           
           </div>
-      }
+      
     </div>
   );
 };

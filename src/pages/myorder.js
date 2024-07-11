@@ -13,11 +13,8 @@ import Swal  from'sweetalert2'
 const MyOrder = () => {
     const cookies = new Cookies();
     let token_data = cookies.get('User_Token_access')
-    // let accessToken = localStorage.getItem('User_Token_access');
     if (typeof window !== 'undefined') {
-
         token_data = localStorage.getItem('User_Token_access');
-
    }
     const [Getsearch, SetSearch] = React.useState("")
     const navigate = useRouter()
@@ -30,7 +27,7 @@ const MyOrder = () => {
         document.documentElement.scrollTo({
             top: 0,
             left: 0,
-            behavior: "instant", // Optional if you want to skip the scrolling animation
+            behavior: "instant",
         });
         SetLoading(true)
         if (GetFilter === "") {
@@ -106,51 +103,6 @@ const MyOrder = () => {
         }, 2000)
         return () => clearTimeout(getData)
     }, [Getsearch])
-
-    function filter(e) {
-        SetLoading(true)
-        SetFilter(e.target.value)
-        Setordertype(e.target.value)
-        if (e.target.value === "All Order") {
-            order().then((res) => {
-                SetAllOrder_data(res?.data?.reverse())
-                SetLoading(false)
-            }).catch()
-        }
-        else if (e.target.value === "Pending Order") {
-            PendingOrder().then((res) => {
-                SetAllOrder_data(res.data)
-                SetLoading(false)
-            }).catch((error) => {
-               
-                SetLoading(false)
-            })
-        }
-        else if (e.target.value === "Delivered Order") {
-            GetDeliveredOrder().then((res) => {
-                SetAllOrder_data(res.data)
-                SetLoading(false)
-            }).catch((error) => {
-           
-                SetLoading(false)
-            })
-        }
-
-        else if (e.target.value === "Cancelled Order") {
-            GetCancelOrder().then((res) => {
-                SetAllOrder_data(res.data)
-                SetLoading(false)
-            }).catch((error) => {
-              
-                SetLoading(false)
-            })
-        }
-        else {
-            SetLoading(false)
-            SetAllOrder_data([])
-        }
-    }
-
     const top100Films = []
     return (
         <React.Fragment>

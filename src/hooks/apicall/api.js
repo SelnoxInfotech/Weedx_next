@@ -5,8 +5,11 @@ import React from 'react';
 
 const cookies = new Cookies();
 let token_data = cookies.get('User_Token_access')
-let accessToken = localStorage.getItem('User_Token_access');
+if (typeof window !== 'undefined') {
+   
+    accessToken = localStorage.getItem('User_Token_access');
 
+}
 
 export function registerEmp(usrdata) {
     let data = axios.post(' https://api.cannabaze.com/DeliveryBoy/Add-Employee/', usrdata);

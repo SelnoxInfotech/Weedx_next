@@ -12,8 +12,6 @@ const HomePageDealsSignup = () => {
     const { register, handleSubmit, errors, reset, setError } = useForm();
     const [email, setEmail] = React.useState('');
     const onSubmit = (data) => {
-
-
         Axios.post(`https://api.cannabaze.com/UserPanel/Add-Subscribe/`,
             {
                 email: email
@@ -24,14 +22,14 @@ const HomePageDealsSignup = () => {
                     setsubmited(true)
                 }
                
-            })
-            .catch((error) => {
-                setError("email", {
-                    type: 'custom',
-                    message: 'subscribe with this email already exists.',
-                }
-                )
-            })
+        })
+        .catch((error) => {
+            setError("email", {
+                type: 'custom',
+                message: 'subscribe with this email already exists.',
+            }
+            )
+        })
     }
     const handleChange = event => {
         event.preventDefault();
@@ -44,7 +42,7 @@ const HomePageDealsSignup = () => {
                     <div className='row'>
                         <div className='col-md-6 col-12 d-md-inline d-none'>
                             <div className='newsletterImage text-center'>
-                                <Image width={100} height={100} src='/newsletters.png' alt='newsletter Icon' title='newsletter Icon'/>
+                                <Image width={200} height={200} src='/newsletters.png' alt='newsletter Icon' title='newsletter Icon'/>
                             </div>
                         </div>
                         <div className='col-md-6  col-12'>

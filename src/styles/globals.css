@@ -39,40 +39,6 @@
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-  }
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -84,28 +50,10 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
-
-body {
-  /* color: rgb(var(--foreground-rgb)); */
-  /* background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb)); */
-}
-
 a {
   color: inherit;
   text-decoration: none;
 }
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-
 
 
 .c {
@@ -10514,3 +10462,135 @@ background: #FFF;
     }
   }
    /* ***************************end************************** */
+
+   .term_condition .tc_hero{
+    background-color: #E8FFF1
+    ;
+    text-align: center;
+  margin-bottom: 50px;
+  }
+  .term_condition .tc_hero .page_heading{
+      color: #000;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  line-height: 100px;
+  margin: 0;
+  }
+  .term_condition .tc_topic_list{
+      position: sticky;
+      top: 20%;
+      max-height: 70vh;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      border-bottom: 1px solid #80808059;
+  }
+  .term_condition .tc_topic_list::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .term_condition .tc_topic_list {
+      -ms-overflow-style: none; 
+      scrollbar-width: none;  
+    }
+  .term_condition .tc_topic_list .heading_box{
+      background: #31B665; 
+      padding: 10px;
+  }
+  .term_condition .tc_topic_list .heading_box a{
+    color: white;
+    font-size: 22px;
+    margin-right: 20px;
+  }
+  .term_condition .tc_topic_list ul{
+      margin: 0;
+      padding: 0;
+  }
+  .term_condition .tc_topic_list ul li{
+      list-style-type: none;
+      color: #000;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 2;
+      padding: 7px 10px;
+      border: 1px solid #E0E0E0;
+  }
+  .term_condition .tc_topic_list ul li{
+      color: #000;
+      transition: all .2s ease;
+  }
+  .term_condition .tc_topic_list ul li:hover{
+      color: #31B665;
+      font-weight: 600;
+  }
+  .sideTableHeading{
+      font-size: 18px;
+      line-height: 1.3;
+  }
+  .term_condition .tc_topic_list ul li.activeTable{
+      color:#31B665
+  }
+  .term_condition .tc_content .tc_main-centent{
+      color: #000;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 700;
+  }
+  .term_condition .tc_content .tc_main-centent li{
+     margin-bottom: 40px;
+  }
+  .term_condition .tc_content .tc_main-centent .question{
+      display: block;
+      color: #000;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+  }
+  .term_condition .tc_content .tc_main-centent li .answer{
+      color: #666;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.3;
+      display: block;
+      margin-bottom: 10px;
+  }
+  .term_condition .tc_content .tc_main-centent li .answer a{
+      color: #31B665;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.3;
+  } 
+  @media only screen and (max-width: 768px){
+      .term_condition .tc_hero .page_heading{
+       
+      font-size: 22px;
+      line-height: 70px;
+      }
+      .tc_topic_list{
+          display: none;
+      }
+  }
+  @media only screen and (max-width: 576px){
+      .term_condition .tc_content .tc_main-centent{
+          padding:0 40px;
+      }
+      .term_condition .tc_content .tc_main-centent .question {
+       font-size: 18px; 
+      }
+      .term_condition .tc_content .tc_main-centent li .answer{
+          font-size: 14px;
+      }
+      .term_condition .tc_content .tc_main-centent{
+          font-size: 18px;
+      }
+  }
+  @media only screen and (max-width: 480px){
+      .term_condition .tc_hero .page_heading{
+       
+      font-size: 18px;
+      line-height: 70px;
+      }
+  }

@@ -15,7 +15,12 @@ import Axios from 'axios';
 const AddDeliveryAddressPopup = ({ DeliveryAddress, Api, SetApi }) => {
     const cookies = new Cookies();
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const { register, handleSubmit, errors, reset ,setError} = useForm();
     const classes = useStyles()

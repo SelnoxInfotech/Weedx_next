@@ -272,7 +272,7 @@ const AddToCartReview = () => {
                                         Boolean(ele.free) &&     <div className="ssss row py-3 px-0 border-top border-bottom justify-content-center   align-items-center" key={index}>
                                         <div className='row align-items-center col-5'>
                                             <div className="p-0 Add_prod_item_image_cont">
-                                                {/* <Link to={`/products/${modifystr(ele.category)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.ProductName)}/${ele.Product_id}`}> */}
+                                                {/* <Link href={`/products/${modifystr(ele.category)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.ProductName)}/${ele.Product_id}`}> */}
                                                     <Image 
                                                      width={100}
                                                      height={100}        
@@ -328,7 +328,7 @@ const AddToCartReview = () => {
                             return (
                                 <div className="addtoproduct_card" key={index}>
                                     <div className='mb_addtoproduct_card_img'>
-                                        <Link to={`/products/${modifystr(ele.category)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.ProductName)}/${ele.Sub_Category_id}`}>
+                                        <Link href={`/products/${modifystr(ele.category)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.ProductName)}/${ele.Sub_Category_id}`}>
 
                                             <Image
                                             width={100}

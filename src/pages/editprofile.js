@@ -10,33 +10,39 @@ import Link from "next/link"
 import Cookies from 'universal-cookie';
 import Image from "next/image"
 import Axios from 'axios';
-import Createcontext from "@/Hooks/Context/"
+import Createcontext from "@/hooks/context"
 const EditProfile = () => {
-    const [state, dispatch ] = useContext(Createcontext)
+    const {state, dispatch } = useContext(Createcontext)
     const cookies = new Cookies();
     let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
-    if(  Boolean(accessToken) ){ token_data  =  accessToken}
+    let accessToken 
+    if (typeof window !== 'undefined') {
+
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     const [Profile ,SetProfile] =  React.useState([])
     const [Api , SetApi] =  React.useState(false)
     const [selectedImage, setSelectedImage] = React.useState(null);
     const [Error, SetError] = React.useState('')
     React.useEffect( ()=>{
-        const config = {
-            headers: { Authorization: `Bearer ${token_data}` }
-        };
-      
-        Axios.get(`https://api.cannabaze.com/UserPanel/Get-GetUserProfile/`,
-            config,
+   if(Boolean(token_data)) {
+    const config = {
+        headers: { Authorization: `Bearer ${token_data}` }
+    };
+  
+    Axios.get(`https://api.cannabaze.com/UserPanel/Get-GetUserProfile/`,
+        config,
 
-        )
-            .then((res) => {
-                SetProfile(res.data)
-                dispatch({ type: 'Profile', Profile:res.data })
-            })
-            .catch((error) => {
-                console.error(error)    
-            })
+    )
+        .then((res) => {
+            SetProfile(res.data)
+            dispatch({ type: 'Profile', Profile:res.data })
+        })
+        .catch((error) => {
+            console.error("error")    
+        })
+   }
     },[Api , dispatch , token_data])     
     const handleImage = (event) => {
         const file = event.target.files[0];
@@ -71,7 +77,7 @@ const EditProfile = () => {
                 ,
             }
         ).then((res) => {
-                dispatch({ type: 'Profile', Profile: res.data.data            })
+                dispatch({ type: 'Profile', Profile: res.data.data})
         }).catch((error) => {
             
             // setError("Username", {
@@ -85,10 +91,10 @@ const EditProfile = () => {
             <div className="row">
                 <div className="col-12 profile_setting_container mt-4">
                     <div className="EditProfile_heading_cont d-lg-none d-block">
-                      <Link to="/Profile"><span><IconButton><IoChevronBackSharp color="#707070"size={18} /></IconButton></span><span className="editProfile_backBtn">Back Profile</span></Link>
+                      <Link href="/Profile"><span><IconButton><IoChevronBackSharp color="#707070"size={18} /></IconButton></span><span className="editProfile_backBtn">Back Profile</span></Link>
                     </div>
                     <div className="EditProfile_heading_cont">
-                       <h1 className="EditProfile_heading">Profile Setting</h1>
+                       <h1 className="EditProfile_heading">{`Profile Setting`}</h1>
                     </div>
                 </div>
                 <div className="row">
@@ -102,10 +108,8 @@ const EditProfile = () => {
                                                         className="profile_images" />
                                                         :
                                                         <Image
-                                                            onError={ event => {
-                                                                event.target.src = "/image/user.webp"
-                                                                event.onerror = null
-                                                            }}
+                                                         width={100}
+                                                         height={100}
                                                             src={ state.Profile.googlelink === null ?`${state.Profile.image} ` : state.Profile.googlelink}
                                                             alt='profile_image'
                                                             title='profile_image'
@@ -116,7 +120,7 @@ const EditProfile = () => {
                                             <div className="w-100 profileInput_container">
                                                 <label for="profile image" className="change_profile_container_padding">
                                                     <input onChange={(event) => { handleImage(event) }} type="file"  capture="environment" hidden id="profile image" />
-                                                    <AiFillCamera color="#707070" size={22} /><span className="nameChangeProfile">Change profile</span>
+                                                    <AiFillCamera color="#707070" size={22} /><span className="nameChangeProfile">{`Change profile`}</span>
                                                     {Error !== '' && <p style={{color:"red",fontSize: 'x-small'}}>{Error}</p>}
                                                 </label>
                                             </div>

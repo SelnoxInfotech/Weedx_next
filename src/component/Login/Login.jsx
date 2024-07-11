@@ -187,7 +187,7 @@ const Login = () => {
                             </div>
                             <div className='w-100 text-center my-2 '>
                                 <h2 className='login_bottom'>New To weedx ?</h2> 
-                                <Link className='signInfo' to={location.pathname==='/menu-integration/login' ?   '/menu-integration/signup':  '/signup'}><span>Create your Weedx Account</span></Link>
+                                <Link className='signInfo' href={location.pathname==='/menu-integration/login' ?   '/menu-integration/signup':  '/signup'}><span>Create your Weedx Account</span></Link>
                             </div>
                             <div className='crosslogin'>
                               <Tooltip title="Back">

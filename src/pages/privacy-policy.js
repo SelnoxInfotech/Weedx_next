@@ -1,6 +1,6 @@
 import React from 'react'
-import Newsletter from '@/Component/home/HomePageDealsSignup/';
-// import {PrivacyPolicy}  from "../../Component/ScoPage/CommenpageSeo";
+import Newsletter from '@/component/home/HomePageDealsSignup/';
+// import {PrivacyPolicy}  from "@/component/ScoPage/CommenpageSeo";
 import { useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

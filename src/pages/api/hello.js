@@ -10,7 +10,12 @@ export default function handler(req, res) {
 function order() {
   const cookies = new Cookies();
       let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+   let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
   const config = {
     headers: { Authorization: `Bearer ${token_data}` }
@@ -24,7 +29,12 @@ function order() {
 function PendingOrder() {
   const cookies = new Cookies();
       let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+   let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
   const config = {
     headers: { Authorization: `Bearer ${token_data}` }
@@ -39,7 +49,12 @@ function PendingOrder() {
 function OrderBYID(id) {
   const cookies = new Cookies();
       let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+   let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
   const config = {
     headers: { Authorization: `Bearer ${token_data}` }
@@ -51,7 +66,12 @@ function OrderBYID(id) {
 function Cancel(id) {
   const cookies = new Cookies();
       let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+   let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
   const config = {
     headers: { Authorization: `Bearer ${token_data}` }
@@ -64,7 +84,12 @@ function Cancel(id) {
 function GetCancelOrder() {
   const cookies = new Cookies();
       let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+   let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
   const config = {
     headers: { Authorization: `Bearer ${token_data}` }
@@ -79,7 +104,12 @@ function GetCancelOrder() {
 function GetDeliveredOrder() {
   const cookies = new Cookies();
       let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+   let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
   const config = {
     headers: { Authorization: `Bearer ${token_data}` }
@@ -94,7 +124,7 @@ function GetDeliveredOrder() {
 
 
 
-export { order, PendingOrder, OrderBYID, Cancel,GetCancelOrder , GetDeliveredOrder }
+
 
 
 // https://api.cannabaze.com/UserPanel/Get-GetCancelOrder/ 

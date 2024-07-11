@@ -42,7 +42,7 @@ const EditPasswordPopup = () => {
     return (
         <div>
             <Button className={`${classes.EditProfileBtn_Color}`} startIcon={<MdEdit color="#707070" size={18} />} onClick={handleClickOpen}>
-                Edit
+                {`Edit`}
             </Button>
             <Dialog open={Open} onClose={handleClose} className={classes.editPwd_Popup_dialog}>
                 <div className="container-fluid px-4">
@@ -51,14 +51,14 @@ const EditPasswordPopup = () => {
                             <IconButton onClick={handleClose} aria-label="closebutton"><RiCloseCircleFill color='#949494' size={24} /></IconButton>
                         </div>
                         <div className="col-12 mt-4 editPassword_Col">
-                            <h2 className="editPassword_heading">Edit password</h2>
+                            <h2 className="editPassword_heading">{`Edit password`}</h2>
                         </div>
 
                     </div>
                     <form>
                         <div className="row">
                             <div className="col-12 editPassword_Col">
-                                <label className="editPassword_label" htmlFor="current password">Current Password</label>
+                                <label className="editPassword_label" htmlFor="current password">{`Current Password`}</label>
                             </div>
                             <div className="col-12 editPassword_Col_textfield mt-2">
                                 <TextField id="current password"
@@ -76,10 +76,10 @@ const EditPasswordPopup = () => {
                                     variant="filled" placeholder="Password" fullWidth />
                             </div>
                             <div className="col-12 mt-2">
-                                <p className="forgotPwdLink">Forgot Password</p>
+                                <p className="forgotPwdLink">{`Forgot Password`}</p>
                             </div>
                             <div className="col-12 editPassword_Col">
-                                <label className="editPassword_label" htmlFor="NewPassword">New Password</label>
+                                <label className="editPassword_label" htmlFor="NewPassword">{`New Password`}</label>
                             </div>
                             <div className="col-12 editPassword_Col_textfield mt-2">
                                 <TextField id="NewPassword"
@@ -100,7 +100,7 @@ const EditPasswordPopup = () => {
                         </div>
                         <div className="row">
                             <div className="col-12 mt-4">
-                                <label className="editPassword_label" htmlFor="ConfirmPassword">Confirm Password</label>
+                                <label className="editPassword_label" htmlFor="ConfirmPassword">{`Confirm Password`}</label>
                             </div>
                             <div className="col-12 editPassword_Col_textfield mt-2">
                                 <TextField id="ConfirmPassword"
@@ -120,16 +120,16 @@ const EditPasswordPopup = () => {
                                     placeholder="Password" variant="filled" fullWidth />
                             </div>
                             <div className="col-12 mt-2">
-                                <p className="pwdAtLeastChar">Atleast 8 characters.</p>
+                                <p className="pwdAtLeastChar">{`Atleast 8 characters.`}</p>
 
                             </div>
 
                         </div>
                         <Box className={`mt-4 ${classes.editEmail_loadingBtn}`}>
-                            <LoadingButton onClick={handleClose}>Save</LoadingButton>
+                            <LoadingButton onClick={handleClose}>{`Save`}</LoadingButton>
                         </Box>
                         <Box className={`mt-4 ${classes.editEmail_loadingBtn_cancel}`}>
-                            <LoadingButton onClick={handleClose}>Cancel</LoadingButton>
+                            <LoadingButton onClick={handleClose}>{`Cancel`}</LoadingButton>
                         </Box>
                     </form>
                 </div>

@@ -22,9 +22,9 @@ const Sitemap = () => {
     return (
         <div >
             {
-                pages.map((data) => {
+                pages.map((data , index) => {
                     return (
-                        <Link href={data.link} >
+                        <Link  key={index} href={data.link} >
                             <p style={{ color: "#31B665" }}>{data.page}</p>
                         </Link>
                     )

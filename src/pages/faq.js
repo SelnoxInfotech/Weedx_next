@@ -151,7 +151,7 @@ const Faq = () => {
           <div className='faq_centent'>
           {
             data.map((item,index)=>{
-                return  <Accordion   className={classes.faqbox}>
+                return  <Accordion   key={index} className={classes.faqbox}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls={`panel${index+1}a-content`}

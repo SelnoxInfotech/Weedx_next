@@ -33,7 +33,12 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
     const cookies = new Cookies();
     let token_data = cookies.get('User_Token_access')
     const [open, setOpen] = React.useState(false)
-    let accessToken = localStorage.getItem('User_Token_access');
+    let accessToken 
+    if (typeof window !== 'undefined') {
+
+         accessToken = localStorage.getItem('User_Token_access');
+
+    }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const [imageopup , setImagepopup] = useState(false)
     const [sliderdata,setsliderdata]= useState({

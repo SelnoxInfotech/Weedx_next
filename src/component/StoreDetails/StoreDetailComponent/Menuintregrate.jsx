@@ -101,7 +101,7 @@ const Menuintregrate = ({tab = "Menu" }) => {
                                 }
                                 <div className="d-flex gap-4">
                                     <div style={{ display: "contents" }}>
-                                        <Link to="/carts">
+                                        <Link href="/carts">
                                             <Badge badgeContent={state.AllProduct?.length > 0 ? state.AllProduct?.length : null} className={`state.LoadingApi ? "animated bounce" : " " ${classes.sliderLink_badge}`}>
                                                 <IconButton className={classes.navBarButton_icons} aria-label='shopping-cart'><MdOutlineShoppingCart color="#858585" size={22}></MdOutlineShoppingCart></IconButton>
                                             </Badge>

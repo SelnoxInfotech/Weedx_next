@@ -10,7 +10,7 @@ import Loader from "@/component/Loader/Loader";
 const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
   const location = useReducer();
   const classes = useStyles()
-   
+  const [Loading, SetLoading] = React.useState(false)
   return (
     <div className="container-fluid">
       {loading?
@@ -23,19 +23,19 @@ const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
                   <div className=" col-lg-10 rounded   AllOrderContainer px-0 mt-4">
                     <div className="orderdetailsheader">
                       <div className="d-flex justify-content-between align-items-center">
-                        <div className="d-flex gap-2">  <p className="sellerName_date">Order ID : {val.OrderId}  </p>   <div className="d-flex gap-1 align-items-center">
+                        <div className="d-flex gap-2">  <p className="sellerName_date">{`Order ID : `}{val.OrderId}  </p>   <div className="d-flex gap-1 align-items-center">
                                       <BsFillCircleFill color={val.Order_Status === "Cancel" ? "#fb0000" : "#45d37d"} size={16} />
                                       <span className="allOrder_spanName">
                                         {val.Order_Status}
                                       </span>
                                     </div>
                                     </div>
-                          <p className="sellerName_date">SubTotal : {val.subtotal}</p>
+                          <p className="sellerName_date">{`SubTotal : `}{val.subtotal}</p>
                       </div>
                       <div className="d-flex justify-content-between align-items-center">
                         
                           <h2 className="sellerName_date">
-                            Seller Name : {val.SellerName}
+                           {` Seller Name :`} {val.SellerName}
                           </h2>
                     
                           <span className="sellerName_date ">
@@ -49,17 +49,17 @@ const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
                        {val.Product.map((items, index) => {
                         return (
                       
-                          <div className="place_order_product_cart ">
+                          <div key={index} className="place_order_product_cart ">
                           <div className="place_order_product_cart_image">
-                              <Image onError={event => {
-                                  event.target.src = "/image/blankImage.jpg"
-                                  event.onerror = null
-                              }} className='w-100' src={`${items.Image}`} alt={items.ProductName} title={items.ProductName} />
+                              <Image 
+                            width={100} 
+                            height={100}
+                               className='w-100' src={`${items.Image}`} alt={items.ProductName} title={items.ProductName} />
                           </div>
                           <div className="place_order_product_cart_Text">
                               <h4 className='productname'>{items.ProductName}</h4> 
-                              <p className="price"><b>Price</b> : $ {items.TotalPrice}</p>  
-                              <p><b>Qty</b> : {items.Cart_Quantity}</p>
+                              <p className="price"><b>{`Price`}</b>{` : $`} {items.TotalPrice}</p>  
+                              <p><b>{`Qty`}</b> : {items.Cart_Quantity}</p>
                           </div>
                           </div>
                         
@@ -74,13 +74,13 @@ const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
                         ) : (
                           <>
                           <div className=" ">
-                            <Link to={`/MyOrderProductDetail/${val.OrderId}`}>
-                              <LoadingButton className={classes.cncelbtnorder}>view details</LoadingButton>
+                            <Link href={`/MyOrderProductDetail/${val.OrderId}`}>
+                              <LoadingButton className={classes.cncelbtnorder}>{`view details`}</LoadingButton>
                             </Link>
                           </div>
                           {
                             val.Order_Status !=="Cancel" &&
-                             <div><LoadingButton loading={Loading} className={classes.cncelbtnorder}  onClick={() => { CencelOrder(val.OrderId) }}>Cancel </LoadingButton></div>}
+                             <div><LoadingButton loading={Loading} className={classes.cncelbtnorder}  onClick={() => { CencelOrder(val.OrderId) }}>{`Cancel`} </LoadingButton></div>}
                          </>
                         )}
                       </div>
@@ -95,7 +95,7 @@ const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
                         justifyContent: "flex-end",
                         marginTop: "10px"
 
-                    }}   >  <LoadingButton loading={Loading} onClick={() => { CencelOrder(val.OrderId) }}>Cancel </LoadingButton> </Box>
+                    }}   >  <LoadingButton loading={Loading} onClick={() => { CencelOrder(val.OrderId) }}>{`Cancel`} </LoadingButton> </Box>
                     </div>
                   }
                 </React.Fragment>

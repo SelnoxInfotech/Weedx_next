@@ -16,7 +16,12 @@ import Axios from 'axios';
 const EditUserName = ({ Username, Api, SetApi }) => {
     const cookies = new Cookies();
        let token_data = cookies.get('User_Token_access')
-    let accessToken = localStorage.getItem('User_Token_access');
+       let accessToken 
+       if (typeof window !== 'undefined') {
+   
+            accessToken = localStorage.getItem('User_Token_access');
+   
+       }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const classes = useStyles()
     const { register, handleSubmit, errors, reset, setError } = useForm();

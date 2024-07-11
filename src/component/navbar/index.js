@@ -257,7 +257,7 @@ const Navbar = () => {
                                                 <section className=' navbarProfileDropDownSection'>
                                                     <ol className='navbar_profile_orderList px-0'>
 
-                                                        <Link href={'/EditProfile'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list'>  <span><TbEdit /></span> {`EDIT PROFILE`}</li></Link>
+                                                        <Link href={'/editprofile'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list'>  <span><TbEdit /></span> {`EDIT PROFILE`}</li></Link>
                                                         <Link href={'/myorder'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list' > <span><FiShoppingBag /></span> {`MY ORDER`}</li></Link>
                                                         <Link href={'/whislists'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list'> <span><FaHeart /></span> {`FAVORITES`} </li></Link>
                                                         <Link href={'/myreviews'} onClick={() => { SetDropDownState(false) }}> <li className='profile_list' >  <span><MdReviews /></span>{`MY REVIEW`} </li></Link>

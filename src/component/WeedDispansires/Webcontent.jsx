@@ -59,13 +59,13 @@ const WebContent = ({ state, Store = [], modifystr, from , url }) => {
                                 return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
                             }).length ===0
                             ?
-                            Store?.map((items , index) => {
+                            Store?.slice(1,10).map((items , index) => {
                                 return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
                             })
                             :
                             Store?.filter((item) => item.rating >= 4)?.map((items , index) => {
                                 return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
-                            })
+                            }).slice(0,10)
                         }
 
                     </ul>

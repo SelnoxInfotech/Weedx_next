@@ -5,6 +5,7 @@ import React from 'react';
 
 const cookies = new Cookies();
 let token_data = cookies.get('User_Token_access')
+let accessToken
 if (typeof window !== 'undefined') {
    
     accessToken = localStorage.getItem('User_Token_access');

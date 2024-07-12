@@ -210,12 +210,7 @@ const DeliveryOption = ({ SetShowData, DeliveryOptionData, address  , Hours  ,Ti
                                                 <input checked={Checkbox.documented} onChange={CheckBox} name="documented" type='checkbox' required />
                                             </div>
                                             <div className='col-10  col-lg-10 col-md-10 col-sm-10 justify-content-start font_size_checkbox_paragraph'>
-                                                <p>{`I confirm that all the customer information added is the information linked to my NYS issued medical marijuana card and agree to present
-                                                    my card to the driver upon arrival. I also confirm that any changes in my medical history
-                                                    and/or medications have been documented with Vireo Health, as there are potential medication interactions and contraindications to using cannabis
-                                                    (including pregnancy, breastfeeding, unstable cardiac conditions, and history of schizophrenia).
-                                                    If you have questions or concerns regarding whether medical cannabis is right for you,
-                                                    please either reach out to your physician or schedule a consultation with one of our pharmacists.*`}</p>
+                                                <p>{`I confirm that the provided customer information meets my medical requirements. I agree to present required documentation upon delivery. Any updates to my medical history or medications have been noted. For questions about cannabis use, please consult your physician or our pharmacists.*`}</p>
                                                 {/* <p>{paragraph}</p> */}
 
 

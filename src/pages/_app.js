@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }) {
       notificationSound
       styles={{ zIndex: 9999 }} 
     /></div>
-    </div>
+        </div>
       </Layout>
     </Context>
   );

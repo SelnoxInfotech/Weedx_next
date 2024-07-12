@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 // import { useParams, usenavigate.push, useLocation, Link } from "react-router-dom";
 import { useRouter } from "next/router";
-
+import Image from 'next/image'
 import axios from "axios";
 import useStyles from "../../../styles/style"
 import ProductFilter from "../../../component/Filter/ProductFilter";
@@ -32,7 +32,6 @@ import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Swal from 'sweetalert2';
 import Link from "next/link";
 import { useParams } from 'next/navigation'
-import Image from "next/image";
 export default function DispensoriesDetails(props) {
     const {id , tab} =  props.params
     const  data  = false
@@ -370,6 +369,7 @@ export default function DispensoriesDetails(props) {
             }
         }
     }
+
     return (
         <div>{
             !Despen.length ? <Loader /> : <div>
@@ -398,7 +398,7 @@ export default function DispensoriesDetails(props) {
                             (tab === 'menu' || tab === undefined) &&
                             <React.Fragment>
                              {!productload ?<> {!location.pathname.includes('/menu-integration') ? 
-                                 (   Boolean(DespensariesData.length)?
+                                 (   Boolean(DespensariesData?.length)?
                                     <>
                                         <CategoryProduct Category={category} ShowCategoryProduct={ShowCategoryProduct}> </CategoryProduct>
                                         <div className="col-12 productCat_cont" style={{ display: "contents" }}>
@@ -416,7 +416,7 @@ export default function DispensoriesDetails(props) {
                                     :
                                       <div id='oopss'>
                                         <div id='error-text'>
-                                            <img src="/image/gif.svg" alt="no product"/>
+                                            <Image src="/image/gif.svg" alt="no product" width={400} height={400}/>
                                             <span>{`Menu Not Available`}</span>
                                             <p class="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses`}</p>
                                             <span onClick={()=>{navigate.push(-1)}} class="back">{`VIEW OTHER BUSINESSES`}</span>

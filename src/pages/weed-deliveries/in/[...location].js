@@ -25,24 +25,29 @@ import Loader from "../../../component/Loader/Loader";
 import WebContent from "../../../component/WeedDispansires/Webcontent";
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import RoutingDespen from '../../../hooks/utilis/Routingdespen';
+
 const Deliveries = () => {
     const { state, dispatch } = React.useContext(Createcontext)
     const Location = useRouter()
     const navigate = useRouter()
     const [Deliverie, SetDelivery] = React.useState([])
+    const [idload , setidload]= React.useState(false)
     const [edibaleproduct, setedibaleproduct] = React.useState([])
     const [loader, setloader] = React.useState(false);
     const [contentdata, setcontentdata] = React.useState([])
     React.useEffect(() => {
+        setidload(true)
         const object = { City: state.City.replace(/-/g, " "), State: state.State.replace(/-/g, " "), Country: state.Country.replace(/-/g, " ") }
         if (state.Country !== '') {
             GetAllDelivery(object).then((response) => {
 
                 SetDelivery(() => response)
                 setloader(true)
+                setidload(false)
 
             }).catch((error) => {
                 setloader(true)
+                setidload(false)
             })
 
             axios.post(`https://api.cannabaze.com/UserPanel/Get-WebpageDescriptionDeliveries/`, { ...object }).then((res) => {
@@ -203,6 +208,7 @@ const Deliveries = () => {
                     }
                 </div>
             </div>
+            { idload && <Loader/>}
         </RoutingDespen>
     )
 }

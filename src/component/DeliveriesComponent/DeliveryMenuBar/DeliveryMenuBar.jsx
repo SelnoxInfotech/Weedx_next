@@ -10,18 +10,23 @@ import Createcontext from "../../../../../Hooks/Context"
 import { Delivery } from '../../../../Component/ScoPage/Deliveries';
 import { GetAllDelivery } from "../../../../../Api/Api"
 import { useLocation } from 'react-router-dom';
+import Loader from '@/component/Loader/Loader';
 const DeliveryMenuBar = () => {
     const location =  useLocation()
     const { state } = React.useContext(Createcontext)
+    const [idload , setidload]= React.useState(false)
     const [Deliverie, SetDelivery] = React.useState([])
     React.useEffect(() => {
+           setidload(true)
             const object = { City: state.City.replace(/-/g, " ") , State: state.State.replace(/-/g, " "), Country: state.Country.replace(/-/g, " ") }
             GetAllDelivery(object).then((response) => {
                 if (response?.length !== 0) {
                     SetDelivery(response)
+                    setidload(false)
                 }
                 else{
                     SetDelivery([])
+                    setidload(false)
                 }
             })
     }, [state])
@@ -46,15 +51,14 @@ const DeliveryMenuBar = () => {
                             </TabList>
                         </Box>
                         <Box className={`${classes.deliverItemCardPadding}`}>
-                            <TabPanel value="1" >
-                                <DeliveryItemsCard Deliverie={Deliverie} />
-                            </TabPanel>
+                            <TabPanel value="1" ><DeliveryItemsCard Deliverie={Deliverie} /></TabPanel>
                             <TabPanel value="2"><DeliveryItemsCard Deliverie={Deliverie} /></TabPanel>
                             <TabPanel value="3"><DeliveryItemsCard Deliverie={Deliverie} /></TabPanel>
                         </Box>
                     </TabContext>
                 </Box>
             </div>
+          {idload &&  <Loader/>}
         </React.Fragment>
     )
 }

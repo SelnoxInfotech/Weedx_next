@@ -9,9 +9,9 @@ import Newsletter from "@/component/home/HomePageDealsSignup"
 import LawsOptions from '@/component/LawsComponent/LawsOptions'
 import Bgheader from '@/component/bgheader/Bgheader';
 import { useRouter } from 'next/router';
-import useStyles from '@/styles/style'; // Adjust the path as needed
+import useStyles from '../../../styles/style';
 
-const index = () => {
+const Index = () => {
     const router = useRouter();
     const classes = useStyles();
     const [value, setValue] = useState(router?.pathname);
@@ -60,4 +60,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default Index;

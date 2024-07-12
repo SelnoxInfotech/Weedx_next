@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Createcontext from '../hooks/context';
 import Navbar from "../component/navbar"
 import Footer from '../component/Footer/Footer';
+import Loader from '@/component/Loader/Loader';
 const Layout = ({ children }) => {
     const { state, dispatch } = React.useContext(Createcontext)
+     const [isload, setisload]=useState(false)
+    useEffect(()=>{
+        setisload(true)
+        setTimeout(() => {
+        setisload(false)
+          }, 2000);
+    },[state.Location])
     return (
         <div>
+           {isload  && <Loader/>}
             <div className='sticky-top '>
                 <Navbar></Navbar>
             </div>

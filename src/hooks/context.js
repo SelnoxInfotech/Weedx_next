@@ -141,7 +141,7 @@ function Context(props) {
                 { headers: { Authorization: `Bearer ${logi}` } }
             )
                 .then((res) => {
-
+console.log( res.data)
                     dispatch({ type: 'Profile', Profile: res.data })
                 })
                 .catch((error) => {

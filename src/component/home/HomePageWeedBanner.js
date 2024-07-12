@@ -36,7 +36,7 @@ const HomePageWeedBanner=()=>{
           delay: 2500,
         
           disableOnInteraction: false,
-        }}  modules={[Autoplay]}>
+        }}    style={{zIndex:0}} modules={[Autoplay]}>
             {data?.reverse()?.map((ele, index) => {
                 return (
                     <SwiperSlide key={index}>
@@ -68,7 +68,7 @@ const HomePageWeedBanner=()=>{
           delay: 2500,
           
           disableOnInteraction: false,
-        }}  modules={[Autoplay]}>
+        }}   style={{zIndex:0}} modules={[Autoplay]}>
             {data?.reverse()?.map((ele, index) => {
                 return (
                     <SwiperSlide key={index}>

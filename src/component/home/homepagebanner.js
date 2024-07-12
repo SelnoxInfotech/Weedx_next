@@ -43,7 +43,7 @@ const HomePageBanner = ({props}) => {
                                 delay: 2500,
                                 disableOnInteraction: false,
 
-                            }} modules={[Autoplay]}>
+                            }}   style={{zIndex:0}} modules={[Autoplay]}>
                                 {props?.reverse()?.map((items, index) => {
                                     return (
                                         <SwiperSlide key={index}>
@@ -72,7 +72,7 @@ const HomePageBanner = ({props}) => {
                                 delay: 2000,
 
                                 disableOnInteraction: true,
-                            }} modules={[Autoplay]}>
+                            }}   style={{zIndex:0}} modules={[Autoplay]}>
                                 {props?.reverse()?.map((items, index) => {
 
                                     return (

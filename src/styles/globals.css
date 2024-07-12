@@ -68,10 +68,7 @@ p {
   width: 100%;
   text-align: center;
 }
-
 /* Slider Navbar */
-
-
 .sidebar {
   height: 100%;
   width: 0;
@@ -4423,9 +4420,7 @@ background: #31B665;
   height: 50px;
 
 }
-footer{
-  margin-top: 20px;
-}
+
 .checkAgeEligibility_footer {
   color: #B6B6B6;
   font-size: 13px;
@@ -10584,4 +10579,29 @@ background: #FFF;
           #mySidebar {
             width: 0px;
           }
+  }
+
+  .bgHedaer{
+    background-color: #a5ffd8;
+    height: 220px;
+    position: relative;
+  }
+  .bgHedaer .text_on_Learn_banner{
+    display: inline;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .bgHedaer .text_on_Learn_banner h1{
+    color: #000;
+    display: inline;
+    font-family: Inter, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
   }

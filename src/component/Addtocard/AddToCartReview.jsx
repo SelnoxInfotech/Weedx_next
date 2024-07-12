@@ -68,7 +68,11 @@ const AddToCartReview = () => {
                                 break;
                             }
                         }
-                        localStorage.setItem("items", JSON.stringify(obj));
+                        if (typeof window !== 'undefined') {
+   
+                            accessToken = localStorage.getItem('User_Token_access');
+                   
+                       }
                         resolve();
                     }
                 })

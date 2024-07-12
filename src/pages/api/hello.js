@@ -100,7 +100,6 @@ function GetCancelOrder() {
   );
   return data;
 }
-
 function GetDeliveredOrder() {
   const cookies = new Cookies();
       let token_data = cookies.get('User_Token_access')

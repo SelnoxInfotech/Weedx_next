@@ -5,7 +5,7 @@ import useStyles from "../styles/style"
 import TextField from '@mui/material/TextField';
 import { usePathname } from 'next/navigation'
 import { useForm } from "react-hook-form";
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
 import Link from 'next/link'
@@ -22,12 +22,10 @@ import Createcontext from "../hooks/context"
 const Login = () => {
     const cookies = new Cookies();
     const pathname = usePathname()
+    console.log(typeof window)
     const method = useForm()
-    // const { data } = useSWR('https://api.cannabaze.com/UserPanel/Login', fetch)
-    // const location = useLocation();
     const Swal = require('sweetalert2')
     const { state, dispatch } = React.useContext(Createcontext)
-    // const Navigate = useNavigate()
     const [loading, Setloading] = React.useState(false)
     const classes = useStyles()
     const [showPassword, setShowPassword] = React.useState(false);

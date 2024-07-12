@@ -54,8 +54,6 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-
 .c {
   margin: 50px;
   color: rgb(245, 187, 80);
@@ -64,10 +62,6 @@ a {
 p {
   color: rgb(78, 53, 58);
 }
-
-
-
-
 /* navbar */ 
 .mobileNavLogo{
   display: block;
@@ -97,10 +91,7 @@ p {
   align-items: center;
   flex-direction: column;
 }
-.Tooglrbar {
-  gap: 10px;
-  display: flex;
-}
+
 .Slider_content_center {
   display: grid;
   justify-content: flex-start;
@@ -118,20 +109,9 @@ p {
   color: #555555;
   border: 1px solid #555555;
 }
-@media screen and (max-width: 993px) {
 
-  #mySidebar {
-    width: 0px;
-  }
 
-}
 
-@media screen and (max-width: 993px){
-  .navbar_logo_image{
-      width: 40px;
-      height: 40px;
-        }
-}
 /* end */
 
 
@@ -10593,4 +10573,15 @@ background: #FFF;
       font-size: 18px;
       line-height: 70px;
       }
+  }
+
+
+  @media screen and (max-width: 993px){
+    .navbar_logo_image{
+        width: 40px;
+        height: 40px;
+          }
+          #mySidebar {
+            width: 0px;
+          }
   }

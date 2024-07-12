@@ -17,9 +17,7 @@ const AddDeliveryAddressPopup = ({ DeliveryAddress, Api, SetApi }) => {
        let token_data = cookies.get('User_Token_access')
        let accessToken 
        if (typeof window !== 'undefined') {
-   
             accessToken = localStorage.getItem('User_Token_access');
-   
        }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const { register, handleSubmit, errors, reset ,setError} = useForm();

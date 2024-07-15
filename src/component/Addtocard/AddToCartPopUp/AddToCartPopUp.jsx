@@ -3,9 +3,9 @@ import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
 // import ModalClose from '@mui/material/ModalClose';
 // import ModalDialog from '@mui/material/ModalDialog';
-import useStyles from '../../../styles/style';
+import useStyles from '@/styles/style';
+// import ModalDialog from '@mui/joy/ModalDialog';
 import Box from '@mui/material/Box';
-
 import LoadingButton from '@mui/lab/LoadingButton';
 import Createcontext from "../../../hooks/context"
 import Cookies from 'universal-cookie';
@@ -75,7 +75,12 @@ const AddToCartPopUp = ({ CartClean, SetCartClean, NewData, SetAddToCard }) => {
 
             </Stack>
             <Modal open={!!layout} onClose={() => {  SetCartClean(false) }}>
-           
+            {/* <ModalDialog
+                    aria-labelledby="layout-modal-title"
+                    aria-describedby="layout-modal-description"
+                    layout={layout}
+                    sx={{ width: "32rem", height: "40rem" }}
+                > */}
                 
                     <div className='container-fluid marginRow'>
                         <div className='row '>
@@ -120,7 +125,8 @@ const AddToCartPopUp = ({ CartClean, SetCartClean, NewData, SetAddToCard }) => {
                         </div>
 
                     </div>
-
+                    
+                    {/* </ModalDialog> */}
 
             
             </Modal>

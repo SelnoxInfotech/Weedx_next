@@ -13,9 +13,9 @@ const PreCheckout = () => {
 
                 <div className="row">
                     <div className="col-12">
-                        <div className="row preCheckOut_center">
-                            <Link href={params.pathname.includes('menu-integration') ? '/carts' :"/cart"}>
-                                <div className="col-lg-3 col-md-6 col-sm-8 col-8  border preCheckout_container">
+                        <div className="row justify-content-center">
+                            <Link href={params.pathname.includes('menu-integration') ? '/carts' :"/cart"} className="">
+                                <div className="col-lg-3 col-md-6 col-sm-8 col-8  mx-auto border preCheckout_container">
                                     <div className=" preCheck_heading">
                                         <h6>CHECKOUT</h6>
                                     </div>

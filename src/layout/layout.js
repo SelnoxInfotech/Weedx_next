@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Createcontext from '../hooks/context';
-import Navbar from "../component/navbar"
+import dynamic from 'next/dynamic'
+const Navbar = dynamic(() => import('../component/navbar'), {
+    loading: () => <p>Loading...</p>,
+    ssr: false
+  });
+
+
 import Footer from '../component/Footer/Footer';
 import Loader from '@/component/Loader/Loader';
 const Layout = ({ children }) => {

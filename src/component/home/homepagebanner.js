@@ -57,6 +57,7 @@ const HomePageBanner = ({props}) => {
                                                         quality={75}
                                                         height={10}
                                                         loader={imageLoader}
+                                                        unoptimized
                                                         className='HomePageBanner_image'
                                                         // onError={handleImageError}
                                                     />
@@ -88,6 +89,7 @@ const HomePageBanner = ({props}) => {
                                                         height={10}
                                                         quality={100}
                                                         className='HomePageBanner_image'
+                                                        unoptimized
                                                         loader={imageLoader}
                                                     />
                                                 </a>

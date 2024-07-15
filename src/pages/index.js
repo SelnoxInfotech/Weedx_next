@@ -73,7 +73,7 @@ export async function getStaticProps() {
       brand.json().catch(handleError)
     ]);
 
-    // Assuming breaking news is the first item in topNews array
+ 
     const responseData = {
       topbanner: topbanner,
       category: category,

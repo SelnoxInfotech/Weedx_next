@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 import axios from 'axios';
 
 import { WishListget } from '@/component/Whishlist/WishListApi_';
-// import { StaticImages } from '../Api/Api';
+import { StaticImages } from '@/hooks/apicall/api';
 const Createcontext = createContext();
 const cookies = new Cookies();
 const login = cookies.get("User_Token_access")
@@ -141,7 +141,6 @@ function Context(props) {
                 { headers: { Authorization: `Bearer ${logi}` } }
             )
                 .then((res) => {
-console.log( res.data)
                     dispatch({ type: 'Profile', Profile: res.data })
                 })
                 .catch((error) => {
@@ -181,6 +180,13 @@ console.log( res.data)
                 dispatch({ type: 'Cart_subTotal', Cart_subTotal: AllTotal })
             }
         }
+        StaticImages().then((response) => {
+            dispatch({ type: 'StaticImage', StaticImage: response?.data?.data[0] })
+        }).catch((error) => {
+            dispatch({ type: 'StaticImage', StaticImage: [] })
+            console.trace(error)
+        })
+
     }, [state.ApiProduct, state.login])
 
 

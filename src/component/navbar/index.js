@@ -21,7 +21,6 @@ import { MdOutlineShoppingCart } from "react-icons/md"
 import SliderLink from "../navbar/component/SideSlider/SilderLink"
 import Createcontext from "../../hooks/context"
 import Cookies from 'universal-cookie';
-// import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import { useRouter } from 'next/router';
@@ -70,7 +69,7 @@ const Navbar = () => {
             winWidth: window?.innerWidth,
             winHeight: window?.innerHeight,
         })
-        window?.innerWidth <= 991 ?SetHamburger((show) => false) : SetHamburger((show) => true);
+        window?.innerWidth <= 991 ? SetHamburger((show) => false) : SetHamburger((show) => true);
     }
     //   const toggleOffCanvas = () => {
     //     if (windowDimenion?.winWidth <= 991) {
@@ -80,14 +79,14 @@ const Navbar = () => {
     //   }
     React.useEffect(() => {
         if (typeof window !== 'undefined') {
-          detectSize();
-          window.addEventListener('resize', detectSize);
-    
-          return () => {
-            window.removeEventListener('resize', detectSize);
-          };
+            detectSize();
+            window.addEventListener('resize', detectSize);
+
+            return () => {
+                window.removeEventListener('resize', detectSize);
+            };
         }
-      }, []);
+    }, []);
     function openNav() {
         SetOpen((open) => !open)
     }
@@ -96,7 +95,7 @@ const Navbar = () => {
     }
     async function Logout() {
         localStorage.removeItem('User_Token_access');
-        await cookies.remove('User_Token_access')
+        cookies.remove('User_Token_access')
         await dispatch({ type: 'Login', login: false })
         await dispatch({ type: 'ApiProduct' })
         await dispatch({ type: 'Profile', Profile: [] })
@@ -104,19 +103,19 @@ const Navbar = () => {
     }
 
 
-      React.useEffect(() => {
+    React.useEffect(() => {
         const handleClickOutside = (event) => {
-          if (ref.current && !ref.current.contains(event.target)) {
-            if (Open) {
-              SetOpen((Open) => !Open)
+            if (ref.current && !ref.current.contains(event.target)) {
+                if (Open) {
+                    SetOpen((Open) => !Open)
+                }
             }
-          }
         };
         document.addEventListener('click', handleClickOutside, true);
         return () => {
-          document.removeEventListener('click', handleClickOutside, true);
+            document.removeEventListener('click', handleClickOutside, true);
         };
-      }, [Open]);
+    }, [Open]);
 
 
     React.useEffect(() => {
@@ -140,7 +139,7 @@ const Navbar = () => {
     }
     const DefaultImage = () => (
         <img src="/image/user.webp" alt="Default Profile" width={100} height={100} />
-      );
+    );
 
     return (
         <React.Fragment>
@@ -178,11 +177,11 @@ const Navbar = () => {
                         <Grid xs={6} md={6} xl={7} display={{ xs: "block", md: "block", lg: "block" }}>
                             {
                                 Hamburger ?
-                          
+
                                     <SearchBar path={Location.pathname} />
                                     :
                                     <span className='mobileNavLogo' >
-                                        <Link href="/"><Image className='navbar_logo_image' alt="WeedX.io logo" title="WeedX.io logo" src={'/weedx.iologo.png'}  width={100} height={100}/></Link>
+                                        <Link href="/"><Image className='navbar_logo_image' alt="WeedX.io logo" title="WeedX.io logo" src={'/weedx.iologo.png'} width={100} height={100} /></Link>
                                     </span>
                             }
                         </Grid>
@@ -202,12 +201,12 @@ const Navbar = () => {
                                         <IconButton className={classes.navBarButton_icons} aria-label='notification'><IoIosNotifications color="#858585" size={22}></IoIosNotifications></IconButton>
                                     </Badge>
                                     <Notification
-                          notify={notify}
-                          setnotify={setnotify}
-                          notificationdata={notificationdata}
-                          Setnotificationdata={Setnotificationdata}
-                          Settotalnotify={Settotalnotify}
-                        ></Notification>
+                                        notify={notify}
+                                        setnotify={setnotify}
+                                        notificationdata={notificationdata}
+                                        Setnotificationdata={Setnotificationdata}
+                                        Settotalnotify={Settotalnotify}
+                                    ></Notification>
 
                                 </div>
                                 <Link href="/cart">
@@ -219,19 +218,16 @@ const Navbar = () => {
                         </Grid>
                         <Grid xs={5} md={4} xl={3} >
                             {
-                                state.login === true
+                                state.login
                                     ?
 
 
                                     <div className='navbarProfileDropDown_container' ref={profileRef}>
                                         <Grid display={{ xs: "none", md: "flex" }} justifyContent="flex-end">
                                             <div className='Navbar_profile_logo_container'>
-                                            {/* <ErrorBoundary fallback={<DefaultImage />}> */}
+                               
                                                 <Image
-                                                    // onError={event => {
-                                                    //     event.target.src = "/image/user.webp"
-                                                    //     event.onerror = null
-                                                    // }}
+                                           
                                                     src={state.Profile.googlelink === null ? `${state.Profile.image} ` : state.Profile.googlelink}
                                                     alt='Profile'
                                                     width={100}
@@ -240,10 +236,11 @@ const Navbar = () => {
                                                     className="Navbar_logo_imgs"
                                                     onClick={handleClickDropdown}
                                                 />
-                                                 {/* </ErrorBoundary> */}
+                                          
                                             </div>
                                         </Grid>
                                         {DropDownState && (
+                                            
                                             <div className='profileDropdown_container'>
                                                 <section className='Navbar_proflie_image_name_section'>
 
@@ -277,8 +274,9 @@ const Navbar = () => {
                                     </div>
 
                                     :
+                                   
                                     <div className=' col-12 Login_Sigup_button justify-content-end  Sapceing'>
-                                        <div className='col-lg-4 col-sm-4'>
+                                         <div className='col-lg-4 col-sm-4'>
                                             <Grid display={{ xs: "none", md: "block", lg: "block", }} >
                                                 <Link href="/login" >   <Button className={classes.muiBtn} >{`Log In`}</Button></Link>
                                             </Grid>
@@ -287,8 +285,8 @@ const Navbar = () => {
                                             <Grid display={{ xs: "none", md: "block", lg: "block" }}>
                                                 <Link href="/signup" >    <Button sx={{ boxShadow: 3 }} className={classes.muiBtn_Signup} >{`Sign Up`}</Button></Link>
                                             </Grid>
-                                        </div>
-                                    </div>
+                                        </div> 
+                                   </div>
                             }
                         </Grid>
                         <Grid xs={12} md={12} xl={12} >

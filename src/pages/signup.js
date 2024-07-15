@@ -88,7 +88,7 @@ const Signup = () => {
                     error={Boolean(method.errors?.email)}
 
                 />
-                {emailvalid && <p className='errorPara'>Email is already Registered</p>}
+                {emailvalid && <p className='errorPara'>{`Email is already Registered`}</p>}
             </div>
         </div>
         <div className='row  signup_margins_top'>
@@ -96,7 +96,7 @@ const Signup = () => {
                 <Box
                     className={`  ${classes.loadingBtnTextAndBack}`}
                 >
-                    <LoadingButton variant="outlined" loading={false} type={'submit'}>Signup</LoadingButton>
+                    <LoadingButton variant="outlined" loading={false} type={'submit'}>{`Signup`}</LoadingButton>
                 </Box>
             </div>
 

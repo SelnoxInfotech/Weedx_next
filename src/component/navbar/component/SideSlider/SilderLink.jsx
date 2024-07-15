@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect } from "react";
 import Grid from "@mui/system/Unstable_Grid";
 import { AiFillHeart } from "react-icons/ai";

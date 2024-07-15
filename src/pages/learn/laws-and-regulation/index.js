@@ -33,8 +33,8 @@ const Index = () => {
                         <Box className={`${classes.learn_tab_background} ${classes.learn_tab}`} sx={{ marginLeft: "-5px", borderColor: 'divider' }}>
                             <TabList scrollButtons={false} variant="scrollable" onChange={handleChange} aria-label="lab API tabs example">
                                 <Tab label="Law" value="/learn/laws-and-regulation" />
-                                <Tab label="All News" value="" onClick={()=>{Naviagte('/cannabis-news')}} />
-                                <Tab label="Blogs" value="" onClick={()=>{Naviagte('/blogs')}} />
+                                <Tab label="All News" value="" onClick={()=>{ router.push('/cannabis-news')}} />
+                                <Tab label="Blogs" value="" onClick={()=>{ router.push('/blogs')}} />
 
                             </TabList>
                         </Box>

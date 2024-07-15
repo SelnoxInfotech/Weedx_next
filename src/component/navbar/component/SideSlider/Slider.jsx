@@ -1,4 +1,4 @@
-
+"use client"
 import React from "react"
 import Button from '@mui/material/Button';
 import useStyles from "../../../../styles/style"
@@ -9,6 +9,7 @@ import { FaHome, FaClinicMedical, FaIdeal, FaProductHunt } from "react-icons/fa"
 import { TbTruckDelivery } from "react-icons/tb";
 import { SiBrandfolder, SiFuturelearn } from "react-icons/si";
 import { RxCross2 } from "react-icons/rx";
+import { URL } from 'url';
 import Image from "next/image";
 const SideNavbar = ({ closeNav, Open }) => {
     const profileRef = React.useRef(null)
@@ -51,6 +52,10 @@ const SideNavbar = ({ closeNav, Open }) => {
         Navigate.push("/profile")
         closeNav()
     }
+
+    // const href = new URL(`/weed-dispensaries/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`, '/weed-dispensaries/in/'); // replace with your base URL
+    // const normalizedHref = href.pathname.replace(/\/\/+/g, '/');
+
     return (
         <React.Fragment>
             <div id="mySidebar" className="sidebar" style={{ width: Open ? "300px" : "0px" }}>
@@ -115,13 +120,14 @@ const SideNavbar = ({ closeNav, Open }) => {
 
                 <hr></hr>
                 <div className="col-12 Slider_content_center " >
-                    <Link className="LinkColor" href={`/weed-dispensaries/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}><p onClick={closeNav} className="m-0 d-flex"><span ><FaClinicMedical color="#31B655" fontSize={25} /></span>Dispensaries</p></Link>
+                    <Link className="LinkColor"
+                     href={`weed-dispensaries/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}><p onClick={closeNav} className="m-0 d-flex"><span ><FaClinicMedical color="#31B655" fontSize={25} /></span>Dispensaries</p></Link>
                 </div>
 
                 <hr></hr>
 
                 <div className="col-12 Slider_content_center ">
-                    <Link className="LinkColor" href={`/weed-deliveries/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}><p onClick={closeNav} className="m-0 d-flex"><span><TbTruckDelivery color="#31B655" fontSize={25} /></span>Deliveries</p></Link>
+                    <Link className="LinkColor" href={`weed-deliveries/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}><p onClick={closeNav} className="m-0 d-flex"><span><TbTruckDelivery color="#31B655" fontSize={25} /></span>Deliveries</p></Link>
                 </div>
                 <hr></hr>
                 {/* <div className="col-12 Slider_content_center " >

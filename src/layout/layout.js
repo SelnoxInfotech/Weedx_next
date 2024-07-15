@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Createcontext from '../hooks/context';
-import Navbar from "../component/navbar"
+import dynamic from 'next/dynamic'
+const Navbar = dynamic(() => import('../component/navbar'));
+
+
 import Footer from '../component/Footer/Footer';
 import Loader from '@/component/Loader/Loader';
 const Layout = ({ children }) => {
@@ -15,17 +18,17 @@ const Layout = ({ children }) => {
     },[state.Location])
     return (
         <div>
-           {isload  && <Loader/>}
-            <div className='sticky-top '>
-                <Navbar></Navbar>
-            </div>
-            <div className='container ' id='layout'>
-                <Grid item={true} xs={12} md={12} xl={12}>
-                    <main>{children}</main>
-                </Grid>
-            </div>
-            <Footer />
+        {isload ? <Loader /> : null}
+        <div className='sticky-top'>
+          <Navbar />
         </div>
+        <div className='container' id='layout'>
+          <Grid item xs={12} md={12} xl={12}>
+            <main>{children}</main>
+          </Grid>
+        </div>
+        <Footer />
+      </div>
     );
 };
 

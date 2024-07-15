@@ -16,12 +16,13 @@ const EditProfile = () => {
     const cookies = new Cookies();
     const [Profile, SetProfile] = React.useState({})
     let token_data = cookies.get('User_Token_access')
-    // let accessToken
-    // if (typeof window !== 'undefined') {
+    let accessToken
+    if (typeof window !== 'undefined') {
 
-    //     accessToken = localStorage.getItem('User_Token_access');
+        accessToken = localStorage.getItem('User_Token_access');
 
-    // }
+    }
+    if(  Boolean(accessToken) ){ token_data  =  accessToken};
    React.useEffect(()=>{
     SetProfile((prevProfile) => { return  state.Profile  });
    },[])
@@ -84,14 +85,13 @@ const EditProfile = () => {
             dispatch({ type: 'Profile', Profile: res.data.data })
         }).catch((error) => {
 
-            // setError("Username", {
-            //     type: "manual",
-            //     message: error.response.data.error.username[0],
-            // })
+            setError("Username", {
+                type: "manual",
+                message: error.response.data.error.username[0],
+            })
         })
     }
 
-    console.log(Api , Profile , state.Profile)
     return (
         <div className="container">
             <div className="row">

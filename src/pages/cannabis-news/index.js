@@ -273,7 +273,7 @@ export default Allblogs
 
 export async function getStaticProps(context) {
   try {
-    const res = await axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyBlog/');
+    const res = await axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyCANNABISNEWS/');
     const data = _.orderBy(res.data, ['created'], ['desc']); // Assuming 'created' is a date field
 
     return {

@@ -10,6 +10,7 @@ import LawsOptions from '@/component/LawsComponent/LawsOptions'
 import Bgheader from '@/component/bgheader/Bgheader';
 import { useRouter } from 'next/router';
 import useStyles from '../../../styles/style';
+import Link from 'next/link';
 
 const Index = () => {
     const router = useRouter();
@@ -32,9 +33,9 @@ const Index = () => {
                     <TabContext value={value}>
                         <Box className={`${classes.learn_tab_background} ${classes.learn_tab}`} sx={{ marginLeft: "-5px", borderColor: 'divider' }}>
                             <TabList scrollButtons={false} variant="scrollable" onChange={handleChange} aria-label="lab API tabs example">
-                                <Tab label="Law" value="/learn/laws-and-regulation" />
-                                <Tab label="All News" value="" onClick={()=>{ router.push('/cannabis-news')}} />
-                                <Tab label="Blogs" value="" onClick={()=>{ router.push('/blogs')}} />
+                                <Tab label="Law" value={"/learn/laws-and-regulation"} />
+                                <Tab label="All News" value={'/cannabis-news'} />
+                                <Link href={"/blogs"}> <Tab label="Blogs" value={"/blogs" }  /></Link>
 
                             </TabList>
                         </Box>

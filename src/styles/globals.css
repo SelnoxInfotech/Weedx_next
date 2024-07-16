@@ -7615,8 +7615,8 @@ line-height: 2;
 } 
 
 .newloader {
-  height: 12rem;
-  width: 12rem;
+  height: 120px;
+  width: 120px;
   border-radius: 6px;
   display: flex;
   align-items: center;

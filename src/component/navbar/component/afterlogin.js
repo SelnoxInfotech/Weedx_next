@@ -9,7 +9,7 @@ import { TbEdit } from "react-icons/tb";
 import { FaHandsHelping } from "react-icons/fa";
 import useStyles from "@/styles/style";
 import Image from 'next/image';
-const afterlogin = ({ dropDownState, state, profileRef, handleClickDropdown , Logout }) => {
+const Afterlogin = ({ dropDownState, state, profileRef, handleClickDropdown , Logout }) => {
     const classes = useStyles();
     return (
         <div>
@@ -66,4 +66,4 @@ const afterlogin = ({ dropDownState, state, profileRef, handleClickDropdown , Lo
     );
 };
 
-export default afterlogin;
+export default Afterlogin;

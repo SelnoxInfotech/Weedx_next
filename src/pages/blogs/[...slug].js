@@ -436,41 +436,41 @@ const Blogs = (props) => {
 
 
 
-export async function getStaticProps(context) {
+// export async function getStaticProps(context) {
     
-    console.log(context )
-    // const handleError = (error) => {
-    //   console.error('Error fetching data:', error);
-    //   return {
-    //     props: {
-    //       initialData: [],
-    //       error: 'Failed to fetch data',
-    //     },
-    //   };
-    // };
+//     console.log(context )
+//     // const handleError = (error) => {
+//     //   console.error('Error fetching data:', error);
+//     //   return {
+//     //     props: {
+//     //       initialData: [],
+//     //       error: 'Failed to fetch data',
+//     //     },
+//     //   };
+//     // };
   
-    // try {
-    //   const [banner, callcategory, bannner2 , brand] = await Promise.all([
-    //     fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
-    //     fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
-    //     fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
-    //     fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
-    //   ]);
+//     // try {
+//     //   const [banner, callcategory, bannner2 , brand] = await Promise.all([
+//     //     fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
+//     //     fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
+//     //     fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
+//     //     fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
+//     //   ]);
   
   
-    //   // Assuming breaking news is the first item in topNews array
+//     //   // Assuming breaking news is the first item in topNews array
     
   
-    //   return {
-    //     props: {
-    //       initialData: [],
-    //     },
-    //     revalidate: 60,
-    //   };
-    // } catch (error) {
-    //   return handleError(error);
-    // }
-  }
+//     //   return {
+//     //     props: {
+//     //       initialData: [],
+//     //     },
+//     //     revalidate: 60,
+//     //   };
+//     // } catch (error) {
+//     //   return handleError(error);
+//     // }
+//   }
   
   export default Blogs
   

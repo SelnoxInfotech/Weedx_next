@@ -44,7 +44,6 @@ const Navbar = () => {
     const [dropDownState, setDropDownState] = React.useState(false);
     const [notificationData, setNotificationData] = React.useState([]);
     const [totalNotify, setTotalNotify] = React.useState([]);
-
     const detectSize = () => {
         setWindowDimension({
             winWidth: window?.innerWidth,
@@ -110,7 +109,6 @@ const Navbar = () => {
     const handleClickDropdown = () => {
         setDropDownState((prevState) => !prevState);
     };
-
     return (
         <React.Fragment>
             <div className='container p-0'>
@@ -156,11 +154,11 @@ const Navbar = () => {
                                         <IconButton className={classes.navBarButton_icons} aria-label='whishlist'><AiFillHeart color="#858585" size={22} /></IconButton>
                                     </Badge>
                                 </Link>
-                                <div className="notification_icon" onClick={() => setNotify(!notify)}>
-                                    <Badge badgeContent={
-                                        state.login ? (totalNotify?.length === state?.Profile?.RemovedNotification?.length ? 0 : (totalNotify?.length - state?.Profile?.RemovedNotification?.length) > 0 ? totalNotify?.length - state?.Profile?.RemovedNotification?.length : 0) : notificationData?.length
+                                <div className="notification_icon" >
+                                    <Badge  onClick={() => setNotify(!notify)} badgeContent={
+                                       Boolean( state.login) ? (totalNotify?.length === state?.Profile?.RemovedNotification?.length ? 0 : (totalNotify?.length - state?.Profile?.RemovedNotification?.length) > 0 ? totalNotify?.length - state?.Profile?.RemovedNotification?.length : 0) : notificationData?.length
                                     } className={classes.sliderLink_badge}>
-                                        <IconButton className={classes.navBarButton_icons} aria-label='notification'><IoIosNotifications color="#858585" size={22}></IoIosNotifications></IconButton>
+                                        <IconButton  className={classes.navBarButton_icons} aria-label='notification'><IoIosNotifications  color="#858585" size={22}></IoIosNotifications></IconButton>
                                     </Badge>
                                     <Notification
                                         notify={notify}
@@ -178,62 +176,11 @@ const Navbar = () => {
                             </div>
                         </Grid>
                         <Grid xs={5} md={4} xl={3}>
-                            {/* {
-                                true ?
-                                    <div className='navbarProfileDropDown_container' ref={profileRef}>
-                                        <Grid display={{ xs: "none", md: "flex" }} justifyContent="flex-end">
-                                            <div className='Navbar_profile_logo_container'>
-                                                <Image
-                                                    src={state.Profile.googlelink === null ? `${state.Profile.image} ` : state.Profile.googlelink}
-                                                    alt='Profile'
-                                                    width={100}
-                                                    height={100}
-                                                    title='Profile'
-                                                    className="Navbar_logo_imgs"
-                                                    onClick={handleClickDropdown}
-                                                />
-                                            </div>
-                                        </Grid>
-                                        {dropDownState && 
-                                            <div className='profileDropdown_container'>
-                                                <section className='Navbar_proflie_image_name_section'>
-                                                    <div className='profile_name_container'>
-                                                        <p className='profile_names ellipsis'>{state.Profile.username}</p>
-                                                    </div>
-                                                </section>
-                                                <hr />
-                                                <section className='navbarProfileDropDownSection'>
-                                                    <ol className='navbar_profile_orderList px-0'>
-                                                        <Link href={'/editprofile'} onClick={() => setDropDownState(false)}> <li className='profile_list'> <span><TbEdit /></span> {`EDIT PROFILE`}</li></Link>
-                                                        <Link href={'/myorder'} onClick={() => setDropDownState(false)}> <li className='profile_list'> <span><FiShoppingBag /></span> {`MY ORDER`}</li></Link>
-                                                        <Link href={'/whislists'} onClick={() => setDropDownState(false)}> <li className='profile_list'> <span><FaHeart /></span> {`FAVORITES`} </li></Link>
-                                                        <Link href={'/myreviews'} onClick={() => setDropDownState(false)}> <li className='profile_list'> <span><MdReviews /></span>{`MY REVIEW`} </li></Link>
-                                                        <Link href={'/helpcenter'} onClick={() => setDropDownState(false)}> <li className='profile_list'> <span><FaHandsHelping /></span> {`HELP`}</li></Link>
-                                                        <li className='profile_list' onClick={Logout}> <span><TbLogout /></span> {`LOGOUT`}</li>
-                                                    </ol>
-                                                </section>
-                                            </div>
-                                        }
-                                    </div>
-                           
-                                    :
-                                    <div className='col-12 Login_Sigup_button justify-content-end Sapceing'>
-                                        <div className='col-lg-4 col-sm-4'>
-                                            <Grid display={{ xs: "none", md: "block", lg: "block", }}>
-                                                <Link href="/login"><Button className={classes.muiBtn}>{`Log In`}</Button></Link>
-                                            </Grid>
-                                        </div>
-                                        <div className='col-lg-4 col-sm-4'>
-                                            <Grid display={{ xs: "none", md: "block", lg: "block" }}>
-                                                <Link href="/signup"><Button sx={{ boxShadow: 3 }} className={classes.muiBtn_Signup}>{`Sign Up`}</Button></Link>
-                                            </Grid>
-                                        </div>
-                                    </div>
-                            } */}
+                   
                             <Afterlogin dropDownState={dropDownState} state={state} profileRef ={profileRef} handleClickDropdown= {handleClickDropdown} Logout={Logout}></Afterlogin >
                         </Grid>
                         <Grid xs={12} md={12} xl={12}>
-                            <SliderLink state={state}></SliderLink>
+                            <SliderLink  state={state}></SliderLink>
                             <SideNavbar closeNav={closeNav} Open={open}></SideNavbar>
                         </Grid>
                     </Grid>

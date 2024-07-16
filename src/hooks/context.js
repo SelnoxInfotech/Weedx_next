@@ -72,6 +72,8 @@ const initialUser = {
 }
 function Context(props) {
     const [state, dispatch] = useReducer(Reducer, initialUser)
+
+    
     React.useEffect(() => {
         const cookies = new Cookies();
         let logi = cookies.get("User_Token_access")

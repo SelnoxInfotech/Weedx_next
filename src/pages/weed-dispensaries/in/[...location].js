@@ -55,14 +55,14 @@ function a11yProps(index) {
 
 
 
-const Dispensaries = () => {
+const Dispensaries = (props) => {
     const classes = useStyles()
     const [searchtext, setsearchtext] = React.useState("");
     const navigate = useRouter()
     const Location = useRouter()
     const { state, dispatch } = React.useContext(Createcontext)
     const [value, setValue] = React.useState(0);
-    const [Store, SetStore] = React.useState([]);
+    const [Store, SetStore] = React.useState(props.store);
     const [loader, setloader] = React.useState(false);
     const [contentdata, setcontentdata] = React.useState([])
     const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: state.Location }]
@@ -70,78 +70,98 @@ const Dispensaries = () => {
         setValue(newValue);
     };
 
-    React.useEffect(() => {
-        const sendPostRequest = () => {
-            axios.post(
-                `https://api.cannabaze.com/UserPanel/Update-SiteMap/14`,
-                {
-                    j: 'https://www.weedx.io' + modifystr(Location?.pathname.replace(/\/+$/, ""))
-                }
-            ).then((res) => {
-            }).catch((err) => {
-            });
-        };
+    // React.useEffect(() => {
+    //     const sendPostRequest = () => {
+    //         axios.post(
+    //             `https://api.cannabaze.com/UserPanel/Update-SiteMap/14`,
+    //             {
+    //                 j: 'https://www.weedx.io' + modifystr(Location?.pathname.replace(/\/+$/, ""))
+    //             }
+    //         ).then((res) => {
+    //         }).catch((err) => {
+    //         });
+    //     };
 
 
-        const timeoutId = setTimeout(sendPostRequest, 2000);
+    //     const timeoutId = setTimeout(sendPostRequest, 2000);
 
-        return () => clearTimeout(timeoutId);
-    }, [Location]);
+    //     return () => clearTimeout(timeoutId);
+    // }, [Location]);
 
-    React.useEffect(() => {
+    // React.useEffect(() => {
 
-        if (searchtext !== "") {
-            const getData = setTimeout(() => {
-                const json = {
-                    "store": searchtext,
-                    "City": state.City,
-                    "Country": state.Country?.replace(/-/g, " "),
-                    "State": state.State?.replace(/-/g, " "),
-                }
-                Axios.post(`https://api.cannabaze.com/UserPanel/FilterDispensaries/`,
-                    json
-                ).then(function (response) {
-                    setloader(true)
-                    SetStore(() => response?.data);
-                })
-                    .catch(function (error) {
-                        setloader(true)
-                        console.trace(error);
-                    });
-            }, 1000)
-            return () => clearTimeout(getData)
-        } else {
-            const sendPostRequest = () => {
-                try {
-                    const object = { City: state.City.replace(/-/g, " "), "Country": state.Country?.replace(/-/g, " "), "State": state.State?.replace(/-/g, " "), }
-                    state.Country !== "" && DespensioriesItem(object)
-                        .then((res) => {
+    //     if (searchtext !== "") {
+    //         const getData = setTimeout(() => {
+    //             const json = {
+    //                 "store": searchtext,
+    //                 "City": state.City,
+    //                 "Country": state.Country?.replace(/-/g, " "),
+    //                 "State": state.State?.replace(/-/g, " "),
+    //             }
+    //             Axios.post(`https://api.cannabaze.com/UserPanel/FilterDispensaries/`,
+    //                 json
+    //             ).then(function (response) {
+    //                 setloader(true)
+    //                 SetStore(() => response?.data);
+    //             })
+    //                 .catch(function (error) {
+    //                     setloader(true)
+    //                     console.trace(error);
+    //                 });
+    //         }, 1000)
+    //         return () => clearTimeout(getData)
+    //     } else {
+    //         const sendPostRequest = () => {
+    //             try {
+    //                 const object = { City: state.City.replace(/-/g, " "), "Country": state.Country?.replace(/-/g, " "), "State": state.State?.replace(/-/g, " "), }
+    //                 // state.Country !== "" && DespensioriesItem(object)
+    //                 //     .then((res) => {
 
-                            if (res === "No Dispensary in your area") {
-                            }
-                            else {
-                                SetStore(res)
-                            }
-                            setloader(true)
+    //                 //         if (res === "No Dispensary in your area") {
+    //                 //         }
+    //                 //         else {
+    //                 //             SetStore(res)
+    //                 //         }
+    //                 //         setloader(true)
 
-                        })
+    //                 //     })
 
-                    axios.post(`https://api.cannabaze.com/UserPanel/Get-WebpageDescriptionDispensary/`, { ...object }
+    //                 axios.post(`https://api.cannabaze.com/UserPanel/Get-WebpageDescriptionDispensary/`, { ...object }
 
-                    ).then((res) => {
-                        setcontentdata(res.data)
-                    })
+    //                 ).then((res) => {
+    //                     setcontentdata(res.data)
+    //                 })
 
-                } catch (error) {
+    //             } catch (error) {
 
-                }
-            }
-            const timeoutId = setTimeout(sendPostRequest, 1000);
-            return () => clearTimeout(timeoutId);
+    //             }
+    //         }
+    //         const timeoutId = setTimeout(sendPostRequest, 1000);
+    //         return () => clearTimeout(timeoutId);
+    //     }
+    // }, [searchtext, state])
+
+    function breadcrumCountry(country, state1, city) {
+        if (Boolean(city)) {
+            dispatch({ type: 'route', route: "" })
+            dispatch({ type: 'Location', Location: state.City })
+            navigate.push(`/weed-dispensaries/in/${modifystr(state.Country.toLowerCase())}/${modifystr(state.State.toLowerCase())}/${modifystr(state.City.toLowerCase())}`)
         }
-    }, [searchtext, state])
+        else if (Boolean(state1)) {
+            dispatch({ type: 'Location', Location: state.State })
+            dispatch({ type: 'City', City: "" })
+            dispatch({ type: 'route', route: "" })
+            navigate.push(`/weed-dispensaries/in/${modifystr(state.Country)}/${modifystr(state?.State)}`)
+        }
+        else if (Boolean(country)) {
+            dispatch({ type: 'State', State: "" })
+            dispatch({ type: 'City', City: "" })
+            dispatch({ type: 'route', route: "" })
+            dispatch({ type: 'Location', Location: state.Country })
+            navigate.push(`/weed-dispensaries/in/${modifystr(state.Country.toLowerCase())}/`)
+        }
 
-
+    }
 
     return (
         <RoutingDespen>
@@ -169,7 +189,7 @@ const Dispensaries = () => {
                 </div>
                 <div className="col-12 col-sm-12 dispensory_menu my-2">
                     {
-                        loader ?
+                        true ?
                             (Store?.length !== 0 ?
                                 <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
                                     <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -215,3 +235,53 @@ const Dispensaries = () => {
 };
 
 export default Dispensaries;
+
+
+export const getServerSideProps = async (context) => {
+    const transformString = (str) => {
+        return str
+            .replace(/-/g, " ")  // Replace hyphens with spaces
+            .split(' ')          // Split the string into an array of words
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize the first letter of each word
+            .join(' ');          // Join the words back into a single string
+    };
+
+    const object = {
+        City: transformString(context.params.location[2] || ''),
+        Country: transformString(context.params.location[0] || ''),
+        State: transformString(context.params.location[1] || '')
+    };
+
+    try {
+        const response = await fetch('https://api.cannabaze.com/UserPanel/Get-Dispensaries/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(object)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch');
+        }
+
+        const data = await response.json();
+
+        if (data === "No Dispensary in your area") {
+            return {
+                notFound: true,
+            };
+        } else {
+            return {
+                props: {
+                    store: data,
+                },
+            };
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return {
+            notFound: true,
+        };
+    }
+};

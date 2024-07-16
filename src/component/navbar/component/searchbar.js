@@ -49,7 +49,7 @@ const SearchBar = ({ path }) => {
                                 data1[1].map((data) => {
 
                                     return SetSearchData(SearchData => [...SearchData, {
-                                        type: data1[0], value: data.name || data.Product_Name || data.Store_Name, id: data.id, image: data?.Brand_Logo || data?.categoryImages || data?.Store_Image || data?.SubCategoryImage || data.images[0].image, StoreName: data.Store_Name, Category: data.category_name, SubCategory_id: data.Sub_Category_id,
+                                        type: data1[0], value: data.name || data.Product_Name || data.Store_Name, id: data.id, image: data?.Brand_Logo || data?.categoryImages || data?.Store_Image || data?.SubCategoryImage || data.images[0]?.image, StoreName: data.Store_Name, Category: data.category_name, SubCategory_id: data.Sub_Category_id,
                                         SubcategoryName: data.SubcategoryName, Store_Type: data.Store_Type
                                     }]);
                                 }

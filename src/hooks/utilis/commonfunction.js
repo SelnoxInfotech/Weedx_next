@@ -26,7 +26,10 @@ function FirstLetterCaps(str){
                 str = str?.replaceAll("-/", "/")
             } else if (str?.includes("//")) {
                 str = str?.replaceAll("/-", "/")
-            } else {
+            }else if (str?.includes("/")) {
+                str = str?.replaceAll("/", "-")
+            }
+             else {
                 a++
             }
         }

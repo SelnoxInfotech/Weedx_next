@@ -3,10 +3,11 @@ import Grid from '@mui/material/Grid';
 import Createcontext from '../hooks/context';
 import dynamic from 'next/dynamic'
 const Navbar = dynamic(() => import('../component/navbar'));
-
+const Chartbot = dynamic(() => import('@/component/chartbot/Chartbot') , {ssr:false});
 
 import Footer from '../component/Footer/Footer';
 import Loader from '@/component/Loader/Loader';
+// import Chartbot from '@/component/chartbot/Chartbot';
 const Layout = ({ children }) => {
     const { state, dispatch } = React.useContext(Createcontext)
      const [isload, setisload]=useState(false)
@@ -28,6 +29,7 @@ const Layout = ({ children }) => {
           </Grid>
         </div>
         <Footer />
+        <Chartbot></Chartbot>
       </div>
     );
 };

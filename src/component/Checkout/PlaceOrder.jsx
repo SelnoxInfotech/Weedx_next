@@ -46,14 +46,13 @@ const PlaceOrder = ({orderid}) => {
 
         Axios.get(`https://api.cannabaze.com/UserPanel/Get-GetOrderBYID/${orderid}`,
             config,
-        )
-            .then((res) => {
+        ).then((res) => {
                 SetOrder(res.data)
                 dispatch({ type: 'ApiProduct', ApiProduct: !state.ApiProduct })
-            })
-            .catch((error) => {
+        }).catch((error) => {
                 console.error(error)
-            })
+        })
+        
     }, [])
 
     return (

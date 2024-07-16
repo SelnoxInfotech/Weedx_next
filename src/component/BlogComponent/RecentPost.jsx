@@ -21,7 +21,7 @@ const RecentPost = () => {
         }
         getApi()
 
-    }, [])
+    }, [id])
     return (
         <React.Fragment>
             <div className="  my-3 my-md-5">

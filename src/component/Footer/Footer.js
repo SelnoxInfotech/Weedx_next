@@ -1,15 +1,12 @@
 import { BsLinkedin } from "react-icons/bs"
 import { FaFacebook } from "react-icons/fa"
 import { FaInstagram } from "react-icons/fa"
-// import { LazyLoadImage } from "react-lazy-load-image-component";
 import useStyles from "../../styles/style"
 import Axios from "axios"
 import React from "react";
-
 import { IoLocationSharp } from "react-icons/io5"
 import { BiMobile } from "react-icons/bi"
 import { HiOutlineMail } from "react-icons/hi"
-// import "./Footer.css";
 import Image from "next/image"
 import Link from "next/link"
 const Footer = () => {
@@ -27,8 +24,7 @@ const Footer = () => {
 
 
     return (
-        <>
-            <footer>
+            <footer className="mt-4">
 
                 <div className="container px-0">
                     <div className="footer_main_div_display ">
@@ -172,7 +168,6 @@ const Footer = () => {
 
 
             </footer>
-        </>
     )
 }
 export default Footer

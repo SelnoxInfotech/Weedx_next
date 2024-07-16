@@ -14,9 +14,7 @@ import { StoreHelpFull } from '@/hooks/apicall/api';
 import { ProductHelpFull } from '@/hooks/utilis/ProductApi';
 import { Menuintegration_login } from '@/component/Menuintregation/Menuintregation';
 
-const Myreview = ({ data1, data2 }) => {
-    console.log(data1)
-    console.log(data2)
+const Myreview = () => {
     const classes = useStyles();
     const [allproductreviews, setAllProductReviews] = useState([]);
     const [allstorereviews, setAllStoreReviews] = useState([]);
@@ -122,7 +120,7 @@ const Myreview = ({ data1, data2 }) => {
                 </div>
                 <div className="col-12 mt-sm-4 mt-2 fontStyle"><h1 className="section_main_title">My Reviews</h1></div>
                 <div className='reviews'>
-                    {data1?.map((item) => (
+                    {allstorereviews?.map((item) => (
                         <div className='myreviewBox' key={item.review.id}>
                             <div className='reviewHeaders mb-sm-4 mb-3 d-flex gap-3'>
                                 <div className='productReviewImg'>
@@ -177,7 +175,7 @@ const Myreview = ({ data1, data2 }) => {
                             </div>
                         </div>
                     ))}
-                    {data2?.map((item) => (
+                    {allproductreviews?.map((item) => (
                         <div className='myreviewBox' key={item.id}>
                             <div className='reviewHeaders mb-sm-4 mb-3 d-flex gap-3'>
                                 <div className='productReviewImg'>
@@ -194,7 +192,7 @@ const Myreview = ({ data1, data2 }) => {
                                 {Boolean(item.rating) && new Array(item?.rating).fill(null).map((_, index) => (
                                     <BsStarFill size={16} color="#31B665" className="product_search_rating_star" key={index} />
                                 ))}
-                                {new Array(5 - item?.rating).fill(null).map((_, index) => (
+                                {new Array(5 - (item?.rating)).fill(null).map((_, index) => (
                                     <BsStar size={16} color="#31B665" className="product_search_rating_star" key={index} />
                                 ))}
                             </div>
@@ -240,27 +238,3 @@ const Myreview = ({ data1, data2 }) => {
 };
 
 export default Myreview;
-
-export async function getServerSideProps() {
-    try {
-        const [response1, response2] = await Promise.all([
-            axios.get('https://api.cannabaze.com/UserPanel/Get-StoreReviewbyUser/'),
-            axios.get('https://api.cannabaze.com/UserPanel/Get-ProductReviewbyUser/')
-        ]);
-
-        return {
-            props: {
-                data1: response1.data,
-                data2: response2.data
-            }
-        };
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return {
-            props: {
-                data1: null,
-                data2: null
-            }
-        };
-    }
-}

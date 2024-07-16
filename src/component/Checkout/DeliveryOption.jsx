@@ -45,20 +45,19 @@ const DeliveryOption = ({ SetShowData, DeliveryOptionData, address  , Hours  ,Ti
         });
     }
     React.useEffect(()=>{
-   if(Time === ""){
-     if(Hours !== null  && Hours !== undefined){
+        if(Time === ""){
+            if(Hours !== null  && Hours !== undefined){
 
-             const h  =  Hours?.map((data)=>data?.day)
-             const t1 =  Hours?.map((data)=>data?.Open.map((data)=> data?.Time1))
-             const t2 =  Hours?.map((data)=>data?.Open.map((data)=> data?.Time2))
-             SetTime(h[0] + " " +t1[0][0]+"-"+t2[0][0])
-     }
-     else{
-
-        SetTime(`Monday 00:30-23:30`)
-     }
-   }
-    },[])
+                    const h  =  Hours?.map((data)=>data?.day)
+                    const t1 =  Hours?.map((data)=>data?.Open.map((data)=> data?.Time1))
+                    const t2 =  Hours?.map((data)=>data?.Open.map((data)=> data?.Time2))
+                    SetTime(h[0] + " " +t1[0][0]+"-"+t2[0][0])
+            }
+            else{
+                SetTime(`Monday 00:30-23:30`)
+            }
+        }
+    },[ Hours])
     return (
         <React.Fragment>
             <div className="container-fluid">
@@ -211,9 +210,7 @@ const DeliveryOption = ({ SetShowData, DeliveryOptionData, address  , Hours  ,Ti
                                             </div>
                                             <div className='col-10  col-lg-10 col-md-10 col-sm-10 justify-content-start font_size_checkbox_paragraph'>
                                                 <p>{`I confirm that the provided customer information meets my medical requirements. I agree to present required documentation upon delivery. Any updates to my medical history or medications have been noted. For questions about cannabis use, please consult your physician or our pharmacists.*`}</p>
-                                                {/* <p>{paragraph}</p> */}
-
-
+                                          
                                             </div>
 
                                         </div>

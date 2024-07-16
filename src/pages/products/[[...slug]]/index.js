@@ -20,7 +20,6 @@ const Product = () => {
     const { slug } = navigate.query;
     const params = slug ? (slug[_.findIndex(slug, item => !isNaN(parseInt(item)))] || 0) : 0;
     const classes = useStyles()
-    // const params = useParams();
     const location = useRouter()
     const { state } = React.useContext(Createcontext)
     const [loading, SetLoading] = React.useState(true)
@@ -28,8 +27,6 @@ const Product = () => {
     const [Product, SetProduct] = React.useState([])
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
-
-    
     async function ShowCategoryProduct(id, name) {
         await navigate.push(`/products/${modifystr(name.toLowerCase())}/${id}`);
         await setSelectedOption(null)
@@ -43,7 +40,6 @@ const Product = () => {
     };
     const [Category, SetCategory] = React.useState([])
     const [C, f] = React.useState('')
-
     React.useEffect(() => {
         const fetchData = async () => {
             const apidata = await fetch("https://api.cannabaze.com/UserPanel/Get-Categories/");
@@ -52,7 +48,6 @@ const Product = () => {
         }
         fetchData()
     }, [])
-
     React.useEffect(() => {
         if (slug?.length === 3) {
             SetLoading(true)
@@ -133,7 +128,6 @@ const Product = () => {
             behavior: "instant",
           }); 
     }, [state.Location, params])
-  
     function breadcrumCountry(params ,  name) {
         if (params === "Product") {
             navigate.push(`/products`)

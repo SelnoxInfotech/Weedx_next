@@ -71,7 +71,7 @@ jobs:
       - name: Install dependencies
         run: |
           if [ "${{ steps.detect-package-manager.outputs.manager }}" = "npm" ]; then
-            npm ci --legacy-peer-deps
+            npm install --legacy-peer-deps
           else
             yarn install
           fi

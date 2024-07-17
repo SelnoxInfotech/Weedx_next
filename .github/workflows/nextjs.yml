@@ -18,6 +18,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+     permissions:
+      id-token: write
+      contents: read
+      pages: write: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4

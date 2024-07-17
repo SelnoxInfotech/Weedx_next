@@ -22,6 +22,7 @@ const DeliveryItemsCard = ({ Deliverie }) => {
                                         <div className='delivery_items_card_img_container'>
                                             <Link href={`/weed-deliveries/${items.Store_Name.replace(/\s/g,'-').toLowerCase()}/${items.id}`}>
                                                 <Image 
+                                                unoptimized={true}
                                                    width={100}
                                                    height={100}
                                                 className='w-100 h-auto' 

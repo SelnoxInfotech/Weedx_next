@@ -11,6 +11,7 @@ import Image from 'next/image';
 const Category = ({ ShowCategoryProduct, Category, Skeleton }) => {
     const Params = useRouter().query;
     const location = useRouter()
+
     return (
         <React.Fragment>
             <div className=' CategoryBordrr'>
@@ -24,6 +25,7 @@ const Category = ({ ShowCategoryProduct, Category, Skeleton }) => {
 
                             <ScrollContainer className="ScrollContainerRelative">
                                 {Category?.map((ele, index) => {
+                                
                                     return (
                                         <div className='CategorySliderImageBlock' key={index}>
                                             <div className='slider1'>
@@ -34,6 +36,7 @@ const Category = ({ ShowCategoryProduct, Category, Skeleton }) => {
                                                     title={ele.name.substr(0, 100)}
                                                     width={100}
                                                     height={100}
+                                                    unoptimized={true}
                                                     className={location.pathname.includes('/menu-integration') ? 'rounded-circle Integrated-catagoriesTabImg' : 'rounded-circle catagoriesTabImg'} />
                                             </div>
                                             <div className='col center Category_title' >

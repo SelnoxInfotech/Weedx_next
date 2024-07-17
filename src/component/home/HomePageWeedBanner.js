@@ -49,6 +49,7 @@ const HomePageWeedBanner=()=>{
                         //     event.target.src = "/image/VANNER_2.png"
                         //     event.onerror = null
                         // }}
+                        unoptimized={true}
                         width={100} height={10}
                         loader={imageLoader}
                         src={`${ele?.Banner}`}
@@ -79,6 +80,7 @@ const HomePageWeedBanner=()=>{
                                 //     event.target.src = "/image/M11.jpg"
                                 //     event.onerror = null
                                 // }}
+                                unoptimized={true}
                                 width={100} height={10}
                                 loader={imageLoader}
                           src={`${ele?.mobile}`}

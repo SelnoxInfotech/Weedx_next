@@ -144,7 +144,7 @@ const AboutUs = () => {
             <div className='about_us_header'>
 
 
-                <Image src='/image/about_us_banner.jpg' alt='imgs not available' width={100} height={100} title='imgs not available'  className='About_us_banner_image' />
+                <Image unoptimized={true} src='/image/about_us_banner.jpg' alt='imgs not available' width={100} height={100} title='imgs not available'  className='About_us_banner_image' />
                 <div className='text-on-image'>
                     <h1>About us</h1>
                 </div>

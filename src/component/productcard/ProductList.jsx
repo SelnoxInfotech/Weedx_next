@@ -441,6 +441,7 @@ const ProductList = ({ arr , link="products" }) => {
                               onClick={() => { Navigate(`/${link}/${modifystr(ele.category_name)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.Product_Name)}/${ele.id}`) }}
                               className="product_search_result_image"
                              width={100}
+                             unoptimized={true}
                              height={100}
                               src={`${ele?.images[0]?.image}`}
                               alt={ele.Product_Name}

@@ -199,6 +199,7 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
                                                 <div className="related_review_image">
 
                                                     <Image
+                                                    unoptimized={true}
                                                        width={100}
                                                        height={100}
                                                         className='realted_review_images'
@@ -231,7 +232,7 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
                                                 {
                                                     ele.images.map((item , index)=>{
                                                          return     <div key={index} className='reviewimagebox' onClick={()=>openimageslider(ele , 'image' ,index)}>
-                                                                        <Image width={100} height={100} src={item.image} className='reviewImage' alt='review image' title='review image'/>
+                                                                        <Image unoptimized={true} width={100} height={100} src={item.image} className='reviewImage' alt='review image' title='review image'/>
                                                                     </div>
                                                     })
                                                 }
@@ -253,6 +254,7 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
                                                     <div className="related_img_container">
                                                         <div className="related_review_image">
                                                             <Image
+                                                            unoptimized={true}
                                                                width={100} 
                                                                height={100}
                                                                 className='realted_review_images'
@@ -324,7 +326,7 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
                    >
                     {
                         sliderdata?.image?.map((item , index)=>{
-                            return  <SwiperSlide key={index}> <div className='Reviewimageslidebox'><Image width={100} height={100} src={item.image} alt='review image' title='review image'/></div></SwiperSlide>
+                            return  <SwiperSlide key={index}> <div className='Reviewimageslidebox'><Image  unoptimized={true} width={100} height={100} src={item.image} alt='review image' title='review image'/></div></SwiperSlide>
                         })
                     }
                      {

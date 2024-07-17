@@ -46,7 +46,7 @@ const VerifyBrands = () => {
                             
                                     <Link   href={`/brands/${items.name.replace(/\s/g, '').toLowerCase()}/${items.id}`}> 
                                     <div className="col-6  verifyBrand_image_container ">
-                                    <Image width={100} height={100}  className="verify_brand_image"  src={`${items.Brand_Logo}`}  alt={items.name} title={items.name} />
+                                    <Image unoptimized={true} width={100} height={100}  className="verify_brand_image"  src={`${items.Brand_Logo}`}  alt={items.name} title={items.name} />
 
                                     </div>
                                     <div className="col-6 verify_content_container">

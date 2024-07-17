@@ -48,6 +48,7 @@ const AllOrder = ({ AllOrder_data,ordertype,CencelOrder ,loading}) => {
                           <div key={index} className="place_order_product_cart ">
                           <div className="place_order_product_cart_image">
                               <Image 
+                              unoptimized={true}
                             width={100} 
                             height={100}
                                className='w-100' src={`${items.Image}`} alt={items.ProductName} title={items.ProductName} />

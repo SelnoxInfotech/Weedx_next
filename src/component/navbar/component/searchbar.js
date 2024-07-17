@@ -207,6 +207,7 @@ const SearchBar = ({ path }) => {
                                         {/* <div> */}
                                         <li onClick={(event, value) => SearchAPi(t?.id, t?.type, t)} className='searchBarListStyles' key={t.value}>
                                             <Image
+                                            unoptimized={true}
                                                 onError={handleImageError}
                                                 className={"searchBarImageStyles"} // Apply CSS module class
                                                 src={t.image}

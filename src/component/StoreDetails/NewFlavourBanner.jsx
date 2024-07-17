@@ -36,6 +36,7 @@ const NewFlavourBanner = ({ delBtn }) => {
                                     <div className="col-md-2 col-sm-4  col-3 newFlavour_image_container_height">
                                         <div className='newFlavourimage_div'>
                                             <Image
+                                            unoptimized={true}
                                               width={100}
                                               height={100}
                                               quality={100}

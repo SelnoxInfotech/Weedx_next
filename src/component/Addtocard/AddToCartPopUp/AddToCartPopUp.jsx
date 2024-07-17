@@ -92,6 +92,7 @@ const AddToCartPopUp = ({ CartClean, SetCartClean, NewData, SetAddToCard }) => {
                                         title='not avail'
                                         height={100}
                                         width={100}
+                                        unoptimized={true}
                                     />
 
                                 </div>

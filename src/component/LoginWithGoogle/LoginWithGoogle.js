@@ -38,13 +38,11 @@ function LoginWithGoogle() {
                 //        Navigate(-1)
                  
                 // }
-                console.log('afsdfa fuh 2')
                 router.back()
         }).catch(
             function (error) {
                 if(!state.login){
                 alert(error?.response?.data?.message)
-                console.log(error , 'afsdfa fuh ')
                }
             })
     }

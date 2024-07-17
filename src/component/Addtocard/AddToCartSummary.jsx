@@ -9,7 +9,6 @@ import DeliverAutoCompleteAddress from "./DeliverAutoCompleteAddress";
 // import { useForm, FormProvider, Controller } from "react-hook-form";
 import PromoCode from "./Promocode";
 import { Menuintegration_login } from "@/component/Login/menu-integration_login";
-
 const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails, Details }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -57,8 +56,6 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
   };
   // console.log(state)
   const CheckoutProcess = (event, j) => {
-    console.log(navigate.pathname);
-  
     if (!state.login) {
       if (navigate.pathname === '/carts') {
         setOpen(true);
@@ -119,9 +116,7 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
     } else {
       alert("Select Delivery address");
     }
-  };
-
-  
+  };  
   React.useEffect(() => {
     if (navigate.pathname === "/cart") {
       if (state.selectDeliveryoptions === "pickup_btn") {

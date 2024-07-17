@@ -22,7 +22,6 @@ import Createcontext from "../hooks/context"
 const Login = () => {
     const cookies = new Cookies();
     const pathname = usePathname()
-    console.log(typeof window)
     const method = useForm()
     const Swal = require('sweetalert2')
     const { state, dispatch } = React.useContext(Createcontext)

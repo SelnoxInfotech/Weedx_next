@@ -23,7 +23,6 @@ import Loader from '@/component/Loader/Loader.js';
 import { modifystr } from "@/hooks/utilis/commonfunction"
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
 const Allblogs = (props) => {
-  console.log(props)
   const [allblogs, setallblogs] = useState(props.initialData)
   const router = useRouter()
   //   let router= userouter();

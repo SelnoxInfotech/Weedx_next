@@ -230,7 +230,6 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
             return vl[0]
         })
     }
-    console.log(Whishlist)
     const handleWhishList = (id) => {
         if (state.login === false) {
             SetWishList(!Whishlist)

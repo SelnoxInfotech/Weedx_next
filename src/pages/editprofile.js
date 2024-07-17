@@ -40,7 +40,6 @@ const EditProfile = () => {
 
             )
                 .then((res) => {
-                    console.log(res)
                     SetProfile(res.data)
                     dispatch({ type: 'Profile', Profile: res.data })
                 })

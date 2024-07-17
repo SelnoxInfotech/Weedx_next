@@ -3,7 +3,6 @@ import Createcontext from "../context"
 import { useRouter } from 'next/router';
 import _ from "lodash";
 const  RoutingSearch = ({ city, State, country, pathname, route, com }) => {
-  console.log(city, State, country, pathname, route)
   const { dispatch } = React.useContext(Createcontext)
   const navigate = useRouter()
 

@@ -11,7 +11,6 @@ const LawStateContent = ({ head }) => {
             setDivElementHeight(divElement ? divElement.clientHeight : 0);
         }
     }, []);
-    console.log(divElementHeight)
     return (
             <div className="col-lg-11 col-md-12 LawStateContentsContainer " style={{top : divElementHeight}}>
                 <div className="heading_box socialIconsContainer"> <h3 className='text-white m-0 sideTableHeading'>Table of Contents</h3> </div>

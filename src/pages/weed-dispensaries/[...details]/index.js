@@ -42,7 +42,6 @@ export default function DispensoriesDetails(props) {
     const params = useRouter();
     const [reviewtype, setReviewtype] = React.useState('All')
     // const index = _.findIndex(params.query.details, item => !isNaN(parseInt(item)));
-    //  console.log(params )
     //  const id =12
 
     // const { tab, Category, StoreName } = params

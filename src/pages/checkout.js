@@ -27,7 +27,6 @@ const CheckOutMainPage = () => {
     const [ShowDeliveryInformation, SetShowDeliveryInformation] = React.useState(false)
     const [DeliveryOptionData, SetDeliveryOptionData] = React.useState([])
     const location = useRouter();
-    console.log(location?.query )
     const { InputValues, abc , orderBtn } = location?.query
     const [image, setImage] = React.useState()
     const [DefalutImage, SetDefalutimage] = React.useState(false)

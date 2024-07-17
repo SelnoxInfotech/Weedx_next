@@ -156,7 +156,7 @@ function Context(props) {
                     dispatch({ type: 'WishList', WishList: object })
                    }
        
-                ).catch((err) => { console.log("contect")});
+                ).catch((err) => { });
         }
         else {
             const data = localStorage?.getItem("items")

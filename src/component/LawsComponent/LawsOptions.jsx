@@ -2,22 +2,21 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md"
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import Content from "./LawContentsJson"
+// import {Content} from "./LawContentsJson"
 import { modifystr } from "@/hooks/utilis/commonfunction";
 
 
-const LawsOptions = () => {
-    const [Values, SetValues] = React.useState([])
+const LawsOptions = (props) => {
     return (
         <div className="col-12 lawsContainer my-4">
-                {Content?.map((items ,index) => {
+            {props.data?.map((items ,index) => {
                 return (
                     <ol className="laws_ol" key={index}>
                         <li className="lawoptionMainList " >
-                            <div className="col-12 lawsListStyle px-2" onClick={() => SetValues({ ...Values, [items.id]: !Values[items.id] })}>
+                            <div className="col-12 lawsListStyle px-2" >
                                 <span className="listCountryName">{items.name}</span><span><MdOutlineKeyboardArrowDown color="#707070" size={22} /></span>
                             </div>
-                            {Values[items.id] === true && (
+                            {(
                                 <div className="border lawsDropDownList px-2 col-12 ">
                                     <ol className="lawssoptionStyle law_Inner_OPtionList_Ol">
                                         {items?.state?.map((val, index) => {
@@ -55,3 +54,5 @@ const LawsOptions = () => {
     )
 }
 export default LawsOptions
+
+   

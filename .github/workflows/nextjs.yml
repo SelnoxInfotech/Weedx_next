@@ -73,7 +73,7 @@ jobs:
       - name: Install dependencies
         run: |
           if [ "${{ steps.detect-package-manager.outputs.manager }}" = "npm" ]; then
-            npm install --legacy-peer-deps
+            npm ci --legacy-peer-deps
           else
             yarn install
           fi
@@ -82,7 +82,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: .next
 
   # Deployment job
   deploy:

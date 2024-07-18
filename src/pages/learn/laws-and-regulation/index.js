@@ -10,6 +10,7 @@ import LawsOptions from '@/component/LawsComponent/LawsOptions'
 import Bgheader from '@/component/bgheader/Bgheader';
 import { useRouter } from 'next/router';
 import useStyles from '../../../styles/style';
+import Link from 'next/link';
 import Content from '@/component/LawsComponent/LawContentsJson'
 import  Law from '@/component/ScoPage/LearnSeo';
 const Index = (props) => {
@@ -21,18 +22,16 @@ const Index = (props) => {
         router.push(newValue)
     };
     return (
-        <React.Fragment>
-            {/* <LearnSeo/> */}
-            <div className='container-fluid'>
-                <div className='row'>
-                    <div className='col-12'>
-                        <Box className={``} sx={{ width: '100%', typography: 'body1', }}>
-                            <TabContext value={value}>
-                                <Box className={`${classes.learn_tab_background} ${classes.learn_tab}`} sx={{ marginLeft: "-5px", borderColor: 'divider' }}>
-                                    <TabList scrollButtons={false} variant="scrollable" onChange={handleChange} aria-label="lab API tabs example">
-                                        <Tab label="Law" value="/learn/laws-and-regulation" />
-                                        <Tab label="All News" value="" onClick={()=>{ router.push('/cannabis-news')}} />
-                                        <Tab label="Blogs" value="" onClick={()=>{ router.push('/blogs')}} />
+        <div className='container-fluid'>
+        <div className='row'>
+            <div className='col-12'>
+                <Box className={``} sx={{ width: '100%', typography: 'body1', }}>
+                    <TabContext value={value}>
+                        <Box className={`${classes.learn_tab_background} ${classes.learn_tab}`} sx={{ marginLeft: "-5px", borderColor: 'divider' }}>
+                            <TabList scrollButtons={false} variant="scrollable" onChange={handleChange} aria-label="lab API tabs example">
+                                <Tab label="Law" value="/learn/laws-and-regulation" />
+                                <Tab label="All News" value="" onClick={()=>{ router.push('/cannabis-news')}} />
+                                <Tab label="Blogs" value="" onClick={()=>{ router.push('/blogs')}} />
 
                                     </TabList>
                                 </Box>

@@ -97,12 +97,10 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
                     let newdata = respones.data.Blog.map((data) => {
                         return { "link": `/${data.category_name==="BLOGS"? "blogs":"cannabis-news"}/${data.Title.replace(/ /g, "-").replace("?", "").toLowerCase()}/${data.id}`, 'title': data.Title, "image": data.Image, 'date': data.created }
                     })
-                  
-                    Setnotificationdata(newdata)
+                    Setnotificationdata(()=>newdata)
 
                 }
                 else {
-                  
                     Setnotificationdata([{ ...notificationdata, "link": `/`, 'title': "Welcome TO WeedX" }])
                 }
             }).catch((err) => {
@@ -184,12 +182,16 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
 
         })
     }
+
     function removenotify(data){
       let ab= notificationdata.filter((item ,index)=>{
         return item.title !== data.title
       })
      Setnotificationdata(ab)
     }
+
+
+    //  console.log(notificationdata.length , state?.login)
     return (
         notify &&
         <ClickAwayListener onClickAway={() => { setnotify(false) }}>
@@ -198,10 +200,10 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
 
                 <div className='notificationHeader'>
                     <h4 className='notifytitle'>{`Notification`}</h4>
-                  { ( Boolean(notificationdata?.length > state?.Profile?.RemovedNotification?.length ) && state.login ) && <span className='clearNotify' onClick={() => ClearAll()}> <RxCross2 /> </span>}
+                  { ( Boolean(notificationdata?.length > state?.Profile?.RemovedNotification?.length ) && state?.login ) && <span className='clearNotify' onClick={() => ClearAll()}> <RxCross2 /> </span>}
                 </div>
                 {
-                    state.login ?
+                    Boolean(state?.login) ?
                     <div className='notificationContainer'>  
                     { 
                         Boolean(notificationdata?.length > state?.Profile?.RemovedNotification?.length)
@@ -245,10 +247,11 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
                     :
                     <div className='notificationContainer'>
                     { 
-                        Boolean(notificationdata?.length !==0)
+                        Boolean(notificationdata.length !==0)
+               
                         ?
                             notificationdata?.map((data, index) => {
-                            
+                               
                         
                                 return (
                                         <div key={index} className='notification_box'>

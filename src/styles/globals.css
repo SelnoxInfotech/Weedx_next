@@ -2449,7 +2449,7 @@ scrollbar-width: none;  /* Firefox */
 .HomePageBanner_height {
   height: 350px;
   width: 100%;
-  background-image: url("/public/image/banner2.jpg");
+  /* background-image: url("/public/image/banner2.jpg"); */
 }
 
 .homePage_header h1 {

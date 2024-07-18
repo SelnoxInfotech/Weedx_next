@@ -23,7 +23,7 @@ import Loader from '@/component/Loader/Loader.js';
 import { modifystr } from "@/hooks/utilis/commonfunction"
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
 const Allblogs = (props) => {
-  console.log(props)
+  // console.log(props)
   const [allblogs, setallblogs] = useState(props.initialData)
   const router = useRouter()
   //   let router= userouter();
@@ -273,7 +273,7 @@ export default Allblogs
 
 export async function getStaticProps(context) {
   try {
-    const res = await axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyBlog/');
+    const res = await axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyCANNABISNEWS/');
     const data = _.orderBy(res.data, ['created'], ['desc']); // Assuming 'created' is a date field
 
     return {

@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollContainer } from "react-indiana-drag-scroll"
+import ScrollContainer from "react-indiana-drag-scroll"
 // import parse from 'html-react-parser';
 import { useParams } from "react-router-dom";
 import Link from "next/link";
@@ -38,6 +38,7 @@ const RecentPost = () => {
                                                         <Image width={500} height={500}
                                                         src={`${ele.Image}`}
                                                         alt={ele.Title}
+                                                        quality={70}
                                                         title={ele.Title}
                                                         style={{ pointerEvents: "none" }} />
                                                     </div>

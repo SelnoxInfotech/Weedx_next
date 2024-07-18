@@ -11,8 +11,8 @@ import SearchBar from "../searchbar";
 import Badge from "@mui/material/Badge";
 import useStyles from "../../../../styles/style";
 import IconButton from "@mui/material/IconButton";
-// import Notification from "../../Notification";
-export default function DashBoardLink({ state }) {
+import Notification from "../Notification";
+export default function DashBoardLink({ state  }) {
   const classes = useStyles()
   const [current_route, Setcurrent_route] = React.useState();
   const [notify, setnotify] = React.useState(false);
@@ -23,6 +23,11 @@ export default function DashBoardLink({ state }) {
   React.useEffect(() => {
     Setcurrent_route(location.pathname);
   }, [location]);
+
+  useEffect(() => {
+    settextnotify(!textnotify)
+  }, [notificationdata])
+
   const scrollToTop = () => {
     document.documentElement.scrollTo({
       top: 0,
@@ -30,12 +35,6 @@ export default function DashBoardLink({ state }) {
       behavior: "instant", // Optional if you want to skip the scrolling animation
     });
   };
-  useEffect(() => {
-    settextnotify(!textnotify)
-  }, [notificationdata])
-
-
-  
   const getDeliveryHref = () => {
     if (state.Country && state.State && state.City && state.route) {
       return `/weed-deliveries/in/${state.Country.toLowerCase()}/${state.State.toLowerCase()}/${state.City.toLowerCase()}/${state.route.toLowerCase()}`;
@@ -155,7 +154,8 @@ export default function DashBoardLink({ state }) {
                   }
                   className={classes.sliderLink_badge}
                   onClick={() => {
-                    setnotify(!notify);
+                    // setnotify(()=>!notify);
+                    setnotify((notify)=>!notify);
                   }}
                 >
                   <IconButton
@@ -170,13 +170,13 @@ export default function DashBoardLink({ state }) {
                   </IconButton>
                 </Badge>
 
-                {/* <Notification
+                <Notification
                   notify={notify}
                   setnotify={setnotify}
                   notificationdata={notificationdata}
                   Setnotificationdata={Setnotificationdata}
                   Settotalnotify={Settotalnotify}
-                ></Notification> */}
+                ></Notification>
               </div>
               <Link href="/cart">
                 <Badge

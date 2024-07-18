@@ -32,6 +32,7 @@ import { SingleNewsSeo } from "@/component/ScoPage/NewsSeo";
 import { modifystr } from "@/hooks/utilis/commonfunction";
 import { useRouter } from "next/router";
 const Blogs = (props) => {
+    let News =  props.data[0]
     const ref = useRef(null)
     const classes = useStyles()
     const router = useRouter()
@@ -40,7 +41,7 @@ const Blogs = (props) => {
     const [Getlikes, SetLikes] = React.useState([])
     const [Getcommnet, Setcommnet] = React.useState([])
     const id = router?.query?.sluge;
-    const [News, SetNews] = React.useState({})
+    // const [News, SetNews] = React.useState({})
     const [WishList, SetWishList] = React.useState(false)
     const [ViewCount, SetViewCount] = React.useState(0)
     const cookies = new Cookies();
@@ -50,10 +51,11 @@ const Blogs = (props) => {
          accessToken = localStorage.getItem('User_Token_access');
     }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
+    // console.log()
     // React.useEffect(() => {
     // //    if(id[1] !== undefined){ const getApi = async () => {
-    // //         const res = await fetch(`https://api.cannabaze.com/UserPanel/Get-GetNewsById/${id[1]}`);
-    // //         const data = await res.json();
+            // const res = await fetch(`https://api.cannabaze.com/UserPanel/Get-GetNewsById/${id[1]}`);
+            // const data = await res.json();
     // //         if (data.length !== 0) {
     // //             SetNews(data[0])
     // //             await BlogLike(data[0].id).then((res) => {
@@ -159,11 +161,11 @@ const Blogs = (props) => {
         SetShowCards(true)
 
         let horiheight = ref.current.children[4].offsetTop - document.getElementById('Navbar_box').clientHeight
-        document.documentElement.scrollTo({
-            top: horiheight,
-            left: 0,
-            behavior: "smooth",
-        });
+        // document.documentElement.scrollTo({
+        //     top: horiheight,
+        //     left: 0,
+        //     behavior: "smooth",
+        // });
     }
     function handleDelete(id) {
 
@@ -178,21 +180,33 @@ const Blogs = (props) => {
                 })
             })
     }
+    async function GetComment(id) {
+        await Get_Comment(id).then((res) => {
+
+            Setcommnet({ ...Getcommnet, "CommentCounts": res.data.CommentCounts, 'UserComment': res.data.Comments })
+        }).catch((error) => {
+            console.error(error)
+        })
+    }
+
+
     if (!Object.keys(News).length) {
         return <BlogSkeleton/>
     }
+
+ 
     else{
 
-    
+    // console.log(News)
     return (
         <React.Fragment>
-            <SingleNewsSeo Title={News?.Meta_title} Description={News?.Meta_Description} location={Location?.pathname}></SingleNewsSeo>
+            <SingleNewsSeo Title={News?.Meta_title} Description={News?.Meta_Description} location={props.url}></SingleNewsSeo>
             <div className="container" >
                 <div className="row mx-1" ref={ref}>
                     <div className="col-12 w-100 row align-items-center justify-content-between blog_searchBar_container px-0">
                         <section className=" col-2 backButton_section">
                             <div className="col-12 backBtnCol_searchBar_height">
-                                <span onClick={() => { Location.pathname.split('/')[1] === "cannabis-news" ? navigate(Location.pathname.split('/')[1] === "cannabis-news" ? '/cannabis-news' : '/blogs') : navigate('/blogs') }} style={{ marginLeft: "-4px", cursor: 'pointer' }}> <IoChevronBack color="#000000" size={20} /></span><span onClick={() => { Location.pathname.split('/')[1] === "cannabis-news" ? navigate(Location.pathname.split('/')[1] === "cannabis-news" ? '/cannabis-news' : '/blogs') : navigate('/blogs') }} style={{ cursor: 'pointer' }} className="blogBackSpan">Back</span>
+                                <span onClick={() => router.push( props.category === 'blogs'  ?  "/blogs":"/cannabis-news")} style={{ marginLeft: "-4px", cursor: 'pointer' }}> <IoChevronBack color="#000000" size={20} /></span><span onClick={() => { Location.pathname.split('/')[1] === "cannabis-news" ? navigate(Location.pathname.split('/')[1] === "cannabis-news" ? '/cannabis-news' : '/blogs') : navigate('/blogs') }} style={{ cursor: 'pointer' }} className="blogBackSpan">Back</span>
 
                             </div>
                         </section>
@@ -221,7 +235,7 @@ const Blogs = (props) => {
                                 <div className="col BlogSocal" id="center1">
 
                                     <RWebShare
-                                        data={{ url: "https://www.weedx.io" + Location.pathname }}
+                                        data={{ url: "https://www.weedx.io" + props.url }}
                                         sites={["facebook", "twitter", "whatsapp", "telegram", "linkedin", 'mail', 'copy']}
                                         onClick={() => console.info("share successful!")}
                                         color="#31B665" >
@@ -237,7 +251,7 @@ const Blogs = (props) => {
                                         <IoEyeSharp></IoEyeSharp>
                                     </IconButton>
 
-                                    <span className="blogViewCounts">{ViewCount} <span className="destop_view">Views</span></span>
+                                    <span className="blogViewCounts">{News.ViewCount} <span className="destop_view">Views</span></span>
 
 
                                 </div>
@@ -436,41 +450,21 @@ const Blogs = (props) => {
 
 
 
-// export async function getStaticProps(context) {
-    
-//     console.log(context )
-//     // const handleError = (error) => {
-//     //   console.error('Error fetching data:', error);
-//     //   return {
-//     //     props: {
-//     //       initialData: [],
-//     //       error: 'Failed to fetch data',
-//     //     },
-//     //   };
-//     // };
-  
-//     // try {
-//     //   const [banner, callcategory, bannner2 , brand] = await Promise.all([
-//     //     fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
-//     //     fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
-//     //     fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
-//     //     fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
-//     //   ]);
-  
-  
-//     //   // Assuming breaking news is the first item in topNews array
-    
-  
-//     //   return {
-//     //     props: {
-//     //       initialData: [],
-//     //     },
-//     //     revalidate: 60,
-//     //   };
-//     // } catch (error) {
-//     //   return handleError(error);
-//     // }
-//   }
+export async function getServerSideProps(context) {
+
+    try {
+        const res = await fetch(`https://api.cannabaze.com/UserPanel/Get-GetNewsById/${context.params.id }`);
+        const data = await res.json();
+        return { props: {data:data , url :context.resolvedUrl , category:context.params.blogcategoryname} };
+    } catch (error) {
+        return {
+            redirect: {
+                destination: '/404',
+                permanent: false, // Set to true for permanent redirection
+            },
+        };
+    }
+  }
   
   export default Blogs
   

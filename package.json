@@ -2,11 +2,13 @@
   "name": "weedx",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://selnoxinfotech.github.io/Weedx_next",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+  "export": "next export"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

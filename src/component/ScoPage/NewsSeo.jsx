@@ -1,10 +1,10 @@
-import { Helmet } from "react-helmet-async"
+import Head from "next/head"
 
 function NewsSeo({location}) {
  
     if(location === 'blogs'){
         return (
-            <Helmet>
+            <Head>
                 <title>{"Weedx Blog: Cannabis Knowledge & Industry Insights."}</title>
                 <meta name="title" content={`Weedx Blog: Cannabis Knowledge & Industry Insights.`}/>
                 <meta name='description' content={" Stay informed with the WeedX Blog! Get the latest tips, trends, and expert insights on all things cannabis. Enhance your knowledge and stay ahead in the industry."} />
@@ -17,11 +17,11 @@ function NewsSeo({location}) {
                 <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
                 <meta name="twitter:title" content={"Weedx Blog: Cannabis Knowledge & Industry Insights."} />
                 <meta name="twitter:description" content={" Stay informed with the WeedX Blog! Get the latest tips, trends, and expert insights on all things cannabis. Enhance your knowledge and stay ahead in the industry."} />
-            </Helmet>
+            </Head>
         )
     }else{
         return (
-            <Helmet>
+            <Head>
                 <title>{"Today's Latest Cannabis and Marijuana News | weedx.io"}</title>
                 <meta name="robots" content="INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"></meta>
                 <meta name='description' content={" Weedx.io: Your trusted source for the latest cannabis industry news, updates, trends, and insights. Discover breaking stories and expert analysis here."} />
@@ -37,14 +37,14 @@ function NewsSeo({location}) {
                 <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
                 <meta name="twitter:title" content={"Today's Latest Cannabis and Marijuana News | weedx.io"} />
                 <meta name="twitter:description" content={" Weedx.io: Your trusted source for the latest cannabis industry news, updates, trends, and insights. Discover breaking stories and expert analysis here."} />
-            </Helmet>
+            </Head>
         )
     }
 }
 function SingleNewsSeo({Title ,Description ,location}) {
     
     return (
-        <Helmet>
+        <Head>
             <title>{`${Title} | weedx.io`}</title>
             <meta name="title" content={`${Title} | weedx.io`}/>
             <meta name='description' content={Description} />
@@ -62,7 +62,7 @@ function SingleNewsSeo({Title ,Description ,location}) {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={`${Title} | weedx.io`} />
             <meta name="twitter:description" content={Description} />
-        </Helmet>
+        </Head>
     )
 }
 export {NewsSeo , SingleNewsSeo }

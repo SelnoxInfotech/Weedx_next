@@ -165,69 +165,69 @@ const Dispensaries = (props) => {
 
     return (
         <RoutingDespen>
-            <div className="row  dispensaries_centers">
-                <div className="col-12 col-sm-12">
-                    <div className="headerBoxdescription">
-                        <div style={{ cursor: "pointer" }}>
+            <div className='container'>
+                <div className="row w-100 mx-auto  dispensaries_centers">
+                    <div className="col-12 w-100 col-sm-12 mx-2 mx-md-0">
+                        <div className="headerBoxdescription">
+                            <div style={{ cursor: "pointer" }}>
 
-                            <span onClick={() => navigate.push("/")}>{"Home"}</span>
-                            {Boolean(state.Country) && <span> {">"} <span onClick={() => breadcrumCountry("Country")}>{state.Country}</span></span>}
-                            {Boolean(state.State) && <span> {">"} <span onClick={() => breadcrumCountry("Country", "state")}>{state.State}</span></span>}
-                            {Boolean(state.City) && <span> {">"} <span onClick={() => { Boolean(state.route) && breadcrumCountry("Country", "state", "City") }}>{state.City}</span></span>}
-                            {Boolean(state.route) && <span> {">"} <span>{state.route}</span></span>}
+                                <span onClick={() => navigate.push("/")}>{"Home"}</span>
+                                {Boolean(state.Country) && <span> {">"} <span onClick={() => breadcrumCountry("Country")}>{state.Country}</span></span>}
+                                {Boolean(state.State) && <span> {">"} <span onClick={() => breadcrumCountry("Country", "state")}>{state.State}</span></span>}
+                                {Boolean(state.City) && <span> {">"} <span onClick={() => { Boolean(state.route) && breadcrumCountry("Country", "state", "City") }}>{state.City}</span></span>}
+                                {Boolean(state.route) && <span> {">"} <span>{state.route}</span></span>}
+                            </div>
+                            {DispensorShopLocation?.map((ele, index) => {
+                                return (
+                                    <div key={index}>
+
+                                        <h1 className="m-0"> <span className="dispensories_name">{ele.name}</span> <span className="dispensories_city">{ele.city}</span></h1>
+                                    </div>
+                                )
+                            })}
+                            <p className="m-0">{`Find Nearby Dispensaries in ${state?.Location} for Recreational & Medical weed. Browse Top Cannabis Products and Place Orders from Trusted Local Dispensaries.`}</p>
                         </div>
-                        {DispensorShopLocation?.map((ele, index) => {
-                            return (
-                                <div key={index}>
+                    </div>
+                    <div className="col-12 w-100 col-sm-12 dispensory_menu my-2">
+                        {
+                            true ?
+                                (Store?.length !== 0 ?
+                                    <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
+                                        <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                            <Tabs scrollButtons={false} variant="scrollable" sx={{ justifyContent: 'space-around' }} value={value} onChange={handleChange} aria-label="basic tabs example">
+                                                <Tab label="Open" {...a11yProps(0)} />
+                                                <Tab label="Storefronts" {...a11yProps(1)} />
+                                                <Tab label="delivery" {...a11yProps(2)} />
+                                                <Tab label="Order online" {...a11yProps(3)} />
+                                            </Tabs>
+                                        </Box>
+                                        <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
+                                            <TabPanel value={value} index={0}>
+                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                            </TabPanel>
+                                            <TabPanel value={value} index={1}>
+                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                            </TabPanel>
+                                            <TabPanel value={value} index={2}>
+                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                            </TabPanel>
+                                            <TabPanel value={value} index={3}>
+                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                            </TabPanel>
+                                        </Box>
 
-                                    <h1 className="m-0"> <span className="dispensories_name">{ele.name}</span> <span className="dispensories_city">{ele.city}</span></h1>
-                                </div>
-                            )
-                        })}
-                        <p className="m-0">{`Find Nearby Dispensaries in ${state?.Location} for Recreational & Medical weed. Browse Top Cannabis Products and Place Orders from Trusted Local Dispensaries.`}</p>
+                                    </Box>
+                                    :
+
+                                    <Wronglocation title={' No dispensaries available'} description={'We apologize, but it appears that there are no dispensaries available in your location. Would you like to enter a different address to search for a nearby dispensary?'} />
+
+                                )
+                                :
+                                <Loader />
+                        }
+
                     </div>
                 </div>
-                <div className="col-12 col-sm-12 dispensory_menu my-2">
-                    {
-                        true ?
-                            (Store?.length !== 0 ?
-                                <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
-                                    <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                        <Tabs scrollButtons={false} variant="scrollable" sx={{ justifyContent: 'space-around' }} value={value} onChange={handleChange} aria-label="basic tabs example">
-                                            <Tab label="Open" {...a11yProps(0)} />
-                                            <Tab label="Storefronts" {...a11yProps(1)} />
-                                            <Tab label="delivery" {...a11yProps(2)} />
-                                            <Tab label="Order online" {...a11yProps(3)} />
-                                        </Tabs>
-                                    </Box>
-                                    <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
-                                        <TabPanel value={value} index={0}>
-                                            <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                        </TabPanel>
-                                        <TabPanel value={value} index={1}>
-                                            <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                        </TabPanel>
-                                        <TabPanel value={value} index={2}>
-                                            <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                        </TabPanel>
-                                        <TabPanel value={value} index={3}>
-                                            <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                        </TabPanel>
-                                    </Box>
-
-                                </Box>
-                                :
-
-                                <Wronglocation title={' No dispensaries available'} description={'We apologize, but it appears that there are no dispensaries available in your location. Would you like to enter a different address to search for a nearby dispensary?'} />
-
-                            )
-                            :
-                            <Loader />
-                    }
-
-                </div>
-
-
             </div>
         </RoutingDespen>
 

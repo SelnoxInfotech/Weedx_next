@@ -23,7 +23,7 @@ const Index = (props) => {
     };
     return (
         <div className='container-fluid'>
-        <div className='row'>
+                <div className='row'>
             <div className='col-12'>
                 <Box className={``} sx={{ width: '100%', typography: 'body1', }}>
                     <TabContext value={value}>
@@ -54,7 +54,7 @@ const Index = (props) => {
                 </div>
                 <Newsletter />
             </div>
-        </React.Fragment>
+     
     );
 };
 

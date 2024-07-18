@@ -1,5 +1,6 @@
 import React from "react"
 const IsWeedLegalState = ({head , description2}) => {
+    console.log(description2)
     const myRef = React.useRef();
     return (
     
@@ -9,7 +10,8 @@ const IsWeedLegalState = ({head , description2}) => {
 
                 <div className="col-12"  >
                     <section className="isWeedLegalParagraph">
-                       {description2}
+                  
+                       <div dangerouslySetInnerHTML={{__html:description2?.content}}></div>
                     </section>
                 </div>
 

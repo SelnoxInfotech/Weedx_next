@@ -2580,7 +2580,7 @@ scrollbar-width: none;  /* Firefox */
 .despensories_card_container {
   height: auto;
   background: #FFFFFF;
-  padding: 15px 5px;
+  padding: 15px;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
   transition: all .4s ease-in;
   border-radius: 5px;
@@ -7719,7 +7719,10 @@ display: flex;
 justify-content: center;
 align-items: center;
 }
-
+.feature_brands .FeaturedBrandImageContainer img{
+  max-height: 100%;
+  height: auto;
+}
 .About_weedx{
   background-color: #F9F9F9;
   padding: 30px 20px;
@@ -8026,6 +8029,12 @@ background: #FFF;
       }
   }
   @media (max-width: 480px){
+      .dispensaries_centers .headerBoxdescription span{
+        font-size: 14px;
+      }
+      .dispensaries_centers .headerBoxdescription p{
+        font-size: 14px;
+      }
     .homePageSignup_paragraph p {
       font-size: 18px;
       margin-bottom: 0;
@@ -8052,6 +8061,9 @@ background: #FFF;
         text-align: center;
         width: 90%;
         margin: 0 auto 20px;
+      }
+      .newsletterFormFeild .newsletter_btn{
+        width: 30%;
       }
   }
   /*  /////////////////////////////////////////////////////News Letter End //////////////////////////////////////////////////////////////////////// */
@@ -8152,7 +8164,7 @@ background: #FFF;
 
   }
 
-  footer  .bottom_menu_items .footer_li,footer .footer_main_list .footer_li {
+  footer .bottom_menu_items .footer_li,footer .footer_main_list .footer_li {
     color: #183B56;
     font-size: 14px;
     font-style: normal;
@@ -8160,8 +8172,6 @@ background: #FFF;
     line-height: 2;
     transition: all .3s ease;
   }
-
-
   footer .bottom_menu_items p span.footer_li:hover,footer  .footer_main_list .footer_li:hover{
     color: #31B665;
     font-weight:600 ;
@@ -8203,19 +8213,19 @@ background: #FFF;
     .footer_heading{
       font-size: 26px;
     }
-    .footer_sub_heading{
+    footer .footer_sub_heading{
      font-size: 20px;
     }
 
-  .footer_main_list p.footer_menu_heading{
+   footer .footer_main_list p.footer_menu_heading{
     font-size: 18px;
   }
-  .bottom_menu_items p span.footer_li, .footer_main_list .footer_li{
+  .bottom_menu_items p span.footer_li,footer .footer_main_list .footer_li{
     font-size: 16px;
   }
   }
   @media(max-width:1200px) {
-    .footer_sub_heading {
+    footer .footer_sub_heading {
       width: 75%;
     }
   }
@@ -8223,40 +8233,40 @@ background: #FFF;
     .footer_heading{
       font-size: 22px;
     }
-    .footer_sub_heading{
+    footer  .footer_sub_heading{
      font-size: 18px;
     }
     .Footer_Left_side_menu .footer_middle_icons_text {
       font-size: 14px;
   }
-  .footer_main_list p.footer_menu_heading{
+  footer .footer_main_list p.footer_menu_heading{
     font-size: 16px;
   }
-  .bottom_menu_items p span.footer_li, .footer_main_list .footer_li{
+  .bottom_menu_items p span.footer_li, footer .footer_main_list .footer_li{
     font-size: 14px;
   }
   .footerLogo {
     width: 140px;
 }
-.footer_main_div_display {
-  padding: 0 25px;
-}
+  footer .footer_main_div_display {
+    padding: 0 25px;
+  }
   }
   @media(max-width:768px) {
-    .footer_sub_heading {
+   footer .footer_sub_heading {
       width: 100%;
     }
     .main_content_logo{
         gap: 20px;
     }
-    .footer_logo_container{
+   footer .footer_logo_container{
       width: 48%;
       border-right: none;
   }
   .footerLogo{
       width: 160px;
   }
-  .footer_list{
+  footer .main_content_logo .footer_list{
       width: 48%;
       border-right: none;
       box-sizing: border-box;
@@ -8268,13 +8278,13 @@ background: #FFF;
   }
   }
   @media(max-width:480px) {
-    .footer_main_div_display{
+    footer  .footer_main_div_display{
       padding-top: 20px;
     }
     .main_content_logo {
       padding: 20px 0;
     }
-    .footer_logo_container{
+    footer .footer_logo_container{
       width: 100%;
       padding: 0;
       display: flex;
@@ -8284,7 +8294,7 @@ background: #FFF;
       width: 100px;
       margin: 0;
   }
-  .footer_list{
+  footer .main_content_logo .footer_list{
       width: 29%;
       padding: 0;
   }
@@ -8293,7 +8303,7 @@ background: #FFF;
    .main_content_logo {
     justify-content: space-between;
 }
-.footer_sub_heading{
+footer .footer_sub_heading{
   font-size: 15px;
 }
   }
@@ -9891,6 +9901,9 @@ background: #FFF;
 }
 
 @media only screen and (max-width: 768px){
+  .noreview_title {
+    font-size: 18px;
+  }
     .productSearch_result_container{
         width: 45%;
         padding: 10px;
@@ -9911,7 +9924,7 @@ background: #FFF;
         font-size: 12px;
     }
     .product_category_list .product_search_result_span1{
-     font-size: 14px;
+     font-size: 12px;
     }
     .productSearchPrice{
         font-size: 14px;
@@ -10275,6 +10288,7 @@ background: #FFF;
     }
    }
    @media screen and (max-width: 480px){
+ 
     .related_review_container{
       padding: 10px;
     }
@@ -10564,6 +10578,7 @@ background: #FFF;
       font-size: 18px;
       line-height: 70px;
       }
+      
   }
 
 
@@ -10661,7 +10676,13 @@ background: #FFF;
 
 
 @media screen and (max-width: 768px){
-
+  .bgHedaer {
+    height: 150px;
+  }
+  .bgHedaer .text_on_Learn_banner h1{
+    font-size: 24px;
+  }
+  
 #oopss {
   width: 100%;
   padding: 10px;

@@ -163,7 +163,7 @@ const Navbar = () => {
                                     </Badge>
                                     <Notification
                                         notify={notify}
-                                        setNotify={setNotify}
+                                        setnotify={setNotify}
                                         notificationdata={notificationData}
                                         Setnotificationdata={setNotificationData}
                                         Settotalnotify={setTotalNotify}

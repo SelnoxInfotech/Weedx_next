@@ -81,7 +81,7 @@ const HomePageDealsSignup = () => {
                                         helperText={errors.email?.message}
                                         error={Boolean(errors?.email)}
                                         inputRef={register({
-                                            required: " Email not Valid",
+                                            required: "Email not Valid",
                                             pattern: {
                                                 value: /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/,
                                                 message: "Email not Valid"

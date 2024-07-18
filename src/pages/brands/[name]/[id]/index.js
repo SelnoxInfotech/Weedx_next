@@ -54,7 +54,7 @@ const RelatedVerifyBrand = (props) => {
         }
     }, [searchval, id])
     return (
-        BrandDetails?.length !== 0 && <div className="">
+        BrandDetails?.length !== 0 && <div className="container">
               {state.permission === false && <Currentlocation></Currentlocation>}
             <BrandDetailsSeo brandname={Name} location={pathname}></BrandDetailsSeo>
             <RelatedVerifyBanner BrandDetails={BrandDetails} />

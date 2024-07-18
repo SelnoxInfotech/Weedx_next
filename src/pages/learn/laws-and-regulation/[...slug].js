@@ -8,7 +8,7 @@ import Bgheader from "@/component/bgheader/Bgheader";
 import _ from "lodash";
 
 const Index = (props) => {
-  console.log(props);
+  console.log(props.initialData);
   const router = useRouter();
   const id = router?.query?.slug;
   const [GetContant, SetContant] = useState([]);
@@ -60,30 +60,32 @@ const Index = (props) => {
       {/* <LawState Title={`Cannabis Law in ${GetContant?.name}`} State={GetContant?.Country} location={useLocation().pathname}></LawState> */}
       <div className="container-fluid">
         <div className="row">
-          <Bgheader text={GetContant?.name} />
+          <Bgheader text={props.initialData?.name} />
           <div className="law_contertn">
             <div className="col-12 lawStateDescriptionHeadings">
               <h1 className="LawStateDescriptionHeading">
                 {`Cannabis Law in `}
-                {GetContant?.name}
+                {props.initialData?.name}
               </h1>
               <hr />
             </div>
             <div className="col-12 d-flex">
               <div className={"col-xl-8 col-md-12"} ref={ref}>
-                {GetContant?.content?.map((data1, index) => {
+                {props?.initialData?.content?.map((data1, index) => {
                   return (
                     <React.Fragment key={index}>
                       <IsWeedLegalState
+                       
                         head={data1.title}
-                        description2={data1.content}
+                        description2={data1}
+                     
                       />
                     </React.Fragment>
                   );
                 })}
               </div>
               <div className={"col-4 hidiingBLog "}>
-                <LawStateContent head={GetContant?.content} />
+                <LawStateContent head={props?.initialData?.content} />
               </div>
             </div>
           </div>
@@ -106,24 +108,25 @@ export default Index;
 // }
 
 export async function getServerSideProps(context) {
-  console.log(context);
-  let responseData = Content.filter((data) => {
-      const l =  data.state.find((d) => {
-            if (d.id === parseInt(context.params.slug[1])) {
-              return d;
-            }
-          });
-    return l
-  });
+  let responseData = {}
+  await Content?.forEach((data)=>{
+    data?.state?.forEach((item)=>{
+      if (item.id === parseInt(context.params.slug[1])) {
+        responseData = item;
+      }
+    })
+  })
+
   // axios.post(`https://api.cannabaze.com/UserPanel/Update-SiteMap/13`, {
   //     j: 'https://www.weedx.io' + router.pathname
   // }).then((res) => {
   // }).catch((err) => {
   // });
-  console.log(responseData , "dfhsfjk");
+  responseData = await JSON.stringify(responseData)
+  responseData = await JSON.parse(responseData)
   return {
     props: {
-      initialData: "responseData",
+      initialData: responseData,
     },
   };
 }

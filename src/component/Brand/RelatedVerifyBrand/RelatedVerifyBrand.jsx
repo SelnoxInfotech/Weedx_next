@@ -50,7 +50,7 @@ const RelatedVerifyBrand = () => {
         }
     }, [searchval, router ,id])
     return (
-        BrandDetails?.length !== 0 && <div className="">
+        BrandDetails?.length !== 0 && <div className="constiner">
             <BrandDetailsSeo brandname={Name} location={router.pathname}></BrandDetailsSeo>
             <RelatedVerifyBanner BrandDetails={BrandDetails} />
             <div className="row  center mx-0 mt-4 mb-4">

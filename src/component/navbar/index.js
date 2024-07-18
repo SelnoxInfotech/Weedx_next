@@ -26,7 +26,7 @@ import Cookies from 'universal-cookie';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import { useRouter } from 'next/router';
-
+import image1 from "../../../public/weedx.iologo.png"
 const Navbar = () => {
     const cookies = new Cookies();
     const ref = React.useRef(null);
@@ -122,7 +122,7 @@ const Navbar = () => {
                                             <Image
                                             unoptimized={true}
                                                 className={"navbarLogoImage"} // Apply CSS module class
-                                                src="/weedx.iologo.png"
+                                                src={image1.src}
                                                 alt="WeedX.io logo"
                                                 title="WeedX.io logo"
                                                 width={50}
@@ -144,7 +144,7 @@ const Navbar = () => {
                                     <SearchBar path={Location.pathname} />
                                     :
                                     <span className='mobileNavLogo'>
-                                        <Link href="/"><Image  unoptimized={true} className='navbar_logo_image' alt="WeedX.io logo" title="WeedX.io logo" src={'/weedx.iologo.png'} width={100} height={100} /></Link>
+                                        <Link href="/"><Image  unoptimized={true} className='navbar_logo_image' alt="WeedX.io logo" title="WeedX.io logo" src={image1.src} width={100} height={100} /></Link>
                                     </span>
                             }
                         </Grid>

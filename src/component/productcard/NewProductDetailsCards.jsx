@@ -300,6 +300,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                                 <div className="newProductDetailsUpperimage_container">
                                     <Image className="newProductDetails_upper_image"
                                          width={100}
+                                         unoptimized={true}
                                          height={100}    
                                         src={Boolean(displaypic) ? displaypic : Product?.images[0]?.image}
                                         alt={Product?.Product_Name} 
@@ -347,6 +348,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
 
                                                         <div className="col-12 NewProductDetails_image_container">
                                                             <Image
+                                                            unoptimized={true}
                                                                 width={100}
                                                                 height={100}   
                                                                 className="NewProductDetails_image" 

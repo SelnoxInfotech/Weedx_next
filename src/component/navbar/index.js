@@ -120,6 +120,7 @@ const Navbar = () => {
                                     <span>
                                         <Link href="/">
                                             <Image
+                                            unoptimized={true}
                                                 className={"navbarLogoImage"} // Apply CSS module class
                                                 src="/weedx.iologo.png"
                                                 alt="WeedX.io logo"
@@ -143,7 +144,7 @@ const Navbar = () => {
                                     <SearchBar path={Location.pathname} />
                                     :
                                     <span className='mobileNavLogo'>
-                                        <Link href="/"><Image className='navbar_logo_image' alt="WeedX.io logo" title="WeedX.io logo" src={'/weedx.iologo.png'} width={100} height={100} /></Link>
+                                        <Link href="/"><Image  unoptimized={true} className='navbar_logo_image' alt="WeedX.io logo" title="WeedX.io logo" src={'/weedx.iologo.png'} width={100} height={100} /></Link>
                                     </span>
                             }
                         </Grid>

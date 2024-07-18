@@ -108,11 +108,12 @@ const EditProfile = () => {
                             <div className="ProfileImageWrapper">
 
                                 {
-                                    selectedImage !== null ? <Image width={100} height={100} src={selectedImage} alt='profile_image'
+                                    selectedImage !== null ? <Image unoptimized={true} width={100} height={100} src={selectedImage} alt='profile_image'
                                         title='profile_image'
                                         className="profile_images" />
                                         :
                                         <Image
+                                        unoptimized={true}
                                             width={100}
                                             height={100}
                                             src={state.Profile.googlelink === null ? `${state.Profile.image} ` : state.Profile.googlelink}

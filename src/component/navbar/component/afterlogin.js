@@ -17,6 +17,7 @@ const Afterlogin = ({ dropDownState, state, profileRef, handleClickDropdown , Lo
                 <Grid display={{ xs: "none", md: "flex" }} justifyContent="flex-end">
                     <div className='Navbar_profile_logo_container'>
                         <Image
+                        unoptimized={true}
                             src={state.Profile.googlelink === null ? `${state.Profile.image} ` : state.Profile.googlelink}
                             alt='Profile'
                             width={100}

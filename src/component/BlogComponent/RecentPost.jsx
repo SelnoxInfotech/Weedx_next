@@ -40,6 +40,7 @@ const RecentPost = () => {
                                                         alt={ele.Title}
                                                         quality={70}
                                                         title={ele.Title}
+                                                        unoptimized={true}
                                                         style={{ pointerEvents: "none" }} />
                                                     </div>
                                                     <div className="new_blog_card_text">  

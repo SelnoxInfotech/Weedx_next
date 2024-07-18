@@ -164,7 +164,7 @@ const Allblogs = (props) => {
                     <div className='col-3 p-0 d-flex align-items-center'>
                       <div className='blogCardImg'>
                         <Link href={`/${router.pathname.substring(1)}/${items.Url_slug === ("" || null || undefined) ? modifystr(items.Title) : modifystr(items.Url_slug)}/${items.id}`} key={index}>
-                          <Image width={500} height={500}
+                          <Image  unoptimized={true} width={500} height={500}
                             src={`${items.Image}`} alt={items.Alt_Text} title={items.Alt_Text} />
                         </Link>
                       </div>

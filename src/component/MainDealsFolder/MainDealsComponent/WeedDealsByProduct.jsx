@@ -23,6 +23,7 @@ const WeedDealsByProduct = ({ArrayData,heading}) => {
                                     <div className="popularStrainImageContainer">
 
                                         <Image
+                                        unoptimized={true}
                                             width={100}
                                             height={100}
                                             className="popularStrain_Image"

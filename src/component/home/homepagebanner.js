@@ -50,6 +50,7 @@ const HomePageBanner = ({props}) => {
                                             <div className='col-12 homePageBanner_container'>
                                                 <a href={items?.Link !== null ? items?.Link : "#"} target="_blank">
                                                     <Image
+                                                    
                                                         src={items?.Banner}
                                                         alt="Weedx.io Promotion banner"
                                                         title="Weedx.io Promotion banner"
@@ -57,7 +58,7 @@ const HomePageBanner = ({props}) => {
                                                         quality={75}
                                                         height={10}
                                                         loader={imageLoader}
-                                                        unoptimized
+                                                        unoptimized={true}
                                                         className='HomePageBanner_image'
                                                         // onError={handleImageError}
                                                     />
@@ -82,6 +83,7 @@ const HomePageBanner = ({props}) => {
                                                 <a href={items?.Link !== null ? items?.Link : "#"} target="_blank">
 
                                                     <Image
+                                                    unoptimized={true}
                                                         src={items?.Banner}
                                                         alt="Weedx.io Promotion banner"
                                                         title="Weedx.io Promotion banner"
@@ -89,7 +91,7 @@ const HomePageBanner = ({props}) => {
                                                         height={10}
                                                         quality={100}
                                                         className='HomePageBanner_image'
-                                                        unoptimized
+                                        
                                                         loader={imageLoader}
                                                     />
                                                 </a>

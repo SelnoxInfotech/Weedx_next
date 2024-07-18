@@ -11,7 +11,7 @@ const Wronglocation = ({title ,description}) => {
   }
   return (
       <div className="nodatafoundcontainer">
-            <Image width={100} height={100} src={image} alt='Wrong Location'  title='Wrong Location'/>
+            <Image  unoptimized={true} width={100} height={100} src={image} alt='Wrong Location'  title='Wrong Location'/>
             <h3>{title}</h3>
             <p>{description}</p>
             <button onClick={()=>{dispatch({ type: 'locationchange', focus: true })}}>Change Location</button>

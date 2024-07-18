@@ -309,6 +309,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                                                         id:items.id
                                                         }}  >
                                                         <Image
+                                                        unoptimized={true}
                                                             className="product_search_result_image"
                                                            width={100}
                                                            height={100}
@@ -408,6 +409,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                                                 id:items.id
                                                 }}  >
                                                 <Image
+                                                unoptimized={true}
                                                     className="product_search_result_image"
                                                   width={100}
                                                   height={100}

@@ -68,6 +68,7 @@ const SideNavbar = ({ closeNav, Open }) => {
                                         <Link href="/">
                                             {/* <LazyLoadImage className='navbar_logo_image'  src='/image/WeedWhiteLogo.webp' alt='WeedX.io logo' title="Weedx.io logo" /> */}
                                             <Image
+                                            unoptimized={true}
                                                 className={'navbarLogoImage'} // Apply CSS module class
                                                 src="/image/WeedWhiteLogo.webp"
                                                 alt="WeedX.io logo"
@@ -96,6 +97,7 @@ const SideNavbar = ({ closeNav, Open }) => {
                                             //     event.target.src = "/image/user.webp"
                                             //     event.onerror = null
                                             // }} 
+                                            unoptimized={true}
                                             width={100}
                                             height={100}
                                             alt='Profile' title='Profile' onClick={Redirect} src={state?.Profile?.image} className="Slider_inner_profile_imgs" />

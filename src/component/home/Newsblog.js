@@ -50,6 +50,7 @@ const Newsblog = () => {
                                                     src={`${ele.Image}`} 
                                                     alt={ele.Title} 
                                                     title={ele.Title} 
+                                                    unoptimized={true}
                                                     style={{ pointerEvents: "none" }} />
                                                 </div>
                                                 <div className="new_blog_card_text">  

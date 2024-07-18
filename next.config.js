@@ -29,10 +29,10 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'selnoxmedia.s3.amazonaws.com',
+        pathname: '/media/**',
       },
     ],
   },
-  exportTrailingSlash: false,
-  generateEtags: false,
+
 };

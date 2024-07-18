@@ -31,6 +31,7 @@ const LawsOptions = (props) => {
                                                         <Image src={'/image/weedleaf.webp'} 
                                                         className="lawOPtionListImage" 
                                                         width={100}
+                                                        unoptimized={true}
                                                         height={100}
                                                         alt={val.name}
                                                         title={val.name}

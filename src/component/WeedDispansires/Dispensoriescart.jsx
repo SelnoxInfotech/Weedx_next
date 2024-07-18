@@ -20,7 +20,7 @@ const Dispensoriescart = ({ ele }) => {
             <div className="row">
                 <div className="col-4 disensories_card_image_div">
                     <Link  href={`/weed-dispensaries/${modifystr(ele?.Store_Name.toLowerCase())}/${ele.id}`}>
-                        <Image width={100} height={100} id={ele?.id} src={`${ele.Store_Image}`} alt={ele.Store_Name} title={ele.Store_Name} className="dispensories_card_image" />
+                        <Image unoptimized={true} width={100} height={100} id={ele?.id} src={`${ele.Store_Image}`} alt={ele.Store_Name} title={ele.Store_Name} className="dispensories_card_image" />
                     </Link>
 
                 </div>

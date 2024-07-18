@@ -19,7 +19,7 @@ const Staticcontent = () => {
                                 //  onError={event => {
                                 //     event.target.src = "/image/VANNER_2.png"
                                 //     event.onerror = null
-
+                                unoptimized={true}
                                 // }} 
                                 width={100}
                                     height={100}
@@ -48,6 +48,7 @@ const Staticcontent = () => {
                                     //     event.target.src = "/image/delivery.png"
                                     //     event.onerror = null
                                     // }}
+                                    unoptimized={true}
                                     width={100}
                                     height={100}
                                     src={state?.StaticImage?.AboutUs2}
@@ -75,6 +76,7 @@ const Staticcontent = () => {
                                     //     event.target.src = "/image/delivery.png"
                                     //     event.onerror = null
                                     // }}
+                                    unoptimized={true}
                                     width={100}
                                     height={100}
                                     src={state?.StaticImage?.AboutUs3}
@@ -104,6 +106,7 @@ const Staticcontent = () => {
                                     src={state?.StaticImage?.AboutUs4}
                                     alt="Retailer Listings"
                                     title="Retailer Listings"
+                                    unoptimized={true}
                                 />
                             </div>
                             <div className="about_text">

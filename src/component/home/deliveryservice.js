@@ -90,7 +90,7 @@ const DeliveryServices = ({ link, title }) => {
                                                     <div className='dispensoriesAddresCardimg'>
                                                         <Link href={`/${link}/${modifystr(items?.Store_Name)}/${items?.id}`}>
                                                             <Image
-                                                                // onError={handleImageError}
+                                                            unoptimized={true}
                                                                 width={100}
                                                                 height={100}
                                                                 quality={100}
@@ -150,6 +150,7 @@ const DeliveryServices = ({ link, title }) => {
                                         <Image
                                             onError={handleImageError}
                                             width={100}
+                                            unoptimized={true}
                                             height={100} src='/NOTDELIVERED.png' alt='NOTDELIVERED' title='NOTDELIVERED' />
                                     </div>
                                     <p>No Delivery Services available</p>

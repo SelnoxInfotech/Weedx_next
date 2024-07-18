@@ -87,6 +87,7 @@ const ProductIncDecQuantity = ({ popup, SetPopup, items, AddToCart, setadding, a
                                      width={100}
                                      height={100}
                                     alt={items.Product_Name}
+                                    unoptimized={true}
                                     title={items.Product_Name}
                                      />
                             </div>

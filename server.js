@@ -6,12 +6,18 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 // const ip = '192.168.1.20';
-app.prepare().then(() => {
+app.prepare().
+then(() => {
   const server = express();
 
   // Custom route example
   server.get('/custom-route', (req, res) => {
     return app.render(req, res, '/custom-route', req.query);
+  });
+  server.get('/robots.txt', (req, res) => {
+    res.type('text/plain');
+    res.send(`User-agent: *
+   Disallow: /`);
   });
 
   // Handle all other routes with Next.js
@@ -22,6 +28,6 @@ app.prepare().then(() => {
 
   server.listen(3000, (err) => {
     if (err) throw err;
-    console.log('> Ready on http://localhost:3000');
+    console.log('> woking on https://localhost:3000');
   });
 });

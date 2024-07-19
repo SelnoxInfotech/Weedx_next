@@ -1,9 +1,7 @@
-import { Helmet } from "react-helmet-async"
-
-
+import Head from "next/head"
 function Faqseo() {
     return (
-        <Helmet>
+        <Head>
             <title>{"WeedX.Io FAQs: Cannabis Orders, Shipping, Compliance & More"}</title>
             <meta name="title" content={`WeedX.Io FAQs: Cannabis Orders, Shipping, Compliance & More`}/>
             <meta name='description' content={"FAQs of WeedX.Io for insights on cannabis orders, shipping, compliance, and more. Find the best Recreational and Medical Marijuana Dispensaries & Delivery Near you."} />
@@ -19,13 +17,13 @@ function Faqseo() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={"Learn everything about you favorite Cannabis | weedx.io |"} />
             <meta name="twitter:description" content={"Learn everything about your favorite Cannabis. Read this guide on weedx.io to understand the laws related to marijuana and about its legalization worldwide."} />
-        </Helmet>
+        </Head>
     )
 }
 
 function HelpcenterSeo() {
     return (
-        <Helmet>
+        <Head>
             <title>{" WeedX Help Center: Your Cannabis Guide"}</title>
             <meta name="title" content={` WeedX Help Center: Your Cannabis Guide`}/>
             <meta name='description' content={"Get started with WeedX.io - register, order online, track deliveries, find cannabis dispensaries & deliveries near you, and report concerns for a safe experience."} />
@@ -40,7 +38,7 @@ function HelpcenterSeo() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={"Learn everything about you favorite Cannabis | weedx.io |"} />
             <meta name="twitter:description" content={"Learn everything about your favorite Cannabis. Read this guide on weedx.io to understand the laws related to marijuana and about its legalization worldwide."} />
-        </Helmet>
+        </Head>
     )
 }
 

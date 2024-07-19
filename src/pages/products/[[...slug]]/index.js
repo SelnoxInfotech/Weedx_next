@@ -27,6 +27,7 @@ const Product = () => {
     const [Product, SetProduct] = React.useState([])
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
+    
     async function ShowCategoryProduct(id, name) {
         await navigate.push(`/products/${modifystr(name.toLowerCase())}/${id}`);
         await setSelectedOption(null)
@@ -40,6 +41,7 @@ const Product = () => {
     };
     const [Category, SetCategory] = React.useState([])
     const [C, f] = React.useState('')
+
     React.useEffect(() => {
         const fetchData = async () => {
             const apidata = await fetch("https://api.cannabaze.com/UserPanel/Get-Categories/");
@@ -48,6 +50,7 @@ const Product = () => {
         }
         fetchData()
     }, [])
+
     React.useEffect(() => {
         if (slug?.length === 3) {
             SetLoading(true)
@@ -99,7 +102,6 @@ const Product = () => {
                 })
             }
             else {
-                // Get All Product
                 const object = {
                     City: state.City.replace(/-/g, " "),
                     Country: state.Country.replace(/-/g, " "),
@@ -122,12 +124,8 @@ const Product = () => {
                 })
             }
         }
-        document.documentElement.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "instant",
-          }); 
     }, [state.Location, params])
+
     function breadcrumCountry(params ,  name) {
         if (params === "Product") {
             navigate.push(`/products`)
@@ -137,6 +135,7 @@ const Product = () => {
             navigate.push(`/products/${categoryfind.name.toLowerCase()}/${categoryfind.id}` )
         }
     }
+
     return (
         <React.Fragment>
                   {state.permission === false && <Currentlocation></Currentlocation>}
@@ -233,3 +232,49 @@ const Product = () => {
 export default Product
 
 
+
+export async function getStaticProps() {
+    const handleError = (error) => {
+      console.error('Error fetching data:', error);
+      return {
+        props: {
+          initialData: [],
+          error: 'Failed to fetch data',
+        },
+      };
+    };
+  
+    try {
+      const [banner, callcategory, bannner2 , brand] = await Promise.all([
+        fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
+        fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
+        fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
+        fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
+      ]);
+  
+      const [topbanner, category, bottembannner , getbrand] = await Promise.all([
+        banner.json().catch(handleError),
+        callcategory.json().catch(handleError),
+        bannner2.json().catch(handleError),
+        brand.json().catch(handleError)
+      ]);
+  
+   
+      const responseData = {
+        topbanner: topbanner,
+        category: category,
+        bottembannner: bottembannner,
+        brand:getbrand
+      };
+  
+      return {
+        props: {
+          initialData: responseData,
+        },
+        revalidate: 60,
+      };
+    } catch (error) {
+      return handleError(error);
+    }
+  }
+  

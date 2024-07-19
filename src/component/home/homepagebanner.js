@@ -84,7 +84,7 @@ const HomePageBanner = ({props}) => {
 
                                                     <Image
                                                     unoptimized={true}
-                                                        src={items?.Banner}
+                                                        src={items?.mobile}
                                                         alt="Weedx.io Promotion banner"
                                                         title="Weedx.io Promotion banner"
                                                         width={100}

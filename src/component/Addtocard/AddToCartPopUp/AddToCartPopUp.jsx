@@ -10,6 +10,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import Createcontext from "../../../hooks/context"
 import Cookies from 'universal-cookie';
 import axios from "axios";
+import addtocart1 from '../../../../public/image/add'
 // import "./Cartpopup.css";
 import { useRouter } from 'next/router';
 import Image from 'next/image';

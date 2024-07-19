@@ -72,14 +72,27 @@ const Index = (props) => {
             <div className="col-12 d-flex">
               <div className={"col-xl-8 col-md-12"} ref={ref}>
                 {props?.initialData?.content?.map((data1, index) => {
+                  
                   return (
                     <React.Fragment key={index}>
-                      <IsWeedLegalState
+                      {/* <IsWeedLegalState
                        
                         head={data1.title}
-                        description2={data1}
+                        description2={[data1]}
                      
-                      />
+                      /> */}
+                      <div  className={data1.title.replaceAll(' ','_')}>
+ 
+ <h2 id="isweedLegalHeadings" className="isweedLegalHeading">{data1.title}</h2>
+
+ <div className="col-12"  >
+     <section className="isWeedLegalParagraph">
+   
+        <div dangerouslySetInnerHTML={{__html:data1?.content}}></div>
+     </section>
+ </div>
+
+</div>
                     </React.Fragment>
                   );
                 })}
@@ -124,6 +137,7 @@ export async function getServerSideProps(context) {
   // });
   responseData = await JSON.stringify(responseData)
   responseData = await JSON.parse(responseData)
+  console.log(responseData)
   return {
     props: {
       initialData: responseData,

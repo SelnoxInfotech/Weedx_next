@@ -2538,10 +2538,10 @@ scrollbar-width: none;  /* Firefox */
   font-weight: 700;
 }
 
-.dispensaries_centers {
+/* .dispensaries_centers {
   display: grid;
   justify-content: center;
-}
+} */
 
 .dispensories_city {
   font-size: 1.5rem;
@@ -6751,7 +6751,7 @@ padding: 5px 0;
 /* end */
 /* blog */
 .blogEditorPaddings {
-  line-height: 1;
+  line-height: 1.4;
   font-size: 24px;
   color: #000000;
   font-weight: 400;

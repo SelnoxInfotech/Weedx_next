@@ -14,7 +14,7 @@ const HomePageWeedBanner=()=>{
         Axios("https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/ ")
         .then((response)=>{
             setdata(response?.data)
-           
+           console.log(response?.data)
             SetSkeleton(false)
         })
         .catch((error)=>{
@@ -66,33 +66,33 @@ const HomePageWeedBanner=()=>{
            </div>
            <div className="mobile_imges">
               <Swiper loop={true}  autoplay={{
-          delay: 2500,
-          
-          disableOnInteraction: false,
-        }}   style={{zIndex:0}} modules={[Autoplay]}>
-            {data?.reverse()?.map((ele, index) => {
-                return (
-                    <SwiperSlide key={index}>
-                    <div className='col-12 homePageBanner_container'>
-                        <a href={ ele.Link !== null ? ele.Link : "#" } target="_blank">
-                        <Image
-                                //   onError={event => {
-                                //     event.target.src = "/image/M11.jpg"
-                                //     event.onerror = null
-                                // }}
-                                unoptimized={true}
-                                width={100} height={10}
-                                loader={imageLoader}
-                          src={`${ele?.mobile}`}
-                          alt="Weedx.io Promotion banner"
-                          title="Weedx.io Promotion banner"
-                          className='HomePageBanner_image'/>
-                        </a>
-                    </div>
-                    </SwiperSlide>
-                )
-            })}
-           </Swiper>
+                delay: 2500,
+                
+                disableOnInteraction: false,
+                }}   style={{zIndex:0}} modules={[Autoplay]}>
+                    {data?.reverse()?.map((ele, index) => {
+                        return (
+                            <SwiperSlide key={index}>
+                            <div className='col-12 homePageBanner_container'>
+                                <a href={ ele.Link !== null ? ele.Link : "#" } target="_blank">
+                                <Image
+                                        //   onError={event => {
+                                        //     event.target.src = "/image/M11.jpg"
+                                        //     event.onerror = null
+                                        // }}
+                                        unoptimized={true}
+                                        width={100} height={10}
+                                        loader={imageLoader}
+                                src={`${ele?.mobile}`}
+                                alt="Weedx.io Promotion banner"
+                                title="Weedx.io Promotion banner"
+                                className='HomePageBanner_image'/>
+                                </a>
+                            </div>
+                            </SwiperSlide>
+                        )
+                    })}
+                </Swiper>
            </div>
            </React.Fragment>
         :

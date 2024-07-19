@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 // import {Content} from "./LawContentsJson"
 import { modifystr } from "@/hooks/utilis/commonfunction";
-
+import weedleaf from '../../../public/image/weedleaf.webp'
 
 const LawsOptions = (props) => {
     return (
@@ -23,12 +23,12 @@ const LawsOptions = (props) => {
                                             return (
 
                                                 <Link href={{
-                                                    pathname: `/learn/laws-and-regulation/${'cannabis-Law-in-'+modifystr(val.name)}/${val.id }`,
+                                                    pathname: `/learn/laws-and-regulation/${'cannabis-law-in-'+modifystr(val.name)}/${val.id }`,
                                                 }}
                                                     key={index}
                                                 >
                                                     <li >
-                                                        <Image src={'/image/weedleaf.webp'} 
+                                                        <Image src={weedleaf.src} 
                                                         className="lawOPtionListImage" 
                                                         width={100}
                                                         unoptimized={true}

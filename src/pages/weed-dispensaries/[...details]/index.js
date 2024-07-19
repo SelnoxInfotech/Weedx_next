@@ -46,7 +46,7 @@ export default function DispensoriesDetails(props) {
 
     // const { tab, Category, StoreName } = params
     const classes = useStyles()
-    const [category, SetCategory] = React.useState([])
+    const [Category, SetCategory] = React.useState([])
     const [DespensariesData, SetDespensariesProductData] = React.useState([])
     const [reviewloading, setReviewloading] = React.useState(false)
     const [productload, setProductload] = React.useState(true)
@@ -124,19 +124,19 @@ export default function DispensoriesDetails(props) {
             }
         ).then(async response => {
             const d = []
-            response.data.map((data) => {
-                d.push(data[0])
-                var uniqueUsersByID = _.uniqBy(d, 'id'); //removed if had duplicate id
+            console.log(response)
+            response.data.map( async (data) => {
+                console.log(data)
+               await d.push(data[0])
+                var uniqueUsersByID = await _.uniqBy(d, 'id'); //removed if had duplicate id
                 SetCategory(uniqueUsersByID)
                 if (Category !== undefined) {
-                    uniqueUsersByID.map((data) => {
-                        if (Category === data.name.toLowerCase()) {
-                            // SetFilterCategory(uniqueUsersByID)
-                            ShowCategoryProduct(data.id, Category)
-                        }
-                        return data
-
-                    })
+                   uniqueUsersByID.forEach((data) => {
+                            if (Category === data.name.toLowerCase()) {
+                                ShowCategoryProduct(data.id, Category)
+                            }
+                            return data
+                        })
                 }
 
                 return data
@@ -399,7 +399,7 @@ export default function DispensoriesDetails(props) {
                              {!productload ?<> {!location.pathname.includes('/menu-integration') ? 
                                  (   Boolean(DespensariesData?.length)?
                                     <>
-                                        <CategoryProduct Category={category} ShowCategoryProduct={ShowCategoryProduct}> </CategoryProduct>
+                                        <CategoryProduct Category={Category} ShowCategoryProduct={ShowCategoryProduct}> </CategoryProduct>
                                         <div className="col-12 productCat_cont" style={{ display: "contents" }}>
                                             <ProductFilter Store_id={Despen[0]?.id}
                                             id={id}

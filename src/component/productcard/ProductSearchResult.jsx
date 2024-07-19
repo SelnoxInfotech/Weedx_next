@@ -34,9 +34,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
        let token_data = cookies.get('User_Token_access')
        let accessToken 
        if (typeof window !== 'undefined') {
-   
             accessToken = localStorage.getItem('User_Token_access');
-   
        }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
     const [CartClean, SetCartClean] = useState(false)
@@ -257,7 +255,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                 <div className="col-12 mt-sm-4 mt-2 p-0 fontStyle">
                    {CategoryName?.length !== undefined  && <h1 className="section_main_title ">{CategoryName}</h1>}
                 </div>
-               { location.pathname.includes('/menu-integration') ? 
+                { location.pathname.includes('/menu-integration') ? 
                     <div className="product_card_wrapper p-0">
                           <Swiper className="mySwiper similerproduxt"
                            spaceBetween={50}

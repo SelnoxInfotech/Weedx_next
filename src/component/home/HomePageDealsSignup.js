@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import useStyles from '../../styles/style';
 import { useForm } from "react-hook-form";
 import Axios from 'axios';
-// import './newsletter.css'
+import  newsletters from '../../../public/newsletters.png'
 import React from 'react';
 import Image from 'next/image';
 const HomePageDealsSignup = () => {
@@ -42,7 +42,7 @@ const HomePageDealsSignup = () => {
                     <div className='row'>
                         <div className='col-md-6 col-12 d-md-inline d-none'>
                             <div className='newsletterImage text-center'>
-                                <Image unoptimized={true} width={200} height={200} src='/newsletters.png' alt='newsletter Icon' title='newsletter Icon'/>
+                                <Image unoptimized={true} width={200} height={200} src={newsletters.src} alt='newsletter Icon' title='newsletter Icon'/>
                             </div>
                         </div>
                         <div className='col-md-6  col-12'>

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async"
+import Head from "next/head"
 import { useLocation, useParams } from "react-router-dom"
 import React from "react"
 function Embedded({ Despen, locationStore  }) {
@@ -150,7 +150,7 @@ function Embedded({ Despen, locationStore  }) {
     }, [params, Despen])
 
     return (
-        <Helmet>
+        <Head>
             <title>{MetaTag.title}</title>
             <meta name="title" content={`Marijuana Dispensaries & Delivery Near Me | weedx.io |`} />
             <meta name='description' content={MetaTag.discription} />
@@ -168,7 +168,7 @@ function Embedded({ Despen, locationStore  }) {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={MetaTag.title} />
             <meta name="twitter:description" content={MetaTag.discription} />
-        </Helmet>
+        </Head>
     )
 }
 export { Embedded }

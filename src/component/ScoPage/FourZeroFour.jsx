@@ -1,9 +1,7 @@
-import { Helmet } from "react-helmet-async"
-
-
+import Head from "next/head"
 function FourZeroFour() {
     return (
-        <Helmet>
+        <Head>
             <title>{"404 | weedx.io |"}</title>
             <meta name="title" content={`Learn everything about you favorite Cannabis | weedx.io |`}/>
             <meta name='description' content={"Learn everything about your favorite Cannabis. Read this guide on weedx.io to understand the laws related to marijuana and about its legalization worldwide."} />
@@ -19,7 +17,7 @@ function FourZeroFour() {
             <meta name="twitter:card" content={"Marijuana Dispensaries & Delivery Near Me"} />
             <meta name="twitter:title" content={"Learn everything about you favorite Cannabis | weedx.io |"} />
             <meta name="twitter:description" content={"Learn everything about your favorite Cannabis. Read this guide on weedx.io to understand the laws related to marijuana and about its legalization worldwide."} />
-        </Helmet>
+        </Head>
     )
 }
 

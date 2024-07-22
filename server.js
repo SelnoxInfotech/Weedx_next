@@ -28,6 +28,6 @@ then(() => {
 
   server.listen(3000, (err) => {
     if (err) throw err;
-    console.log('> woking on https://localhost:3000');
+    console.log('> woking on http://localhost:3000');
   });
 });

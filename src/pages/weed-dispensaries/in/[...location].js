@@ -7,20 +7,16 @@ import Box from '@mui/material/Box';
 import useStyles from "../../../styles/style";
 import dynamic from 'next/dynamic'
 const WeedDispansires = dynamic(() => import('../../../component/WeedDispansires/Weed_Dispansires'));
-import Createcontext from "../../../hooks/context"
+import Createcontext from "@/hooks/context"
 // import { useLocation, useParams, usenavigate.push } from "react-router-dom";
-
 import { useRouter } from 'next/router';
 import axios, { Axios } from "axios";
 import { DespensioriesItem } from '../../../hooks/apicall/api';
 import Wronglocation from "../../../component/skeleton/Wronglocation";
+import WebContent from '@/component/WeedDispansires/Webcontent'
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Loader from "../../../component/Loader/Loader";
 import RoutingDespen from '../../../hooks/utilis/Routingdespen';
-
-
-
-
 function TabPanel(props) {
 
     const { children, value, index, ...other } = props;
@@ -69,7 +65,7 @@ const Dispensaries = (props) => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
+console.log(state ,'state')
     // React.useEffect(() => {
     //     const sendPostRequest = () => {
     //         axios.post(
@@ -162,6 +158,7 @@ const Dispensaries = (props) => {
         }
 
     }
+    console.log(Store ,'Store')
 
     return (
         <RoutingDespen>
@@ -192,35 +189,40 @@ const Dispensaries = (props) => {
                         {
                             true ?
                                 (Store?.length !== 0 ?
-                                    <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
-                                        <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                            <Tabs scrollButtons={false} variant="scrollable" sx={{ justifyContent: 'space-around' }} value={value} onChange={handleChange} aria-label="basic tabs example">
-                                                <Tab label="Open" {...a11yProps(0)} />
-                                                <Tab label="Storefronts" {...a11yProps(1)} />
-                                                <Tab label="delivery" {...a11yProps(2)} />
-                                                <Tab label="Order online" {...a11yProps(3)} />
-                                            </Tabs>
+                                    <React.Fragment>
+                                        <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
+                                            <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                                <Tabs scrollButtons={false} variant="scrollable" sx={{ justifyContent: 'space-around' }} value={value} onChange={handleChange} aria-label="basic tabs example">
+                                                    <Tab label="Open" {...a11yProps(0)} />
+                                                    <Tab label="Storefronts" {...a11yProps(1)} />
+                                                    <Tab label="delivery" {...a11yProps(2)} />
+                                                    <Tab label="Order online" {...a11yProps(3)} />
+                                                </Tabs>
+                                            </Box>
+                                            <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
+                                                <TabPanel value={value} index={0}>
+                                                    <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                                </TabPanel>
+                                                <TabPanel value={value} index={1}>
+                                                    <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                                </TabPanel>
+                                                <TabPanel value={value} index={2}>
+                                                    <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                                </TabPanel>
+                                                <TabPanel value={value} index={3}>
+                                                    <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                                </TabPanel>
+                                            </Box>
                                         </Box>
-                                        <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
-                                            <TabPanel value={value} index={0}>
-                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                            </TabPanel>
-                                            <TabPanel value={value} index={1}>
-                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                            </TabPanel>
-                                            <TabPanel value={value} index={2}>
-                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                            </TabPanel>
-                                            <TabPanel value={value} index={3}>
-                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                            </TabPanel>
-                                        </Box>
-
-                                    </Box>
+                                        {Boolean(Store?.length) &&
+                                            <WebContent modifystr={modifystr} Store={Store} state={state} from={"dispensary"} url={'dispensaries'}></WebContent>
+                                        }
+                                    </React.Fragment>
                                     :
 
-                                    <Wronglocation title={' No dispensaries available'} description={'We apologize, but it appears that there are no dispensaries available in your location. Would you like to enter a different address to search for a nearby dispensary?'} />
-
+                                     <Wronglocation title={' No dispensaries available'} description={'We apologize, but it appears that there are no dispensaries available in your location. Would you like to enter a different address to search for a nearby dispensary?'} />
+                                    
+                                    
                                 )
                                 :
                                 <Loader />

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Bgheader from '@/component/bgheader/Bgheader/';
 import useStyles from "@/styles/style";
-// import {HelpcenterSeo} from "../../Component/ScoPage/Faq"
+import {HelpcenterSeo} from "@/Component/ScoPage/Faq"
 const Helpcenter = () => {
     const [allheight, setallheighth] = React.useState([])
     React.useEffect(() => {
@@ -35,7 +35,7 @@ const Helpcenter = () => {
     }, [])
     return (
         <div className='helpcenter'>
-            {/* <HelpcenterSeo></HelpcenterSeo> */}
+            <HelpcenterSeo></HelpcenterSeo>
             <div className='container-fluid'>
                 <Bgheader text="Welcome To The WeedX.io Help Center" />
                 <div className='helpcenterConent row'>

@@ -135,146 +135,141 @@ const Product = () => {
             navigate.push(`/products/${categoryfind.name.toLowerCase()}/${categoryfind.id}` )
         }
     }
-
+    console.log(location?.query?.slug , 'shahar main')
     return (
         <React.Fragment>
-                  {state.permission === false && <Currentlocation></Currentlocation>}
+            {state.permission === false && <Currentlocation></Currentlocation>}
             <div style={{cursor:"pointer"}}>
                 <span onClick={() => navigate.push("/")}>{"Home"}</span>
                 {<span> {">"} <span onClick={() => breadcrumCountry("Product")}>Product</span></span>}
-                {Boolean(params.categoryname) && <span> {">"} <span onClick={() => breadcrumCountry("categoryname" , params.categoryname)}>{params.categoryname}</span></span>}
-                {Boolean(params.subCategory) && <span> {">"} <span >{params.subCategory}</span></span>}
+                {(location?.query?.slug !== undefined) && <span> {">"} <span onClick={() => breadcrumCountry("categoryname" , location?.query?.slug[0])}>{location?.query?.slug[0]}</span></span>}
+                {(location?.query?.slug !== undefined && location?.query?.slug?.length ===3) && <span> {">"} <span >{location?.query?.slug[1]}</span></span>}
             </div>
             {!params.id ? <ProductSeo location={location?.pathname}></ProductSeo> :
             <ProductCategorySeo categoryname={slug[0]} location={location?.pathname} ></ProductCategorySeo>}
-       
-                <div className="row">
-                    <div className="col-12 mt-4">
-                        <CategoryProduct Category={Category} ShowCategoryProduct={ShowCategoryProduct}></CategoryProduct>
-                    </div>
-                    {
-                       slug?.length <= 2 &&
-                        <div className="col-12 mt-sm-4 mt-2">
-                            <div className="d-flex justify-content-end align-items-center">
-                                <ClickAwayListener onClickAway={() => {
-                                    setIsDropdownOpen(false)
-                                }}>
-                                    <div className="mydropdown ">
-                                        <div className="dropdown-toggle" onClick={() => {
-                                            setIsDropdownOpen(!isDropdownOpen)
-                                        }}>
-                                            {selectedOption && (
-                                                <img  src={`${selectedOption.SubCategoryImage}`} alt={selectedOption.name} title={selectedOption.name} className="dropdown-option-image" />
-                                            )}
-                                            <span className="dropdown-option-label">
-                                                {selectedOption ? selectedOption.name : 'Sort by Subcategory '}
-                                            </span>
-                                            <span className="dropdown-caret"></span>
-                                        </div>
-                                        <ul className={`dropdown-menu image_dropdown ${isDropdownOpen ? 'open' : ''}`}>
-                                            {subcategories?.map((option, index) => (
-                                                <li key={index} onClick={() => selectOption(option)}>
-                                                    <img  src={`${option.SubCategoryImage}`} alt={option.name} title={option.name} className="dropdown-option-image" />
-                                                    <span className="dropdown-option-label">{option.name}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
+            <div className="row">
+                <div className="col-12 mt-4">
+                    <CategoryProduct Category={Category} ShowCategoryProduct={ShowCategoryProduct}></CategoryProduct>
+                </div>
+                {
+                    slug?.length <= 3 &&
+                    <div className="col-12 mt-sm-4 mt-2">
+                        <div className="d-flex justify-content-end align-items-center">
+                            <ClickAwayListener onClickAway={() => {
+                                setIsDropdownOpen(false)
+                            }}>
+                                <div className="mydropdown">
+                                    <div className="dropdown-toggle" onClick={() => {
+                                        setIsDropdownOpen(!isDropdownOpen)
+                                    }}>
+                                        {selectedOption && (
+                                            <img  src={`${selectedOption.SubCategoryImage}`} alt={selectedOption.name} title={selectedOption.name} className="dropdown-option-image" />
+                                        )}
+                                        <span className="dropdown-option-label">
+                                            {selectedOption ? selectedOption.name : 'Sort by Subcategory '}
+                                        </span>
+                                        <span className="dropdown-caret"></span>
                                     </div>
-                                </ClickAwayListener>
-                            </div>
-                        </div>
-                    }
-                    <div className="col-12 center">
-                        {
-                            loading ?
-                               
-                                <div className="col-12">
-                                    <SkeletonCard />
+                                    <ul className={`dropdown-menu image_dropdown ${isDropdownOpen ? 'open' : ''}`}>
+                                        {subcategories?.map((option, index) => (
+                                            <li key={index} onClick={() => selectOption(option)}>
+                                                <img  src={`${option.SubCategoryImage}`} alt={option.name} title={option.name} className="dropdown-option-image" />
+                                                <span className="dropdown-option-label">{option.name}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
-                                :
-                                Product?.length !== 0 && Product !== undefined  ?
+                            </ClickAwayListener>
+                        </div>
+                    </div>
+                }
+                <div className="col-12 center">
+                    {
+                        loading ?
+                            
+                            <div className="col-12">
+                                <SkeletonCard />
+                            </div>
+                            :
+                            Product?.length !== 0 && Product !== undefined  ?
 
-                                    <div className="col-12 mt-sm-4 mt-0">
-                                        <ProductSearchResult RelatedProductResult={Product} CategoryName={C} />
-                                    </div> :
-                                    <div className="container-fluid Product_Empty_container">
-                                        <div className="row">
-                                            <div className="col-12 EmtyCard_container">
-                                                <div className="row">
-                                                    <div className="col-12 image_container">
-                                                        <div className="Empty_card_image">
-                                                            <Box className={classes.muiIcons}>
-                                                              <MdOutlineProductionQuantityLimits size={45} />
-                                                            </Box>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-12 center height_empty_div_heading">
-                                                        <h2>{`No Product Found`}</h2>
-                                                    </div>
-                                                    <div className="col-md-6 col-12 center height_empty_div_paragraph mx-auto text-center my-3 ">
-                                                        <p>{`Apologies, this page is currently empty, but stay tuned as we're working to bring you exciting products soon!`}</p>
-                                                    </div>
-                                                    <div className="col-12 center height_Empty_btnDiv mt-2">
-                                                        <Box  className={`${classes.loadingBtnTextAndBack}`}  >
-                                                            <LoadingButton  style={{width:"100%",height:"100%"}} variant="outlined" loading={false} type={'submit'}>{`Shop now`}</LoadingButton>
+                                <div className="col-12 mt-sm-4 mt-0">
+                                    <ProductSearchResult RelatedProductResult={Product} CategoryName={C} />
+                                </div> :
+                                <div className="container-fluid Product_Empty_container">
+                                    <div className="row">
+                                        <div className="col-12 EmtyCard_container">
+                                            <div className="row">
+                                                <div className="col-12 image_container">
+                                                    <div className="Empty_card_image">
+                                                        <Box className={classes.muiIcons}>
+                                                            <MdOutlineProductionQuantityLimits size={45} />
                                                         </Box>
                                                     </div>
                                                 </div>
+                                                <div className="col-12 center height_empty_div_heading">
+                                                    <h2>{`No Product Found`}</h2>
+                                                </div>
+                                                <div className="col-md-6 col-12 center height_empty_div_paragraph mx-auto text-center my-3 ">
+                                                    <p>{`Apologies, this page is currently empty, but stay tuned as we're working to bring you exciting products soon!`}</p>
+                                                </div>
+                                                <div className="col-12 center height_Empty_btnDiv mt-2">
+                                                    <Box  className={`${classes.loadingBtnTextAndBack}`}  >
+                                                        <LoadingButton  style={{width:"100%",height:"100%"}} variant="outlined" loading={false} type={'submit'}>{`Shop now`}</LoadingButton>
+                                                    </Box>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div> }
-                    </div>
+                                    </div>
+                        </div> }
                 </div>
-   
+            </div>
         </React.Fragment>
     )
 }
 export default Product
-
-
-
-export async function getStaticProps() {
-    const handleError = (error) => {
-      console.error('Error fetching data:', error);
-      return {
-        props: {
-          initialData: [],
-          error: 'Failed to fetch data',
-        },
-      };
-    };
+// export async function getStaticProps() {
+//     const handleError = (error) => {
+//       console.error('Error fetching data:', error);
+//       return {
+//         props: {
+//           initialData: [],
+//           error: 'Failed to fetch data',
+//         },
+//       };
+//     };
   
-    try {
-      const [banner, callcategory, bannner2 , brand] = await Promise.all([
-        fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
-        fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
-        fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
-        fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
-      ]);
+//     try {
+//       const [banner, callcategory, bannner2 , brand] = await Promise.all([
+//         fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
+//         fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
+//         fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
+//         fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
+//       ]);
   
-      const [topbanner, category, bottembannner , getbrand] = await Promise.all([
-        banner.json().catch(handleError),
-        callcategory.json().catch(handleError),
-        bannner2.json().catch(handleError),
-        brand.json().catch(handleError)
-      ]);
+//       const [topbanner, category, bottembannner , getbrand] = await Promise.all([
+//         banner.json().catch(handleError),
+//         callcategory.json().catch(handleError),
+//         bannner2.json().catch(handleError),
+//         brand.json().catch(handleError)
+//       ]);
   
    
-      const responseData = {
-        topbanner: topbanner,
-        category: category,
-        bottembannner: bottembannner,
-        brand:getbrand
-      };
+//       const responseData = {
+//         topbanner: topbanner,
+//         category: category,
+//         bottembannner: bottembannner,
+//         brand:getbrand
+//       };
   
-      return {
-        props: {
-          initialData: responseData,
-        },
-        revalidate: 60,
-      };
-    } catch (error) {
-      return handleError(error);
-    }
-  }
+//       return {
+//         props: {
+//           initialData: responseData,
+//         },
+//         revalidate: 60,
+//       };
+//     } catch (error) {
+//       return handleError(error);
+//     }
+// }
   

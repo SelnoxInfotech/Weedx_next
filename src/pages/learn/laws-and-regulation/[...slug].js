@@ -8,7 +8,6 @@ import Bgheader from "@/component/bgheader/Bgheader";
 import _ from "lodash";
 
 const Index = (props) => {
-  console.log(props.initialData);
   const router = useRouter();
   const id = router?.query?.slug;
   const [GetContant, SetContant] = useState([]);
@@ -137,7 +136,6 @@ export async function getServerSideProps(context) {
   // });
   responseData = await JSON.stringify(responseData)
   responseData = await JSON.parse(responseData)
-  console.log(responseData)
   return {
     props: {
       initialData: responseData,

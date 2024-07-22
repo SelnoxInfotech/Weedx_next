@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { BlogLike, Post_BlogLike } from "@/hooks/apicall/api.js"
 import { FaRegHeart } from "react-icons/fa";
 import { BsShareFill } from "react-icons/bs";
-// import { NewsSeo } from "../../../Component/ScoPage/NewsSeo.jsx";
+import { NewsSeo } from "@/Component/ScoPage/NewsSeo";
 import DeliveryItemsCardSkeleton from '@/component/skeleton/DeliveryItemsCardSkeleton.jsx';
 import _ from "lodash";
 import Image from 'next/image';
@@ -144,7 +144,7 @@ const Allblogs = (props) => {
   }
   return (
     <React.Fragment>
-      {/* <NewsSeo router={router.pathname.substring(1)} ></NewsSeo> */}
+      <NewsSeo router={router.pathname.substring(1)} ></NewsSeo>
       {state.permission === false && <Currentlocation></Currentlocation>}
       <div>
 

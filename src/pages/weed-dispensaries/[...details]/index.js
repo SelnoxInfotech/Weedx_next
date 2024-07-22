@@ -24,6 +24,7 @@ import { StoreDetails } from "../../../component/ScoPage/StoreDetails"
 import { Store_Add_Review, Store_OverAllGet_Review, Store_Get_UserComment, Store_Get_Review, Delete_StoreReview, StoreHelpFull } from "../../../hooks/apicall/api";
 import Createcontext from "../../../hooks/context"
 import Loader from "../../../component/Loader/Loader";
+import gifimage from '../../../../public/image/gif.svg'
 // import { Embedded } from "../../../Component/ScoPage/Embedded";
 // import Menuintregrate from "../../StoreDetail/StoreDetailComponent/Menuintregrate";
 // import { useLoaderData } from 'react-router-dom';
@@ -124,9 +125,7 @@ export default function DispensoriesDetails(props) {
             }
         ).then(async response => {
             const d = []
-            console.log(response)
             response.data.map( async (data) => {
-                console.log(data)
                await d.push(data[0])
                 var uniqueUsersByID = await _.uniqBy(d, 'id'); //removed if had duplicate id
                 SetCategory(uniqueUsersByID)
@@ -143,7 +142,7 @@ export default function DispensoriesDetails(props) {
             })
         }).catch(
             function (error) {
-            })
+        })
         axios.get(`https://api.cannabaze.com/UserPanel/Get-ProductAccordingToDispensaries/${id}`, {
         }).then(response => {
             SetDespensariesProductData(response.data)
@@ -415,7 +414,7 @@ export default function DispensoriesDetails(props) {
                                     :
                                       <div id='oopss'>
                                         <div id='error-text'>
-                                            <Image unoptimized={true} src="/image/gif.svg" alt="no product" width={400} height={400}/>
+                                            <Image unoptimized={true} src={gifimage.src} alt="no product" width={400} height={400}/>
                                             <span>{`Menu Not Available`}</span>
                                             <p class="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses`}</p>
                                             <span onClick={()=>{navigate.push(-1)}} class="back">{`VIEW OTHER BUSINESSES`}</span>
@@ -437,7 +436,7 @@ export default function DispensoriesDetails(props) {
                                     :
                                     <div id='oopss'>
                                         <div id='error-text'>
-                                            <Image unoptimized={true} width={100} height={100} src="/image/gif.svg" alt="no product"/>
+                                            <Image unoptimized={true} width={100} height={100} src={gifimage.src} alt="no product"/>
                                             <span>{`Menu Not Available`}</span>
                                             <p class="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses `}</p>
                                             <span class="back">{`VIEW OTHER BUSINESSES`}</span>

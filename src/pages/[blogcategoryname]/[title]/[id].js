@@ -31,10 +31,13 @@ import axios from "axios";
 import { SingleNewsSeo } from "@/component/ScoPage/NewsSeo";
 import { modifystr } from "@/hooks/utilis/commonfunction";
 import { useRouter } from "next/router";
+import Link from "next/link";
 const Blogs = (props) => {
     let News =  props.data[0]
+    console.log(props)
     const ref = useRef(null)
     const classes = useStyles()
+    console.log(SingleNewsSeo)
     const router = useRouter()
     const { state } = React.useContext(Createcontext)
     const [value, SetValue] = React.useState([])
@@ -206,8 +209,8 @@ const Blogs = (props) => {
                     <div className="col-12 w-100 row align-items-center justify-content-between blog_searchBar_container px-0">
                         <section className=" col-2 backButton_section">
                             <div className="col-12 backBtnCol_searchBar_height">
-                                <span onClick={() => router.push( props.category === 'blogs'  ?  "/blogs":"/cannabis-news")} style={{ marginLeft: "-4px", cursor: 'pointer' }}> <IoChevronBack color="#000000" size={20} /></span><span onClick={() => { Location.pathname.split('/')[1] === "cannabis-news" ? navigate(Location.pathname.split('/')[1] === "cannabis-news" ? '/cannabis-news' : '/blogs') : navigate('/blogs') }} style={{ cursor: 'pointer' }} className="blogBackSpan">Back</span>
-
+                                <Link href={props.category === 'blogs'  ?  "/blogs":"/cannabis-news"}><span style={{ marginLeft: "-4px", cursor: 'pointer' }}> <IoChevronBack color="#000000" size={20} /></span></Link>
+                                <Link href={props.category === 'blogs'  ?  "/blogs":"/cannabis-news"}><span onClick={() => { Location?.pathname?.split('/')[1] === "cannabis-news" ? router.push(Location?.pathname?.split('/')[1] === "cannabis-news" ? '/cannabis-news' : '/blogs') : router.push('/blogs') }} style={{ cursor: 'pointer' }} className="blogBackSpan">Back</span></Link>
                             </div>
                         </section>
                     </div>

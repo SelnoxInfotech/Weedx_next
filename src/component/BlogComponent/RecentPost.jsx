@@ -12,12 +12,10 @@ const RecentPost = () => {
         const getApi = async () => {
             const res = await fetch("https://api.cannabaze.com/UserPanel/Get-News/");
             const data = await res.json();
-           
-           let newdata= data.filter((item )=>{
+            let newdata= data.filter((item )=>{
                 return item.id != id.id
             })
             SetNews(newdata)
-          
         }
         getApi()
 

@@ -1,6 +1,5 @@
 import React from "react"
 const IsWeedLegalState = ({head , description2}) => {
-    console.log(description2)
     return (
     
             <div  className={head.replaceAll(' ','_')}>

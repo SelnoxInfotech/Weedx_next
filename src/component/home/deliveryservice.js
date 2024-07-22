@@ -72,7 +72,7 @@ const DeliveryServices = ({ link, title }) => {
 
                         <div className="d-flex align-items-center justify-content-between">
                             <div className="">
-                                <h1 className='section_main_title'>{title}</h1>
+                                <h2 className='section_main_title'>{title}</h2>
                                 {link === "weed-deliveries" && <h3 className='section_main_subtitle'>{state.Location}</h3>}
                             </div>
                             <Link href={`/${link}/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}>

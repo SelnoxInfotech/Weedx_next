@@ -14,7 +14,6 @@ const HomePageWeedBanner=()=>{
         Axios("https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/ ")
         .then((response)=>{
             setdata(response?.data)
-           console.log(response?.data)
             SetSkeleton(false)
         })
         .catch((error)=>{

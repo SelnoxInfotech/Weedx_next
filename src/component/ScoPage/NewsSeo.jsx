@@ -20,6 +20,7 @@ function NewsSeo({location}) {
             </Head>
         )
     }else{
+   
         return (
             <Head>
                 <title>{"Today's Latest Cannabis and Marijuana News | weedx.io"}</title>

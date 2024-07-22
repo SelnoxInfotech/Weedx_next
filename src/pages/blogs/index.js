@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { BlogLike, Post_BlogLike } from "@/hooks/apicall/api.js"
 import { FaRegHeart } from "react-icons/fa";
 import { BsShareFill } from "react-icons/bs";
-// import { NewsSeo } from "../../../Component/ScoPage/NewsSeo.jsx";
+import { NewsSeo } from "@/Component/ScoPage/NewsSeo";
 import DeliveryItemsCardSkeleton from '@/component/skeleton/DeliveryItemsCardSkeleton.jsx';
 import _ from "lodash";
 import Image from 'next/image';
@@ -22,12 +22,10 @@ import Cookies from 'universal-cookie';
 import Loader from '@/component/Loader/Loader.js';
 import { modifystr } from "@/hooks/utilis/commonfunction"
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
+import Blogheaders from '@/component/Pageheaders/Blogheaders'
 const Allblogs = (props) => {
-  console.log(props)
   const [allblogs, setallblogs] = useState(props.initialData)
   const router = useRouter()
-  //   let router= userouter();
-  //   const navigate = useNavigate()
   const { state } = React.useContext(Createcontext)
   const [value, SetValue] = React.useState([])
   const [allLikes, SetallLikes] = React.useState([])
@@ -104,18 +102,7 @@ const Allblogs = (props) => {
 
 //  console.log(props).initialData
 
-  function Searchbar(e) {
-    setsearchtext(e)
-    axios.post('https://api.cannabaze.com/UserPanel/Get-BlogSearchApi/', {
-      "search": e
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then((res) => {
-      setallblogs(res.data)
-    })
-  }
+
   function PostLike(item) {
 
     if (state.login) {
@@ -144,18 +131,11 @@ const Allblogs = (props) => {
   }
   return (
     <React.Fragment>
-      {/* <NewsSeo router={router.pathname.substring(1)} ></NewsSeo> */}
+      <NewsSeo router={router.pathname.substring(1)} ></NewsSeo>
       {state.permission === false && <Currentlocation></Currentlocation>}
       <div>
-
-        <div className='p-md-0 p-2 d-md-flex  justify-content-between align-items-center'>
-          <div className='col-lg-3'>
-            <h1 className='section_main_title'>  {router.pathname.substring(1) === 'blogs' ? "Blogs" : " Latest news "}   </h1>
-          </div>
-          {/* <SearchBar value={searchtext}  onChange={(e)=>Searchbar(e)} style={{ background: "#FFFFF", border: "1px solid #31B665" }} width={"100%"} placeholder="Search Menu" /> */}
-        </div>
+      <Blogheaders setallblogs={setallblogs}/>
         {
-          // false ?
            <div className='blogListWrapper'>
             {
               props.initialData.map((items, index) => {
@@ -172,13 +152,12 @@ const Allblogs = (props) => {
                     <div className='col-9'>
                       <div className='blogcardText'>
                         <div className='blogDate'> <span>{items.Publish_Date.slice(0, 10)}</span></div>
-                        <Link href={`/${router.pathname.substring(1)}/${modifystr(items.Title)}/${items.id}`} key={index}>
+                        <Link href={`/${router.pathname.substring(1)}/${items.Url_slug === ("" || null || undefined) ? modifystr(items.Title) : modifystr(items.Url_slug)}/${items.id}`} key={index}>
                           <h2 className='blogcardHeading'>{items.Title}</h2>
                         </Link>
-                        <Link href={`/${router.pathname.substring(1)}/${modifystr(items.Title)}/${items.id}`} key={index}>
-                          <p className='blogcardDescription'>   <div dangerouslySetInnerHTML={{ __html: items?.Description.split('</p>')[0] }} /></p>
+                        <Link href={`/${router.pathname.substring(1)}/${items.Url_slug === ("" || null || undefined) ? modifystr(items.Title) : modifystr(items.Url_slug)}/${items.id}`} key={index}>
+                          <p className='blogcardDescription'>   <div dangerouslySetInnerHTML={{ __html: items?.Description?.split('</p>')[0] }} /></p>
                         </Link>
-                        {/* <p onClick={handlechmnag}>click</p>  */}
                         <div className='row extra_function extra_function_destop '>
                           <div className='col-3'>
                             <span className='action_icons'><AiFillEye /></span>
@@ -205,7 +184,6 @@ const Allblogs = (props) => {
                               >
                                 <BsShareFill />
                               </RWebShare>
-
                             </span>
                             <span>Share</span>
                           </div>
@@ -242,7 +220,6 @@ const Allblogs = (props) => {
                             {/* <BsShareFill /> */}
                             {/* </RWebShare> */}
                           </span>
-
                         </div>
                       </div>
                     </div>

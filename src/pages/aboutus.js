@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 // import './Aboutus.css'
-// import {AboutusSeo}  from "../../Component/ScoPage/CommenpageSeo"
+import {AboutusSeo}  from "@/component/ScoPage/CommenpageSeo"
 const AboutUs = () => {
     React.useEffect(() => {
         document.documentElement.scrollTo({
@@ -140,7 +140,7 @@ const AboutUs = () => {
 
     return (
         <div className="container">
-        {/* <AboutusSeo></AboutusSeo> */}
+            <AboutusSeo></AboutusSeo>
             <div className='about_us_header'>
 
 
@@ -240,7 +240,6 @@ const AboutUs = () => {
                     </ClientPreachSlider>
                 </div>
             </div>
-
             <Newsletter />
         </div>
     )

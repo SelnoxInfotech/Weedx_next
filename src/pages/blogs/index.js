@@ -4,38 +4,37 @@ import { AiFillHeart, AiFillEye } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 // import { Link, userouter } from 'react-router-dom';
 import Link from 'next/link';
-import SearchBar from '@mkyy/mui-search-bar';
-import useStyles from "@/styles/style.jsx";
+// import SearchBar from '@mkyy/mui-search-bar';
+// import useStyles from "@/styles/style.jsx";
 import axios from "axios";
 import { useRouter } from 'next/router';
 import { BlogLike, Post_BlogLike } from "@/hooks/apicall/api.js"
 import { FaRegHeart } from "react-icons/fa";
 import { BsShareFill } from "react-icons/bs";
 import { NewsSeo } from "@/Component/ScoPage/NewsSeo";
-import DeliveryItemsCardSkeleton from '@/component/skeleton/DeliveryItemsCardSkeleton.jsx';
+// import DeliveryItemsCardSkeleton from '@/component/skeleton/DeliveryItemsCardSkeleton.jsx';
 import _ from "lodash";
 import Image from 'next/image';
 import Createcontext from '@/hooks/context.js';
 import { RWebShare } from "react-web-share";
 import Cookies from 'universal-cookie';
 // import {useNavigate} from 'react-router-dom'
-import Loader from '@/component/Loader/Loader.js';
+// import Loader from '@/component/Loader/Loader.js';
 import { modifystr } from "@/hooks/utilis/commonfunction"
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
 import Blogheaders from '@/component/Pageheaders/Blogheaders'
 const Allblogs = (props) => {
+  console.log(props)
   const [allblogs, setallblogs] = useState(props.initialData)
   const router = useRouter()
   const { state } = React.useContext(Createcontext)
-  const [value, SetValue] = React.useState([])
-  const [allLikes, SetallLikes] = React.useState([])
-  const [isdata, setisdata] = useState(true)
-  const [loader, setloader] = React.useState(true)
-  const [searchtext, setsearchtext] = useState('')
-  const classes = useStyles()
+  // const [value, SetValue] = React.useState([])
+  // const [allLikes, SetallLikes] = React.useState([])
+  // const [isdata, setisdata] = useState(true)
+  // const [loader, setloader] = React.useState(true)
+  // const classes = useStyles()
   const cookies = new Cookies();
   let token_data = cookies.get('User_Token_access')
-
   let accessToken
   if (typeof window !== 'undefined') {
     accessToken = localStorage.getItem('User_Token_access');
@@ -47,12 +46,9 @@ const Allblogs = (props) => {
   //         left: 0,
   //         behavior: "instant",
   //       }); 
-
   //       if (state.login) {
-
   //             if(router.pathname.substring(1)==='blogs'){
   //               axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyBlog/').then(async (res) => {
-
   //                 let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
   //                 setallblogs(as)
   //                 setloader(false)
@@ -60,11 +56,9 @@ const Allblogs = (props) => {
   //               }).catch((err) => {
   //                 console.trace(err)
   //                 setloader(false)
-
   //               })
   //             }else{
   //                 axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyCANNABISNEWS/').then(async (res) => {
-
   //                 let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
   //                 setallblogs(as)
   //                 setloader(false)
@@ -76,7 +70,6 @@ const Allblogs = (props) => {
   //       }else{
   //         if(router.pathname.substring(1)==='blogs'){
   //           axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyBlog/').then(async (res) => {
-
   //             let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
   //             setallblogs(as)
   //             setloader(false)
@@ -84,11 +77,9 @@ const Allblogs = (props) => {
   //           }).catch((err) => {
   //             console.trace(err)
   //             setloader(false)
-
   //           })
   //         }else{
   //             axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyCANNABISNEWS/').then(async (res) => {
-
   //             let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
   //             setallblogs(as)
   //             setloader(false)
@@ -114,9 +105,9 @@ const Allblogs = (props) => {
 
         }).then(async (res) => {
           setallblogs(res.data)
-          setloader(false)
+          // setloader(false)
 
-          setisdata(true)
+          // setisdata(true)
         }).catch((err) => {
           console.trace(err)
         })
@@ -132,9 +123,9 @@ const Allblogs = (props) => {
   return (
     <React.Fragment>
       <NewsSeo router={router.pathname.substring(1)} ></NewsSeo>
-      {state.permission === false && <Currentlocation></Currentlocation>}
+      {state.permission === false ? <Currentlocation></Currentlocation> : null}
       <div>
-      <Blogheaders setallblogs={setallblogs}/>
+      <Blogheaders title={'Blogs'}/>
         {
            <div className='blogListWrapper'>
             {
@@ -170,7 +161,7 @@ const Allblogs = (props) => {
                           <div className='col-3'>
 
 
-                            <span onClick={(() => { PostLike(items) })} className='action_icons'> {(state?.login && items.Liked) ? <AiFillHeart color={"#31B655"}></AiFillHeart> : <FaRegHeart color="#31B655" />}</span>
+                            <span onClick={(() => { PostLike(items) })} className='action_icons'> {(state?.login ? items.Liked : null) ? <AiFillHeart color={"#31B655"}></AiFillHeart> : <FaRegHeart color="#31B655" />}</span>
 
                             <span>{items.likeCount}</span>
                           </div>
@@ -203,7 +194,7 @@ const Allblogs = (props) => {
                         <div className='col-3'>
                           <span className='action_icons'>
 
-                            {(state?.login && items.Liked) ? <AiFillHeart color={"#31B655"} onClick={() => { PostLike(items) }}></AiFillHeart> : <FaRegHeart onClick={() => { PostLike(items) }} color="#31B655" />}
+                            {(state?.login ? items.Liked : null) ? <AiFillHeart color={"#31B655"} onClick={() => { PostLike(items) }}></AiFillHeart> : <FaRegHeart onClick={() => { PostLike(items) }} color="#31B655" />}
 
                             <span>{items.likeCount}</span>
                           </span>

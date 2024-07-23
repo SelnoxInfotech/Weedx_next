@@ -19,6 +19,7 @@ import Createcontext from '@/hooks/context.js';
 import { RWebShare } from "react-web-share";
 import Cookies from 'universal-cookie';
 // import {useNavigate} from 'react-router-dom'
+import Blogheaders from '@/component/Pageheaders/Blogheaders';
 import Loader from '@/component/Loader/Loader.js';
 import { modifystr } from "@/hooks/utilis/commonfunction"
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
@@ -104,18 +105,7 @@ const Allblogs = (props) => {
 
 //  console.log(props).initialData
 
-  function Searchbar(e) {
-    setsearchtext(e)
-    axios.post('https://api.cannabaze.com/UserPanel/Get-BlogSearchApi/', {
-      "search": e
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then((res) => {
-      setallblogs(res.data)
-    })
-  }
+
   function PostLike(item) {
 
     if (state.login) {
@@ -148,12 +138,12 @@ const Allblogs = (props) => {
       {state.permission === false && <Currentlocation></Currentlocation>}
       <div>
 
-        <div className='p-md-0 p-2 d-md-flex  justify-content-between align-items-center'>
+        {/* <div className='p-md-0 p-2 d-md-flex  justify-content-between align-items-center'>
           <div className='col-lg-3'>
             <h1 className='section_main_title'>  {router.pathname.substring(1) === 'blogs' ? "Blogs" : " Latest news "}   </h1>
           </div>
-          {/* <SearchBar value={searchtext}  onChange={(e)=>Searchbar(e)} style={{ background: "#FFFFF", border: "1px solid #31B665" }} width={"100%"} placeholder="Search Menu" /> */}
-        </div>
+        </div> */}
+        <Blogheaders title={'Latest news'}/>
         {
           // false ?
            <div className='blogListWrapper'>

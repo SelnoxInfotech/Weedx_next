@@ -148,7 +148,6 @@ const Content = [
                     content:` <div>
                         <p>Public cannabis consumption is prohibited by state law. Legal consumption may occur on private property or in an establishment with a valid onsite consumption endorsement.
                             Adults can consume flower, edibles, concentrates, oils, tinctures, salves, drinks, patches, and topical cannabis products.</p>
-
                     </div>`
                 },
                 {
@@ -367,7 +366,7 @@ const Content = [
                     title: "Patient qualifications",
                         content: `<div>
                             <p>ADHS recognizes out-of-state medical marijuana registration, offering the same legal protections for visiting patients as those offered to state residents. Out-of-state patients may not purchase from Arizona state-licensed dispensaries, but are allowed to possess up to 2.5 ounces (70 grams) of usable cannabis. </p>
-                            <h3 className="text-black">Registry process</h3>
+                            <h3 className='text-black'>Registry process</h3>
                             <ol>
                                 <li>Receive a written certification of a qualifying debilitating condition from an Arizona-licensed physician. The written certification has to be on a form provided by ADHS and completed within 90 days of submitting an application for a registry identification card.</li>
                                 <li>Complete the online patient registry application.</li>
@@ -771,11 +770,10 @@ const Content = [
                     },
                     {
                         title: "Where is it Safe to Consume in Connecticut?",
-                        content: <div>
+                        content:` <div>
                             <p>Partaking in marijuana consumption within the confines of private residences is sanctioned by the law. However, it's of paramount importance to recognize that consuming cannabis in public spaces, particularly in areas where tobacco use is disallowed, remains against the law. Demonstrating responsible consumption within the privacy of one's property holds significant weight in terms of legal adherence.</p>
                             <p>Whether intended for recreational or medicinal purposes, the consumption of cannabis is exclusively permissible in private settings. It's vital to note that the regulations extend to the prohibition of cannabis consumption on modes of public transportation, in workplaces, on educational campuses, in public venues, and when in the presence of individuals under the age of 18. This prohibition remains applicable even within private spaces. Additionally, the law strictly disallows the use of medical marijuana if it poses a risk to another person's health or well-being.</p>
-
-                        </div>
+                           </div>`
                     }, {
                         title: "Is Home Cultivation Allowed in Connecticut?",
                         content:` <div>

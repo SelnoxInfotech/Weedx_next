@@ -231,48 +231,48 @@ export default Product
 
 
 
-export async function getStaticProps() {
-    const handleError = (error) => {
-      console.error('Error fetching data:', error);
-      return {
-        props: {
-          initialData: [],
-          error: 'Failed to fetch data',
-        },
-      };
-    };
+// export async function getStaticProps() {
+//     const handleError = (error) => {
+//       console.error('Error fetching data:', error);
+//       return {
+//         props: {
+//           initialData: [],
+//           error: 'Failed to fetch data',
+//         },
+//       };
+//     };
   
-    try {
-      const [banner, callcategory, bannner2 , brand] = await Promise.all([
-        fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
-        fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
-        fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
-        fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
-      ]);
+//     try {
+//       const [banner, callcategory, bannner2 , brand] = await Promise.all([
+//         fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
+//         fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
+//         fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
+//         fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
+//       ]);
   
-      const [topbanner, category, bottembannner , getbrand] = await Promise.all([
-        banner.json().catch(handleError),
-        callcategory.json().catch(handleError),
-        bannner2.json().catch(handleError),
-        brand.json().catch(handleError)
-      ]);
+//       const [topbanner, category, bottembannner , getbrand] = await Promise.all([
+//         banner.json().catch(handleError),
+//         callcategory.json().catch(handleError),
+//         bannner2.json().catch(handleError),
+//         brand.json().catch(handleError)
+//       ]);
   
    
-      const responseData = {
-        topbanner: topbanner,
-        category: category,
-        bottembannner: bottembannner,
-        brand:getbrand
-      };
+//       const responseData = {
+//         topbanner: topbanner,
+//         category: category,
+//         bottembannner: bottembannner,
+//         brand:getbrand
+//       };
   
-      return {
-        props: {
-          initialData: responseData,
-        },
-        revalidate: 60,
-      };
-    } catch (error) {
-      return handleError(error);
-    }
-  }
+//       return {
+//         props: {
+//           initialData: responseData,
+//         },
+//         revalidate: 60,
+//       };
+//     } catch (error) {
+//       return handleError(error);
+//     }
+//   }
   

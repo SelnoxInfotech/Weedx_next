@@ -8,6 +8,7 @@ import Link from "next/link";
 import ScrollContainer from 'react-indiana-drag-scroll';
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import { modifystr } from "../../hooks/utilis/commonfunction";
+import DeliverServiceSkeleton from '@/component/skeleton/DeliveryServicesSkeleton'
 import Image from "next/image";
 const Newsblog = () => {
     const [News, SetNews] = useState([])
@@ -26,7 +27,6 @@ const Newsblog = () => {
     }, [])
 
 
-
     return (
         <React.Fragment>
             <div className="px-sm-0 px-3">
@@ -37,7 +37,7 @@ const Newsblog = () => {
                       </Link>
                     </div>
                     <div className="blogs_card_slider">
-                        <ScrollContainer className="ScrollContainerRelative">
+                       { Boolean(News.length !==0) ? <ScrollContainer className="ScrollContainerRelative">
                            
                                 {News?.slice(1,8)?.map((ele, index) => {
                                     return (
@@ -64,7 +64,8 @@ const Newsblog = () => {
                                     )
                                 })}
                           
-                        </ScrollContainer>
+                        </ScrollContainer>:
+                        <DeliverServiceSkeleton></DeliverServiceSkeleton>}
                     </div>
                
             </div >

@@ -264,7 +264,7 @@ const NewProductDetails = (props) => {
         : navigate.push(-1)
       }} className="BackPageBtn"> <AiOutlineLeft size={22} /> Back to products </span>
       <NewProductDetailsCards link={location.pathname.slice(0, 9) === "/products" ? Product.Store_Type === "dispensary" ? "weed-dispensaries" : "weed-deliveries" : "menu-integration"} dynamicWeight={dynamicWeight} setdynamicWeight={setdynamicWeight} quentity={quentity} setquentity={setquentity} Product={Product} DiscountedValue={discount} Price={Price} SetPrice={SetPrice} />
-      <div className="offerlist">
+     {  Boolean(Product?.copuon?.length) && <div className="offerlist">
         <h2 className="section_main_title">Offers</h2>
         <div className="offerlistwrapper">
           {
@@ -286,8 +286,11 @@ const NewProductDetails = (props) => {
             })
           }
         </div>
-      </div>
+      </div>}
+      {Boolean(StoreProduct?.length !== 0) &&
       <ProductSearchResult link={location.pathname.slice(0, 9) === "/products" ? "products" : "menu-integration"} RelatedProductResult={StoreProduct} currentProductID={Product.id} CategoryName={heading} />
+     }
+     
       <Review
         delBtn={Despen}
         reviewloading={reviewloading}

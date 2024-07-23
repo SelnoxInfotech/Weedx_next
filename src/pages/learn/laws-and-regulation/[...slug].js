@@ -8,52 +8,7 @@ import Bgheader from "@/component/bgheader/Bgheader";
 import _ from "lodash";
 
 const Index = (props) => {
-  const router = useRouter();
-  const id = router?.query?.slug;
-  const [GetContant, SetContant] = useState([]);
   const ref = useRef(null);
-  const [allHeigths, setAllHeight] = useState([]);
-
-  // useEffect(() => {
-  //     if (GetContant?.content !== undefined) {
-  //         let data = [];
-  //         ref.current.childNodes.forEach((item, index) => {
-  //             data.push({
-  //                 topheigth: item.offsetTop,
-  //                 id: item.classList.value,
-  //                 height: item.clientHeight
-  //             });
-  //         });
-  //         setAllHeight(data);
-  //     }
-  // }, [GetContant]);
-  // useEffect(() => {
-  //     let divElement = 140;
-  //     allHeigths.forEach((item) => {
-  //         if (router.asPath.includes(`#${item.id}`)) {
-  //             window.scroll(0, item.topheigth - divElement);
-  //         }
-  //     });
-  // }, [router.asPath, allHeigths]);
-
-  // useEffect(() => {
-  //     Content.filter((data) => {
-  //         return data.state.map((d) => {
-  //             console.log(d.id === props.d , typeof parseInt(d.id) , typeof parseInt(props.d))
-  //                 if (d.id ===  parseInt(props.d)) {
-  //                     SetContant(d);
-  //                     return d;
-
-  //             }
-  //             return null;
-  //         });
-  //     });
-  //     axios.post(`https://api.cannabaze.com/UserPanel/Update-SiteMap/13`, {
-  //         j: 'https://www.weedx.io' + router.pathname
-  //     }).then((res) => {
-  //     }).catch((err) => {
-  //     });
-  // }, [router]);
   return (
     <React.Fragment>
       {/* <LawState Title={`Cannabis Law in ${GetContant?.name}`} State={GetContant?.Country} location={useLocation().pathname}></LawState> */}
@@ -71,7 +26,6 @@ const Index = (props) => {
             <div className="col-12 d-flex">
               <div className={"col-xl-8 col-md-12"} ref={ref}>
                 {props?.initialData?.content?.map((data1, index) => {
-                  
                   return (
                     <React.Fragment key={index}>
                       {/* <IsWeedLegalState
@@ -80,24 +34,21 @@ const Index = (props) => {
                         description2={[data1]}
                      
                       /> */}
-                      <div  className={data1.title.replaceAll(' ','_')}>
- 
- <h2 id="isweedLegalHeadings" className="isweedLegalHeading">{data1.title}</h2>
-
- <div className="col-12"  >
-     <section className="isWeedLegalParagraph">
-   
-        <div dangerouslySetInnerHTML={{__html:data1?.content}}></div>
-     </section>
- </div>
-
-</div>
+                      <div  className={data1.title.replaceAll(' ','_')} id={data1.title.replaceAll(' ','_')}>
+                          <h2 id="isweedLegalHeadings" className="isweedLegalHeading">{data1.title}</h2>
+                          <div className="col-12"  >
+                              <section className="isWeedLegalParagraph">
+                            
+                                  <div dangerouslySetInnerHTML={{__html:data1?.content}}></div>
+                              </section>
+                          </div>
+                      </div>
                     </React.Fragment>
                   );
                 })}
               </div>
-              <div className={"col-4 hidiingBLog "}>
-                <LawStateContent head={props?.initialData?.content} />
+              <div className={"col-4 hidiingBLog "}> 
+                <LawStateContent head={props?.initialData?.content} refrence={ref} />
               </div>
             </div>
           </div>

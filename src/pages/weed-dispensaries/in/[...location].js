@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic'
 const WeedDispansires = dynamic(() => import('../../../component/WeedDispansires/Weed_Dispansires'));
 import Createcontext from "@/hooks/context"
 // import { useLocation, useParams, usenavigate.push } from "react-router-dom";
+
 import { useRouter } from 'next/router';
 import axios, { Axios } from "axios";
 import { DespensioriesItem } from '../../../hooks/apicall/api';
@@ -17,6 +18,10 @@ import WebContent from '@/component/WeedDispansires/Webcontent'
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Loader from "../../../component/Loader/Loader";
 import RoutingDespen from '../../../hooks/utilis/Routingdespen';
+
+
+
+
 function TabPanel(props) {
 
     const { children, value, index, ...other } = props;
@@ -58,10 +63,9 @@ const Dispensaries = (props) => {
     const Location = useRouter()
     const { state, dispatch } = React.useContext(Createcontext)
     const [value, setValue] = React.useState(0);
-    const [Store, SetStore] = React.useState(props.store);
-    const [loader, setloader] = React.useState(false);
+
     const [contentdata, setcontentdata] = React.useState([])
-    const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: state.Location }]
+    const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: props.location.formatted_address }]
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -137,6 +141,18 @@ console.log(state ,'state')
     //     }
     // }, [searchtext, state])
 
+React.useEffect(()=>{
+    dispatch({ type: 'Location', Location: props.location.formatted_address })
+    dispatch({ type: 'permission', permission: true });
+    dispatch({ type: 'Country', Country: props.location.country});
+    dispatch({ type: 'countrycode', countrycode: props.location.countrycode });
+    dispatch({ type: 'State', State: props.location.state });
+    dispatch({ type: 'statecode', statecode: props.location.statecode });
+    dispatch({ type: 'City', City: props.location.city })
+    dispatch({ type: 'citycode', citycode: props.location.citycode});
+    dispatch({ type: 'route', route: props.location.route });
+},[props])
+
     function breadcrumCountry(country, state1, city) {
         if (Boolean(city)) {
             dispatch({ type: 'route', route: "" })
@@ -161,7 +177,7 @@ console.log(state ,'state')
     console.log(Store ,'Store')
 
     return (
-        <RoutingDespen>
+        // <RoutingDespen>
             <div className='container'>
                 <div className="row w-100 mx-auto  dispensaries_centers">
                     <div className="col-12 w-100 col-sm-12 mx-2 mx-md-0">
@@ -169,10 +185,10 @@ console.log(state ,'state')
                             <div style={{ cursor: "pointer" }}>
 
                                 <span onClick={() => navigate.push("/")}>{"Home"}</span>
-                                {Boolean(state.Country) && <span> {">"} <span onClick={() => breadcrumCountry("Country")}>{state.Country}</span></span>}
-                                {Boolean(state.State) && <span> {">"} <span onClick={() => breadcrumCountry("Country", "state")}>{state.State}</span></span>}
-                                {Boolean(state.City) && <span> {">"} <span onClick={() => { Boolean(state.route) && breadcrumCountry("Country", "state", "City") }}>{state.City}</span></span>}
-                                {Boolean(state.route) && <span> {">"} <span>{state.route}</span></span>}
+                                {Boolean(props.location.country) && <span> {">"} <span onClick={() => breadcrumCountry("Country")}>{props.location.country}</span></span>}
+                                {Boolean(props.location.state) && <span> {">"} <span onClick={() => breadcrumCountry("Country", "state")}>{props.location.state}</span></span>}
+                                {Boolean(props.location.city) && <span> {">"} <span onClick={() => { Boolean(props.location.route) && breadcrumCountry("Country", "state", "City") }}>{props.location.city}</span></span>}
+                                {Boolean(props.location.route) && <span> {">"} <span>{props.location.route}</span></span>}
                             </div>
                             {DispensorShopLocation?.map((ele, index) => {
                                 return (
@@ -182,56 +198,52 @@ console.log(state ,'state')
                                     </div>
                                 )
                             })}
-                            <p className="m-0">{`Find Nearby Dispensaries in ${state?.Location} for Recreational & Medical weed. Browse Top Cannabis Products and Place Orders from Trusted Local Dispensaries.`}</p>
+                            <p className="m-0">{`Find Nearby Dispensaries in ${props.location.formatted_address} for Recreational & Medical weed. Browse Top Cannabis Products and Place Orders from Trusted Local Dispensaries.`}</p>
                         </div>
                     </div>
                     <div className="col-12 w-100 col-sm-12 dispensory_menu my-2">
                         {
-                            true ?
+                            // true ?
                                 (Store?.length !== 0 ?
-                                    <React.Fragment>
-                                        <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
-                                            <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                                <Tabs scrollButtons={false} variant="scrollable" sx={{ justifyContent: 'space-around' }} value={value} onChange={handleChange} aria-label="basic tabs example">
-                                                    <Tab label="Open" {...a11yProps(0)} />
-                                                    <Tab label="Storefronts" {...a11yProps(1)} />
-                                                    <Tab label="delivery" {...a11yProps(2)} />
-                                                    <Tab label="Order online" {...a11yProps(3)} />
-                                                </Tabs>
-                                            </Box>
-                                            <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
-                                                <TabPanel value={value} index={0}>
-                                                    <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                                </TabPanel>
-                                                <TabPanel value={value} index={1}>
-                                                    <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                                </TabPanel>
-                                                <TabPanel value={value} index={2}>
-                                                    <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                                </TabPanel>
-                                                <TabPanel value={value} index={3}>
-                                                    <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                                </TabPanel>
-                                            </Box>
+                                    <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
+                                        <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                            <Tabs scrollButtons={false} variant="scrollable" sx={{ justifyContent: 'space-around' }} value={value} onChange={handleChange} aria-label="basic tabs example">
+                                                <Tab label="Open" {...a11yProps(0)} />
+                                                <Tab label="Storefronts" {...a11yProps(1)} />
+                                                <Tab label="delivery" {...a11yProps(2)} />
+                                                <Tab label="Order online" {...a11yProps(3)} />
+                                            </Tabs>
                                         </Box>
-                                        {Boolean(Store?.length) &&
-                                            <WebContent modifystr={modifystr} Store={Store} state={state} from={"dispensary"} url={'dispensaries'}></WebContent>
-                                        }
-                                    </React.Fragment>
+                                        <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
+                                            <TabPanel value={value} index={0}>
+                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                            </TabPanel>
+                                            <TabPanel value={value} index={1}>
+                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                            </TabPanel>
+                                            <TabPanel value={value} index={2}>
+                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                            </TabPanel>
+                                            <TabPanel value={value} index={3}>
+                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                            </TabPanel>
+                                        </Box>
+
+                                    </Box>
                                     :
 
                                      <Wronglocation title={' No dispensaries available'} description={'We apologize, but it appears that there are no dispensaries available in your location. Would you like to enter a different address to search for a nearby dispensary?'} />
                                     
                                     
                                 )
-                                :
-                                <Loader />
+                                // :
+                                // <Loader />
                         }
 
                     </div>
                 </div>
             </div>
-        </RoutingDespen>
+        // </RoutingDespen>
 
     );
 };
@@ -239,7 +251,84 @@ console.log(state ,'state')
 export default Dispensaries;
 
 
-export const getServerSideProps = async (context) => {
+// export const getServerSideProps = async (context) => {
+//     const transformString = (str) => {
+//         return str
+//             .replace(/-/g, " ")  // Replace hyphens with spaces
+//             .split(' ')          // Split the string into an array of words
+//             .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize the first letter of each word
+//             .join(' ');          // Join the words back into a single string
+//     };
+
+//     const object = {
+//         City: transformString(context.params.location[2] || ''),
+//         Country: transformString(context.params.location[0] || ''),
+//         State: transformString(context.params.location[1] || ''),
+//         limit:10
+//     };
+//   let product = []
+//     try {
+//         const response = await fetch('https://api.cannabaze.com/UserPanel/Get-Dispensaries/', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(object)
+//         });
+//         GetProduct(object).then((response) => {
+//                         let desinesery =response.data.filter((item)=>{
+//                             return item.Store_Type==="dispensary"
+//                         })
+//                         product=desinesery
+            
+//                 })
+//         if (!response.ok) {
+//             throw new Error('Failed to fetch');
+//         }
+
+//         const data = await response.json();
+
+//         if (data === "No Dispensary in your area") {
+//             return {
+//                 store: [],
+//                 product:[]
+//             };
+//         } else {
+//             return {
+//                 props: {
+//                     store: data,
+//                     product:product
+//                 },
+//             };
+//         }
+//     } catch (error) {
+//         console.error('Error fetching data:', error);
+//         return {
+//             notFound: true,
+//         };
+//     }
+// };
+
+
+
+export const getStaticPaths = async () => {
+    // Fetch the list of locations or define them statically
+    const locations = [
+        ['united-states', 'new-york',],
+    ];
+
+    const paths = locations.map(location => ({
+        params: { location },
+    }));
+
+    return { paths, fallback: 'blocking' };
+};
+
+export const getStaticProps = async (context) => {
+    const locationParams = context.params.location;
+    const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
+    const k = await Location(decodedLocation)
+
     const transformString = (str) => {
         return str
             .replace(/-/g, " ")  // Replace hyphens with spaces
@@ -249,11 +338,17 @@ export const getServerSideProps = async (context) => {
     };
 
     const object = {
-        City: transformString(context.params.location[2] || ''),
-        Country: transformString(context.params.location[0] || ''),
-        State: transformString(context.params.location[1] || '')
+        City: transformString(k.city || ''),
+        Country: transformString(k.country || ''),
+        State: transformString(k.state || ''),
     };
-
+    const object1 = {
+        City: transformString(k.city || ''),
+        Country: transformString(k.country || ''),
+        State: transformString(k.state || ''),
+        limit:10
+    };
+    let product = [];
     try {
         const response = await fetch('https://api.cannabaze.com/UserPanel/Get-Dispensaries/', {
             method: 'POST',
@@ -269,15 +364,43 @@ export const getServerSideProps = async (context) => {
 
         const data = await response.json();
 
+        const GetProduct = async (obj) => {
+            const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            });
+
+            if (!productResponse.ok) {
+                throw new Error('Failed to fetch products');
+            }
+
+            const productData = await productResponse.json();
+            return productData;
+        };
+ 
+        const productData = await GetProduct(object1);
+        product = productData?.filter(item => item.Store_Type === "dispensary");
+
         if (data === "No Dispensary in your area") {
             return {
-                notFound: true,
+                props: {
+                    store: [],
+                    product: [],
+                    location:k
+                },
+                revalidate: 10
             };
         } else {
             return {
                 props: {
                     store: data,
+                    product: product ,
+                    location:k
                 },
+                revalidate: 10
             };
         }
     } catch (error) {

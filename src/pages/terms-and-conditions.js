@@ -5,7 +5,7 @@ import { useRef } from 'react';
 // import { Link } from 'react-router-dom';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Termandcondition from '@/component/tableofcontent/termandcondition'
+import Termandcondition from '@/component/tableofcontent/Termandcondition'
 const Termsconditions = () => {
   const ref = useRef(null);
 

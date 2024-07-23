@@ -69,7 +69,7 @@ const Dispensaries = (props) => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-console.log(state ,'state')
+
     // React.useEffect(() => {
     //     const sendPostRequest = () => {
     //         axios.post(
@@ -174,7 +174,6 @@ React.useEffect(()=>{
         }
 
     }
-    console.log(Store ,'Store')
 
     return (
         // <RoutingDespen>

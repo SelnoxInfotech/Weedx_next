@@ -25,4 +25,4 @@ const Termandcondition = ({refplace}) => {
   )
 }
 
-export default termandcondition
+export default Termandcondition

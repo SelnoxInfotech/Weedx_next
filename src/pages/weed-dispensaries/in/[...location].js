@@ -8,8 +8,8 @@ import useStyles from "../../../styles/style";
 import dynamic from 'next/dynamic'
 const WeedDispansires = dynamic(() => import('../../../component/WeedDispansires/Weed_Dispansires'));
 import Createcontext from "@/hooks/context"
-// import { useLocation, useParams, usenavigate.push } from "react-router-dom";
-
+import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
+import { useSession } from 'next-session';
 import { useRouter } from 'next/router';
 import axios, { Axios } from "axios";
 import { DespensioriesItem } from '../../../hooks/apicall/api';
@@ -57,6 +57,7 @@ function a11yProps(index) {
 
 
 const Dispensaries = (props) => {
+
     const classes = useStyles()
     const [searchtext, setsearchtext] = React.useState("");
     const navigate = useRouter()
@@ -151,8 +152,6 @@ React.useEffect(()=>{
     dispatch({ type: 'citycode', citycode: props.location.citycode});
     dispatch({ type: 'route', route: props.location.route });
 },[props])
-
- console.log(props.location)
 
     function breadcrumCountry(country, state1, city) {
         if (Boolean(city)) {
@@ -261,10 +260,12 @@ export const getStaticPaths = async () => {
         params: { location },
     }));
 
-    return { paths, fallback: 'blocking' };
+    return { paths, fallback: "blocking" };
 };
 
 export const getStaticProps = async (context) => {
+
+    
     const locationParams = context.params.location;
     const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
     const k = await Location(decodedLocation)

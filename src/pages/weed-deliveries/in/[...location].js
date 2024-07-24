@@ -25,82 +25,93 @@ import Loader from "../../../component/Loader/Loader";
 import WebContent from "../../../component/WeedDispansires/Webcontent";
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import RoutingDespen from '../../../hooks/utilis/Routingdespen';
+import Location from '../../../hooks/utilis/getlocation';
 
-const Deliveries = () => {
+const Deliveries = (props) => {
     const { state, dispatch } = React.useContext(Createcontext)
     const Location = useRouter()
     const navigate = useRouter()
     const [Deliverie, SetDelivery] = React.useState([])
-    const [idload , setidload]= React.useState(false)
-    const [edibaleproduct, setedibaleproduct] = React.useState([])
-    const [loader, setloader] = React.useState(false);
+    // const [idload, setidload] = React.useState(false)
+    // const [edibaleproduct, setedibaleproduct] = React.useState([])
+    // const [loader, setloader] = React.useState(false);
     const [contentdata, setcontentdata] = React.useState([])
+    // React.useEffect(() => {
+    //     setidload(true)
+    //     const object = { City: state.City.replace(/-/g, " "), State: state.State.replace(/-/g, " "), Country: state.Country.replace(/-/g, " ") }
+    //     if (state.Country !== '') {
+    //         GetAllDelivery(object).then((response) => {
+
+    //             SetDelivery(() => response)
+    //             setloader(true)
+    //             setidload(false)
+
+    //         }).catch((error) => {
+    //             setloader(true)
+    //             setidload(false)
+    //         })
+
+    //         axios.post(`https://api.cannabaze.com/UserPanel/Get-WebpageDescriptionDeliveries/`, { ...object }).then((res) => {
+    //             setcontentdata(res.data)
+    //         })
+    //     }
+
+    // }, [state.City, state.State, state.Country])
+
+
     React.useEffect(() => {
-        setidload(true)
-        const object = { City: state.City.replace(/-/g, " "), State: state.State.replace(/-/g, " "), Country: state.Country.replace(/-/g, " ") }
-        if (state.Country !== '') {
-            GetAllDelivery(object).then((response) => {
+        dispatch({ type: 'Location', Location: props.location.formatted_address })
+        dispatch({ type: 'permission', permission: true });
+        dispatch({ type: 'Country', Country: props.location.country });
+        dispatch({ type: 'countrycode', countrycode: props.location.countrycode });
+        dispatch({ type: 'State', State: props.location.state });
+        dispatch({ type: 'statecode', statecode: props.location.statecode });
+        dispatch({ type: 'City', City: props.location.city })
+        dispatch({ type: 'citycode', citycode: props.location.citycode });
+        dispatch({ type: 'route', route: props.location.route });
+    }, [props])
+    console.log(props.product)
 
-                SetDelivery(() => response)
-                setloader(true)
-                setidload(false)
 
-            }).catch((error) => {
-                setloader(true)
-                setidload(false)
-            })
-
-            axios.post(`https://api.cannabaze.com/UserPanel/Get-WebpageDescriptionDeliveries/`, { ...object }).then((res) => {
-                setcontentdata(res.data)
-            })
-        }
-
-    }, [state.City, state.State, state.Country])
     const classes = useStyles()
     const [value, setValue] = React.useState('1');
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    React.useEffect(() => {
-        document.documentElement.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "instant", // Optional if you want to skip the scrolling animation
-        });
-    }, [])
 
-    React.useEffect(() => {
-        let a = []
-        Deliverie?.forEach((item) => {
 
-            item?.Category?.forEach((items) => {
+    // React.useEffect(() => {
+    //     let a = []
+    //     Deliverie?.forEach((item) => {
 
-                if ("EDIBLES" in items) {
-                    a.push({ Store_Name: item.Store_Name, id: item.id })
-                }
-            })
-        })
-        setedibaleproduct(a)
+    //         item?.Category?.forEach((items) => {
 
-    }, [Deliverie])
-    React.useEffect(() => {
-        const sendPostRequest = () => {
-            axios.post(
-                `https://api.cannabaze.com/UserPanel/Update-SiteMap/11`,
-                {
-                    j: 'https://www.weedx.io' + modifystr(Location.pathname.replace(/\/+$/, ""))
-                }
-            ).then((res) => {
-            }).catch((err) => {
-            });
-        };
+    //             if ("EDIBLES" in items) {
+    //                 a.push({ Store_Name: item.Store_Name, id: item.id })
+    //             }
+    //         })
+    //     })
+    //     setedibaleproduct(a)
 
-        // Call the sendPostRequest function after 2 seconds
-        const timeoutId = setTimeout(sendPostRequest, 2000);
+    // }, [Deliverie])
+    // React.useEffect(() => {
+    //     const sendPostRequest = () => {
+    //         axios.post(
+    //             `https://api.cannabaze.com/UserPanel/Update-SiteMap/11`,
+    //             {
+    //                 j: 'https://www.weedx.io' + modifystr(Location.pathname.replace(/\/+$/, ""))
+    //             }
+    //         ).then((res) => {
+    //         }).catch((err) => {
+    //         });
+    //     };
 
-        // Cleanup function to clear the timeout if the component unmounts or Location changes
-        return () => clearTimeout(timeoutId);
-    }, [Location]);
+    //     // Call the sendPostRequest function after 2 seconds
+    //     const timeoutId = setTimeout(sendPostRequest, 2000);
+
+    //     // Cleanup function to clear the timeout if the component unmounts or Location changes
+    //     return () => clearTimeout(timeoutId);
+    // }, [Location]);
 
     function breadcrumCountry(country, state1, city) {
         if (Boolean(city)) {
@@ -124,7 +135,8 @@ const Deliveries = () => {
 
     }
     return (
-        <RoutingDespen>
+        // <RoutingDespen>
+        <div>
             <div style={{ cursor: "pointer" }}>
                 <span onClick={() => navigate.push("/")}>{"Home"}</span>
                 {Boolean(state.Country) && <span> {">"} <span onClick={() => breadcrumCountry("Country")}>{state.Country}</span></span>}
@@ -138,8 +150,8 @@ const Deliveries = () => {
                     <div className="headerBoxdescription">
                         <h1 className="m-0">
                             <span className="dispensories_name">Weed Delivery In </span>
-                            <span className="dispensories_city">{state.Location}</span></h1>
-                        <p className="m-0">{`Find Nearby Weed Delivery in  ${state.Location}  for Recreational & Medical Uses. Browse Top Cannabis Products and Place Orders from Trusted weed delivery near you.`}</p>
+                            <span className="dispensories_city">{props.location.formatted_address}</span></h1>
+                        <p className="m-0">{`Find Nearby Weed Delivery in  ${props.location.formatted_address}  for Recreational & Medical Uses. Browse Top Cannabis Products and Place Orders from Trusted weed delivery near you.`}</p>
 
                     </div>
 
@@ -147,8 +159,8 @@ const Deliveries = () => {
                         <Delivery location={Location.pathname}></Delivery>
 
                         {
-                            loader ?
-                                (Boolean(Deliverie?.length) ?
+                           
+                                (Boolean(props.store.length) ?
 
                                     <Box className={``} sx={{ width: '100%', typography: 'body1', }}>
                                         <TabContext value={value}>
@@ -162,16 +174,15 @@ const Deliveries = () => {
                                                 </TabList>
                                             </Box>
                                             <Box className={`${classes.deliverItemCardPadding}`}>
-                                                <TabPanel value="1"><DeliveryItemsCard Deliverie={Deliverie} /></TabPanel>
-                                                <TabPanel value="2"><DeliveryItemsCard Deliverie={Deliverie} /></TabPanel>
-                                                <TabPanel value="3"><DeliveryItemsCard Deliverie={Deliverie} /></TabPanel>
+                                                <TabPanel value="1"><DeliveryItemsCard Deliverie={props.store} /></TabPanel>
+                                                <TabPanel value="2"><DeliveryItemsCard Deliverie={props.store} /></TabPanel>
+                                                <TabPanel value="3"><DeliveryItemsCard Deliverie={props.store} /></TabPanel>
                                             </Box>
                                         </TabContext>
                                     </Box>
                                     :
                                     <Wronglocation title={'No deliveries available'} description={`Delivery service isn't available at your location. Would you like to try a different address ?`} />)
-                                :
-                                <Loader />
+                               
                         }
                     </div>
                     <div className="col-12 webContent">
@@ -184,7 +195,7 @@ const Deliveries = () => {
 
                             <div className="row">
                                 {
-                                    contentdata?.Faq?.map((item , index) => {
+                                    contentdata?.Faq?.map((item, index) => {
                                         return <div className="col-lg-6 webContent my-2" key={index}> <Accordion>
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon />}
@@ -203,13 +214,126 @@ const Deliveries = () => {
                             </div></>}
 
 
-                    {Boolean(Deliverie.length) &&
-                        <WebContent modifystr={modifystr} Store={Deliverie} state={state} from={"delivery"} url={'deliveries'}></WebContent>
+                    {Boolean(props.store) &&
+                        <WebContent modifystr={modifystr} product={props.product} Store={props.store} state={state} from={"delivery"} url={'deliveries'} location={props.location}></WebContent>
                     }
                 </div>
             </div>
-            { idload && <Loader/>}
-        </RoutingDespen>
+
+        </div>
+// {console.log(props.product)}
     )
 }
 export default Deliveries
+
+
+export const getStaticPaths = async () => {
+    // Fetch the list of locations or define them statically
+    const locations = [
+        ['united-states', 'new-york',],
+    ];
+
+    const paths = locations.map(location => ({
+        params: { location },
+    }));
+
+    return { paths, fallback: "blocking" };
+};
+
+export const getStaticProps = async (context) => {
+
+
+    const locationParams = context.params.location;
+    const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
+    const k = await Location(decodedLocation)
+
+    const transformString = (str) => {
+        return str
+            .replace(/-/g, " ")  // Replace hyphens with spaces
+            .split(' ')          // Split the string into an array of words
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize the first letter of each word
+            .join(' ');          // Join the words back into a single string
+    };
+
+    const object = {
+        City: transformString(k.city || ''),
+        Country: transformString(k.country || ''),
+        State: transformString(k.state || ''),
+    };
+    const object1 = {
+        City: transformString(k.city || ''),
+        Country: transformString(k.country || ''),
+        State: transformString(k.state || ''),
+        limit: 10
+    };
+    let product = [];
+    let WebContent = [];
+    try {
+        const response = await GetAllDelivery(object)
+
+        const data = await response;
+
+        const GetProduct = async (obj) => {
+            const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            });
+
+            if (!productResponse.ok) {
+                throw new Error('Failed to fetch products');
+            }
+
+            const productData = await productResponse.json();
+            return productData;
+        };
+        const WebContentcall = async (obj) => {
+            const Web = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            });
+
+            const WebContent = await Web.json();
+            return WebContent;
+        };
+        WebContent = await WebContentcall(object1);
+        const productData = await GetProduct(object1);
+        product = productData?.filter(item => item.Store_Type === "delivery");
+     
+        
+
+
+
+        if (data.length === 0) {
+            return {
+                props: {
+                    store: [],
+                    product: [],
+                    location: k,
+                    WebContent:WebContent
+                },
+                revalidate: 60
+            };
+        } else {
+            return {
+                props: {
+                    store: data,
+                    product: product,
+                    location: k,
+                    WebContent:WebContent
+                },
+                revalidate: 60
+            };
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return {
+            notFound: true,
+        };
+    }
+};

@@ -7,8 +7,8 @@ async function location(value, type) {
 
     if (data.error_message) {
       return {
-        city: 'New York',
-        state: 'New York',
+        city: 'New-York',
+        state: 'New-York',
         country: 'United States',
         route: '',
         formatted_address:"New York, NY, USA",
@@ -156,7 +156,6 @@ async function location(value, type) {
       }
 
     }
-
 
 
     return {

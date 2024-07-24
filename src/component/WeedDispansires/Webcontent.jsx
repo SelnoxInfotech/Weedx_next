@@ -6,9 +6,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Link from "next/link";
 import Neighborhood from "./loactoncomponent/Neighborhood";
 import Zipcode from "./loactoncomponent/Zipcode";
-import {GetProduct} from '../../hooks/apicall/api'
-const WebContent = ({ state, Store = [], modifystr, from , url , product  ,location}) => {
-   
+import { GetProduct } from '../../hooks/apicall/api'
+const WebContent = ({ state, Store = [], modifystr, from, url, product, location }) => {
+
     function getediblelist() {
         Store?.forEach((item) => {
             item?.Category?.forEach((items) => {
@@ -32,9 +32,9 @@ const WebContent = ({ state, Store = [], modifystr, from , url , product  ,locat
     //         State: state.State.replace(/-/g, " "),
     //         limit:10
     //     }
-       
+
     //     state.Country !== "" && GetProduct(object).then((response) => {
-           
+
     //         if(url === 'dispensaries'){
     //             let desinesery =response.data.filter((item)=>{
     //                 return item.Store_Type==="dispensary"
@@ -48,34 +48,35 @@ const WebContent = ({ state, Store = [], modifystr, from , url , product  ,locat
     //         }
     //     })
     // },[state])
+    console.log(Store.length)
     return (
         <div >
             <div className="col-12 webContent">
                 <h2 className="section_main_title">{`Discover the Best Cannabis ${from} in ${location.formatted_address}`} </h2>
                 <div style={{ display: "grid", gap: "8px" }}>
-                    <p>{`Explore top-rated weed ${from} in {location.formatted_address} with Weedx.io. Our platform simplifies the search for trusted recreational and medical ${from} conveniently located near you in ${location.formatted_address} `}</p>
-                    <h3>{`Top Weed  ${from} in ${location.formatted_address}:`}</h3>
+                    <p>{`Explore top-rated weed ${from} in ${location.formatted_address} with Weedx.io. Our platform simplifies the search for trusted recreational and medical ${from} conveniently located near you in ${location.formatted_address} `}</p>
+                    <h3>{`Top Weed  ${from} in ${location.formatted_address}`}</h3>
                     {Boolean(Store?.length) && <ul>
-                        {   Store?.filter((item ) => item.rating >= 4)?.map((items , index) => {
-                                return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
-                            }).length ===0
+                        {Store?.filter((item) => item.rating >= 4)?.map((items, index) => {
+                            return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
+                        }).length === 0
                             ?
-                            Store?.slice(1,10).map((items , index) => {
+                            Store?.slice(1, 10).map((items, index) => {
                                 return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
                             })
                             :
-                            Store?.filter((item) => item.rating >= 4)?.map((items , index) => {
+                            Store?.filter((item) => item.rating >= 4)?.map((items, index) => {
                                 return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
-                            }).slice(0,10)
+                            }).slice(0, 10)
                         }
 
                     </ul>
                     }
                     {Boolean(product?.length) && <>
-                            <h3>{`Top Selling Weed ${from} Products in ${location.formatted_address}:`}</h3>
-                            <ul> { product?.slice(0,10)?.map((items , index) => {
-                                return <li key={index}><Link href={`/products/${modifystr(items.category_name)}/${modifystr(items.SubcategoryName)}/${modifystr(items.Product_Name)}/${items.id}`}>{items.Product_Name}</Link></li>
-                            }) } </ul>
+                        <h3>{`Top Selling Weed ${from} Products in ${location.formatted_address}:`}</h3>
+                        <ul> {product?.slice(0, 10)?.map((items, index) => {
+                            return <li key={index}><Link href={`/products/${modifystr(items.category_name)}/${modifystr(items.SubcategoryName)}/${modifystr(items.Product_Name)}/${items.id}`}>{items.Product_Name}</Link></li>
+                        })} </ul>
                     </>
                     }
                     <h3>{`Neighborhood weed ${from} Locations  Near ${location.formatted_address}:`}</h3>
@@ -98,8 +99,10 @@ const WebContent = ({ state, Store = [], modifystr, from , url , product  ,locat
                     </ul>
                 </div>
             </div>
-            <h3 className="section_main_title">{`FAQs`}</h3>
-            {Boolean(Store.length) && <div className="row">
+            {Boolean(Store.length) && 
+             <div>
+                 <h3 className="section_main_title">{`FAQs`}</h3>
+            <div className="row">
                 <div className="col-lg-6 webContent my-2">
                     <Accordion>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header" >
@@ -225,7 +228,9 @@ const WebContent = ({ state, Store = [], modifystr, from , url , product  ,locat
                     </Accordion>
                 </div>
 
-                </div>}
+                </div>
+             </div>
+                }
         </div>
     )
 }

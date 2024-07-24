@@ -10,7 +10,8 @@ import useStyles from "../../../styles/style"
 import Createcontext from "../../../hooks/context"
 // import { use  navigate.replace } from "react-router-dom";
 import { useRouter } from 'next/router';
-// import { ScriptTag } from 'react-script-tag';
+// import 'dns-polyfill';
+
 export default function SearchingLocation({ openLocation, SearchBarWidth, open1, setOpenLocation, path }) {
   const classes = useStyles()
   const   navigate=  useRouter();
@@ -183,6 +184,20 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         dispatch({ type: 'State', State: '' })
       }
       dispatch({ type: 'Location', Location: placeDetails?.formatted_address })
+      const addressdata={
+        country:Coun,
+        state:sta,
+        city:ci,
+        route:route,
+        formatted_address:placeDetails.formatted_address
+      }
+
+
+      //  redis.set('data', JSON.stringify(addressdata));
+      // localStorage.setItem("Address", JSON.stringify(addressdata));
+      // const expirationDate = new Date();
+      // expirationDate.setFullYear(expirationDate.getFullYear() + 100);
+      // setCookie('Address', addressdata, expirationDate);
 
     })
   }

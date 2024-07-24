@@ -37,7 +37,7 @@ const [deals,setdeals]= React.useState([])
          {
             deals.length ?
        
-             <ProductSearchResult RelatedProductResult={deals} CategoryName={"Best Deals Near By You"} /> 
+             <ProductSearchResult RelatedProductResult={deals} title={"Best Deals Near By You"} /> 
                : <div className="noReview">
                                 <div className="noreviewicon">
                                     <div className="iconcircl"><Image unoptimized={true} width={100} height={100} src={'/image/nodeal.png'} className="nodealsicon" title="no Deals"  alt="no Deals"/></div>

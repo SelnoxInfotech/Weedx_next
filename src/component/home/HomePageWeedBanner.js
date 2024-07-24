@@ -32,7 +32,7 @@ const HomePageWeedBanner=()=>{
 
            
            <Swiper loop={true} autoplay={{
-          delay: 2500,
+          delay: 250000,
         
           disableOnInteraction: false,
         }}    style={{zIndex:0}} modules={[Autoplay]}>
@@ -42,7 +42,7 @@ const HomePageWeedBanner=()=>{
               
                <div   className='col-12 homePageBanner_container' >
                <a href={ ele.Link !== null ? ele.Link : "#" } target="_blank">
-                        <Image 
+                        <img 
                         
                         // onError={event => {
                         //     event.target.src = "/image/VANNER_2.png"
@@ -74,12 +74,7 @@ const HomePageWeedBanner=()=>{
                             <SwiperSlide key={index}>
                             <div className='col-12 homePageBanner_container'>
                                 <a href={ ele.Link !== null ? ele.Link : "#" } target="_blank">
-                                <Image
-                                        //   onError={event => {
-                                        //     event.target.src = "/image/M11.jpg"
-                                        //     event.onerror = null
-                                        // }}
-                                        unoptimized={true}
+                                <img  unoptimized={true}
                                         width={100} height={10}
                                         loader={imageLoader}
                                 src={`${ele?.mobile}`}

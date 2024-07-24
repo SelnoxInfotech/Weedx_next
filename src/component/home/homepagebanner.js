@@ -40,7 +40,7 @@ const HomePageBanner = ({props}) => {
                     <div className="homeBannerContainer">
                         <div className="destop_image">
                             <Swiper loop={true} autoplay={{
-                                delay: 2500,
+                                delay: 25000,
                                 disableOnInteraction: false,
 
                             }}   style={{zIndex:0}} modules={[Autoplay]}>
@@ -49,9 +49,7 @@ const HomePageBanner = ({props}) => {
                                         <SwiperSlide key={index}>
                                             <div className='col-12 homePageBanner_container'>
                                                 <a href={items?.Link !== null ? items?.Link : "#"} target="_blank">
-                                                    <Image
-                                                    
-                                                        src={items?.Banner}
+                                                    <img  src={items?.Banner}
                                                         alt="Weedx.io Promotion banner"
                                                         title="Weedx.io Promotion banner"
                                                         width={100}
@@ -60,7 +58,6 @@ const HomePageBanner = ({props}) => {
                                                         loader={imageLoader}
                                                         unoptimized={true}
                                                         className='HomePageBanner_image'
-                                                        // onError={handleImageError}
                                                     />
                                                 </a>
                                             </div>
@@ -82,8 +79,8 @@ const HomePageBanner = ({props}) => {
                                             <div className='col-12 homePageBanner_container'>
                                                 <a href={items?.Link !== null ? items?.Link : "#"} target="_blank">
 
-                                                    <Image
-                                                    unoptimized={true}
+                                                    <img
+                                                        unoptimized={true}
                                                         src={items?.mobile}
                                                         alt="Weedx.io Promotion banner"
                                                         title="Weedx.io Promotion banner"

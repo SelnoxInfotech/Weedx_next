@@ -187,7 +187,7 @@ const ProductList = ({ arr , link="products" }) => {
           }
         } else {
           SetCartClean(true);
-          // console.log(5)
+       
         }
       } else {
         SetAddToCard([Arry]);

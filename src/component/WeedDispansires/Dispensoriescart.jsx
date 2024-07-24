@@ -14,7 +14,7 @@ const Dispensoriescart = ({ ele }) => {
 
 
   return (
-    <div className="row mt-4">
+    
         <div className=" col-11  mx-auto despensories_card_container">
         
             <div className="row">
@@ -73,7 +73,7 @@ const Dispensoriescart = ({ ele }) => {
             </div>
            
         </div>
-    </div>
+  
   )
 }
 

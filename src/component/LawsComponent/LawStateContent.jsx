@@ -5,7 +5,6 @@ const LawStateContent = ({ head , refrence }) => {
     const router = useRouter();
     
         React.useEffect(() => {
-          console.log(router ,'fknzd dzybzdjfh')
           refrence.current.childNodes.forEach((item, index) => {
             window.scrollTo((item.offsetTop+item.clientHeight), 0);
           });

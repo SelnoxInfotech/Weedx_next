@@ -37,7 +37,7 @@ const Category = ({ ShowCategoryProduct, Category, Skeleton }) => {
                                                     width={100}
                                                     height={100}
                                                     unoptimized={true}
-                                                    className={location.pathname.includes('/menu-integration') ? 'rounded-circle Integrated-catagoriesTabImg' : 'rounded-circle catagoriesTabImg'} />
+                                                    className={location.pathname.includes('/menu-integration') ? ' Integrated-catagoriesTabImg' : ' catagoriesTabImg'} />
                                             </div>
                                             <div className='col center Category_title' >
                                                 <p>{FirstLetterCaps(ele?.name?.substr(0, 100))}</p>

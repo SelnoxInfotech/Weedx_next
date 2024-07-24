@@ -37,7 +37,6 @@ const NewProductDetails = (props) => {
 
   const { state } = React.useContext(Createcontext)
   const navigate = useRouter();
-  const heading = "You may also like"
   const [Product, SetProduct] = React.useState([])
   const [reviewloading, setReviewloading] = React.useState(false)
   const [StoreProduct, SetStoreProduct] = React.useState([])
@@ -239,6 +238,7 @@ const NewProductDetails = (props) => {
 //  },[Product])
 // console.log(`${modifystr(Product.category_name)}/${modifystr(Product.SubcategoryName)}/${modifystr(Product.Product_Name)}` )
 
+
   return (
     <div className="container-fluid">
       {Object.keys(Product).length !== 0
@@ -264,7 +264,7 @@ const NewProductDetails = (props) => {
         : navigate.push(-1)
       }} className="BackPageBtn"> <AiOutlineLeft size={22} /> Back to products </span>
       <NewProductDetailsCards link={location.pathname.slice(0, 9) === "/products" ? Product.Store_Type === "dispensary" ? "weed-dispensaries" : "weed-deliveries" : "menu-integration"} dynamicWeight={dynamicWeight} setdynamicWeight={setdynamicWeight} quentity={quentity} setquentity={setquentity} Product={Product} DiscountedValue={discount} Price={Price} SetPrice={SetPrice} />
-     {  Boolean(Product?.copuon?.length) && <div className="offerlist">
+          {  Boolean(Product?.copuon?.length) && <div className="offerlist">
         <h2 className="section_main_title">Offers</h2>
         <div className="offerlistwrapper">
           {
@@ -288,7 +288,7 @@ const NewProductDetails = (props) => {
         </div>
       </div>}
       {Boolean(StoreProduct?.length !== 0) &&
-      <ProductSearchResult link={location.pathname.slice(0, 9) === "/products" ? "products" : "menu-integration"} RelatedProductResult={StoreProduct} currentProductID={Product.id} CategoryName={heading} />
+      <ProductSearchResult link={location.pathname.slice(0, 9) === "/products" ? "products" : "menu-integration"} RelatedProductResult={StoreProduct} currentProductID={Product.id} title={'You may also like'}  CategoryName={Product}/>
      }
      
       <Review

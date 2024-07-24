@@ -26,7 +26,6 @@ import { Navigation } from 'swiper/modules';
 import { modifystr } from "../../hooks/utilis/commonfunction";
 import Image from "next/image";
 const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProductID, title , link="products" }) => {
-
     const { state, dispatch } = React.useContext(Createcontext)
     const classes = useStyles()
     const cookies = new Cookies();
@@ -231,15 +230,28 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
             return "Free Shipping"
         }
     }
-    React.useEffect(()=>{
-        console.log(RelatedProductResult)
-       let a =  RelatedProductResult.filter((item)=>{
-            return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating !== 0
-        })
-        let b =  RelatedProductResult.filter((item)=>{
-            return item?.Prices[0]?.Price[0]?.Stock !== "IN Stock" && item.rating === 0
-        })
-        Setshowdata(a.concat(b))
+      React.useEffect(  ()=>{
+        if(currentProductID === undefined){
+            let a =  RelatedProductResult.filter((item)=>{
+                return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating !== 0
+            })
+            let b =  RelatedProductResult.filter((item)=>{
+                return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating === 0
+            })
+            Setshowdata(a.concat(b))
+        }else{
+            let ababa=  RelatedProductResult.filter((item)=>{
+                return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item?.category_name === CategoryName?.category_name
+            })
+                if(ababa?.length ===1){
+                    axios.get(`https://api.cannabaze.com/UserPanel/Get-ProductAccordingToDispensaries/${CategoryName?.category_id}`).then((res)=>{
+                      Setshowdata(res.data)
+                    })
+
+                }else{
+                   Setshowdata(ababa)
+                }
+        }
         const scrollToTop = () => {
             document.documentElement.scrollTo({
               top: 0,
@@ -248,15 +260,13 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
           });
         }
     },[RelatedProductResult])
-
-
     return (
         <React.Fragment>
             <div className="row mx-0 marginProductSearchResult">
                {Boolean(showdata?.length) && <div className="col-12 mt-sm-4 mt-2 p-0 fontStyle">
-                   {CategoryName?.length !== undefined  && <h1 className="section_main_title ">{CategoryName}</h1>}
+                   {title !== undefined  && <h1 className="section_main_title ">{title}</h1>}
                 </div>}
-                { location.pathname.includes('/menu-integration') ? 
+                { Boolean(location.pathname.includes('/menu-integration') || (title === 'You may also like')) ? 
                     <div className="product_card_wrapper p-0">
                           <Swiper className="mySwiper similerproduxt"
                            spaceBetween={50}
@@ -383,11 +393,10 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                         </Swiper>
                     </div>
                   :
-                    <div className="product_card_wrapper p-0">
-                    {  Boolean( RelatedProductResult.length <= 5) ?
-                        showdata?.filter((items, index) => {
-                            console.log(items)
-
+                    <div className="product_card_wrapper p-0 ppddd">
+                    { 
+                    // Boolean( showdata.length !== 0) ?
+                        showdata?.map((items, index) => {
                             if (items.id !== currentProductID) {
                                 return (
                                     <div className="productSearch_result_container" key={index}>
@@ -481,102 +490,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                                 )
                             }
                         })
-                        :
-                        RelatedProductResult?.filter((items, index) => {
-                            console.log(items)
-                            if(items.id !== currentProductID) {
-                                return (
-                                    <div className="productSearch_result_container" key={index}>
-                                        {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <span className="discountTag">{((parseInt(items.Prices[0].Price[0].Price) - parseInt(items.Prices[0].Price[0].SalePrice)) / parseInt(items.Prices[0].Price[0].Price) * 100).toFixed(1)}% OFF</span>}
-                                        <div className="productSearchResultImage_container">
-                                            <div className="product_whish_list">
-
-                                                <Box className={classes.productSearchIcons2}>
-                                                    <IconButton onClick={() => { handleWhishList(items.id) }} aria-label="Example">
-                                                        {
-                                                            state.login ? state.WishList[items.id] ? <AiFillHeart color="31B665"></AiFillHeart> : <AiOutlineHeart color="31B665" /> : <AiOutlineHeart color="31B665" />
-                                                        }
-                                                    </IconButton>
-                                                </Box>
-                                            </div>
-                                            <Link href={`/${link}/${modifystr(items.category_name.toLowerCase())}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${modifystr(items.Product_Name.toLowerCase())}/${items.id}`}
-
-                                            state={{
-                                                prevuisurl: location.pathname,
-                                                id:items.id
-                                                }}  >
-                                                <Image
-                                                unoptimized={true}
-                                                    className="product_search_result_image"
-                                                  width={100}
-                                                  height={100}
-                                                    src={`${items?.images[0]?.image}`}
-                                                   
-                                                    alt={items.Product_Name}
-                                                    title={items.Product_Name}
-                                                />
-                                            </Link>
-                                        </div>
-                                        <div className=" product_search_result_content_div ">
-                                            <Link href={`/${link}/${items.category_name.toLowerCase()}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${items.Product_Name.replace(/%20| /g, "-").toLowerCase()}/${items.id}`}  state={{
-                                                prevuisurl: location.pathname,
-                                                id:items.id
-                                                }} >
-                                                <p className="productSearchResultParagraph text-truncate">{items.Product_Name}</p>
-
-                                                <p className="product_search_result_sub_heading text-truncate">by {items.StoreName}</p>
-                                                <div className="product_category_list">
-                                                    <span className="product_search_result_span1">15{items.lab_Result !== "Magnesium" ? '%' : "Mg."} THC | 0.2{items.lab_Result !== "Magnesium" ? '%' : "Mg."} CBD</span>
-                                                    <div className="product_cart_review">
-                                                        { new Array(items.rating).fill(null).map((itwm , index) => (
-                                                            <BsStarFill key={index +1}  size={16} color="#31B665" className="product_search_rating_star" />
-                                                        ))}
-
-                                                        {new Array(5 - items.rating).fill(null).map((item , index) => (
-                                                            <BsStar  key={index +1} size={16} color="#31B665" className="product_search_rating_star" />
-                                                        ))}
-                                                        <span className="product_search_result_sub_heading ">({items.TotalRating})</span>
-                                                    </div>
-                                                </div>
-                                                <div className=" productPriceDivHeight">
-                                                    <p className="productSearch text-truncate"><span className="productSearchPrice">${parseInt(items.Prices[0]?.Price[0]?.SalePrice)}  {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <del className="text-muted">${parseInt(items.Prices[0].Price[0].Price)}</del>} </span> per {items.Prices[0].Price[0].Weight ? items.Prices[0].Price[0].Weight : `${items.Prices[0].Price[0].Unit} Unit`}</p>
-                                                </div>
-                                                <div className="discount_boc">{
-                                                    items?.CategoryCoupoun?.length !== 0 || items?.ProductCoupoun?.length !== 0 && <div className="discountinfo">
-                                                        <span className="carddiscountoffer">{discountshoer(items.CategoryCoupoun, items.ProductCoupoun)} </span>  and more Offers
-                                                    </div>
-                                                }</div>
-
-                                            </Link>
-                                            <div className="my-2">
-                                                <Box className={`center ${classes.loadingBtnTextAndBack}`}>
-                                                    {
-                                                        items?.Prices[0].Price.length > 1
-                                                            ?
-                                                            <ProductIncDecQuantity popup={popup} setadding={setadding}
-                                                                adding={adding} SetPopup={SetPopup} items={items} AddToCart={AddToCart} />
-                                                            :
-
-                                                            items?.Prices[0].Price[0].Stock === "IN Stock" ?
-                                                                    <LoadingButton loading={adding === items.id} loadingIndicator={<CircularProgress color="inherit" size={16} />}
-                                                                        onClick={() => { AddToCart(items) }} >
-                                                                        <span><FaShoppingCart  size={18} /> </span> Add To Cart
-                                                                    </LoadingButton>
-                                                                :
-                                                                    <LoadingButton className={`${classes.odsbtn}`} >
-                                                                        <span><FaShoppingCart size={18} /> </span>  Out of Stock
-                                                                    </LoadingButton>
-                                                    }
-                                                    {
-                                                        CartClean && <AddToCartPopUp CartClean={"center"} SetCartClean={SetCartClean} NewData={NewData} SetAddToCard={SetAddToCard} />
-                                                    }
-                                                </Box>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            }
-                        })
+                       
                     }
                     </div>
                 }

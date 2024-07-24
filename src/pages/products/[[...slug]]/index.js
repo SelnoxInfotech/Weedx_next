@@ -135,7 +135,6 @@ const Product = () => {
             navigate.push(`/products/${categoryfind.name.toLowerCase()}/${categoryfind.id}` )
         }
     }
-    console.log(location?.query?.slug , 'shahar main')
     return (
         <React.Fragment>
             {state.permission === false && <Currentlocation></Currentlocation>}
@@ -194,7 +193,7 @@ const Product = () => {
                             Product?.length !== 0 && Product !== undefined  ?
 
                                 <div className="col-12 mt-sm-4 mt-0">
-                                    <ProductSearchResult RelatedProductResult={Product} CategoryName={C} />
+                                    <ProductSearchResult RelatedProductResult={Product} title={C} />
                                 </div> :
                                 <div className="container-fluid Product_Empty_container">
                                     <div className="row">

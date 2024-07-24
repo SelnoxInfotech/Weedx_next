@@ -41,7 +41,7 @@ const WhisListCard = () => {
     return (                                                                                                                            
         <div className="whislistCard_wrapper1">
             {
-                GetApiData.length ? <ProductSearchResult RelatedProductResult={GetApiData} CategoryName={"Wishlist"} /> : <div className="container-fluid Empty_container_margin_top">
+                GetApiData.length ? <ProductSearchResult RelatedProductResult={GetApiData} title={"Wishlist"} /> : <div className="container-fluid Empty_container_margin_top">
                     <div className="row">
                         <div className="col-12 EmtyCard_container">
                             <div className="row">

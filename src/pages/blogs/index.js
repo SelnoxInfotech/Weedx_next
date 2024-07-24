@@ -24,7 +24,6 @@ import { modifystr } from "@/hooks/utilis/commonfunction"
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
 import Blogheaders from '@/component/Pageheaders/Blogheaders'
 const Allblogs = (props) => {
-  console.log(props)
   const [allblogs, setallblogs] = useState(props.initialData)
   const router = useRouter()
   const { state } = React.useContext(Createcontext)

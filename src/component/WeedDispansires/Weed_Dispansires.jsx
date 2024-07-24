@@ -20,7 +20,7 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata }) => 
             <DispensariesSco location={locaton?.pathname}></DispensariesSco>
             <div className="container">
                 <div className="row">
-                    <div className="col-xl-4 col-lg-6 col-md-8 col-sm-10 col-12 dispensories_main_container">
+                    <div className="col-12 dispensories_main_container">
                         <div className="row dispensories_search_result">
                             <div className="col-12 dispensories_open_result_heading">
                                 <div className="row">
@@ -37,14 +37,11 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata }) => 
                             </div>
                         </div>
 
-
-                        {Store?.map((ele, index) => {
-                            return (
-                                <div key={index}>
-                                    <Dispensoriescart ele={ele} />
-                                </div>
-                            )
-                        })}
+                        <div className="d-flex justify-content-between flex-wrap gap-4">
+                            {Store?.map((ele, index) => {
+                                return (<Dispensoriescart ele={ele} key={index}/> )
+                            })}
+                        </div>
                     </div>
                     <div className="col-12 webContent">
                         <h2 className="section_main_title">{contentdata?.Title}</h2>

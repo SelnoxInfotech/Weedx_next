@@ -32,7 +32,7 @@ const Featuredbrand = ({ CardDataArray}) => {
                                       <Link  href={`/brands/${modifystr(items.name)}/${items.id}`}> 
                                         <div className="row  FeaturedBrandContainer  mx-0 my-2">
                                             <div className="col-12 FeaturedBrandImageContainer px-0">
-                                                  <Image unoptimized={true} width={100} height={100}  alt={items.name} title={items.name} className="w-100" src={`${items.Brand_Logo}`} />
+                                                  <Image unoptimized={true} width={100} height={100}  alt={items.name} title={items.name}  src={`${items.Brand_Logo}`} />
                                             </div>
                                         </div>
                                       </Link>

@@ -34,10 +34,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 const Blogs = (props) => {
     let News =  props.data[0]
-    console.log(props)
     const ref = useRef(null)
     const classes = useStyles()
-    console.log(SingleNewsSeo)
     const router = useRouter()
     const { state } = React.useContext(Createcontext)
     const [value, SetValue] = React.useState([])
@@ -54,51 +52,7 @@ const Blogs = (props) => {
          accessToken = localStorage.getItem('User_Token_access');
     }
     if(  Boolean(accessToken) ){ token_data  =  accessToken}
-    // console.log()
-    // React.useEffect(() => {
-    // //    if(id[1] !== undefined){ const getApi = async () => {
-            // const res = await fetch(`https://api.cannabaze.com/UserPanel/Get-GetNewsById/${id[1]}`);
-            // const data = await res.json();
-    // //         if (data.length !== 0) {
-    // //             SetNews(data[0])
-    // //             await BlogLike(data[0].id).then((res) => {
-    // //                 SetLikes(res.data.Like)
-    // //                 SetValue({ ...value, "LinkCount": res.data.LikeCount })
-    // //             }).catch((error) => {
-    // //                 console.error(error)
-    // //             })
-    // //             GetComment(data[0].id)
-    // //         } else {
-    // //             router.push("/404")
-    // //         }
-    // //     }
-    // //     document.documentElement.scrollTo({
-    // //         top: 0,
-    // //         left: 0,
-    // //         behavior: "instant",
-    // //     });
-    // //     getApi()}
 
-
-    // }, [id])
-    // React.useEffect(() => {
-    //     if (Object.keys(News).length !== 0) {
-    //         axios.post("https://api.cannabaze.com/UserPanel/Update-ViewCounter/", {
-    //             id: News.id
-    //         }).then((response) => {
-    //             SetViewCount(response.data.data.ViewCount)
-
-    //         });
-    //     }
-    // }, [News])
-    // async function GetComment(id) {
-    //     await Get_Comment(id[1]).then((res) => {
-
-    //         Setcommnet({ ...Getcommnet, "CommentCounts": res.data.CommentCounts, 'UserComment': res.data.Comments })
-    //     }).catch((error) => {
-    //         console.error(error)
-    //     })
-    // }
     function PostLike(like) {
         if (state.login) {
             Post_BlogLike(News?.id, !like).then((res) => {

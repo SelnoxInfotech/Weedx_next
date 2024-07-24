@@ -7721,6 +7721,9 @@ line-height: 2;
     width: 50px;
     height: 50px;
   }
+.despensories_card_container{
+  width: 100%;
+}
   .myreviewBox{
     padding: 15px;
     width: 100%;
@@ -7936,7 +7939,9 @@ background: #FFF;
     padding: 25px;
     width: 48%;
   }
- 
+.despensories_card_container {
+  width: 48%;
+}
   .about_card_Wraper{
   row-gap: 30px;
   }
@@ -7968,8 +7973,12 @@ background: #FFF;
   .about_card_Wraper .about_card .about_text .acard_title{
     text-align: left;
     }
+    .despensories_card_container {
+      width: 100%;
+    }
 }
 @media only screen and (max-width: 480px){
+  
   .About_weedx{
     background-color: #F9F9F9;
     padding:10px;

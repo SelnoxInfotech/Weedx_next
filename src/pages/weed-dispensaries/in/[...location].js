@@ -69,7 +69,6 @@ const Dispensaries = (props) => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-console.log(state ,'state')
     // React.useEffect(() => {
     //     const sendPostRequest = () => {
     //         axios.post(

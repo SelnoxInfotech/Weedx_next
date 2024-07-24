@@ -304,6 +304,10 @@ export const getStaticProps = async (context) => {
         WebContent = await WebContentcall(object1);
         const productData = await GetProduct(object1);
         product = productData?.filter(item => item.Store_Type === "delivery");
+     
+        
+
+
 
         if (data.length === 0) {
             return {

@@ -71,7 +71,7 @@ const WebContent = ({ state, Store = [], modifystr, from , url , product  ,locat
 
                     </ul>
                     }
-                    {Boolean(product.length) && <>
+                    {Boolean(product?.length) && <>
                             <h3>{`Top Selling Weed ${from} Products in ${location.formatted_address}:`}</h3>
                             <ul> { product?.slice(0,10)?.map((items , index) => {
                                 return <li key={index}><Link href={`/products/${modifystr(items.category_name)}/${modifystr(items.SubcategoryName)}/${modifystr(items.Product_Name)}/${items.id}`}>{items.Product_Name}</Link></li>

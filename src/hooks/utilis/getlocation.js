@@ -10,7 +10,12 @@ async function location(value, type) {
         city: 'New York',
         state: 'New York',
         country: 'United States',
-        route: ''
+        route: '',
+        formatted_address:"New York, NY, USA",
+        citycode:"",
+        statecode:"NY",
+        countrycode:"US"
+
       };
     }
 

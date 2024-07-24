@@ -17,7 +17,7 @@ import Wronglocation from "../../../component/skeleton/Wronglocation";
 import WebContent from '@/component/WeedDispansires/Webcontent'
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Loader from "../../../component/Loader/Loader";
-import RoutingDespen from '../../../hooks/utilis/Routingdespen';
+import Location from '../../../hooks/utilis/getlocation';
 
 
 
@@ -153,6 +153,8 @@ React.useEffect(()=>{
     dispatch({ type: 'route', route: props.location.route });
 },[props])
 
+ console.log(props.location)
+
     function breadcrumCountry(country, state1, city) {
         if (Boolean(city)) {
             dispatch({ type: 'route', route: "" })
@@ -203,7 +205,7 @@ React.useEffect(()=>{
                     <div className="col-12 w-100 col-sm-12 dispensory_menu my-2">
                         {
                             // true ?
-                                (Store?.length !== 0 ?
+                                (props.store?.length !== 0 ?
                                     <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
                                         <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                             <Tabs scrollButtons={false} variant="scrollable" sx={{ justifyContent: 'space-around' }} value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -215,16 +217,16 @@ React.useEffect(()=>{
                                         </Box>
                                         <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
                                             <TabPanel value={value} index={0}>
-                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                                <WeedDispansires Store={props.store} location={props.location} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
                                             </TabPanel>
                                             <TabPanel value={value} index={1}>
-                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                                <WeedDispansires Store={props.store} location={props.location} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
                                             </TabPanel>
                                             <TabPanel value={value} index={2}>
-                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                                <WeedDispansires Store={props.store} location={props.location}  product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
                                             </TabPanel>
                                             <TabPanel value={value} index={3}>
-                                                <WeedDispansires Store={Store} SetStore={SetStore} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                                <WeedDispansires Store={props.store} location={props.location} product={props.product}  searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
                                             </TabPanel>
                                         </Box>
 
@@ -248,66 +250,6 @@ React.useEffect(()=>{
 };
 
 export default Dispensaries;
-
-
-// export const getServerSideProps = async (context) => {
-//     const transformString = (str) => {
-//         return str
-//             .replace(/-/g, " ")  // Replace hyphens with spaces
-//             .split(' ')          // Split the string into an array of words
-//             .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize the first letter of each word
-//             .join(' ');          // Join the words back into a single string
-//     };
-
-//     const object = {
-//         City: transformString(context.params.location[2] || ''),
-//         Country: transformString(context.params.location[0] || ''),
-//         State: transformString(context.params.location[1] || ''),
-//         limit:10
-//     };
-//   let product = []
-//     try {
-//         const response = await fetch('https://api.cannabaze.com/UserPanel/Get-Dispensaries/', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(object)
-//         });
-//         GetProduct(object).then((response) => {
-//                         let desinesery =response.data.filter((item)=>{
-//                             return item.Store_Type==="dispensary"
-//                         })
-//                         product=desinesery
-            
-//                 })
-//         if (!response.ok) {
-//             throw new Error('Failed to fetch');
-//         }
-
-//         const data = await response.json();
-
-//         if (data === "No Dispensary in your area") {
-//             return {
-//                 store: [],
-//                 product:[]
-//             };
-//         } else {
-//             return {
-//                 props: {
-//                     store: data,
-//                     product:product
-//                 },
-//             };
-//         }
-//     } catch (error) {
-//         console.error('Error fetching data:', error);
-//         return {
-//             notFound: true,
-//         };
-//     }
-// };
-
 
 
 export const getStaticPaths = async () => {
@@ -390,7 +332,7 @@ export const getStaticProps = async (context) => {
                     product: [],
                     location:k
                 },
-                revalidate: 10
+                revalidate: 60
             };
         } else {
             return {
@@ -399,7 +341,7 @@ export const getStaticProps = async (context) => {
                     product: product ,
                     location:k
                 },
-                revalidate: 10
+                revalidate: 60
             };
         }
     } catch (error) {

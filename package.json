@@ -2,11 +2,11 @@
   "name": "weedx",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://selnoxinfotech.github.io/Weedx_next",
+  "homepage": "/",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "lint": "next lint",
     "export": "next export"
   },

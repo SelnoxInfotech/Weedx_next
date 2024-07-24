@@ -24,7 +24,7 @@ const DeliveryServices = ({ link, title }) => {
     const [Skeleton, SetSkeleton] = React.useState(true)
     const ref = React.useRef(null);
     React.useEffect(() => {
-        const object = { State: state.State.replace(/-/g, " "), City: state.City.replace(/-/g, " "), Country: state.Country.replace(/-/g, " ") }
+        const object = { State: state.State.replace(/-/g, " "), City: state.City.replace(/-/g, " "), Country: state.Country.replace(/-/g, " "),limit:10 }
        
        if(object.Country !==""){
         if (link === "weed-deliveries") {

@@ -165,10 +165,6 @@ const  RoutingSearch = ({ city, State, country, pathname, route, com }) => {
 
             }
 
-
-
-
-
             if (ci !== undefined && sta !== undefined && Coun !== undefined && route !== undefined) {
 
               navigate.push(pathname + `/${'in'}/${Coun.toLowerCase()}/${sta.toLowerCase()}/${ci.toLowerCase()}/${route.toLowerCase()}`)

@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { BlogLike, Post_BlogLike } from "@/hooks/apicall/api.js"
 import { FaRegHeart } from "react-icons/fa";
 import { BsShareFill } from "react-icons/bs";
-import { NewsSeo } from "@/Component/ScoPage/NewsSeo";
+import { NewsSeo } from "@/component/ScoPage/NewsSeo";
 // import DeliveryItemsCardSkeleton from '@/component/skeleton/DeliveryItemsCardSkeleton.jsx';
 import _ from "lodash";
 import Image from 'next/image';

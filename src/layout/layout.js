@@ -11,15 +11,15 @@ import Loader from '@/component/Loader/Loader';
 const Layout = ({ children }) => {
     const { state, dispatch } = React.useContext(Createcontext)
      const [isload, setisload]=useState(false)
-    useEffect(()=>{
-        setisload(true)
-        setTimeout(() => {
-        setisload(false)
-          }, 2000);
-    },[state.Location])
+    // useEffect(()=>{
+    //     setisload(true)
+    //     setTimeout(() => {
+    //     setisload(false)
+    //       }, 2000);
+    // },[state.Location])
     return (
         <div>
-        {isload ? <Loader /> : null}
+        {/* {isload ? <Loader /> : null} */}
         <div className='sticky-top'>
           <Navbar />
         </div>

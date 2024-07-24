@@ -8,12 +8,13 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DispensariesSco } from "../ScoPage/dispensariessco"
 import Createcontext from "../../hooks/context";
-import WebContent from "../WeedDispansires/Webcontent"
+import dynamic from 'next/dynamic'
+const WebContent = dynamic(() => import('../WeedDispansires/Webcontent') , {ssr:true});
+// import WebContent from "../WeedDispansires/Webcontent"
 import { modifystr } from "../../hooks/utilis/commonfunction";
-const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata }) => {
+const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata , product , location }) => {
     const { state } = useContext(Createcontext)
     const locaton = useRouter();
-
     return (
         <React.Fragment>
 
@@ -72,8 +73,7 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata }) => 
                             </div>
                         </>
                     }
-                    {/* <WebContent modifystr={modifystr} Store={Store} state={state} from={"dispensary"} url={'dispensaries'}></WebContent> */}
-
+                    <WebContent location={location} product={product} modifystr={modifystr} Store={Store} state={state} from={"dispensary"} url={'dispensaries'}></WebContent>
                 </div>
             </div>
         </React.Fragment>

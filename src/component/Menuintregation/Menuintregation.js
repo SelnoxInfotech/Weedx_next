@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import  Swal from 'sweetalert2';
-import useNavigate from 'next/navigation'
 import { useRouter } from 'next/router';
 import useStyles from "@/styles/style"
 import { useForm } from "react-hook-form";
@@ -23,7 +22,6 @@ export function Menuintegration_login({ open, setOpen }) {
     const method = useForm()
     const router = useRouter();
     const { state, dispatch } = React.useContext(Createcontext)
-    const Navigate = useNavigate()
     const [loading, Setloading] = React.useState(false)
     const classes = useStyles()
     const [showPassword, setShowPassword] = React.useState(false);

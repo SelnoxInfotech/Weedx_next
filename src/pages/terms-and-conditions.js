@@ -1,51 +1,15 @@
 import React from 'react'
 import Newsletter from '@/component/home/HomePageDealsSignup/';
-// import { TermsAndConditions } from '../../Component/ScoPage/CommenpageSeo';
+import { TermsAndConditions } from "@/component/ScoPage/CommenpageSeo";
 import { useRef } from 'react';
-// import { Link } from 'react-router-dom';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import Termandcondition from '@/component/tableofcontent/Termandcondition'
 const Termsconditions = () => {
   const ref = useRef(null);
-
-  // const [allHeigths,setallheight] = React.useState([])
-  // const router = useRouter()
-
-//   React.useEffect(()=>{
-//     document.documentElement.scrollTo({
-//       top: 0,
-//       left: 0,
-//       behavior: "instant",
-//     }); 
-//         let data =[]
-//         ref.current.childNodes.forEach((item , index)=>{
-    
-//             data.push({
-//                 topheigth: item.offsetTop,
-//                 id : item.id,
-//                 height : item.clientHeight
-//             })   
-//         })
-//         setallheight(data)
-    
-//   },[])
-
-// React.useEffect(() => {
-//      let divElement = document.getElementById('Navbar_box')?.clientHeight
-      
-//        allHeigths.forEach((item)=>{
-       
-//        if(location.hash === `#${item.id}`){
-//          window.scroll(0 , item.topheigth - divElement)
-//        }
-//     })
- //   }, [allHeigths])
-
   return (
-    <>
+    <React.Fragment>
       <div className='term_condition'>
-        {/* <TermsAndConditions></TermsAndConditions> */}
+        <TermsAndConditions></TermsAndConditions>
         <div className="container-fluid">
           <div className="tc_hero">
             <h1 className="page_heading">{`  Website Terms and Conditions`}  </h1>
@@ -167,7 +131,7 @@ const Termsconditions = () => {
         </div>
       </div>
       <Newsletter></Newsletter>
-    </>
+    </React.Fragment>
   )
 }
 

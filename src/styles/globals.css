@@ -114,23 +114,17 @@ p {
 
 
 /* App.css file from react */ 
-jss1 {
-  top: 0px;
-}
-/* Share Link Css Blog Section */
-.rws-backdrop {
 
-  justify-content: center;
-}
+/* Share Link Css Blog Section */
 /*  */
 .noreview_title{
   font-size: 28px;
 
 }
-.selected {
+/* .selected {
   background-color: #007bff;
   color: #fff;
-}
+} */
 .NODataInOrderPage{
   height: 453px;
   background: #F0FFF6;
@@ -1137,7 +1131,7 @@ scrollbar-width: none;  /* Firefox */
  max-height: 500px;
 }
 .opning_time p.currentDay{
-  color: #000000;
+  color: #31B655;
   font-weight: 600;
 }
 
@@ -11396,6 +11390,10 @@ font-size: 18px;
 font-size: 18px;
 font-family: "Inter", sans-serif;
 font-weight: 600;
+color: #fff;
+}
+.order_Summary_total_container .fontStyle p{
+  color: #fff;  
 }
 .add_prod_cart_summary_p p {
 font-size: 18px;
@@ -11598,6 +11596,7 @@ font-size: 20px;
 .order_summary_flex {
 display: flex;
 justify-content: space-between;
+color: #fff;
 }
 .Add_product_cart_right_container_summary {
 background: #fff;

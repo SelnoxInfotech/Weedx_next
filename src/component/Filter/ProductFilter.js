@@ -7,7 +7,6 @@ import Axios from "axios";
 import _ from "lodash";
 import { FormControl, Grid, MenuItem, Select } from "@mui/material";
 // import SearchBar from "material-ui-search-bar";
-// import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useRouter } from "next/router";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";

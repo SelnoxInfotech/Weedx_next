@@ -4,15 +4,16 @@ import Box from '@mui/material/Box';
 import useStyles from "../../../Style"
 import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios';
-import { useNavigate , useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Createcontext from "../../../Hooks/Context"
 import {FcGoogle} from "react-icons/fc"
+import { useRouter } from 'next/router';
 function LoginWithGoogle() {
     const classes = useStyles()
     const cookies = new Cookies();
     const location = useLocation();
-    const Navigate = useNavigate()
+    const router = useRouter()
     const { state, dispatch } = React.useContext(Createcontext)
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => { GoogleAuth(codeResponse) },
@@ -30,11 +31,9 @@ function LoginWithGoogle() {
                 dispatch({ type: 'Login', login: true })
                 dispatch({ type: 'ApiProduct', ApiProduct: !state.ApiProduct })
                 if( location?.state?.location?.pathname === '/cart'){
-                    Navigate('/cart')
+                    router.push('/cart')
                 }else{ 
-                   
-                       Navigate(-1)
-                 
+                    router.push(-1)
                 }
             
         }).catch(
@@ -44,9 +43,7 @@ function LoginWithGoogle() {
             })
     }
     return (
-        <Box
-            className={`${classes.Signup_loading_btn_Googles}`}
-        >
+        <Box className={`${classes.Signup_loading_btn_Googles}`} >
             <LoadingButton onClick={login} variant="outlined"  loadingPosition="center" className={classes.logingoolgebtn}  startIcon={<FcGoogle />}> Continue with Google</LoadingButton>
         </Box>
     )

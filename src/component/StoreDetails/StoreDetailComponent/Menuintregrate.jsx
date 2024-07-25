@@ -2,8 +2,8 @@
 import React from "react"
 import useStyles from "../../../../Style"
 import Createcontext from "../../../../Hooks/Context"
-import { Link, NavLink } from "react-router-dom";
 import Button from '@mui/material/Button';
+import Link from "next/link";
 import Badge from '@mui/material/Badge';
 import Aos from "aos";
 import "aos/dist/aos.css"
@@ -18,14 +18,15 @@ import { FaRegUserCircle } from "react-icons/fa";
 import Cookies from 'universal-cookie';
 import { Menuintegration_login } from "../../Login/menu-integration_login";
 import Tooltip from '@mui/material/Tooltip';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import { modifystr } from "../../../../Hooks/Function";
 const Menuintregrate = ({tab = "Menu" }) => {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const { state, dispatch } = React.useContext(Createcontext)
-
+    const router =useRouter()
     function SelectionTab(item) {
-        Boolean(state.Embeddedstore[0]) && navigate (`/menu-integration/${modifystr(state.Embeddedstore[0]?.Store_Name)}/${modifystr(item)}/${state.Embeddedstore[0].id}`)
+        Boolean(state.Embeddedstore[0]) && router.push(`/menu-integration/${modifystr(state.Embeddedstore[0]?.Store_Name)}/${modifystr(item)}/${state.Embeddedstore[0].id}`)
     }
     const cookies = new Cookies();
     const [open, setOpen] = React.useState(false);

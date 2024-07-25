@@ -133,7 +133,6 @@ export default function DispensoriesDetails(props) {
                 if (Category !== undefined) {
                     uniqueUsersByID.map((data) => {
                         if (Category === data.name.toLowerCase()) {
-                            // SetFilterCategory(uniqueUsersByID)
                             ShowCategoryProduct(data.id, Category)
                         }
                         return data

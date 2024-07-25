@@ -1,15 +1,14 @@
 import React from 'react'
 import Newsletter from '@/component/home/HomePageDealsSignup/';
-// import {PrivacyPolicy}  from "@/component/ScoPage/CommenpageSeo";
+import {PrivacyPolicy}  from "@/component/ScoPage/CommenpageSeo";
 import { useRef } from 'react';
-
 import Privacypolicytb from '@/component/tableofcontent/Privatepolicy'
 const Privacypolicy = () => {
   const ref = useRef(null);
   return (
     <>
     <div className='term_condition'>
-      {/* <PrivacyPolicy></PrivacyPolicy> */}
+      <PrivacyPolicy></PrivacyPolicy>
       <div className="container-fluid">
         <div className="tc_hero">
           <h1 className="page_heading">{`Weedx.io Privacy policy`}</h1>

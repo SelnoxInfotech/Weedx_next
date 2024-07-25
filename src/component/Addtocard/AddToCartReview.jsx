@@ -225,6 +225,7 @@ const AddToCartReview = () => {
 
                             {AfterDiscount?.map((ele, index) => {
                                 let wrigh = Boolean(ele.Price.Weight) ? ele.Price.Weight : `${ele.Price.Unit} Unit`;
+                                console.log(ele)
                                 return (
                           <>
                                     <div className="ssss row py-3 px-0 border-top border-bottom justify-content-center   align-items-center" key={index}>
@@ -339,7 +340,7 @@ const AddToCartReview = () => {
                                             <Image
                                             width={100}
                                             height={100}
-                                            src={`https://selnoxmedia.s3.amazonaws.com/${ele.Image}`}
+                                            src={`${ele.Image}`}
                                              alt={ele.ProductName}
                                              title={ele.ProductName}
                                              unoptimized={true}

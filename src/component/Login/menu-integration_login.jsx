@@ -8,7 +8,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import useStyles from "../../styles/style"
 import { useForm } from "react-hook-form";
 import axios from 'axios';
@@ -34,7 +34,6 @@ export function Menuintegration_login({ open, setOpen }) {
     const Swal = require('sweetalert2')
  
     const { state, dispatch } = React.useContext(Createcontext)
-    const Navigate = useNavigate()
     const [loading, Setloading] = React.useState(false)
     const classes = useStyles()
     const [showPassword, setShowPassword] = React.useState(false);

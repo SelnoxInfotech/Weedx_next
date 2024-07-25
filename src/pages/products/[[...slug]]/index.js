@@ -20,7 +20,6 @@ const Product = () => {
     const { slug } = navigate.query;
     const params = slug ? (slug[_.findIndex(slug, item => !isNaN(parseInt(item)))] || 0) : 0;
     const classes = useStyles()
-    const location = useRouter()
     const { state } = React.useContext(Createcontext)
     const [loading, SetLoading] = React.useState(true)
     const [subcategories, setsubcategories] = useState([])

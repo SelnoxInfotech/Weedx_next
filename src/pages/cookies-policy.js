@@ -1,6 +1,6 @@
 import React from "react";
 import Newsletter from "@/component/home/HomePageDealsSignup/";
-// import { CookiesPolicy } from '../../Component/ScoPage/CommenpageSeo';
+import { CookiesPolicy } from '@/Component/ScoPage/CommenpageSeo';
 import Link from "next/link";
 import Cockiestable from "@/component/tableofcontent/Cockiestable";
 import { useRef } from "react";
@@ -11,7 +11,7 @@ const Termsconditions = () => {
 
   return (
     <>
-      {/* <CookiesPolicy></CookiesPolicy> */}
+      <CookiesPolicy></CookiesPolicy>
       <div className="term_condition">
         <div className="container-fluid">
           <div className="tc_hero">

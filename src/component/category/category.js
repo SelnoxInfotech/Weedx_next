@@ -1,17 +1,12 @@
 import * as React from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
-// import { LazyLoadImage } from 'react-lazy-load-image-component';
-// import { useLocation, useParams } from 'react-router-dom';
 import { useRouter } from 'next/router';
 import Categoryskeleton from "../skeleton/categoryskeleton";
 import { FirstLetterCaps } from "../../hooks/utilis/commonfunction"
 import Image from 'next/image';
-
-
 const Category = ({ ShowCategoryProduct, Category, Skeleton }) => {
     const Params = useRouter().query;
     const location = useRouter()
-
     return (
         <React.Fragment>
             <div className=' CategoryBordrr'>

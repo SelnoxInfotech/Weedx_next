@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import axios from "axios";
 import LawStateContent from "@/component/LawsComponent/LawStateContent";
-import IsWeedLegalState from "@/component/LawsComponent/IsWeedLegalState";
 import Content from "@/component/LawsComponent/LawContentsJson";
 import Bgheader from "@/component/bgheader/Bgheader";
 import _ from "lodash";

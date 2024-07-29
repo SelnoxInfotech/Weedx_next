@@ -172,9 +172,6 @@ const NewProductDetails = (props) => {
     })
   };
 
-
-
-
   React.useEffect(() => {
     Product_Get_Review(Product.id).then((res) => {
       SetReview(() => {
@@ -186,6 +183,7 @@ const NewProductDetails = (props) => {
       console.error(e)
     })
   }, [Product, api])
+  
   function handleDelete(id) {
     Delete_Review(id).then((res) => {
       res.data.status === 'success' && SetApi(!api)
@@ -314,8 +312,6 @@ export default NewProductDetails
 
 export async function getServerSideProps(context) {
  
-
-
 
    return {
      props: {

@@ -4,7 +4,6 @@ async function location(value, type) {
   try {
     const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=AIzaSyBRchIzUTBZskwvoli9S0YxLdmklTcOicU`);
     const data = await response.json();
-
     if (data.error_message) {
       return {
         city: 'New-York',
@@ -156,8 +155,6 @@ async function location(value, type) {
       }
 
     }
-
-
     return {
       city  ,
       state,

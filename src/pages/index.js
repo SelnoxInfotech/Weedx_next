@@ -1,13 +1,13 @@
 import React from "react";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import dynamic from 'next/dynamic'
 import { useRouter } from "next/router";
 const inter = Inter({ subsets: ["latin"] });
 import { HomePageSco } from "../component/ScoPage/HomePageSco"
+import dynamic from 'next/dynamic'
 const HomePageBanner = dynamic(() => import('../component/home/homepagebanner'));
 const CategoryProduct = dynamic(() => import('../component/category/category'));
-const DeliveryServices = dynamic(() => import('../component/home/deliveryservice'));
+const DeliveryServices = dynamic(() => import('../component/home/deliveryservice') , {ssr:true});
 const HomePageWeedBanner = dynamic(() => import('../component/home/HomePageWeedBanner'));
 const Map = dynamic(() => import('../component/home/map/map'));
 const Staticcontent = dynamic(() => import('../component/home/staticcontent'));

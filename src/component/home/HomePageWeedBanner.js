@@ -41,8 +41,9 @@ const HomePageWeedBanner=()=>{
                     <SwiperSlide key={index}>
               
                <div   className='col-12 homePageBanner_container' >
-               <a href={ ele.Link !== null ? ele.Link : "#" }>
-                        <img
+               <a href={ ele.Link !== null ? ele.Link : "#" } target="_blank">
+                        <img 
+                        
                         // onError={event => {
                         //     event.target.src = "/image/VANNER_2.png"
                         //     event.onerror = null
@@ -72,7 +73,7 @@ const HomePageWeedBanner=()=>{
                         return (
                             <SwiperSlide key={index}>
                             <div className='col-12 homePageBanner_container'>
-                                <a href={ ele.Link !== null ? ele.Link : "#" }>
+                                <a href={ ele.Link !== null ? ele.Link : "#" } target="_blank">
                                 <img  unoptimized={true}
                                         width={100} height={10}
                                         loader={imageLoader}

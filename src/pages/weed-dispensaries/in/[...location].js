@@ -8,11 +8,14 @@ import useStyles from "@/styles/style";
 import dynamic from 'next/dynamic'
 const WeedDispansires = dynamic(() => import('../../../component/WeedDispansires/Weed_Dispansires'));
 import Createcontext from "@/hooks/context"
+<<<<<<< HEAD
 // import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
 // import { useSession } from 'next-session';
+=======
+>>>>>>> 4932984 (deliver)
 import { useRouter } from 'next/router';
 import axios, { Axios } from "axios";
-import { DespensioriesItem } from '../../../hooks/apicall/api';
+
 import Wronglocation from "../../../component/skeleton/Wronglocation";
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Loader from "../../../component/Loader/Loader";

@@ -123,13 +123,13 @@ const SideNavbar = ({ closeNav, Open }) => {
                 <hr></hr>
                 <div className="col-12 Slider_content_center " >
                     <Link className="LinkColor"
-                     href={`weed-dispensaries/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}><p onClick={closeNav} className="m-0 d-flex"><span ><FaClinicMedical color="#31B655" fontSize={25} /></span>Dispensaries</p></Link>
+                     href={`/weed-dispensaries/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}><p onClick={closeNav} className="m-0 d-flex"><span ><FaClinicMedical color="#31B655" fontSize={25} /></span>Dispensaries</p></Link>
                 </div>
 
                 <hr></hr>
 
                 <div className="col-12 Slider_content_center ">
-                    <Link className="LinkColor" href={`weed-deliveries/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}><p onClick={closeNav} className="m-0 d-flex"><span><TbTruckDelivery color="#31B655" fontSize={25} /></span>Deliveries</p></Link>
+                    <Link className="LinkColor" href={`/weed-deliveries/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}><p onClick={closeNav} className="m-0 d-flex"><span><TbTruckDelivery color="#31B655" fontSize={25} /></span>Deliveries</p></Link>
                 </div>
                 <hr></hr>
                 {/* <div className="col-12 Slider_content_center " >

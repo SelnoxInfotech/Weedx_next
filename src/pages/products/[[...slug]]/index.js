@@ -4,19 +4,19 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 // import { useLocation, usenavigate.push, useParams } from "react-router-dom"
 import { useRouter } from "next/router";
-import useStyles from "../../../styles/style"
+import useStyles from "../../../../src/styles/style"
 import LoadingButton from '@mui/lab/LoadingButton';
 import Box from '@mui/material/Box';
-import { ProductSeo, ProductCategorySeo } from "../../../component/ScoPage/ProductSeo"
-import SkeletonCard from '../../../component/skeleton/DashBoardSkeleton/DispensoriesAddressSkeleton';
-import ProductSearchResult from "../../../component/productcard/ProductSearchResult"
-import Createcontext from "../../../hooks/context"
+import { ProductSeo, ProductCategorySeo } from "@/component/ScoPage/ProductSeo"
+import SkeletonCard from '@/component/skeleton/DashBoardSkeleton/DispensoriesAddressSkeleton';
+import ProductSearchResult from "@/component/productcard/ProductSearchResult"
+import Createcontext from "@/hooks/context"
 import _ from "lodash"
-import { GetProduct, CategoryProductsearch, SubcategoryProduct , SubCategoryApibyname } from "../../../hooks/apicall/api"
-import { modifystr } from "../../../hooks/utilis/commonfunction";
+import { GetProduct, CategoryProductsearch, SubcategoryProduct, SubCategoryApibyname } from "@/hooks/apicall/api"
+import { modifystr } from "@/hooks/utilis/commonfunction";
 import Currentlocation from "@/component/currentlocation/CurrentLocation";
 const Product = () => {
-    const navigate= useRouter();
+    const navigate = useRouter();
     const { slug } = navigate.query;
     const params = slug ? (slug[_.findIndex(slug, item => !isNaN(parseInt(item)))] || 0) : 0;
     const classes = useStyles()
@@ -26,7 +26,7 @@ const Product = () => {
     const [Product, SetProduct] = React.useState([])
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
-    
+
     async function ShowCategoryProduct(id, name) {
         await navigate.push(`/products/${modifystr(name.toLowerCase())}/${id}`);
         await setSelectedOption(null)
@@ -72,7 +72,7 @@ const Product = () => {
                 setsubcategories([])
                 console.trace(error)
             })
-           
+
         }
         else {
             if (slug?.length === 2) {
@@ -116,7 +116,7 @@ const Product = () => {
                         }
                         else {
                             SetLoading(false)
-                            
+
                             SetProduct(response.data)
                         }
                     }
@@ -125,26 +125,26 @@ const Product = () => {
         }
     }, [state.Location, params])
 
-    function breadcrumCountry(params ,  name) {
+    function breadcrumCountry(params, name) {
         if (params === "Product") {
             navigate.push(`/products`)
         }
         else if (params === "categoryname") {
-         const categoryfind = _.find(Category, function(o) { return o.name ===  name.toUpperCase()})
-            navigate.push(`/products/${categoryfind.name.toLowerCase()}/${categoryfind.id}` )
+            const categoryfind = _.find(Category, function (o) { return o.name === name.toUpperCase() })
+            navigate.push(`/products/${categoryfind.name.toLowerCase()}/${categoryfind.id}`)
         }
     }
     return (
         <React.Fragment>
             {state.permission === false && <Currentlocation></Currentlocation>}
-            <div style={{cursor:"pointer"}}>
+            <div style={{ cursor: "pointer" }}>
                 <span onClick={() => navigate.push("/")}>{"Home"}</span>
                 {<span> {">"} <span onClick={() => breadcrumCountry("Product")}>Product</span></span>}
-                {(navigate?.query?.slug !== undefined) && <span> {">"} <span onClick={() => breadcrumCountry("categoryname" , navigate?.query?.slug[0])}>{navigate?.query?.slug[0]}</span></span>}
-                {(navigate?.query?.slug !== undefined && navigate?.query?.slug?.length ===3) && <span> {">"} <span >{navigate?.query?.slug[1]}</span></span>}
+                {(location?.query?.slug !== undefined) && <span> {">"} <span onClick={() => breadcrumCountry("categoryname", location?.query?.slug[0])}>{location?.query?.slug[0]}</span></span>}
+                {(location?.query?.slug !== undefined && location?.query?.slug?.length === 3) && <span> {">"} <span >{location?.query?.slug[1]}</span></span>}
             </div>
-            {!params.id ? <ProductSeo location={navigate?.pathname}></ProductSeo> :
-            <ProductCategorySeo categoryname={slug[0]} location={navigate?.pathname} ></ProductCategorySeo>}
+            {!params.id ? <ProductSeo location={location?.pathname}></ProductSeo> :
+                <ProductCategorySeo categoryname={slug[0]} location={location?.pathname} ></ProductCategorySeo>}
             <div className="row">
                 <div className="col-12 mt-4">
                     <CategoryProduct Category={Category} ShowCategoryProduct={ShowCategoryProduct}></CategoryProduct>
@@ -161,7 +161,7 @@ const Product = () => {
                                         setIsDropdownOpen(!isDropdownOpen)
                                     }}>
                                         {selectedOption && (
-                                            <img  src={`${selectedOption.SubCategoryImage}`} alt={selectedOption.name} title={selectedOption.name} className="dropdown-option-image" />
+                                            <img src={`${selectedOption.SubCategoryImage}`} alt={selectedOption.name} title={selectedOption.name} className="dropdown-option-image" />
                                         )}
                                         <span className="dropdown-option-label">
                                             {selectedOption ? selectedOption.name : 'Sort by Subcategory '}
@@ -171,7 +171,7 @@ const Product = () => {
                                     <ul className={`dropdown-menu image_dropdown ${isDropdownOpen ? 'open' : ''}`}>
                                         {subcategories?.map((option, index) => (
                                             <li key={index} onClick={() => selectOption(option)}>
-                                                <img  src={`${option.SubCategoryImage}`} alt={option.name} title={option.name} className="dropdown-option-image" />
+                                                <img src={`${option.SubCategoryImage}`} alt={option.name} title={option.name} className="dropdown-option-image" />
                                                 <span className="dropdown-option-label">{option.name}</span>
                                             </li>
                                         ))}
@@ -184,12 +184,12 @@ const Product = () => {
                 <div className="col-12 center">
                     {
                         loading ?
-                            
+
                             <div className="col-12">
                                 <SkeletonCard />
                             </div>
                             :
-                            Product?.length !== 0 && Product !== undefined  ?
+                            Product?.length !== 0 && Product !== undefined ?
 
                                 <div className="col-12 mt-sm-4 mt-0">
                                     <ProductSearchResult RelatedProductResult={Product} title={C} />
@@ -212,14 +212,14 @@ const Product = () => {
                                                     <p>{`Apologies, this page is currently empty, but stay tuned as we're working to bring you exciting products soon!`}</p>
                                                 </div>
                                                 <div className="col-12 center height_Empty_btnDiv mt-2">
-                                                    <Box  className={`${classes.loadingBtnTextAndBack}`}  >
-                                                        <LoadingButton  style={{width:"100%",height:"100%"}} variant="outlined" loading={false} type={'submit'}>{`Shop now`}</LoadingButton>
+                                                    <Box className={`${classes.loadingBtnTextAndBack}`}  >
+                                                        <LoadingButton style={{ width: "100%", height: "100%" }} variant="outlined" loading={false} type={'submit'}>{`Shop now`}</LoadingButton>
                                                     </Box>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                        </div> }
+                                </div>}
                 </div>
             </div>
         </React.Fragment>
@@ -229,48 +229,37 @@ export default Product
 
 
 
-// export async function getStaticProps() {
-//     const handleError = (error) => {
-//       console.error('Error fetching data:', error);
-//       return {
-//         props: {
-//           initialData: [],
-//           error: 'Failed to fetch data',
-//         },
-//       };
+
+// export const getServerSideProps = async (context) => {
+
+//     console.log(context.params.slug.length)
+//     const transformString = (str) => {
+//         return str
+//             .replace(/-/g, " ")  // Replace hyphens with spaces 
+//             .split(' ')          // Split the string into an array of words
+//             .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize the first letter of each word
+//             .join(' ');          // Join the words back into a single string
 //     };
-  
+//     let product = []
 //     try {
-//       const [banner, callcategory, bannner2 , brand] = await Promise.all([
-//         fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
-//         fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
-//         fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
-//         fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
-//       ]);
-  
-//       const [topbanner, category, bottembannner , getbrand] = await Promise.all([
-//         banner.json().catch(handleError),
-//         callcategory.json().catch(handleError),
-//         bannner2.json().catch(handleError),
-//         brand.json().catch(handleError)
-//       ]);
-  
-   
-//       const responseData = {
-//         topbanner: topbanner,
-//         category: category,
-//         bottembannner: bottembannner,
-//         brand:getbrand
-//       };
-  
-//       return {
-//         props: {
-//           initialData: responseData,
-//         },
-//         revalidate: 60,
-//       };
+//         if (context.params.slug.length === 2) {
+            
+//         }
+
+
+//         return {
+//             props: {
+
+//                 product: product,
+
+//             },
+//             revalidate: 60
+//         };
+
 //     } catch (error) {
-//       return handleError(error);
+//         console.error('Error fetching data:', error);
+//         return {
+//             notFound: true,
+//         };
 //     }
-//   }
-  
+// };

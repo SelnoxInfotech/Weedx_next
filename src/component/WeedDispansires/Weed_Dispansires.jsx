@@ -17,7 +17,7 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata , prod
     return (
         <React.Fragment>
 
-            <DispensariesSco location={locaton?.pathname}></DispensariesSco>
+            <DispensariesSco location={locaton?.asPath}></DispensariesSco>
             <div className="container">
                 <div className="row">
                     <div className="col-12 dispensories_main_container">

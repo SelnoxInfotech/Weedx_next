@@ -1,6 +1,6 @@
 import React from "react";
 import Newsletter from "@/component/home/HomePageDealsSignup/";
-import { CookiesPolicy } from '@/Component/ScoPage/CommenpageSeo';
+import { CookiesPolicy } from '@/component/ScoPage/CommenpageSeo';
 import Link from "next/link";
 import Cockiestable from "@/component/tableofcontent/Cockiestable";
 import { useRef } from "react";

@@ -166,7 +166,6 @@ async function location(value, type) {
       formatted_address
     };
   } catch (error) {
-    console.error(error);
     return {
       city: '',
       state: '',

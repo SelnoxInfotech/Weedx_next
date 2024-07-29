@@ -25,31 +25,37 @@ import { WhisList } from "@/component/Whishlist/WhisList"
 import { Navigation } from 'swiper/modules';
 import { modifystr } from "../../hooks/utilis/commonfunction";
 import Image from "next/image";
-const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProductID, title , link="products" }) => {
+const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProductID, title, link = "products" }) => {
     const { state, dispatch } = React.useContext(Createcontext)
     const classes = useStyles()
     const cookies = new Cookies();
     const location = useRouter()
-       let token_data = cookies.get('User_Token_access')
-       let accessToken 
-       if (typeof window !== 'undefined') {
-            accessToken = localStorage.getItem('User_Token_access');
-       }
-    if(  Boolean(accessToken) ){ token_data  =  accessToken}
+    let token_data = cookies.get('User_Token_access')
+    let accessToken
+    if (typeof window !== 'undefined') {
+        accessToken = localStorage.getItem('User_Token_access');
+    }
+    if (Boolean(accessToken)) { token_data = accessToken }
     const [CartClean, SetCartClean] = useState(false)
     const [adding, setadding] = React.useState('')
     const [popup, SetPopup] = useState(true)
     const [NewData, SetNewData] = useState([])
     const [showdata, Setshowdata] = useState([])
     const [Whishlist, SetWishList] = useState(false)
-    const [AddTOCard, SetAddToCard] = useState(() => {
+    const [AddTOCard, SetAddToCard] = useState([]);  
+
+ 
+    React.useEffect(() => {
+      if (typeof window !== 'undefined') {
         const saved = localStorage.getItem("items");
-        const initialValue = JSON.parse(saved);
-        return initialValue || []
-    })
+        if (saved) {
+          SetAddToCard(JSON.parse(saved));
+        }
+      }
+    }, []);
 
     async function AddToCart(Event, counter, SelectWeight, handleClose) {
-       
+  console.log(Event)
         setadding(Event.id)
         const AddData = _.filter(Event.Prices, Price => Price);
         const PriceArrry = _.find(AddData[0].Price, Price => Price.id === SelectWeight);
@@ -74,9 +80,9 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                 Sub_Category_id: Event.Sub_Category_id,
                 SubcategoryName: Event.SubcategoryName,
                 StoreName: Event.StoreName,
-                Country:Event.Store_Country,
+                Country: Event.Store_Country,
                 State: Event.Store_State,
-                City:Event.Store_City 
+                City: Event.Store_City
 
             })
             await axios.post("https://api.cannabaze.com/UserPanel/Add-AddtoCart/",
@@ -93,9 +99,9 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                     StoreName: Event.StoreName,
                     Sub_Category_id: Event.Sub_Category_id,
                     SubcategoryName: Event.SubcategoryName,
-                    Country:Event.Store_Country,
+                    Country: Event.Store_Country,
                     State: Event.Store_State,
-                    City:Event.Store_City 
+                    City: Event.Store_City
 
                 }
                 , config
@@ -138,9 +144,9 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                 Sub_Category_id: Event.Sub_Category_id,
                 SubcategoryName: Event.SubcategoryName,
                 StoreName: Event.StoreName,
-                Country:Event.Store_Country,
+                Country: Event.Store_Country,
                 State: Event.Store_State,
-                City:Event.Store_City 
+                City: Event.Store_City
 
             }
             SetNewData(Arry)
@@ -184,17 +190,13 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
             dispatch({ type: 'Cart_subTotal' })
 
         }
-        
+
     }
-  
+
     React.useEffect(() => {
-        localStorage.setItem('items', JSON.stringify(AddTOCard))
-        const scrollToTop = () => {
-            document.documentElement.scrollTo({
-              top: 0,
-              left: 0,
-              behavior: "instant", // Optional if you want to skip the scrolling animation
-          });
+        if (typeof window !== 'undefined') {
+
+            localStorage.setItem('items', JSON.stringify(AddTOCard))
         }
     }, [AddTOCard])
 
@@ -230,268 +232,264 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
             return "Free Shipping"
         }
     }
-      React.useEffect(  ()=>{
-        if(currentProductID === undefined){
-            let a =  RelatedProductResult.filter((item)=>{
-                return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating !== 0
-            })
-            let b =  RelatedProductResult.filter((item)=>{
-                return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating === 0
-            })
-            Setshowdata(a.concat(b))
-        }else{
-            let ababa=  RelatedProductResult.filter((item)=>{
-                return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item?.category_name === CategoryName?.category_name
-            })
-                if(ababa?.length ===1){
-                    axios.get(`https://api.cannabaze.com/UserPanel/Get-ProductAccordingToDispensaries/${CategoryName?.category_id}`).then((res)=>{
-                      Setshowdata(res.data)
-                    })
 
-                }else{
-                   Setshowdata(ababa)
-                }
-        }
-        const scrollToTop = () => {
-            document.documentElement.scrollTo({
-              top: 0,
-              left: 0,
-              behavior: "instant",
-          });
-        }
-    },[RelatedProductResult])
+    //   React.useEffect(  ()=>{
+    //     if(currentProductID === undefined){
+        //         let a =  RelatedProductResult.filter((item)=>{
+        //             return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating !== 0
+        //         })
+        //         let b =  RelatedProductResult.filter((item)=>{
+        //             return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating === 0
+        //         })
+    //         Setshowdata(a.concat(b))
+    //     }else{
+    //         let ababa=  RelatedProductResult.filter((item)=>{
+    //             return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item?.category_name === CategoryName?.category_name
+    //         })
+    //             if(ababa?.length ===1){
+    //                 axios.get(`https://api.cannabaze.com/UserPanel/Get-ProductAccordingToDispensaries/${CategoryName?.category_id}`).then((res)=>{
+    //                   Setshowdata(res.data)
+    //                 })
+
+    //             }else{
+    //                Setshowdata(ababa)
+    //             }
+    //     }
+
+    // },[RelatedProductResult])
     return (
         <React.Fragment>
             <div className="row mx-0 marginProductSearchResult">
-               {Boolean(showdata?.length) && <div className="col-12 mt-sm-4 mt-2 p-0 fontStyle">
-                   {title !== undefined  && <h1 className="section_main_title ">{title}</h1>}
-                </div>}
-                { Boolean(location.pathname.includes('/menu-integration') || (title === 'You may also like')) ? 
+                {Boolean(RelatedProductResult?.length) &&
+                    <div className="col-12 mt-sm-4 mt-2 p-0 fontStyle">
+                         <h1 className="section_main_title ">{title}</h1>
+                    </div>}
+                {Boolean(location.pathname.includes('/menu-integration') || (title === 'You may also like')) ?
                     <div className="product_card_wrapper p-0">
-                          <Swiper className="mySwiper similerproduxt"
-                           spaceBetween={50}
-                           slidesPerView={6}
-                           navigation={true} modules={[Navigation]}
-                           breakpoints={{
-                             0: {
-                               slidesPerView: 1,
-                             },
-                             480:{
-                               slidesPerView:3,
-                               spaceBetween:20,
-                             },
-                             768:{
-                               slidesPerView:3,
-                               spaceBetween:20,
-                             },
-                             992:{
-                               slidesPerView:4
-                             },
-                             1296:{
-                               slidesPerView:5
-                             },
-                             
-                           }}
-                           >
+                        <Swiper className="mySwiper similerproduxt"
+                            spaceBetween={50}
+                            slidesPerView={6}
+                            navigation={true} modules={[Navigation]}
+                            breakpoints={{
+                                0: {
+                                    slidesPerView: 1,
+                                },
+                                480: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 20,
+                                },
+                                768: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 20,
+                                },
+                                992: {
+                                    slidesPerView: 4
+                                },
+                                1296: {
+                                    slidesPerView: 5
+                                },
+
+                            }}
+                        >
+                            {
+                                RelatedProductResult?.map((items, index) => {
+                                    if (items.id !== currentProductID) {
+                                        return (
+                                            <SwiperSlide key={index}>
+                                                <div className="productSearch_result_container" >
+                                                    {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <span className="discountTag">{((parseInt(items.Prices[0].Price[0].Price) - parseInt(items.Prices[0].Price[0].SalePrice)) / parseInt(items.Prices[0].Price[0].Price) * 100).toFixed(1)}% OFF</span>}
+                                                    <div className="productSearchResultImage_container">
+                                                        <div className="product_whish_list">
+
+                                                            <Box className={classes.productSearchIcons2}>
+                                                                <IconButton onClick={() => { handleWhishList(items.id) }} aria-label="Example">
+                                                                    {
+                                                                        state.login ? state.WishList[items.id] ? <AiFillHeart color="31B665"></AiFillHeart> : <AiOutlineHeart color="31B665" /> : <AiOutlineHeart color="31B665" />
+                                                                    }
+                                                                </IconButton>
+                                                            </Box>
+                                                        </div>
+                                                        <Link href={`/${link}/${modifystr(items.category_name.toLowerCase())}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${modifystr(items.Product_Name.toLowerCase())}/${items.id}`}
+
+                                                            state={{
+                                                                prevuisurl: location.pathname,
+                                                                id: items.id
+                                                            }}  >
+                                                            <Image
+                                                                unoptimized={true}
+                                                                className="product_search_result_image"
+                                                                width={100}
+                                                                height={100}
+                                                                src={`${items?.images[0]?.image}`}
+
+                                                                alt={items.Product_Name}
+                                                                title={items.Product_Name}
+                                                            />
+                                                        </Link>
+                                                    </div>
+                                                    <div className=" product_search_result_content_div ">
+                                                        <Link href={`/${link}/${items.category_name.toLowerCase()}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${items.Product_Name.replace(/%20| /g, "-").toLowerCase()}/${items.id}`} state={{
+                                                            prevuisurl: location.pathname,
+                                                            id: items.id
+                                                        }} >
+                                                            <p className="productSearchResultParagraph text-truncate">{items.Product_Name}</p>
+
+                                                            <p className="product_search_result_sub_heading text-truncate">by {items.StoreName}</p>
+                                                            <div className="product_category_list">
+                                                                <span className="product_search_result_span1">15{items.lab_Result !== "Magnesium" ? '%' : "Mg."} THC | 0.2{items.lab_Result !== "Magnesium" ? '%' : "Mg."} CBD</span>
+                                                                <div className="product_cart_review">
+                                                                    {new Array(items.rating).fill(null).map((itwm, index) => (
+                                                                        <BsStarFill key={index + 1} size={16} color="#31B665" className="product_search_rating_star" />
+                                                                    ))}
+
+                                                                    {new Array(5 - items.rating).fill(null).map((item, index) => (
+                                                                        <BsStar key={index + 1} size={16} color="#31B665" className="product_search_rating_star" />
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                            <div className=" productPriceDivHeight">
+                                                                <p className="productSearch text-truncate"><span className="productSearchPrice">${parseInt(items.Prices[0]?.Price[0]?.SalePrice)}  {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <del className="text-muted">${parseInt(items.Prices[0].Price[0].Price)}</del>} </span> per {items.Prices[0].Price[0].Weight ? items.Prices[0].Price[0].Weight : `${items.Prices[0].Price[0].Unit} Unit`}</p>
+                                                            </div>
+                                                            <div className="discount_boc">{
+                                                                items?.CategoryCoupoun?.length !== 0 || items?.ProductCoupoun?.length !== 0 && <div className="discountinfo">
+                                                                    <span className="carddiscountoffer">{discountshoer(items.CategoryCoupoun, items.ProductCoupoun)} </span>  and more Offers
+                                                                </div>
+                                                            }</div>
+
+                                                        </Link>
+                                                        <div className="my-2">
+                                                            <Box className={`center ${classes.loadingBtnTextAndBack}`}>
+                                                                {
+                                                                    items?.Prices[0].Price.length > 1
+                                                                        ?
+                                                                        <ProductIncDecQuantity popup={popup} setadding={setadding}
+                                                                            adding={adding} SetPopup={SetPopup} items={items} AddToCart={AddToCart} />
+                                                                        :
+
+                                                                        items?.Prices[0].Price[0].Stock === "IN Stock" ?
+                                                                            <LoadingButton loading={adding === items.id} loadingIndicator={<CircularProgress color="inherit" size={16} />}
+                                                                                onClick={() => { AddToCart(items) }} >
+                                                                                <span><FaShoppingCart size={18} /> </span> Add To Cart
+                                                                            </LoadingButton>
+                                                                            :
+                                                                            <LoadingButton className={`${classes.odsbtn}`} >
+                                                                                <span><FaShoppingCart size={18} /> </span>  Out of Stock
+                                                                            </LoadingButton>
+                                                                }
+                                                                {
+                                                                    CartClean && <AddToCartPopUp CartClean={"center"} SetCartClean={SetCartClean} NewData={NewData} SetAddToCard={SetAddToCard} />
+                                                                }
+                                                            </Box>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </SwiperSlide>
+                                        )
+                                    }
+                                })
+                            }
+                        </Swiper>
+                    </div>
+                    :
+                    <div className="product_card_wrapper p-0 ppddd">
                         {
-                            showdata?.map((items, index) => {
+                            // Boolean( showdata.length !== 0) ?
+                            RelatedProductResult?.map((items, index) => {
                                 if (items.id !== currentProductID) {
                                     return (
-                                        <SwiperSlide key={index}>
-                                            <div className="productSearch_result_container" >
-                                                {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <span className="discountTag">{((parseInt(items.Prices[0].Price[0].Price) - parseInt(items.Prices[0].Price[0].SalePrice)) / parseInt(items.Prices[0].Price[0].Price) * 100).toFixed(1)}% OFF</span>}
-                                                <div className="productSearchResultImage_container">
-                                                    <div className="product_whish_list">
+                                        <div className="productSearch_result_container" key={index}>
+                                            {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <span className="discountTag">{((parseInt(items.Prices[0].Price[0].Price) - parseInt(items.Prices[0].Price[0].SalePrice)) / parseInt(items.Prices[0].Price[0].Price) * 100).toFixed(1)}% OFF</span>}
+                                            <div className="productSearchResultImage_container">
+                                                <div className="product_whish_list">
 
-                                                        <Box className={classes.productSearchIcons2}>
-                                                            <IconButton onClick={() => { handleWhishList(items.id) }} aria-label="Example">
-                                                                {
-                                                                    state.login ? state.WishList[items.id] ? <AiFillHeart color="31B665"></AiFillHeart> : <AiOutlineHeart color="31B665" /> : <AiOutlineHeart color="31B665" />
-                                                                }
-                                                            </IconButton>
-                                                        </Box>
-                                                    </div>
-                                                    <Link href={`/${link}/${modifystr(items.category_name.toLowerCase())}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${modifystr(items.Product_Name.toLowerCase())}/${items.id}`}
+                                                    <Box className={classes.productSearchIcons2}>
+                                                        <IconButton onClick={() => { handleWhishList(items.id) }} aria-label="Example">
+                                                            {
+                                                                state.login ? state.WishList[items.id] ? <AiFillHeart color="31B665"></AiFillHeart> : <AiOutlineHeart color="31B665" /> : <AiOutlineHeart color="31B665" />
+                                                            }
+                                                        </IconButton>
+                                                    </Box>
+                                                </div>
+                                                <Link href={`/${link}/${modifystr(items.category_name.toLowerCase())}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${modifystr(items.Product_Name.toLowerCase())}/${items.id}`}
 
                                                     state={{
                                                         prevuisurl: location.pathname,
-                                                        id:items.id
-                                                        }}  >
-                                                        <Image
+                                                        id: items.id
+                                                    }}  >
+                                                    <Image
                                                         unoptimized={true}
-                                                            className="product_search_result_image"
-                                                           width={100}
-                                                           height={100}
-                                                            src={`${items?.images[0]?.image}`}
-                                                            
-                                                            alt={items.Product_Name}
-                                                            title={items.Product_Name}
-                                                        />
-                                                    </Link>
-                                                </div>
-                                                <div className=" product_search_result_content_div ">
-                                                    <Link href={`/${link}/${items.category_name.toLowerCase()}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${items.Product_Name.replace(/%20| /g, "-").toLowerCase()}/${items.id}`}  state={{
-                                                        prevuisurl: location.pathname,
-                                                        id:items.id
-                                                        }} >
-                                                        <p className="productSearchResultParagraph text-truncate">{items.Product_Name}</p>
+                                                        className="product_search_result_image"
+                                                        width={100}
+                                                        height={100}
+                                                        src={`${items?.images[0]?.image}`}
 
-                                                        <p className="product_search_result_sub_heading text-truncate">by {items.StoreName}</p>
-                                                        <div className="product_category_list">
-                                                            <span className="product_search_result_span1">15{items.lab_Result !== "Magnesium" ? '%' : "Mg."} THC | 0.2{items.lab_Result !== "Magnesium" ? '%' : "Mg."} CBD</span>
-                                                            <div className="product_cart_review">
-                                                                { new Array(items.rating).fill(null).map((itwm , index) => (
-                                                                    <BsStarFill key={index +1}  size={16} color="#31B665" className="product_search_rating_star" />
-                                                                ))}
-
-                                                                {new Array(5 - items.rating).fill(null).map((item , index) => (
-                                                                    <BsStar  key={index +1} size={16} color="#31B665" className="product_search_rating_star" />
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                        <div className=" productPriceDivHeight">
-                                                            <p className="productSearch text-truncate"><span className="productSearchPrice">${parseInt(items.Prices[0]?.Price[0]?.SalePrice)}  {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <del className="text-muted">${parseInt(items.Prices[0].Price[0].Price)}</del>} </span> per {items.Prices[0].Price[0].Weight ? items.Prices[0].Price[0].Weight : `${items.Prices[0].Price[0].Unit} Unit`}</p>
-                                                        </div>
-                                                        <div className="discount_boc">{
-                                                            items?.CategoryCoupoun?.length !== 0 || items?.ProductCoupoun?.length !== 0 && <div className="discountinfo">
-                                                                <span className="carddiscountoffer">{discountshoer(items.CategoryCoupoun, items.ProductCoupoun)} </span>  and more Offers
-                                                            </div>
-                                                        }</div>
-
-                                                    </Link>
-                                                    <div className="my-2">
-                                                        <Box className={`center ${classes.loadingBtnTextAndBack}`}>
-                                                            {
-                                                                items?.Prices[0].Price.length > 1
-                                                                    ?
-                                                                    <ProductIncDecQuantity popup={popup} setadding={setadding}
-                                                                        adding={adding} SetPopup={SetPopup} items={items} AddToCart={AddToCart} />
-                                                                    :
-
-                                                                    items?.Prices[0].Price[0].Stock === "IN Stock" ?
-                                                                            <LoadingButton loading={adding === items.id} loadingIndicator={<CircularProgress color="inherit" size={16} />}
-                                                                                onClick={() => { AddToCart(items) }} >
-                                                                                <span><FaShoppingCart  size={18} /> </span> Add To Cart
-                                                                            </LoadingButton>
-                                                                        :
-                                                                            <LoadingButton className={`${classes.odsbtn}`} >
-                                                                            <span><FaShoppingCart size={18} /> </span>  Out of Stock
-                                                                            </LoadingButton>
-                                                            }
-                                                            {
-                                                                CartClean && <AddToCartPopUp CartClean={"center"} SetCartClean={SetCartClean} NewData={NewData} SetAddToCard={SetAddToCard} />
-                                                            }
-                                                        </Box>
-                                                    </div>
-                                                </div>
+                                                        alt={items.Product_Name}
+                                                        title={items.Product_Name}
+                                                    />
+                                                </Link>
                                             </div>
-                                        </SwiperSlide>
-                                    )
-                                }
-                            })
-                        }
-                        </Swiper>
-                    </div>
-                  :
-                    <div className="product_card_wrapper p-0 ppddd">
-                    { 
-                    // Boolean( showdata.length !== 0) ?
-                        showdata?.map((items, index) => {
-                            if (items.id !== currentProductID) {
-                                return (
-                                    <div className="productSearch_result_container" key={index}>
-                                        {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <span className="discountTag">{((parseInt(items.Prices[0].Price[0].Price) - parseInt(items.Prices[0].Price[0].SalePrice)) / parseInt(items.Prices[0].Price[0].Price) * 100).toFixed(1)}% OFF</span>}
-                                        <div className="productSearchResultImage_container">
-                                            <div className="product_whish_list">
-
-                                                <Box className={classes.productSearchIcons2}>
-                                                    <IconButton onClick={() => { handleWhishList(items.id) }} aria-label="Example">
-                                                        {
-                                                            state.login ? state.WishList[items.id] ? <AiFillHeart color="31B665"></AiFillHeart> : <AiOutlineHeart color="31B665" /> : <AiOutlineHeart color="31B665" />
-                                                        }
-                                                    </IconButton>
-                                                </Box>
-                                            </div>
-                                            <Link href={`/${link}/${modifystr(items.category_name.toLowerCase())}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${modifystr(items.Product_Name.toLowerCase())}/${items.id}`}
-
-                                            state={{
-                                                prevuisurl: location.pathname,
-                                                id:items.id
-                                                }}  >
-                                                <Image
-                                                unoptimized={true}
-                                                    className="product_search_result_image"
-                                                  width={100}
-                                                  height={100}
-                                                    src={`${items?.images[0]?.image}`}
-                                                   
-                                                    alt={items.Product_Name}
-                                                    title={items.Product_Name}
-                                                />
-                                            </Link>
-                                        </div>
-                                        <div className=" product_search_result_content_div ">
-                                            <Link href={`/${link}/${items.category_name.toLowerCase()}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${items.Product_Name.replace(/%20| /g, "-").toLowerCase()}/${items.id}`}  state={{
-                                                prevuisurl: location.pathname,
-                                                id:items.id
+                                            <div className=" product_search_result_content_div ">
+                                                <Link href={`/${link}/${items.category_name.toLowerCase()}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${items.Product_Name.replace(/%20| /g, "-").toLowerCase()}/${items.id}`} state={{
+                                                    prevuisurl: location.pathname,
+                                                    id: items.id
                                                 }} >
-                                                <p className="productSearchResultParagraph text-truncate">{items.Product_Name}</p>
+                                                    <p className="productSearchResultParagraph text-truncate">{items.Product_Name}</p>
 
-                                                <p className="product_search_result_sub_heading text-truncate">by {items.StoreName}</p>
-                                                <div className="product_category_list">
-                                                    <span className="product_search_result_span1">15{items.lab_Result !== "Magnesium" ? '%' : "Mg."} THC | 0.2{items.lab_Result !== "Magnesium" ? '%' : "Mg."} CBD</span>
-                                                    <div className="product_cart_review">
-                                                        { new Array(items.rating).fill(null).map((itwm , index) => (
-                                                            <BsStarFill key={index +1}  size={16} color="#31B665" className="product_search_rating_star" />
-                                                        ))}
+                                                    <p className="product_search_result_sub_heading text-truncate">by {items.StoreName}</p>
+                                                    <div className="product_category_list">
+                                                        <span className="product_search_result_span1">15{items.lab_Result !== "Magnesium" ? '%' : "Mg."} THC | 0.2{items.lab_Result !== "Magnesium" ? '%' : "Mg."} CBD</span>
+                                                        <div className="product_cart_review">
+                                                            {new Array(items.rating).fill(null).map((itwm, index) => (
+                                                                <BsStarFill key={index + 1} size={16} color="#31B665" className="product_search_rating_star" />
+                                                            ))}
 
-                                                        {new Array(5 - items.rating).fill(null).map((item , index) => (
-                                                            <BsStar  key={index +1} size={16} color="#31B665" className="product_search_rating_star" />
-                                                        ))}
-                                                        <span className="product_search_result_sub_heading ">({items.TotalRating})</span>
+                                                            {new Array(5 - items.rating).fill(null).map((item, index) => (
+                                                                <BsStar key={index + 1} size={16} color="#31B665" className="product_search_rating_star" />
+                                                            ))}
+                                                            <span className="product_search_result_sub_heading ">({items.TotalRating})</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div className=" productPriceDivHeight">
-                                                    <p className="productSearch text-truncate"><span className="productSearchPrice">${parseInt(items.Prices[0]?.Price[0]?.SalePrice)}  {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <del className="text-muted">${parseInt(items.Prices[0].Price[0].Price)}</del>} </span> per {items.Prices[0].Price[0].Weight ? items.Prices[0].Price[0].Weight : `${items.Prices[0].Price[0].Unit} Unit`}</p>
-                                                </div>
-                                                <div className="discount_boc">{
-                                                    items?.CategoryCoupoun?.length !== 0 || items?.ProductCoupoun?.length !== 0 && <div className="discountinfo">
-                                                        <span className="carddiscountoffer">{discountshoer(items.CategoryCoupoun, items.ProductCoupoun)} </span>  and more Offers
+                                                    <div className=" productPriceDivHeight">
+                                                        <p className="productSearch text-truncate"><span className="productSearchPrice">${parseInt(items.Prices[0]?.Price[0]?.SalePrice)}  {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <del className="text-muted">${parseInt(items.Prices[0].Price[0].Price)}</del>} </span> per {items.Prices[0].Price[0].Weight ? items.Prices[0].Price[0].Weight : `${items.Prices[0].Price[0].Unit} Unit`}</p>
                                                     </div>
-                                                }</div>
+                                                    <div className="discount_boc">{
+                                                        items?.CategoryCoupoun?.length !== 0 || items?.ProductCoupoun?.length !== 0 && <div className="discountinfo">
+                                                            <span className="carddiscountoffer">{discountshoer(items.CategoryCoupoun, items.ProductCoupoun)} </span>  and more Offers
+                                                        </div>
+                                                    }</div>
 
-                                            </Link>
-                                            <div className="my-2">
-                                                <Box className={`center ${classes.loadingBtnTextAndBack}`}>
-                                                    {
-                                                        items?.Prices[0].Price.length > 1
-                                                            ?
-                                                            <ProductIncDecQuantity popup={popup} setadding={setadding}
-                                                                adding={adding} SetPopup={SetPopup} items={items} AddToCart={AddToCart} />
-                                                            :
+                                                </Link>
+                                                <div className="my-2">
+                                                    <Box className={`center ${classes.loadingBtnTextAndBack}`}>
+                                                        {
+                                                            items?.Prices[0].Price.length > 1
+                                                                ?
+                                                                <ProductIncDecQuantity popup={popup} setadding={setadding}
+                                                                    adding={adding} SetPopup={SetPopup} items={items} AddToCart={AddToCart} />
+                                                                :
 
-                                                            items?.Prices[0].Price[0].Stock === "IN Stock" ?
+                                                                items?.Prices[0].Price[0].Stock === "IN Stock" ?
                                                                     <LoadingButton loading={adding === items.id} loadingIndicator={<CircularProgress color="inherit" size={16} />}
                                                                         onClick={() => { AddToCart(items) }} >
-                                                                        <span><FaShoppingCart  size={18} /> </span> Add To Cart
+                                                                        <span><FaShoppingCart size={18} /> </span> Add To Cart
                                                                     </LoadingButton>
-                                                                :
+                                                                    :
                                                                     <LoadingButton className={`${classes.odsbtn}`} >
                                                                         <span><FaShoppingCart size={18} /> </span>  Out of Stock
                                                                     </LoadingButton>
-                                                    }
-                                                    {
-                                                        CartClean && <AddToCartPopUp CartClean={"center"} SetCartClean={SetCartClean} NewData={NewData} SetAddToCard={SetAddToCard} />
-                                                    }
-                                                </Box>
+                                                        }
+                                                        {
+                                                            CartClean && <AddToCartPopUp CartClean={"center"} SetCartClean={SetCartClean} NewData={NewData} SetAddToCard={SetAddToCard} />
+                                                        }
+                                                    </Box>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )
-                            }
-                        })
-                       
-                    }
+                                    )
+                                }
+                            })
+
+                        }
                     </div>
                 }
             </div>

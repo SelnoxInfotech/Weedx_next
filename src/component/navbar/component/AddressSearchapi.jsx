@@ -11,9 +11,10 @@ import Createcontext from "../../../hooks/context"
 // import { use  navigate.replace } from "react-router-dom";
 import { useRouter } from 'next/router';
 // import 'dns-polyfill';
-
+import Cookies from 'universal-cookie';
 export default function SearchingLocation({ openLocation, SearchBarWidth, open1, setOpenLocation, path }) {
   const classes = useStyles()
+  const cookies = new Cookies();
   const   navigate=  useRouter();
   const [formatted_address, Setformatted_address] = React.useState('')
   const { state, dispatch } = React.useContext(Createcontext)
@@ -184,21 +185,16 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         dispatch({ type: 'State', State: '' })
       }
       dispatch({ type: 'Location', Location: placeDetails?.formatted_address })
-      const addressdata={
+      const setLocation={
         country:Coun,
         state:sta,
         city:ci,
         route:route,
         formatted_address:placeDetails.formatted_address
       }
-
-
-      //  redis.set('data', JSON.stringify(addressdata));
-      // localStorage.setItem("Address", JSON.stringify(addressdata));
-      // const expirationDate = new Date();
-      // expirationDate.setFullYear(expirationDate.getFullYear() + 100);
-      // setCookie('Address', addressdata, expirationDate);
-
+      const date = new Date();
+      date.setTime(date.getTime() + 60 * 60 * 24 * 365);
+      cookies.set('setlocation', JSON.stringify(setLocation), { expires: date });
     })
   }
   function OnBlur() {

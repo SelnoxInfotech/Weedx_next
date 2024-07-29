@@ -10,7 +10,6 @@ import { DispensariesSco } from "../ScoPage/dispensariessco"
 import Createcontext from "../../hooks/context";
 import dynamic from 'next/dynamic'
 const WebContent = dynamic(() => import('../WeedDispansires/Webcontent') , {ssr:true});
-// import WebContent from "../WeedDispansires/Webcontent"
 import { modifystr } from "../../hooks/utilis/commonfunction";
 const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata , product , location }) => {
     const { state } = useContext(Createcontext)
@@ -38,16 +37,16 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata , prod
                             </div>
                         </div>
 
-                        <div className="d-flex justify-content-between flex-wrap gap-4">
+                        <div className="d-flex justify-content-between flex-wrap gap-4 py-3">
                             {Store?.map((ele, index) => {
                                 return (<Dispensoriescart ele={ele} key={index}/> )
                             })}
                         </div>
                     </div>
-                    <div className="col-12 webContent">
+                    {/* <div className="col-12 webContent">
                         <h2 className="section_main_title">{contentdata?.Title}</h2>
                         <div dangerouslySetInnerHTML={{ __html: contentdata?.Content }} />
-                    </div>
+                    </div> */}
                     {contentdata.length !== 0 &&
                         contentdata?.Faq[0]?.title !== '' &&
                         <>  <h3 className="section_main_title">FAQs</h3>

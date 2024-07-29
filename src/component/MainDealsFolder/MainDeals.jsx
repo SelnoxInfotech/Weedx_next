@@ -31,9 +31,9 @@ const [deals,setdeals]= React.useState([])
     const DispensoriesDealHeading="Find dispensories Deals"
     
     return(
-        <div className="container">
+        <div className="">
             <DealsSeo></DealsSeo>
-            <div className="row mx-2">
+            <div className="">
          {
             deals.length ?
        

@@ -1237,66 +1237,137 @@ const Content = [
                 content: [
                     {
                         title: "Illinois",
-                        content:` <p>In recent years, the legal landscape surrounding marijuana has undergone significant changes across the United States. One state that has been at the forefront of this movement is Illinois. With evolving legislation, regulations, and guidelines, it's important to have a clear understanding of the marijuana laws in the Land of Lincoln. Whether you're a resident, a traveller, or just curious about the topic, this comprehensive guide will help you navigate through the complexities of marijuana laws in Illinois.</p>`
+                        content:` <p>Welcome to our comprehensive guide on Cannabis Laws & Regulations in Illinois for 2024. Whether you're a resident, a visitor, or just curious about the legal landscape of cannabis in Illinois, we've got you covered with the latest and most accurate information.</p>
+                        <p>In recent years, the legal landscape surrounding marijuana has undergone significant changes across the United States. One state that has been at the forefront of this movement is Illinois. With evolving legislation, regulations, and guidelines, it's important to have a clear understanding of the marijuana laws in the Land of Lincoln. Whether you're a resident, a traveler, or just curious about the topic, this comprehensive guide will help you navigate through the complexities of marijuana laws in Illinois.</p>
+                        `
                     },
                     {
                         title: "Is Weed Legal in Illinois?",
-                        content:` <p>Yes, marijuana is legal for both medical and adult-use (recreational) purposes in Illinois. The state passed the Illinois Cannabis Regulation and Tax Act (CRTA) in 2019, which legalized the possession, consumption, and sale of marijuana for adults aged 21 and older. However, like any legal matter, there are specific rules and regulations in place to ensure responsible use and distribution.</p>`
+                        content:`<p>Yes, marijuana is legal for both medical and adult-use (recreational) purposes in Illinois. The state passed the Illinois Cannabis Regulation and Tax Act (CRTA) in 2019, which legalized the possession, consumption, and sale of marijuana for adults aged 21 and older. However, like any legal matter, there are specific rules and regulations in place to ensure responsible use and distribution.</p>`
                     },
                     {
                         title: "Legislation History in Illinois",
                         content:` <div>
-                            <p>Illinois's journey towards modern cannabis legislation has been a remarkable evolution. The state's first encounter with cannabis laws dates back to 1931, when it criminalized recreational marijuana. Decades later, the Cannabis Control Act of 1978 brought about a significant shift, marking the inception of legalized medical cannabis, albeit without clear regulations from key departments. It wasn't until 2013 that Illinois made a substantial leap forward with the enactment of the Compassionate Use of Medical Cannabis Pilot Program Act, ushering in a comprehensive framework for the cultivation, sale, and utilization of medical marijuana. Dispensaries initiated their inaugural sales to eligible patients in November 2015, and subsequent legislative amendments widened the program's scope, accommodating more patients and conditions. Notably, the decriminalization of possession up to 10 grams in 2016 was a pivotal step, replacing jail time with fines.</p>
-                            <p>The turning point arrived in 2019, as Governor JB Pritzker's signature on the Illinois Cannabis Regulation and Tax Act paved the way for adult-use cannabis legalization. The state boldly became the 11th in the nation to achieve this milestone, breaking new ground by legalizing cannabis via legislation rather than a public referendum. This historic move triggered the expungement of countless records related to cannabis possession under 30 grams prior to the legalization. On January 1, 2020, the law formally took effect, ushering in a new era of regulated cannabis sales, consumption, and possession. Illinois's intricate journey through the evolution of its cannabis laws showcases a progressive shift towards a more enlightened and comprehensive approach to marijuana regulation, reflecting changing attitudes and a commitment to responsible use.</p>
+                                        <ul>
+                                            <li><b>1931:</b> Illinois criminalized recreational marijuana.</li>
+                                            <li><b>1978:</b> The Cannabis Control Act marked the inception of legalized medical cannabis.
+                                            </li>
+                                            <li><b>2013:</b> Enactment of the Compassionate Use of Medical Cannabis Pilot Program Act.
+                                            </li>
+                                            <li><b>2015:</b> First dispensary sales to eligible patients.
+                                            </li>
+                                            <li><b>2016:</b> Decriminalization of possession up to 10 grams.
+                                            </li>
+                                            <li><b>2019:</b> Governor JB Pritzker signed the Illinois Cannabis Regulation and Tax Act, legalizing adult-use cannabis.
+                                            </li>
+                                            <li><b>2020:</b> The law took effect, allowing regulated cannabis sales, consumption, and possession.
+                                            </li>
+                                        </ul>
+                                        <p> <b>Fact:</b>Illinois was the first state to legalize cannabis via legislation rather than a public referendum.</p>
+                         
                         </div>`
                     },
                     {
                         title: "Regulation Authority",
-                        content:` <p>The Illinois Department of Financial and Professional Regulation (IDFPR) is the regulatory authority responsible for overseeing the cannabis industry in the state. They issue licenses to businesses, regulate distribution, and ensure compliance with the law.</p>`
+                        content:` <p><b>Illinois Department of Financial and Professional Regulation (IDFPR):</b> Oversees the cannabis industry, issues licenses, regulates distribution, and ensures compliance with the law.</p>`
                     },
                     {
                         title: "Cannabis Possession in Illinois",
                         content: `<div>
-                            <p>In Illinois, the guidelines for medical marijuana possession are thoughtfully designed to ensure patient well-being and safety. Within a 14-day span, patients are allowed to possess up to 2.5 ounces (71 grams) of cannabis or cannabis products, with the flexibility to request an extended recommendation from their doctor should their medical needs demand it. To maintain secure transportation practices, medical marijuana cardholders are permitted to carry cannabis in securely sealed containers, stowed away and inaccessible while driving. It's important to note that both drivers and passengers are prohibited from consuming cannabis within a vehicle, prioritizing responsible consumption habits.</p>
-                            <p>The state of Illinois underscores its commitment to equal rights by legislating against discrimination. Schools, employers, and landlords are prohibited from denying enrollment, employment, or apartment leasing to medical marijuana consumers based solely on their status as a patient or caregiver. This ensures that patients can access necessary medical treatment without fear of unwarranted consequences. Additionally, while patients are restricted from giving away medical cannabis, caregivers are empowered to purchase and possess cannabis medicine solely for their designated patients. For adults over the age of 21, limited sharing is allowed, with cannabis gifts permissible as long as they involve no monetary exchange. Illinois's possession limits for both residents and out-of-state visitors over 21 foster a balanced approach: residents can possess 30 grams of raw cannabis flower, up to 500 milligrams of THC in cannabis-infused products, and 5 grams of cannabis concentrates, while out-of-state visitors are allowed 15 grams of flower, no more than 250 milligrams of THC in cannabis-infused products, and 2.5 grams of cannabis concentrates. These regulations encapsulate Illinois's dedication to equitable access and responsible use within the realm of cannabis.</p>
+                         
+                               <p>Medical Marijuana:</p>
+                                  <ul>
+                                <li>  Patients can possess up to 2.5 ounces (71 grams) within a 14-day span.</li>
+                                <li>   Cannabis must be in securely sealed containers while being transported.</li>
+                                <li>   No consumption of cannabis within vehicles.</li>
+                                </ul>
+                                <p> Non-Discrimination:</p>
+                                <ul>
+                                <li>   Schools, employers, and landlords cannot discriminate based on medical marijuana patient status.</li></ul>
+                                <p> Adults Over 21:</p>
+                               <ul> <li>  Residents: 30 grams of flower, 500 milligrams of THC in products, 5 grams of concentrates.</li>
+                                <li>   Non-residents: 15 grams of flower, 250 milligrams of THC in products, 2.5 grams of concentrates.</li></ul>
+                            </ul>
+                            <p><b>Fact:</b> Caregivers can purchase and possess cannabis medicine solely for their designated patients.</p>
                         </div>`
                     },
                     {
                         title: "Where is it Safe to Purchase Weed in Illinois?",
-                        content: `<p>Licensed dispensaries are the only legal places to purchase marijuana in Illinois. These dispensaries are authorized by the state and follow strict regulations to ensure the quality and safety of the products they sell.</p>`
+                        content: `<p><b>Licensed Dispensaries:</b> The only legal places to purchase marijuana in Illinois. Explore our <a href={https://www.weedx.io/weed-dispensaries/in/united-states/illinois}> list of recreational dispensaries in Illinois</a> for more details.</p>`
                     },
                     {
                         title: "Where is it Safe to Consume Cannabis?",
                         content:
                            ` <div>
-                                <p>In Illinois, a well-structured framework governs the purchasing of cannabis, whether for medical or recreational use. Registered medical patients and caregivers are granted the legal privilege to acquire medical cannabis from licensed dispensaries. This process, however, involves a 1% pharmaceutical tax on medical patients, whereas cultivators and dispensaries are mandated to contribute a 7% tax based on the sales price per ounce. Within a 14-day timeframe, medical patients and caregivers are entitled to purchase up to 2.5 ounces (71 grams) of usable cannabis. Notably, patients can select a preferred dispensary during their initial registry application and can adjust this choice as needed through the Medical Cannabis Selection Form, without incurring any charges.</p>
-                                <p>For adults aged 18 and above seeking recreational cannabis, Illinois boasts an array of adult-use dispensaries to choose from. Parallel to the medical sector, growers within the adult-use domain contribute a 7% tax, but exclusively on their initial sale. Dispensaries in the recreational sphere, however, adhere to varying tax rates based on THC content and product type, paying 10% tax on items with less than 35% THC, 25% on those exceeding 35% THC, and 20% on infused products. While medical dispensaries enjoy exemption from local taxes, adult-use establishments are subject to the state's 6.25% tax, coupled with potential local taxes capped at 3% for cities and 3.75% for counties. It's essential for consumers to anticipate these taxes factored into the overall product cost, ensuring a transparent purchasing experience.</p>
+                               <p>Medical Use:</p>
+                               <ul>
+                                 <li>Purchases subject to a 1% pharmaceutical tax.</li>
+                                 <li>Medical patients can buy up to 2.5 ounces (71 grams) within 14 days.</li>
+                               </ul>
+                               <p>Adult Use:</p>
+                               <ul>
+                                 <li>Dispensaries follow varying tax rates based on THC content and product type.</li>
+                                 <li>Taxes: 10% for products with <35% THC, 25% for products with >35% THC, 20% for infused products.</li>
+                                 <li>Local taxes: 6.25% state tax + potential local taxes (up to 3% for cities and 3.75% for counties).</li>
+                               </ul>
+                               <p> <b>Fact:</b> Consumers should anticipate taxes factored into the overall product cost. Also refer to this report of the Illinois Govt related to the <a href={https://www2.illinois.gov/IISNews/20242-Summary_of_HB_1438__The_Cannabis_Regulation_and_Tax_Act.pdf}>Adult Use of Cannabis.</a></p>
                             </div>`
                     },
                     {
                         title: "Is Home Cultivation Allowed in Illinois?",
                         content:` <div>
-                            <p>In the realm of cannabis cultivation, Illinois imposes clear guidelines that exclusively permit registered patients and caregivers to engage in this practice. These regulations outline stringent criteria that medicinal cultivators must adhere to. Specifically, cultivation spaces must be securely enclosed and locked, ensuring a controlled environment for the growth of cannabis. Moreover, the number of plants exceeding 5 inches in height should not exceed five in a given garden. The significance of privacy is underscored, with the requirement that these cultivation areas remain hidden from public view. Importantly, this cultivation is restricted to residential properties owned by the cultivator or with the explicit consent of the property owner, reinforcing responsible and legal cultivation practices.</p>
-                            <p>In this comprehensive framework, Illinois strikes a balance between individual cultivation rights and community standards. By mandating specific parameters for cannabis cultivation, the state ensures that registered patients and caregivers engage in this practice responsibly, safeguarding both their own interests and those of the larger community.</p>
+                        <P>Registered Patients and Caregivers:</P>
+                           <ul>
+                            <li>Can cultivate cannabis under strict guidelines.</li>
+                            <li>Cultivation spaces must be securely enclosed and locked.</li>
+                            <li>Up to five plants over 5 inches tall are allowed.</li>
+                            <li>Cultivation must be hidden from public view and restricted to residential properties owned by the cultivator or with explicit consent from the property owner.</li>
+                           </ul>
+                           <p><b>Fact:</b> Home cultivation is limited to ensure responsible and legal practices.</p>
                         </div>`
                     },
                     {
                         title: "Medical Marijuana in Illinois",
                         content:` <div>
-                            <p>The administration of Illinois's Medical Cannabis Patient Registry Program falls under the jurisdiction of the Illinois Department of Public Health. Aspiring patients have the option to apply online or utilize a printable application that can be sent by mail. To be eligible for the program, patients must be at least 18 years old and must not hold specific licenses such as a school bus driver permit or a commercial driver's license. Active duty law enforcement officers, correctional officers, probation officers, and firefighters are also ineligible.</p>
-                            <p>The eligibility criteria encompass both qualifying conditions and patient qualifications. Residents of Illinois who possess one of the qualifying conditions must acquire a written certification from a licensed physician in the state. Veterans under the care of the Veterans Affairs (VA) office are exempt from submitting a physician's certification but must instead provide the last 12 months of VA treatment records. Minors seeking medical marijuana must obtain a physician's certification for a qualifying condition, with a reviewing physician subsequently confirming the diagnosis. Minors can designate one caregiver at no cost and potentially add more by submitting a caregiver application along with the required fee. Overall, the program's structure reflects Illinois's commitment to ensuring that medical cannabis access is well-regulated and accessible to those in genuine need.</p>
+                               <p>Eligibility</p>
+                                <ul>
+                                    <li>Patients must be at least 18 years old and cannot hold certain professional licenses.
+                                    </li>
+                                    <li>Residents with qualifying conditions need a written certification from a licensed physician.
+                                    </li>
+                                    <li>Veterans can submit 12 months of VA treatment records instead of a physician's certification.
+                                    </li>
+                                    <li>Minors require a physician's certification and can designate one caregiver at no cost.
+                                    </li>
+                                </ul>
+                                <p><b>Fact:</b>The Medical Cannabis Patient Registry Program is administered by the Illinois Department of Public Health.</p>
                         </div>`
                     },
                     {
                         title: "Caregiver Qualifications",
                         content:` <div>
-                            <p>medical cannabis caregiving, Illinois institutes specific qualifications to ensure responsible and appropriate assistance for registered patients. To qualify as a registered caregiver, individuals must be residents of Illinois, at least 21 years old, and committed to aiding the registered patient, as affirmed in written consent. The state's stringent approach involves conducting background checks to uphold safety standards. Notably, caregivers are limited to assisting only one patient at a time and are prohibited from receiving compensation for their services, emphasizing their role as supportive aids rather than commercial entities.</p>
-                            <p>The caregiver registry process in Illinois entails a series of steps designed to establish the legitimacy and credibility of caregivers. These steps include the submission of a caregiver application either alongside the designated patient's application or as an independent submission at a later point. An application fee is applicable, with options for one-, two-, or three-year cards. The inclusion of a passport-size photograph taken against a plain white background is mandatory, and proof of Illinois residency via two separate documents is required. Additionally, caregivers must verify their age and identity by providing a copy of a valid government-issued photo ID. Through this comprehensive process, Illinois ensures that registered caregivers are equipped to provide reliable and responsible assistance to those in need of medical cannabis support.</p>
+                            <p>Requirements</p>
+                             <ul>
+                               <li>Must be Illinois residents aged 21 or older.</li>
+                               <li>Background checks are conducted.</li>
+                               <li>Caregivers can assist only one patient at a time and cannot receive compensation.</li>
+                               <li>Application includes a fee and submission of required documents.</li>
+                             </ul>
+                             <p><b>Fact:</b> Caregivers play a crucial role in providing responsible assistance to registered patients.</p>
                         </div>`
                     },
                     {
                         title: "Lab Testing",
-                        content: `<p>The CRTA mandates strict testing regulations for cannabis products sold in dispensaries. Products are tested for potency, contaminants, and quality to ensure consumer safety.</p>`
+                        content: `<p><b>CRTA Mandates:</b> Products sold in dispensaries must undergo testing for potency, contaminants, and quality to ensure consumer safety.</p>`
+                    },
+                    {
+                        title: "Facts Corner",
+                        content: `<p><b>Illinois:</b> First state to legalize cannabis via legislation rather than public referendum.</p>
+                        <p><b>Expungement:</b> Records related to possession under 30 grams were expunged following legalization.</p>
+                        <p><b>Equality:</b> Schools, employers, and landlords cannot discriminate against medical marijuana patients.</p>
+                        <p><b>Cultivation:</b>  Limited to five plants over 5 inches tall for registered patients and caregivers.</p>
+                        <p><b>Tax Rates:</b>  Vary for adult-use products based on THC content and product type.</p>
+                        `
                     },
                     {
                         title: "Frequently Asked Questions",

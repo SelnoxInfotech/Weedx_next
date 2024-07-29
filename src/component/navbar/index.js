@@ -51,7 +51,6 @@ const Navbar = () => {
         });
         setHamburger(window?.innerWidth <= 991 ? false : true);
     };
-
     React.useEffect(() => {
         if (typeof window !== 'undefined') {
             detectSize();
@@ -61,15 +60,12 @@ const Navbar = () => {
             };
         }
     }, []);
-
     const openNav = () => {
         setOpen((prevOpen) => !prevOpen);
     };
-
     const closeNav = () => {
         setOpen(false);
     };
-
     async function Logout() {
         localStorage.removeItem('User_Token_access');
         cookies.remove('User_Token_access');
@@ -77,7 +73,6 @@ const Navbar = () => {
         await dispatch({ type: 'ApiProduct' });
         await dispatch({ type: 'Profile', Profile: [] });
     }
-
     React.useEffect(() => {
         const handleClickOutside = (event) => {
             if (ref.current && !ref.current.contains(event.target)) {
@@ -91,7 +86,6 @@ const Navbar = () => {
             document.removeEventListener('click', handleClickOutside, true);
         };
     }, [open]);
-
     React.useEffect(() => {
         const handleClickOutsideProfile = (event) => {
             if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -105,7 +99,6 @@ const Navbar = () => {
             document.removeEventListener('click', handleClickOutsideProfile, true);
         };
     }, [dropDownState]);
-
     const handleClickDropdown = () => {
         setDropDownState((prevState) => !prevState);
     };

@@ -444,6 +444,49 @@ const useStyles = makeStyles({
       },   
     },
   },
+  differstoreaddtocartbtn:{
+    "& .MuiButton-text": {
+      fontSize: ".5rem",
+    },
+    "& .MuiLoadingButton-root": {
+      fontSize: "14px",
+      width: "100%",
+      height: "40px",
+      borderRadius: "5px",
+      backgroundColor: "#ffff",
+      color: "#31B665",
+      textTransform: "none",
+      border: "2px solid #31B665",
+      transition:'none',
+      "& span":{
+          marginRight:'5px',
+      }
+    },
+    "& .MuiButtonBase-root:hover": {
+      color: "#ffff",
+      backgroundColor: "#00b96a",
+      border: "2px solid #31B665",
+      transition:"all .3s ease",
+    },
+    "@media(max-width:480px)": {
+      "& .MuiLoadingButton-root": {
+       
+        "& span":{
+            marginRight:'5px',
+            display:'none',
+        }
+      },   
+    },
+    "@media(max-width:320px)": {
+      "& .MuiLoadingButton-root": {
+       fontSize:'10px',
+        "& span":{
+            marginRight:'5px',
+            display:'none',
+        }
+      },   
+    },
+  },
   Cencell: {
     "& .MuiButton-text": {
       fontSize: ".5rem",

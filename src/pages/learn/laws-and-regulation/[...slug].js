@@ -25,24 +25,19 @@ const Index = (props) => {
                 {props?.initialData?.content?.map((data1, index) => {
                   return (
                     <React.Fragment key={index}>
-                      {/* <IsWeedLegalState
-                       
-                        head={data1.title}
-                        description2={[data1]}
-                     
-                      /> */}
                       <div  className={data1.title.replaceAll(' ','_')} id={data1.title.replaceAll(' ','_')}>
                           <h2 id="isweedLegalHeadings" className="isweedLegalHeading">{data1.title}</h2>
                           <div className="col-12"  >
                               <section className="isWeedLegalParagraph">
-                            
                                   <div dangerouslySetInnerHTML={{__html:data1?.content}}></div>
+                                
                               </section>
                           </div>
                       </div>
                     </React.Fragment>
                   );
                 })}
+                  <p>{`By understanding the cannabis laws and regulations in ${props.initialData?.name}, residents and visitors alike can ensure they are compliant and informed. Whether you're purchasing, consuming, or considering cultivation, it's crucial to stay updated with the latest legal guidelines.`}</p>
               </div>
               <div className={"col-4 hidiingBLog "}> 
                 <LawStateContent head={props?.initialData?.content} refrence={ref} />
@@ -57,15 +52,15 @@ const Index = (props) => {
 
 export default Index;
 
-// export async function generateStaticParams() {
-//     let posts = await JSON.stringify(Content)
-//     posts = await JSON.parse(posts)
-//     let wholedata =[...posts[0].state , ...posts[1].state]
-//     return wholedata.map((product) => ({
-//       category: product.name,
-//       product: product.id,
-//     }))
-// }
+export async function generateStaticParams() {
+    let posts = await JSON.stringify(Content)
+    posts = await JSON.parse(posts)
+    let wholedata =[...posts[0].state , ...posts[1].state]
+    return wholedata.map((product) => ({
+      category: product.name,
+      product: product.id,
+    }))
+}
 
 export async function getServerSideProps(context) {
   let responseData = {}

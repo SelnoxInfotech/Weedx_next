@@ -225,7 +225,6 @@ const AddToCartReview = () => {
 
                             {AfterDiscount?.map((ele, index) => {
                                 let wrigh = Boolean(ele.Price.Weight) ? ele.Price.Weight : `${ele.Price.Unit} Unit`;
-                                console.log(ele)
                                 return (
                           <>
                                     <div className="ssss row py-3 px-0 border-top border-bottom justify-content-center   align-items-center" key={index}>

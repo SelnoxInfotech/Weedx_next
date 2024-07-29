@@ -140,11 +140,11 @@ const Product = () => {
             <div style={{cursor:"pointer"}}>
                 <span onClick={() => navigate.push("/")}>{"Home"}</span>
                 {<span> {">"} <span onClick={() => breadcrumCountry("Product")}>Product</span></span>}
-                {(location?.query?.slug !== undefined) && <span> {">"} <span onClick={() => breadcrumCountry("categoryname" , location?.query?.slug[0])}>{location?.query?.slug[0]}</span></span>}
-                {(location?.query?.slug !== undefined && location?.query?.slug?.length ===3) && <span> {">"} <span >{location?.query?.slug[1]}</span></span>}
+                {(navigate?.query?.slug !== undefined) && <span> {">"} <span onClick={() => breadcrumCountry("categoryname" , navigate?.query?.slug[0])}>{navigate?.query?.slug[0]}</span></span>}
+                {(navigate?.query?.slug !== undefined && navigate?.query?.slug?.length ===3) && <span> {">"} <span >{navigate?.query?.slug[1]}</span></span>}
             </div>
-            {!params.id ? <ProductSeo location={location?.pathname}></ProductSeo> :
-            <ProductCategorySeo categoryname={slug[0]} location={location?.pathname} ></ProductCategorySeo>}
+            {!params.id ? <ProductSeo location={navigate?.pathname}></ProductSeo> :
+            <ProductCategorySeo categoryname={slug[0]} location={navigate?.pathname} ></ProductCategorySeo>}
             <div className="row">
                 <div className="col-12 mt-4">
                     <CategoryProduct Category={Category} ShowCategoryProduct={ShowCategoryProduct}></CategoryProduct>

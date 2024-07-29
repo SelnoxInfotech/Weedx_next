@@ -16,7 +16,6 @@ const Index = () => {
     const classes = useStyles();
     const [AllOrder_data, SetAllOrder_data] = React.useState([]);
     const [loading, SetLoading] = React.useState(false);
-    console.log(router)
     React.useEffect(() => {
         OrderBYID(router.query.id)
             .then((res) => {

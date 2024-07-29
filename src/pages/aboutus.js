@@ -139,7 +139,7 @@ const AboutUs = () => {
     }]
 
     return (
-        <div className="container">
+        <div>
             <AboutusSeo></AboutusSeo>
             <div className='about_us_header'>
 
@@ -182,7 +182,7 @@ const AboutUs = () => {
                    <div className="journy_container">
 
                   
-                        {AboutUsJourney.map((items, index) => {
+                        {/* {AboutUsJourney.map((items, index) => {
                             return (
                                 <div className="about_us_inner_section_container" key={index}>
                                     <h2 className="About_Journey_heading">{items.head}</h2>
@@ -191,7 +191,102 @@ const AboutUs = () => {
                                     </p>
                                 </div>
                             )
-                        })}
+                        })} */}
+                          <div className="about_us_inner_section_container">
+                                    <h2 className="About_Journey_heading">
+                                    {`   About Us`}
+                                    </h2>
+                                    <p className="journey_paragraph">
+                                  {`  Welcome to WeedX.io, your premier destination for all things cannabis. At WeedX.io, we are committed to revolutionizing the cannabis industry by providing an innovative e-commerce platform that connects consumers with top-quality dispensaries, brands, and delivery services.`}
+                                    </p>
+                                </div>
+                                <div className="about_us_inner_section_container">
+                                    <h2 className="About_Journey_heading">
+                                   {` Our Mission`}
+                                    </h2>
+                                    <p className="journey_paragraph">
+                                    {`Our mission is to simplify the cannabis shopping experience by offering a seamless, user-friendly platform that caters to both B2B and B2C markets. We aim to empower businesses and consumers alike by providing comprehensive tools and resources that enhance accessibility, convenience, and choice in the cannabis industry.`}
+                                    </p>
+                                </div>
+
+                                <div className="about_us_inner_section_container">
+                                    <h2 className="About_Journey_heading">
+                                   {` Who We Are`}
+
+                                    </h2>
+                                    <p className="journey_paragraph">
+                                   {` WeedX.io was developed by `} <a href="https://selnox.com/">{`Selnox Infotech Pvt Ltd`}</a>,{` a leading tech company dedicated to creating cutting-edge solutions for various industries. Founded by Sandeep Kourav, Selnox Infotech brings together a team of experts passionate about technology and innovation. Our goal is to leverage our expertise to elevate the cannabis industry to new heights.`}
+                                    </p>
+                                </div>
+                                <div className="about_us_inner_section_container">
+                                    <h2 className="About_Journey_heading">
+                                  {`  What We Offer`}
+                                    </h2>
+                                    <p className="journey_paragraph">
+                                        {`WeedX.io is designed to be a one-stop-shop for all your cannabis needs. Our platform features:`}
+                                    </p>
+                                    <ul>
+                                        <li><b>{`Find a Weed Dispensary Near You:`}</b> {` Easily locate and choose from a wide range of dispensaries in your area.
+                                        `}</li>
+                                        <li><b>{`Weed Delivery Near You:`}</b>{` Discover delivery services available in your locality and get your cannabis delivered to your doorstep.
+                                        `}</li>
+                                        <li><b>{` Brand Discovery:`}</b>{` Explore various cannabis brands and their products.
+                                        `}</li>
+                                        <li><b>{`Order Placement:`}</b>{` Conveniently place orders for delivery or in-store pickup.
+                                        `}</li>
+                                        <li><b>{` Location-Based Search:`}</b>{` Utilize our location-based search to find nearby dispensaries and delivery services.
+                                        `}</li>
+                                        <li><b>{` Curbside Pickup:`}</b>{` Enjoy the convenience of curbside pickup for your orders.
+                                        `}</li>
+                                        <li><b>{` Product Reviews and Ratings:`}</b>{` Read and share reviews on products and dispensaries to make informed choices.
+                                        `}</li>
+                                        <li><b>{`Strain Information:`}</b>{` Access detailed information on different cannabis strains to find the perfect match for your needs.
+                                        `}</li>
+                                        <li><b>{`Cannabis Blogs and News:`}</b>{` Stay updated with the latest industry news and insightful blogs on cannabis-related topics.
+                                        `}</li>
+                                        <li><b>{`Cash Payment:`}</b>{` Pay with cash upon delivery or pickup, offering a hassle-free payment option.
+                                        `}</li>
+                                      
+                                    </ul>
+                                </div>
+                                <div className="about_us_inner_section_container">
+                                    <h2 className="About_Journey_heading">
+                                   {`Manage Your Inventory with `}  <a href="https://cannabaze.com/">{`Cannabaze POS`}</a>
+                                    </h2>
+                                    <p className="journey_paragraph">
+                                        {`For dispensaries and cannabis businesses, managing inventory efficiently is crucial. That's where Cannabaze POS comes in. Our advanced Point of Sale system, Cannabaze POS, offers:`}
+                                    </p>
+                                    <ul>
+                                        <li><b>{`Real-Time Inventory Tracking:`}</b> {` Monitor your inventory levels in real-time to ensure you never run out of stock.
+                                        `}</li>
+                                        <li><b>{`Automated Reordering: `}</b>{`  Set up automated reordering based on inventory thresholds to streamline your stock management.
+                                        `}</li>
+                                        <li><b>{` Comprehensive Reporting:`}</b>{` Generate detailed reports on sales, inventory, and performance to make informed business decisions.
+                                        `}</li>
+                                        <li><b>{`Integration with WeedX.io:`}</b>{`Seamlessly integrate with WeedX.io to synchronize your product listings and manage your online sales effectively.
+                                        `}</li>
+                                        <li><b>{`User-Friendly Interface:`}</b>{` Enjoy an intuitive interface that simplifies daily operations and enhances efficiency.
+                                        `}</li>
+                                    </ul>
+                                </div>
+                                <div className="about_us_inner_section_container">
+                                    <h2 className="About_Journey_heading">
+                                   {`Available in the USA and Canada`}
+                                    </h2>
+                                    <p className="journey_paragraph">
+                                        {`WeedX.io proudly serves customers across the USA and Canada, ensuring that our platform is accessible to a broad audience. Whether you're looking for a dispensary near you or need reliable weed delivery services, WeedX.io has you covered in both countries.
+`}
+                                    </p>
+                                </div>
+                                <div className="about_us_inner_section_container">
+                                    <h2 className="About_Journey_heading">
+                                   {`Our Commitment`}
+                                    </h2>
+                                    <p className="journey_paragraph">
+                                        {`WeedX.io is dedicated to providing a secure, reliable, and enjoyable shopping experience. We continually strive to enhance our platform by incorporating user feedback and staying abreast of industry trends. Our commitment to quality and customer satisfaction is unwavering, and we are proud to serve the cannabis community with integrity and excellence.`}
+                                    </p>
+                                </div>
+                               
                     </div>
             </div>
             <div className="our_valuesSection">

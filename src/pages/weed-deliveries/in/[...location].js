@@ -185,10 +185,10 @@ const Deliveries = (props) => {
                                
                         }
                     </div>
-                    <div className="col-12 webContent">
+                    {/* <div className="col-12 webContent">
                         <h2 className="section_main_title">{contentdata?.Title}</h2>
                         <div dangerouslySetInnerHTML={{ __html: contentdata?.Content }} />
-                    </div>
+                    </div> */}
                     {contentdata.length !== 0 &&
                         contentdata?.Faq[0]?.title !== '' &&
                         <>  <h3 className="section_main_title">FAQs</h3>
@@ -221,14 +221,12 @@ const Deliveries = (props) => {
             </div>
 
         </div>
-// {console.log(props.product)}
     )
 }
 export default Deliveries
 
 
 export const getStaticPaths = async () => {
-    // Fetch the list of locations or define them statically
     const locations = [
         ['united-states', 'new-york',],
     ];

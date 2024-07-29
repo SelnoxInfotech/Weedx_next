@@ -561,6 +561,9 @@ overflow-x: hidden; */
   .BlogContainer section {
     width: 95vw;
   }
+  .container{
+    width: 95%;
+  }
 }
 
 .center_latest img {
@@ -1134,8 +1137,34 @@ scrollbar-width: none;  /* Firefox */
   color: #31B655;
   font-weight: 600;
 }
-
-
+.differentstorepopup{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000d5;
+}
+.differentstorepopup  .popupbox{
+     width: 500px;
+     height: auto;
+     background-color: #fff;
+     border-radius: 20px;
+     box-shadow: rgba(256, 256, 256, 0.35) 0px 5px 15px;
+     padding: 20px;
+     position: relative;
+     z-index: 99;
+}
+.differentstorepopup  .popupbox .popupctrossbtn{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+.differentstorepopup  .popupbox .popupctrossbtn:hover{
+  transform: scale(1.1);
+  transition: all .4s ease;
+}
 .linkTaginsideEditer a span  {
   color: #31B665 !important ;
 }
@@ -2534,14 +2563,10 @@ scrollbar-width: none;  /* Firefox */
 /* DispensoriesOpenResult */
 .dispensories_main_container {
   z-index: 1;
-  height: 740px;
-  border: 1px solid gray;
   background: white;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  /* overflow-x: hidden;
+  overflow-y: scroll; */
   padding-bottom: 20px;
-}
-.dispensories_main_container{
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
@@ -7711,6 +7736,12 @@ line-height: 2;
  }
 }
 @media screen and (max-width: 480px){
+  .isweedLegalHeading{
+    font-size: 18px;
+  }
+  .isWeedLegalParagraph p{
+    font-size: 14px;
+  }
   .productreview_imgcircle{
     width: 50px;
     height: 50px;
@@ -9184,7 +9215,7 @@ footer .footer_sub_heading{
     }
     .product_card_wrapper{
       display: flex;
-      /* justify-content: center; */
+      justify-content: center;
       flex-wrap: wrap;
       gap: 25px;
   }
@@ -11983,6 +12014,9 @@ font-size: 24px;
 .weedx_number_container ul {
   width: 200%;
   overflow-x: scroll;
+}
+.About_us_banner_image{
+  height: 140px;
 }
 }
 

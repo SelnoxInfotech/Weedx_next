@@ -4,36 +4,27 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import useStyles from "../../../styles/style";
+import useStyles from "@/styles/style";
 import dynamic from 'next/dynamic'
 const WeedDispansires = dynamic(() => import('../../../component/WeedDispansires/Weed_Dispansires'));
 import Createcontext from "@/hooks/context"
-import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
-import { useSession } from 'next-session';
+// import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
+// import { useSession } from 'next-session';
 import { useRouter } from 'next/router';
 import axios, { Axios } from "axios";
 import { DespensioriesItem } from '../../../hooks/apicall/api';
 import Wronglocation from "../../../component/skeleton/Wronglocation";
-import WebContent from '@/component/WeedDispansires/Webcontent'
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Loader from "../../../component/Loader/Loader";
 import Location from '../../../hooks/utilis/getlocation';
-
-
-
-
 function TabPanel(props) {
-
     const { children, value, index, ...other } = props;
-
     return (
-        <div
-            role="tabpanel"
+        <div role="tabpanel"
             hidden={value !== index}
             id={`simple-tabpanel-${index}`}
             aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
+            {...other}>
             {value === index && (
                 <Box sx={{ p: 3 }}>
                     <Typography variant="div">{children}</Typography>
@@ -176,10 +167,8 @@ React.useEffect(()=>{
     }
 
     return (
-        // <RoutingDespen>
-            <div className='container'>
-                <div className="row w-100 mx-auto  dispensaries_centers">
-                    <div className="col-12 w-100 col-sm-12 mx-2 mx-md-0">
+                <div className="w-100 mx-auto  dispensaries_centers">
+                    <div className="w-100">
                         <div className="headerBoxdescription">
                             <div style={{ cursor: "pointer" }}>
 
@@ -200,9 +189,8 @@ React.useEffect(()=>{
                             <p className="m-0">{`Find Nearby Dispensaries in ${props.location.formatted_address} for Recreational & Medical weed. Browse Top Cannabis Products and Place Orders from Trusted Local Dispensaries.`}</p>
                         </div>
                     </div>
-                    <div className="col-12 w-100 col-sm-12 dispensory_menu my-2">
+                    <div className="w-100 dispensory_menu my-2">
                         {
-                            // true ?
                                 (props.store?.length !== 0 ?
                                     <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
                                         <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -235,15 +223,10 @@ React.useEffect(()=>{
                                     
                                     
                                 )
-                                // :
-                                // <Loader />
                         }
 
                     </div>
                 </div>
-            </div>
-        // </RoutingDespen>
-
     );
 };
 

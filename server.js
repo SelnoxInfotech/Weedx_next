@@ -3,6 +3,7 @@ const next = require('next');
 const cookieParser = require('cookie-parser');
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
+
 const handle = app.getRequestHandler();
 // const ip = '192.168.1.20';
 app.prepare().
@@ -22,6 +23,7 @@ then(() => {
 
   // Handle all other routes with Next.js
   server.get('*', (req, res) => {
+
     return handle(req, res);
   });
 

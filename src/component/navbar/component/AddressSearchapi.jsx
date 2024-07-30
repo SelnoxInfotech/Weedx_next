@@ -16,6 +16,7 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
   const classes = useStyles()
   const cookies = new Cookies();
   const   navigate=  useRouter();
+  const router = useRouter();
   const [formatted_address, Setformatted_address] = React.useState('')
   const { state, dispatch } = React.useContext(Createcontext)
   const {
@@ -50,6 +51,20 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         object[l] = data.long_name
         short[l] = data?.short_name
       })
+
+      const setLocation={
+        country:Coun || '',
+        state:sta || "",
+        city:ci || '',
+        route:route || '',
+        formatted_address:placeDetails.formatted_address
+      }
+      // cookies.remove('setlocation');
+      const date = new Date();
+      date.setTime(date.getTime() + 60 * 60 * 24 * 365);
+      cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
+
+
       if (Boolean(object.country)) {
         Coun = object.country.replace(/\s/g, '-');
         dispatch({ type: 'Country', Country: Coun });
@@ -139,9 +154,6 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         }
 
       }
-
-
-
       if (ci !== undefined && sta !== undefined && Coun !== undefined && route !== undefined) {
         window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
         window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
@@ -184,17 +196,9 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
       if (sta === undefined) {
         dispatch({ type: 'State', State: '' })
       }
+      router.replace(router.asPath);
+      dispatch({ type: 'location_Api', location_Api: false })
       dispatch({ type: 'Location', Location: placeDetails?.formatted_address })
-      const setLocation={
-        country:Coun,
-        state:sta,
-        city:ci,
-        route:route,
-        formatted_address:placeDetails.formatted_address
-      }
-      const date = new Date();
-      date.setTime(date.getTime() + 60 * 60 * 24 * 365);
-      cookies.set('setlocation', JSON.stringify(setLocation), { expires: date });
     })
   }
   function OnBlur() {

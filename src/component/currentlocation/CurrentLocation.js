@@ -32,6 +32,16 @@ const Currentlocation = () => {
           dispatch({ type: 'Country', Country: "United-States" });
           dispatch({ type: 'State', State: 'New-York' });
           dispatch({ type: 'City', City: "New-York" });
+          const setLocation = {
+            country: "United-States",
+            state: 'New-York',
+            city: 'New-York',
+               formatted_address:'New York, NY, USA'
+          };
+          cookies.remove('setlocation');
+          const date = new Date();
+          date.setTime(date.getTime() + 60 * 60 * 24 * 365);
+          cookies.set('setlocation', JSON.stringify(setLocation), { expires: date });
         } else {
           const location = data.plus_code?.compound_code.slice(9) || '';
           dispatch({ type: 'Location', Location: location });
@@ -57,9 +67,11 @@ const Currentlocation = () => {
           const setLocation = {
             country: country1,
             state: state1,
-            city: city1
+            city: city1,
+            formatted_address:location
           };
-        
+          console.log(setLocation)
+          cookies.remove('setlocation');
           const date = new Date();
           date.setTime(date.getTime() + 60 * 60 * 24 * 365);
           cookies.set('setlocation', JSON.stringify(setLocation), { expires: date });
@@ -104,8 +116,10 @@ const Currentlocation = () => {
             const setLocation = {
               country: country1,
               state: state1,
-              city: city1
+              city: city1,
+              formatted_address:location
             };
+            cookies.remove('setlocation');
             const date = new Date();
             date.setTime(date.getTime() + 60 * 60 * 24 * 365);
             cookies.set('setlocation', JSON.stringify(setLocation), { expires: date });

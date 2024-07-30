@@ -35,8 +35,8 @@ const Product = (props) => {
 
     async function ShowCategoryProduct(id, name) {
         SetLoading(true);
-         navigate.replace(`/products/${modifystr(name.toLowerCase())}/${id}`);
-         setSelectedOption(null)
+        navigate.replace(`/products/${modifystr(name.toLowerCase())}/${id}`);
+        setSelectedOption(null)
         setsubcategories([])
         // SetLoading(false);
     }
@@ -59,11 +59,11 @@ const Product = (props) => {
     }, [])
 
     React.useEffect(() => {
-        SetLoading(()=>{
-           return props.loading
+        SetLoading(() => {
+            return props.loading
         });
-      }, [props]);
-    
+    }, [props]);
+
     React.useEffect(() => {
         if (slug?.length === 3) {
             SubCategoryApibyname(slug[0].toUpperCase()).then((response) => {
@@ -220,7 +220,7 @@ export const getServerSideProps = async (context) => {
 
     const { req, res } = context
     const allCookies = cookies(context);
-console.log(allCookies)
+    console.log(allCookies)
     const transformString = (str) => {
         if (!str) {
             // Handle the case where str is undefined or null
@@ -237,12 +237,11 @@ console.log(allCookies)
         'public, s-maxage=60, stale-while-revalidate=59'
     )
     const object = {
-        City: transformString(allCookies.setlocation.city) || 'New York',
-        Country: transformString(allCookies.setlocation.country) || 'United States',
-        State:  transformString(allCookies.setlocation.state) || 'New York',
+        City: transformString(allCookies?.setlocation?.city) || '',
+        Country: transformString(allCookies?.setlocation?.country) || '',
+        State: transformString(allCookies?.setlocation?.state) || '',
         limit: 20
     };
-
 
     let product = [];
     try {
@@ -308,7 +307,7 @@ console.log(allCookies)
         return {
             props: {
                 product: product,
-                loading:false
+                loading: false
             },
         };
 

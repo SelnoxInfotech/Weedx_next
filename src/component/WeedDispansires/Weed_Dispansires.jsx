@@ -13,7 +13,7 @@ const WebContent = dynamic(() => import('../WeedDispansires/Webcontent') , {ssr:
 import { modifystr } from "../../hooks/utilis/commonfunction";
 const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata , product , location }) => {
     const { state } = useContext(Createcontext)
-    const locaton = useRouter();
+ 
     return (
         <React.Fragment>
 

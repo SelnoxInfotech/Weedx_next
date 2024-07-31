@@ -1,15 +1,15 @@
 import React from 'react';
 
 async function location(value, type) {
-  console.log(value, type)
+  console.log("its runing location ")
   try {
-    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=AIzSyBRchIzUTBZskwvoli9S0YxLdmklTcOicU`);
+    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=AIzaSyBRchIzUTBZskwvoli9S0YxLdmklTcOicU`);
     const data = await response.json();
     if (data.error_message) {
       return {
         city: type.city || "",
         state: type.state || "",                                    
-        country: type.country || "",
+        country: type.country|| "",
         route: type.route || '',
         formatted_address: "New York, NY, USA",
         citycode: "",
@@ -21,7 +21,6 @@ async function location(value, type) {
     }
 
     const addressComponents = data.results[0].address_components || [];
-    console.log(addressComponents)
     let city = "", state = "", country = "", route = "", formatted_address = data?.results[0]?.formatted_address;
     let citycode = "", statecode = "", countrycode = "";
     let ci = ""
@@ -54,7 +53,6 @@ async function location(value, type) {
       country = Coun
       countrycode = short.country
     }
-
     if (Boolean(object.administrative_area_level_1)) {
 
       let sta = object.administrative_area_level_1.replace(/\s/g, '-');
@@ -157,12 +155,6 @@ async function location(value, type) {
       }
 
     }
-    console.log(
-      city,
-      state,
-      country,
-      route,
-    )
     return {
       city,
       state,

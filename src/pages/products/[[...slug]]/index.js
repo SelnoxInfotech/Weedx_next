@@ -25,7 +25,7 @@ const Product = (props) => {
     const { slug } = navigate.query;
     const params = slug ? (slug[_.findIndex(slug, item => !isNaN(parseInt(item)))] || 0) : 0;
     const classes = useStyles()
-    const { state , dispatch } = React.useContext(Createcontext)
+    const { state, dispatch } = React.useContext(Createcontext)
     const [loading, SetLoading] = React.useState(props.length)
     const [subcategories, setsubcategories] = useState([])
     const [Product, SetProduct] = React.useState(props.product)
@@ -62,8 +62,8 @@ const Product = (props) => {
         SetLoading(() => {
             return props.loading
         });
-        dispatch({ type: 'Location', Location: props?.location.formatted_address  })
-       dispatch({ type: 'permission', permission: true });
+        dispatch({ type: 'Location', Location: props?.location.formatted_address })
+        dispatch({ type: 'permission', permission: true });
         dispatch({ type: 'Country', Country: props?.location?.country });
         dispatch({ type: 'State', State: props?.location?.state });
         dispatch({ type: 'City', City: props?.location?.city })
@@ -314,7 +314,7 @@ export const getServerSideProps = async (context) => {
             props: {
                 product: product,
                 loading: false,
-                location:allCookies.fetchlocation
+                location: allCookies.fetchlocation
             },
         };
 

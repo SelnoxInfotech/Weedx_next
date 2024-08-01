@@ -11,7 +11,6 @@ import Createcontext from "@/hooks/context"
 import { useRouter } from 'next/router';
 import Wronglocation from "../../../component/skeleton/Wronglocation";
 import { modifystr } from "../../../hooks/utilis/commonfunction";
-import Loader from "../../../component/Loader/Loader";
 import Location from '../../../hooks/utilis/getlocation';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -46,18 +45,14 @@ const Dispensaries = (props) => {
 
     const classes = useStyles()
     const [searchtext, setsearchtext] = React.useState("");
-    const [redirecting, setRedirecting] = React.useState(true);
     const navigate = useRouter()
-    const Location = useRouter()
     const { state, dispatch } = React.useContext(Createcontext)
     const [value, setValue] = React.useState(0);
-    const { query } = navigate;
     const [contentdata, setcontentdata] = React.useState([])
-    const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: props.formatted_address }]
+    const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: props.formatted_address  ||state.Location }]
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    console.log( query )
     // React.useEffect(() => {
     //     const sendPostRequest = () => {
     //         axios.post(
@@ -136,6 +131,8 @@ const Dispensaries = (props) => {
  
     //     // navigate.push(`/weed-dispensaries/${props.location.country || 'default-country'}/${props.location.state || 'default-state'}/${props.location.city || 'default-city'}`,undefined ,  { shallow: false });
     // }, [props])
+
+
     React.useEffect(() => {
         props.isDirectHit &&   dispatch({ type: 'Location', Location: props?.formatted_address  })
 
@@ -522,6 +519,7 @@ export const getServerSideProps = async (context) => {
     const { req , query } = context;
     const { headers: { referer }, url } = req;
     const isDirectHit = !referer || referer === req.url;
+
 
     const transformString = (str) => {
         if (typeof str !== "string" || !str.trim()) {

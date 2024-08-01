@@ -16,8 +16,8 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import useStyles from '../../../styles/style';
 import dynamic from 'next/dynamic'
-const DeliveryItemsCard = dynamic(() => import('../../../component/DeliveriesComponent/DeliveryMenuBar/DeliveryItemsCards') , {ssr:true});
-const Text = dynamic(() => import('../../../layout/text') , {ssr:true});
+const DeliveryItemsCard = dynamic(() => import('../../../component/DeliveriesComponent/DeliveryMenuBar/DeliveryItemsCards'), { ssr: true });
+const Text = dynamic(() => import('../../../layout/text'), { ssr: true });
 // import DeliveryItemsCard from "../../../component/DeliveriesComponent/DeliveryMenuBar/DeliveryItemsCards";
 import { Delivery } from '../../../component/ScoPage/Deliveries';
 import { GetAllDelivery } from "../../../hooks/apicall/api"
@@ -32,7 +32,9 @@ import Location from '../../../hooks/utilis/getlocation';
 import Cookies from 'universal-cookie';
 
 const Deliveries = (props) => {
+    console.log(props   )
     const { state, dispatch } = React.useContext(Createcontext)
+    const locations =  props?.location.formatted_address || state.Location
 
     const Location = useRouter()
     const navigate = useRouter()
@@ -40,19 +42,43 @@ const Deliveries = (props) => {
 
     const [contentdata, setcontentdata] = React.useState([])
 
-    React.useEffect(() => {
-        dispatch({ type: 'Location', Location: props?.location.formatted_address })
-        dispatch({ type: 'permission', permission: true });
-        dispatch({ type: 'Country', Country: props?.location.country });
-        dispatch({ type: 'countrycode', countrycode: props?.location.countrycode });
-        dispatch({ type: 'State', State: props?.location.state });
-        dispatch({ type: 'statecode', statecode: props?.location.statecode });
-        dispatch({ type: 'City', City: props?.location.city })
-        dispatch({ type: 'citycode', citycode: props?.location.citycode });
-        dispatch({ type: 'route', route: props?.location.route });
 
-    }, [props])
-    // console.log(props)
+    React.useEffect(() => {
+        props.isDirectHit &&   dispatch({ type: 'Location', Location: props?.formatted_address   })
+
+        if(props.isDirectHit)
+       dispatch({ type: 'permission', permission: true });
+        dispatch({ type: 'Country', Country: props?.location?.country });
+        dispatch({ type: 'countrycode', countrycode: props.location?.countrycode });
+        dispatch({ type: 'State', State: props?.location?.state });
+        dispatch({ type: 'statecode', statecode: props?.location?.statecode });
+        dispatch({ type: 'City', City: props?.location?.city })
+        dispatch({ type: 'citycode', citycode: props?.location?.citycode });
+        dispatch({ type: 'route', route: props?.location?.route });
+{        const { country, state, city,route } = props.location || {};
+    
+        // Build the URL based on available location data
+        let url = '/weed-deliveries/in/';
+        if(route){
+            url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}/${modifystr(route)}`;
+        }
+        else if (city) {
+          url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}`;
+        } else if (state) {
+          url += `${modifystr(country) || 'default-country'}/${modifystr(state)}`;
+        } else if (country) {
+          url += modifystr(country);
+        } else {
+          url = '/weed-deliveries/default-country'; // Fallback URL
+        }
+    
+        // Use shallow routing to navigate to the constructed URL
+
+       navigate.replace(url, 0, { shallow: true });
+    }      
+      }, [props.location]);
+
+
 
 
 
@@ -101,38 +127,38 @@ const Deliveries = (props) => {
                     <div className="headerBoxdescription">
                         <h1 className="m-0">
                             <span className="dispensories_name">Weed Delivery In </span>
-                            <span className="dispensories_city">{props?.location.formatted_address }</span></h1>
-                            {/* <Text data= {state.Location}></Text> */}
-                        <p className="m-0">{`Find Nearby Weed Delivery in  ${props?.location.formatted_address}  for Recreational & Medical Uses. Browse Top Cannabis Products and Place Orders from Trusted weed delivery near you.`}</p>
+                            <span className="dispensories_city">{locations}</span></h1>
+                        {/* <Text data= {state.Location}></Text> */}
+                        <p className="m-0">{`Find Nearby Weed Delivery in  ${locations}  for Recreational & Medical Uses. Browse Top Cannabis Products and Place Orders from Trusted weed delivery near you.`}</p>
 
                     </div>
 
                     <div className="col-lg-12 col-11 delivery_menuBar_container px-0 mt-4">
                         <Delivery location={Location.asPath}></Delivery>
                         {
-                                (Boolean(props?.store.length) ?
+                            (Boolean(props?.store.length) ?
 
-                                    <Box className={``} sx={{ width: '100%', typography: 'body1', }}>
-                                        <TabContext value={value}>
-                                            <Box className={`${classes.open_dispensory_tab_background} ${classes.open_dispensory_tab}`} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                                <TabList scrollButtons={false} variant="scrollable" onChange={handleChange} aria-label="lab API tabs example">
-                                                    <Tab label="Order Online" value="1" />
-                                                    <Tab label="Order now" value="2" />
-                                                    <Tab label="Best of WeedX" value="3" />
-                                                    {/* <Tab label="Recreational" value="4" /> */}
+                                <Box className={``} sx={{ width: '100%', typography: 'body1', }}>
+                                    <TabContext value={value}>
+                                        <Box className={`${classes.open_dispensory_tab_background} ${classes.open_dispensory_tab}`} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                            <TabList scrollButtons={false} variant="scrollable" onChange={handleChange} aria-label="lab API tabs example">
+                                                <Tab label="Order Online" value="1" />
+                                                <Tab label="Order now" value="2" />
+                                                <Tab label="Best of WeedX" value="3" />
+                                                {/* <Tab label="Recreational" value="4" /> */}
 
-                                                </TabList>
-                                            </Box>
-                                            <Box className={`${classes.deliverItemCardPadding}`}>
-                                                <TabPanel value="1"><DeliveryItemsCard Deliverie={props?.store} /></TabPanel>
-                                                <TabPanel value="2"><DeliveryItemsCard Deliverie={props?.store} /></TabPanel>
-                                                <TabPanel value="3"><DeliveryItemsCard Deliverie={props?.store} /></TabPanel>
-                                            </Box>
-                                        </TabContext>
-                                    </Box>
-                                    :
-                                    <Wronglocation title={'No deliveries available'} description={`Delivery service isn't available at your location. Would you like to try a different address ?`} />)
-                               
+                                            </TabList>
+                                        </Box>
+                                        <Box className={`${classes.deliverItemCardPadding}`}>
+                                            <TabPanel value="1"><DeliveryItemsCard Deliverie={props?.store} /></TabPanel>
+                                            <TabPanel value="2"><DeliveryItemsCard Deliverie={props?.store} /></TabPanel>
+                                            <TabPanel value="3"><DeliveryItemsCard Deliverie={props?.store} /></TabPanel>
+                                        </Box>
+                                    </TabContext>
+                                </Box>
+                                :
+                                <Wronglocation title={'No deliveries available'} description={`Delivery service isn't available at your location. Would you like to try a different address ?`} />)
+
                         }
                     </div>
                     {/* <div className="col-12 webContent">
@@ -176,114 +202,222 @@ const Deliveries = (props) => {
 export default Deliveries
 
 
-export const getStaticPaths = async () => {
-    const locations = [
-        ['united-states', 'new-york',],
-    ];
+// export const getStaticPaths = async () => {
+//     const locations = [
+//         ['united-states', 'new-york',],
+//     ];
 
-    const paths = locations.map(location => ({
-        params: { location },
-    }));
+//     const paths = locations.map(location => ({
+//         params: { location },
+//     }));
 
-    return { paths, fallback: "blocking" };
-};
+//     return { paths, fallback: "blocking" };
+// };
 
-export const getStaticProps = async (context) => {
+// export const getStaticProps = async (context) => {
 
 
-    const locationParams = context.params.location;
-    const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
+//     const locationParams = context.params.location;
+//     const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
 
-    const k = await Location(decodedLocation);
+//     const k = await Location(decodedLocation);
+
+//     const transformString = (str) => {
+//         return str
+//             .replace(/-/g, " ")  // Replace hyphens with spaces
+//             .split(' ')          // Split the string into an array of words
+//             .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize the first letter of each word
+//             .join(' ');          // Join the words back into a single string
+//     };
+
+//     const object = {
+//         City: transformString(k.city || ''),
+//         Country: transformString(k.country || ''),
+//         State: transformString(k.state || ''),
+//     };
+//     const object1 = {
+//         City: transformString(k.city || ''),
+//         Country: transformString(k.country || ''),
+//         State: transformString(k.state || ''),
+//         limit: 10
+//     };
+
+//     try {
+//         const response = await GetAllDelivery(object);
+//         const data = await response;
+
+//         const fetchProducts = async (obj) => {
+//             const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify(obj)
+//             });
+
+//             if (!productResponse.ok) {
+//                 throw new Error('Failed to fetch products');
+//             }
+
+//             const productData = await productResponse.json();
+//             return productData;
+//         };
+
+//         const fetchWebContent = async (obj) => {
+//             const webResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify(obj)
+//             });
+
+//             if (!webResponse.ok) {
+//                 throw new Error('Failed to fetch web content');
+//             }
+
+//             const webContentData = await webResponse.json();
+//             return webContentData;
+//         };
+
+//         const productData = await fetchProducts(object1);
+//         const WebContent = await fetchWebContent(object1);
+
+//         const product = productData?.filter(item => item.Store_Type === "delivery");
+
+//         if (data.length === 0) {
+//             return {
+//                 props: {
+//                     store: [],
+//                     product: [],
+//                     location: k,
+//                     WebContent
+//                 }
+//             };
+//         } else {
+//             return {
+//                 props: {
+//                     store: data,
+//                     product: product,
+//                     location: k,
+//                     WebContent
+//                 }
+//             };
+//         }
+//     } catch (error) {
+//         console.error('Error fetching data:', error);
+//         return {
+//             notFound: true,
+//         };
+//     }
+// };
+
+
+export const getServerSideProps = async (context) => {
+    const { req, query } = context;
+    const { headers: { referer }, url } = req;
+    const isDirectHit = !referer || referer === req.url;
+
 
     const transformString = (str) => {
+        if (typeof str !== "string" || !str.trim()) {
+            return '';
+        }
+
         return str
             .replace(/-/g, " ")  // Replace hyphens with spaces
             .split(' ')          // Split the string into an array of words
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize the first letter of each word
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())  // Capitalize the first letter of each word
             .join(' ');          // Join the words back into a single string
     };
 
-    const object = {
-        City: transformString(k.city || ''),
-        Country: transformString(k.country || ''),
-        State: transformString(k.state || ''),
+    const locationParams = context.params.location || [];
+    let country1 = "", state = "", city = "", formatted_address = "";
+
+    let type = {
+        country: locationParams[0] || "",
+        state: locationParams[1] || "",
+        city: locationParams[2] || "",
+        route: locationParams[3] || ""
     };
+
+    if (isDirectHit) {
+        const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
+        const k = await Location(decodedLocation, type);
+        country1 = k.country || "";
+        state = k.state || "";
+        city = k.city || "";
+        formatted_address = k.formatted_address || "";
+    } else {
+        country1 = locationParams[0] || "";
+        state = locationParams[1] || "";
+        city = locationParams[2] || "";
+    }
+
+    const object = {
+        City: transformString(city) || '',
+        Country: transformString(country1) || '',
+        State: transformString(state) || '',
+    };
+
     const object1 = {
-        City: transformString(k.city || ''),
-        Country: transformString(k.country || ''),
-        State: transformString(k.state || ''),
+        ...object,
         limit: 10
     };
 
     try {
         const response = await GetAllDelivery(object);
+        // const data = await response;
         const data = await response;
+        console.log(response)
+        const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(object1)
+        });
 
-        const fetchProducts = async (obj) => {
-            const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(obj)
-            });
+        if (!productResponse.ok) {
+            throw new Error('Failed to fetch products');
+        }
 
-            if (!productResponse.ok) {
-                throw new Error('Failed to fetch products');
-            }
+        const productData = await productResponse.json();
+        const products = productData?.filter(item => item.Store_Type === "dispensary");
 
-            const productData = await productResponse.json();
-            return productData;
-        };
-
-        const fetchWebContent = async (obj) => {
-            const webResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(obj)
-            });
-
-            if (!webResponse.ok) {
-                throw new Error('Failed to fetch web content');
-            }
-
-            const webContentData = await webResponse.json();
-            return webContentData;
-        };
-
-        const productData = await fetchProducts(object1);
-        const WebContent = await fetchWebContent(object1);
-
-        const product = productData?.filter(item => item.Store_Type === "delivery");
-
-        if (data.length === 0) {
+        if (data === "No Dispensary in your area") {
             return {
                 props: {
                     store: [],
                     product: [],
-                    location: k,
-                    WebContent
+                    location: {
+                        country: country1,
+                        state: state,
+                        city: city,
+                    },
+                    formatted_address: formatted_address,
+                    isDirectHit
                 }
             };
         } else {
             return {
                 props: {
                     store: data,
-                    product: product,
-                    location: k,
-                    WebContent
+                    product: products,
+                    location: {
+                        country: country1,
+                        state: state,
+                        city: city,
+                    },
+                    formatted_address: formatted_address,
+                    isDirectHit
                 }
             };
         }
     } catch (error) {
         console.error('Error fetching data:', error);
         return {
-            notFound: true,
+            notFound: true
         };
     }
 };
-
-

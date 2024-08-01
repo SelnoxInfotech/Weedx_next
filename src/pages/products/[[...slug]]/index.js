@@ -21,12 +21,11 @@ import Image from "next/image";
 import cookies from 'next-cookies';
 
 const Product = (props) => {
-
     const navigate = useRouter();
     const { slug } = navigate.query;
     const params = slug ? (slug[_.findIndex(slug, item => !isNaN(parseInt(item)))] || 0) : 0;
     const classes = useStyles()
-    const { state } = React.useContext(Createcontext)
+    const { state , dispatch } = React.useContext(Createcontext)
     const [loading, SetLoading] = React.useState(props.length)
     const [subcategories, setsubcategories] = useState([])
     const [Product, SetProduct] = React.useState(props.product)
@@ -56,12 +55,19 @@ const Product = (props) => {
             SetCategory(data)
         }
         fetchData()
+
     }, [])
 
     React.useEffect(() => {
         SetLoading(() => {
             return props.loading
         });
+        dispatch({ type: 'Location', Location: props?.location.formatted_address  })
+       dispatch({ type: 'permission', permission: true });
+        dispatch({ type: 'Country', Country: props?.location?.country });
+        dispatch({ type: 'State', State: props?.location?.state });
+        dispatch({ type: 'City', City: props?.location?.city })
+        dispatch({ type: 'route', route: props?.location?.route });
     }, [props]);
 
     React.useEffect(() => {
@@ -121,7 +127,7 @@ const Product = (props) => {
 
     return (
         <React.Fragment>
-            {state.permission === false && <Currentlocation></Currentlocation>}
+            {/* {state.permission === false && <Currentlocation></Currentlocation>} */}
             <div style={{ cursor: "pointer" }}>
                 <span onClick={() => navigate.push("/")}>{"Home"}</span>
                 {<span> {">"} <span onClick={() => breadcrumCountry("Product")}>Product</span></span>}
@@ -220,7 +226,7 @@ export const getServerSideProps = async (context) => {
 
     const { req, res } = context
     const allCookies = cookies(context);
-    console.log(allCookies)
+    // console.log(allCookies.fetchlocation)
     const transformString = (str) => {
         if (!str) {
             // Handle the case where str is undefined or null
@@ -237,9 +243,9 @@ export const getServerSideProps = async (context) => {
         'public, s-maxage=60, stale-while-revalidate=59'
     )
     const object = {
-        City: transformString(allCookies?.setlocation?.city) || '',
-        Country: transformString(allCookies?.setlocation?.country) || '',
-        State: transformString(allCookies?.setlocation?.state) || '',
+        City: transformString(allCookies?.fetchlocation?.city) || '',
+        Country: transformString(allCookies?.fetchlocation?.country) || '',
+        State: transformString(allCookies?.fetchlocation?.state) || '',
         limit: 20
     };
 
@@ -307,7 +313,8 @@ export const getServerSideProps = async (context) => {
         return {
             props: {
                 product: product,
-                loading: false
+                loading: false,
+                location:allCookies.fetchlocation
             },
         };
 

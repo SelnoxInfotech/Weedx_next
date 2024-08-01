@@ -52,18 +52,6 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         short[l] = data?.short_name
       })
 
-      // const setLocation={
-      //   country:Coun || '',
-      //   state:sta || "",
-      //   city:ci || '',
-      //   route:route || '',
-      //   formatted_address:placeDetails.formatted_address
-      // }
-      // cookies.remove('setlocation');
-      // const date = new Date();
-      // date.setTime(date.getTime() + 60 * 60 * 24 * 365);
-      // cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
-
 
       if (Boolean(object.country)) {
         Coun = object.country.replace(/\s/g, '-');
@@ -196,7 +184,18 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
       if (sta === undefined) {
         dispatch({ type: 'State', State: '' })
       }
-      console.log(router.pathname === "/products/[[...slug]]" )
+      const setLocation={
+        country:Coun || '',
+        state:sta || "",
+        city:ci || '',
+        route:route || '',
+        formatted_address:placeDetails.formatted_address
+      }
+      cookies.remove('fetchlocation');
+      const date = new Date();
+      date.setTime(date.getTime() + 60 * 60 * 24 * 365);
+      cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
+
       router.pathname === "/products/[[...slug]]" &&  router.replace(router.asPath);
       dispatch({ type: 'location_Api', location_Api: false })
       dispatch({ type: 'Location', Location: placeDetails?.formatted_address })

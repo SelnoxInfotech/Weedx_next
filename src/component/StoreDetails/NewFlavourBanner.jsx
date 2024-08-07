@@ -72,7 +72,7 @@ const NewFlavourBanner = ({ delBtn }) => {
                                                     <p className='m-0'><TbCircleFilled id="new_flavCircle" /></p>
                                                     <Link
                                                         href={location.pathname.includes("weed-dispensaries")
-                                                            ? `/weed-dispensaries/${modifystr(data.Store_Name)}/store-details/${delBtn[0].id}`
+                                                            ? `                                                                                             ${modifystr(data.Store_Name)}/store-details/${delBtn[0].id}`
                                                             :
                                                             location.pathname.includes("/weed-deliveries") &&
 

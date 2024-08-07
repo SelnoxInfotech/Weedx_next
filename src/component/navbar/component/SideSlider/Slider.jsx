@@ -68,7 +68,7 @@ const SideNavbar = ({ closeNav, Open }) => {
                                         <Link href="/">
                                             {/* <LazyLoadImage className='navbar_logo_image'  src='/image/WeedWhiteLogo.webp' alt='WeedX.io logo' title="Weedx.io logo" /> */}
                                             <Image
-                                            unoptimized={true}
+                                                unoptimized={true}
                                                 className={'navbarLogoImage'} // Apply CSS module class
                                                 src="/image/WeedWhiteLogo.webp"
                                                 alt="WeedX.io logo"
@@ -92,15 +92,15 @@ const SideNavbar = ({ closeNav, Open }) => {
                                     <section className="image_name_section">
                                         <div className="SliderImageProfile_container">
 
-                                            <Image 
-                                            // onError={event => {
-                                            //     event.target.src = "/image/user.webp"
-                                            //     event.onerror = null
-                                            // }} 
-                                            unoptimized={true}
-                                            width={100}
-                                            height={100}
-                                            alt='Profile' title='Profile' onClick={Redirect} src={state?.Profile?.image} className="Slider_inner_profile_imgs" />
+                                            <Image
+                                                // onError={event => {
+                                                //     event.target.src = "/image/user.webp"
+                                                //     event.onerror = null
+                                                // }} 
+                                                unoptimized={true}
+                                                width={100}
+                                                height={100}
+                                                alt='Profile' title='Profile' onClick={Redirect} src={state?.Profile?.image} className="Slider_inner_profile_imgs" />
 
                                         </div>
                                         <div className="slider_image_profile_names_conatiner">
@@ -122,8 +122,11 @@ const SideNavbar = ({ closeNav, Open }) => {
 
                 <hr></hr>
                 <div className="col-12 Slider_content_center " >
-                    <Link className="LinkColor"
-                     href={`/weed-dispensaries/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}><p onClick={closeNav} className="m-0 d-flex"><span ><FaClinicMedical color="#31B655" fontSize={25} /></span>Dispensaries</p></Link>
+                    <Link
+                        className="LinkColor"
+                        href={`/weed-dispensaries/in/${state?.Country?.toLowerCase() || 'default-country'}/${state?.State?.toLowerCase() || 'default-state'}/${state?.City?.toLowerCase() || 'default-city'}`}
+                    ><p onClick={closeNav} className="m-0 d-flex"><span ><FaClinicMedical color="#31B655" fontSize={25} /></span>Dispensaries</p></Link>
+               
                 </div>
 
                 <hr></hr>

@@ -311,7 +311,7 @@ const NewProductDetails = (props) => {
 export default NewProductDetails
 
 export async function getServerSideProps(context) {
- 
+    
 
    return {
      props: {

@@ -32,9 +32,9 @@ import Location from '../../../hooks/utilis/getlocation';
 import Cookies from 'universal-cookie';
 
 const Deliveries = (props) => {
-    console.log(props   )
+    const cookies = new Cookies();
     const { state, dispatch } = React.useContext(Createcontext)
-    const locations =  props?.location.formatted_address || state.Location
+    const locations = props?.location.formatted_address || state.Location
 
     const Location = useRouter()
     const navigate = useRouter()
@@ -44,10 +44,10 @@ const Deliveries = (props) => {
 
 
     React.useEffect(() => {
-        props.isDirectHit &&   dispatch({ type: 'Location', Location: props?.formatted_address   })
+        props.isDirectHit && dispatch({ type: 'Location', Location: props?.formatted_address })
 
-        if(props.isDirectHit)
-       dispatch({ type: 'permission', permission: true });
+        if (props.isDirectHit)
+            dispatch({ type: 'permission', permission: true });
         dispatch({ type: 'Country', Country: props?.location?.country });
         dispatch({ type: 'countrycode', countrycode: props.location?.countrycode });
         dispatch({ type: 'State', State: props?.location?.state });
@@ -55,28 +55,38 @@ const Deliveries = (props) => {
         dispatch({ type: 'City', City: props?.location?.city })
         dispatch({ type: 'citycode', citycode: props?.location?.citycode });
         dispatch({ type: 'route', route: props?.location?.route });
-{        const { country, state, city,route } = props.location || {};
-    
-        // Build the URL based on available location data
-        let url = '/weed-deliveries/in/';
-        if(route){
-            url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}/${modifystr(route)}`;
-        }
-        else if (city) {
-          url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}`;
-        } else if (state) {
-          url += `${modifystr(country) || 'default-country'}/${modifystr(state)}`;
-        } else if (country) {
-          url += modifystr(country);
-        } else {
-          url = '/weed-deliveries/default-country'; // Fallback URL
-        }
-    
-        // Use shallow routing to navigate to the constructed URL
+        const setLocation = {
+            country: props?.location?.country,
+            state: props?.location?.state,
+            city: props?.location?.city,
+            formatted_address:props?.formatted_address
+          };
+          const date = new Date();
+          date.setTime(date.getTime() + 60 * 60 * 24 * 365); // 1 year expiry
+          props.isDirectHit &&   cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
+        {
+            const { country, state, city, route } = props.location || {};
 
-       navigate.replace(url, 0, { shallow: true });
-    }      
-      }, [props.location]);
+            // Build the URL based on available location data
+            let url = '/weed-deliveries/in/';
+            if (route) {
+                url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}/${modifystr(route)}`;
+            }
+            else if (city) {
+                url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}`;
+            } else if (state) {
+                url += `${modifystr(country) || 'default-country'}/${modifystr(state)}`;
+            } else if (country) {
+                url += modifystr(country);
+            } else {
+                url = '/weed-deliveries/default-country'; // Fallback URL
+            }
+
+            // Use shallow routing to navigate to the constructed URL
+
+            navigate.replace(url, 0, { shallow: true });
+        }
+    }, [props.location]);
 
 
 
@@ -202,117 +212,6 @@ const Deliveries = (props) => {
 export default Deliveries
 
 
-// export const getStaticPaths = async () => {
-//     const locations = [
-//         ['united-states', 'new-york',],
-//     ];
-
-//     const paths = locations.map(location => ({
-//         params: { location },
-//     }));
-
-//     return { paths, fallback: "blocking" };
-// };
-
-// export const getStaticProps = async (context) => {
-
-
-//     const locationParams = context.params.location;
-//     const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
-
-//     const k = await Location(decodedLocation);
-
-//     const transformString = (str) => {
-//         return str
-//             .replace(/-/g, " ")  // Replace hyphens with spaces
-//             .split(' ')          // Split the string into an array of words
-//             .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize the first letter of each word
-//             .join(' ');          // Join the words back into a single string
-//     };
-
-//     const object = {
-//         City: transformString(k.city || ''),
-//         Country: transformString(k.country || ''),
-//         State: transformString(k.state || ''),
-//     };
-//     const object1 = {
-//         City: transformString(k.city || ''),
-//         Country: transformString(k.country || ''),
-//         State: transformString(k.state || ''),
-//         limit: 10
-//     };
-
-//     try {
-//         const response = await GetAllDelivery(object);
-//         const data = await response;
-
-//         const fetchProducts = async (obj) => {
-//             const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify(obj)
-//             });
-
-//             if (!productResponse.ok) {
-//                 throw new Error('Failed to fetch products');
-//             }
-
-//             const productData = await productResponse.json();
-//             return productData;
-//         };
-
-//         const fetchWebContent = async (obj) => {
-//             const webResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify(obj)
-//             });
-
-//             if (!webResponse.ok) {
-//                 throw new Error('Failed to fetch web content');
-//             }
-
-//             const webContentData = await webResponse.json();
-//             return webContentData;
-//         };
-
-//         const productData = await fetchProducts(object1);
-//         const WebContent = await fetchWebContent(object1);
-
-//         const product = productData?.filter(item => item.Store_Type === "delivery");
-
-//         if (data.length === 0) {
-//             return {
-//                 props: {
-//                     store: [],
-//                     product: [],
-//                     location: k,
-//                     WebContent
-//                 }
-//             };
-//         } else {
-//             return {
-//                 props: {
-//                     store: data,
-//                     product: product,
-//                     location: k,
-//                     WebContent
-//                 }
-//             };
-//         }
-//     } catch (error) {
-//         console.error('Error fetching data:', error);
-//         return {
-//             notFound: true,
-//         };
-//     }
-// };
-
-
 export const getServerSideProps = async (context) => {
     const { req, query } = context;
     const { headers: { referer }, url } = req;
@@ -348,6 +247,7 @@ export const getServerSideProps = async (context) => {
         state = k.state || "";
         city = k.city || "";
         formatted_address = k.formatted_address || "";
+
     } else {
         country1 = locationParams[0] || "";
         state = locationParams[1] || "";
@@ -369,7 +269,6 @@ export const getServerSideProps = async (context) => {
         const response = await GetAllDelivery(object);
         // const data = await response;
         const data = await response;
-        console.log(response)
         const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
             method: 'POST',
             headers: {

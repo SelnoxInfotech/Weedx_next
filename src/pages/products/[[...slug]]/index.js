@@ -19,6 +19,7 @@ const CategoryProduct = dynamic(() => import('@/component/category/category'), {
 const ProductSearchResult = dynamic(() => import('@/component/productcard/ProductSearchResult'), { ssr: true });
 import Image from "next/image";
 import cookies from 'next-cookies';
+import { setCookie } from 'nookies';
 
 const Product = (props) => {
     const navigate = useRouter();
@@ -224,28 +225,50 @@ export default Product
 
 export const getServerSideProps = async (context) => {
 
-    const { req, res } = context
-    const allCookies = cookies(context);
-    // console.log(allCookies.fetchlocation)
+    const { req, res } = context;
+    let allCookies
+    
+    function getCookies(req) {
+        let cookies = req.headers.cookie;
+        return Object.fromEntries(cookies.split('; ').map(c => c.split('=')));
+    }
+    const cookies = getCookies(req);
+    if (cookies.fetchlocation) {
+        try {
+            // Decode and parse the fetchlocation cookie value
+            const decodedString = decodeURIComponent(cookies.fetchlocation);
+            const jsonObject = JSON.parse(decodedString);
+            allCookies=jsonObject
+        } catch (error) {
+            console.error('Error decoding or parsing cookie:', error);
+        }
+    } else {
+        console.log('fetchlocation cookie not found');
+    }
+
+
+    const locationData = allCookies;
+
     const transformString = (str) => {
         if (!str) {
-            // Handle the case where str is undefined or null
-            return ''; // or return some default value
+            return '';
         }
         return str
-            .replace(/-/g, " ")  // Replace hyphens with spaces 
-            .split(' ')          // Split the string into an array of words
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize the first letter of each word
+            .replace(/-/g, " ")
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
     };
+
     res.setHeader(
         'Cache-Control',
         'public, s-maxage=60, stale-while-revalidate=59'
-    )
+    );
+    
     const object = {
-        City: transformString(allCookies?.fetchlocation?.city) || '',
-        Country: transformString(allCookies?.fetchlocation?.country) || '',
-        State: transformString(allCookies?.fetchlocation?.state) || '',
+        City: transformString(locationData.city),
+        Country: transformString(locationData.country),
+        State: transformString(locationData.state),
         limit: 20
     };
 
@@ -263,11 +286,7 @@ export const getServerSideProps = async (context) => {
                     });
 
                     const data = await response.json();
-                    if (data === "There is no Product") {
-                        product = [];
-                    } else {
-                        product = data;
-                    }
+                    product = data === "There is no Product" ? [] : data;
                 } catch (error) {
                     console.error('Error:', error);
                 }
@@ -283,18 +302,14 @@ export const getServerSideProps = async (context) => {
                     });
 
                     const data = await response.json();
-                    if (data === "There is no Product") {
-                        product = [];
-                    } else {
-                        product = data;
-                    }
+                    product = data === "There is no Product" ? [] : data;
                 } catch (error) {
                     console.error('Error:', error);
                 }
                 break;
             default:
                 const response = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
-                    method: 'POST', // Assuming you are making a POST request. Change if needed.
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -303,10 +318,8 @@ export const getServerSideProps = async (context) => {
 
                 const data = await response.json();
                 if (data !== "No Product Found" && data.length !== 0) {
-                    product = data
-
+                    product = data;
                 }
-
                 break;
         }
 
@@ -314,7 +327,7 @@ export const getServerSideProps = async (context) => {
             props: {
                 product: product,
                 loading: false,
-                location: allCookies.fetchlocation
+                location: locationData
             },
         };
 

@@ -7,7 +7,7 @@ import { HomePageSco } from "../component/ScoPage/HomePageSco"
 import dynamic from 'next/dynamic'
 const HomePageBanner = dynamic(() => import('../component/home/homepagebanner'));
 const CategoryProduct = dynamic(() => import('../component/category/category'));
-const DeliveryServices = dynamic(() => import('../component/home/deliveryservice') , {ssr:true});
+const DeliveryServices = dynamic(() => import('../component/home/deliveryservice'), { ssr: true });
 const HomePageWeedBanner = dynamic(() => import('../component/home/HomePageWeedBanner'));
 const Map = dynamic(() => import('../component/home/map/map'));
 const Staticcontent = dynamic(() => import('../component/home/staticcontent'));
@@ -25,11 +25,11 @@ export default function Home({ initialData }) {
 
     Navigate(`/products/${name.replace(/%20| /g, "-").toLowerCase()}/${id}`);
   }
-// console.log(initialData.brand)
+  // console.log(initialData.brand)
   return (
     <>
+      {/* <Currentlocation></Currentlocation> */}
       <HomePageSco location={useRouter().pathname}></HomePageSco>
-      {state.permission === false && <Currentlocation></Currentlocation>}
       <HomePageBanner props={initialData.topbanner}> </HomePageBanner>
       <CategoryProduct Category={initialData.category} ShowCategoryProduct={ShowCategoryProduct} Skeleton={false}></CategoryProduct>
       <DeliveryServices Skeleton={Skeleton} link={"weed-deliveries"} title={"Delivery services"}></DeliveryServices>
@@ -59,26 +59,26 @@ export async function getStaticProps() {
   };
 
   try {
-    const [banner, callcategory, bannner2 , brand] = await Promise.all([
+    const [banner, callcategory, bannner2, brand] = await Promise.all([
       fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
       fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
       fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
       fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
     ]);
 
-    const [topbanner, category, bottembannner , getbrand] = await Promise.all([
+    const [topbanner, category, bottembannner, getbrand] = await Promise.all([
       banner.json().catch(handleError),
       callcategory.json().catch(handleError),
       bannner2.json().catch(handleError),
       brand.json().catch(handleError)
     ]);
 
- 
+
     const responseData = {
       topbanner: topbanner,
       category: category,
       bottembannner: bottembannner,
-      brand:getbrand
+      brand: getbrand
     };
 
     return {

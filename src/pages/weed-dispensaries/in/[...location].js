@@ -12,6 +12,8 @@ import { useRouter } from 'next/router';
 import Wronglocation from "../../../component/skeleton/Wronglocation";
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Location from '../../../hooks/utilis/getlocation';
+import Cookies from 'universal-cookie';
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -42,7 +44,7 @@ function a11yProps(index) {
 
 
 const Dispensaries = (props) => {
-
+    const cookies = new Cookies();
     const classes = useStyles()
     const [searchtext, setsearchtext] = React.useState("");
     const navigate = useRouter()
@@ -145,6 +147,16 @@ const Dispensaries = (props) => {
         dispatch({ type: 'City', City: props?.location?.city })
         dispatch({ type: 'citycode', citycode: props?.location?.citycode });
         dispatch({ type: 'route', route: props?.location?.route });
+        const setLocation = {
+            country: props?.location?.country,
+            state: props?.location?.state,
+            city: props?.location?.city,
+            formatted_address:props?.formatted_address
+          };
+          const date = new Date();
+          date.setTime(date.getTime() + 60 * 60 * 24 * 365); // 1 year expiry
+          props.isDirectHit  && cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
+
 {        const { country, state, city,route } = props.location || {};
     
         // Build the URL based on available location data
@@ -519,7 +531,7 @@ export const getServerSideProps = async (context) => {
     const { req , query } = context;
     const { headers: { referer }, url } = req;
     const isDirectHit = !referer || referer === req.url;
-
+// console.log(req.url , "urlx")
 
     const transformString = (str) => {
         if (typeof str !== "string" || !str.trim()) {

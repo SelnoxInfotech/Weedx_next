@@ -6,19 +6,8 @@ import useStyles from '../../styles/style';
 import Axios from "axios";
 import HomePageBannerSkeleton from '../../component/skeleton/DashBoardSkeleton/HomePageBannerSkeleton';
 import Image from 'next/image';
-const HomePageWeedBanner=()=>{
-    const [Skeletoncom , SetSkeleton]= React.useState(true)
-    const [data,setdata] = React.useState([]) 
-   
-    React.useEffect(() => {
-        Axios("https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/ ")
-        .then((response)=>{
-            setdata(response?.data)
-            SetSkeleton(false)
-        })
-        .catch((error)=>{
-        })
-    }, [])
+const HomePageWeedBanner=({props})=>{
+
 
     const imageLoader = ({ src, width, quality }) => {
         return `${src}`
@@ -26,7 +15,7 @@ const HomePageWeedBanner=()=>{
 
     return(
         <div className='homepagebanner2 '>
-         { !Skeletoncom   ?
+      
            <React.Fragment>
             <div className='destop_image'>
 
@@ -36,7 +25,7 @@ const HomePageWeedBanner=()=>{
         
           disableOnInteraction: false,
         }}    style={{zIndex:0}} modules={[Autoplay]}>
-            {data?.reverse()?.map((ele, index) => {
+            {props?.reverse()?.map((ele, index) => {
                 return (
                     <SwiperSlide key={index}>
               
@@ -64,7 +53,7 @@ const HomePageWeedBanner=()=>{
                 
                 disableOnInteraction: false,
                 }}   style={{zIndex:0}} modules={[Autoplay]}>
-                    {data?.reverse()?.map((ele, index) => {
+                    {props?.reverse()?.map((ele, index) => {
                         return (
                             <SwiperSlide key={index}>
                             <div className='col-12 homePageBanner_container'>
@@ -84,10 +73,7 @@ const HomePageWeedBanner=()=>{
                 </Swiper>
            </div>
            </React.Fragment>
-        :
-       <HomePageBannerSkeleton/>
 
-    }
         </div>
     )
 }

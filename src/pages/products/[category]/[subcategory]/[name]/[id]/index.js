@@ -24,8 +24,7 @@ const usePlaceholderStyles = makeStyles(theme => ({
   }
 }));
 const NewProductDetails = (props) => {
-    
-  const { id } = props.params;
+  const { id } = props.id;
   const [discount, setdiscount] = React.useState({
     Product: id,
     Amount: '',
@@ -37,7 +36,7 @@ const NewProductDetails = (props) => {
 
   const { state } = React.useContext(Createcontext)
   const navigate = useRouter();
-  const [Product, SetProduct] = React.useState([])
+  const [Product, SetProduct] = React.useState(props.data[0])
   const [reviewloading, setReviewloading] = React.useState(false)
   const [StoreProduct, SetStoreProduct] = React.useState([])
   const [Despen, SetDespens] = React.useState([])
@@ -57,25 +56,25 @@ const NewProductDetails = (props) => {
   })
 
   React.useEffect(() => {
-    Axios(`https://api.cannabaze.com/UserPanel/Get-ProductById/${id}`, {
-    }).then(response => {
-      if (response.data.length === 0) {
-        navigate.push('/404')
-      }
-      else {
-        const validation =  `/products/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}` || `/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`
-        if((location.pathname !==  validation)){
-          if(location.pathname === `/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`){
-            navigate.push(`/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`)
-          }
-          else{
+    // Axios(`https://api.cannabaze.com/UserPanel/Get-ProductById/${id}`, {
+    // }).then(response => {
+    //   if (response.data.length === 0) {
+    //     navigate.push('/404')
+    //   }
+    //   else {
+        // const validation =  `/products/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}` || `/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`
+        // if((location.pathname !==  validation)){
+        //   if(location.pathname === `/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`){
+        //     navigate.push(`/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`)
+        //   }
+        //   else{
 
-            navigate.push(`/products/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`)
-          }
-          }
-        SetProduct(() => {
-          return response.data[0]
-        })
+        //     navigate.push(`/products/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`)
+        //   }
+        //   }
+        // SetProduct(() => {
+        //   return response.data[0]
+        // })
 
         // h(response.data[0].Prices[0].Price?.filter((data) => {
         //   if (data.id === parseInt(Price[0]?.Item_id)) {
@@ -88,42 +87,44 @@ const NewProductDetails = (props) => {
         //   }
         // })
         // )
-        Axios.get(`https://api.cannabaze.com/UserPanel/Get-StoreById/${response.data[0]?.Store_id}`, {
+        Axios.get(`https://api.cannabaze.com/UserPanel/Get-StoreById/${props.data[0]?.Store_id}`, {
         }).then(response => {
           SetDespens(response.data[0])
 
         })
         Axios.post(`https://api.cannabaze.com/UserPanel/YouMayAlsoLike/`,
           {
-            category: response.data[0].category_id,
-            store_id: response.data[0].Store_id
+            category: props.data[0].category_id,
+            store_id: props.data[0].Store_id
           }
         ).then(response => {
           SetStoreProduct(response.data)
         }).catch(
           function (error) {
           })
-      }
-    }).catch(
-      function (error) {
-        navigate.push('/404')
-      })
+      
+    // }
+    
+    // .catch(
+    //   function (error) {
+    //     navigate.push('/404')
+    //   })
 
 
   }, [id])
 
 
   React.useEffect(() => {
-    product_OverAllGet_Review(Product.id).then((res) => {
+    product_OverAllGet_Review(props.data[0].id).then((res) => {
 
       SetRating(res?.data)
     }).catch(() => { })
-  }, [Product.id, api])
+  }, [props.data[0].id, api])
 
   React.useEffect(() => {
 
-    if (state.login && state.Profile.id !== undefined && Product.id !== undefined) {
-      Product_Get_UserComment(state.Profile.id, Product.id).then((res) => {
+    if (state.login && state.Profile.id !== undefined && props.data[0].id !== undefined) {
+      Product_Get_UserComment(state.Profile.id, props.data[0].id).then((res) => {
 
         if (res.data.length !== 0) {
           SetGetProductReview({
@@ -182,7 +183,7 @@ const NewProductDetails = (props) => {
     }).catch((e) => {
       console.error(e)
     })
-  }, [Product, api])
+  }, [props.data[0], api])
   
   function handleDelete(id) {
     Delete_Review(id).then((res) => {
@@ -243,16 +244,16 @@ const NewProductDetails = (props) => {
         &&
         <ProductDetailsSeo
           robot={location.pathname.slice(0, 9) === "/products" ? "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1" : "NOINDEX,INDEXIFEMBEDDED"}
-          rating={Product?.rating || 0}
-          image={Product?.images[0]?.image || "/image/weedx.io%20logo.png"}
-          category={Product.category_name}
-          Subcategorge={Product.SubcategoryName}
-          id={Product.id}
-          price={Product?.Prices[0]?.Price[0]?.SalePrice}
-          sellername={Product.StoreName}
-          Description={Product.Product_Description}
-          Productnm={Product.Product_Name} Productname={`Buy ${Product.Product_Name} at ${Product.StoreName} on WeedX.io - Your Trusted Marketplace`} ProductCategory={Product.category_name} StoreName={Product.StoreName} City={Product.Store_City} State={Product.Store_State} location={location.pathname}
-          TotalRating={Product.TotalRating}
+          rating={props.data[0]?.rating || 0}
+          image={props.data[0]?.images[0]?.image || "/image/weedx.io%20logo.png"}
+          category={props.data[0].category_name}
+          Subcategorge={props.data[0].SubcategoryName}
+          id={props.data[0].id}
+          price={props.data[0]?.Prices[0]?.Price[0]?.SalePrice}
+          sellername={props.data[0].StoreName}
+          Description={props.data[0].Product_Description}
+          Productnm={props.data[0].Product_Name} Productname={`Buy ${props.data[0].Product_Name} at ${props.data[0].StoreName} on WeedX.io - Your Trusted Marketplace`} ProductCategory={props.data[0].category_name} StoreName={props.data[0].StoreName} City={props.data[0].Store_City} State={props.data[0].Store_State} location={location.pathname}
+          TotalRating={props.data[0].TotalRating}
           ></ProductDetailsSeo>
      }
 
@@ -261,12 +262,12 @@ const NewProductDetails = (props) => {
         navigate.push(location?.state !== null ? (location?.state?.prevuisurl !== '/products' ? location?.state?.prevuisurl : '/products') : '/products')
         : navigate.push(-1)
       }} className="BackPageBtn"> <AiOutlineLeft size={22} /> Back to products </span>
-      <NewProductDetailsCards link={location.pathname.slice(0, 9) === "/products" ? Product.Store_Type === "dispensary" ? "weed-dispensaries" : "weed-deliveries" : "menu-integration"} dynamicWeight={dynamicWeight} setdynamicWeight={setdynamicWeight} quentity={quentity} setquentity={setquentity} Product={Product} DiscountedValue={discount} Price={Price} SetPrice={SetPrice} />
-          {  Boolean(Product?.copuon?.length) && <div className="offerlist">
+      <NewProductDetailsCards link={location.pathname.slice(0, 9) === "/products" ? props.data[0].Store_Type === "dispensary" ? "weed-dispensaries" : "weed-deliveries" : "menu-integration"} dynamicWeight={dynamicWeight} setdynamicWeight={setdynamicWeight} quentity={quentity} setquentity={setquentity} Product={props.data[0]} DiscountedValue={discount} Price={Price} SetPrice={SetPrice} />
+          {  Boolean(props.data[0]?.copuon?.length) && <div className="offerlist">
         <h2 className="section_main_title">Offers</h2>
         <div className="offerlistwrapper">
           {
-            Product.copuon?.map((item , index) => {
+            props.data[0].copuon?.map((item , index) => {
               return <div className="offercard" key={index}>
                 <div className="leftcoupon">
                   <span>Use Code</span>
@@ -286,7 +287,7 @@ const NewProductDetails = (props) => {
         </div>
       </div>}
       {Boolean(StoreProduct?.length !== 0) &&
-      <ProductSearchResult link={location.pathname.slice(0, 9) === "/products" ? "products" : "menu-integration"} RelatedProductResult={StoreProduct} currentProductID={Product.id} title={'You may also like'}  CategoryName={Product}/>
+      <ProductSearchResult link={location.pathname.slice(0, 9) === "/products" ? "products" : "menu-integration"} RelatedProductResult={StoreProduct} currentProductID={props.data[0].id} title={'You may also like'}  CategoryName={props.data[0]}/>
      }
      
       <Review
@@ -310,16 +311,24 @@ const NewProductDetails = (props) => {
 }
 export default NewProductDetails
 
-export async function getServerSideProps(context) {
-    
+export const getStaticPaths = async () => {
+  return { 
+    paths: [], 
+    fallback: "blocking" 
+  };
+};
 
-   return {
-     props: {
-       params: {
-         id: context.params.id ,
-        category:context.params.category,
-        productname: context.params.name
-       }
-     }
-   };
- }
+export async function getStaticProps(context) {
+  const { id } = context.params;
+
+  // Replace `id` with actual dynamic value in your API call
+  const res = await fetch(`https://api.cannabaze.com/UserPanel/Get-ProductById/${id}`);
+  const data = await res.json();
+
+  return {
+    props: {
+      data ,
+      id : id // Pass the fetched data to your component as a prop
+    }
+  };
+}

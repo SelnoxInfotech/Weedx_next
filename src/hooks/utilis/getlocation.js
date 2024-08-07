@@ -155,6 +155,7 @@ async function location(value, type) {
       }
 
     }
+    
     return {
       city,
       state,

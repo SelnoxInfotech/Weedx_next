@@ -9,7 +9,6 @@ import Cookies from 'universal-cookie';
 import Createcontext from "@/hooks/context"
 import {ImNotification} from "react-icons/im"
 const CheckAgeEligbilityPopup = ({value}) => {
-     console.log(value)
     const cookies = new Cookies();
     const [open, setOpen] = React.useState(value);
     const [Country, SetCountry] = React.useState('USA');
@@ -52,7 +51,7 @@ const CheckAgeEligbilityPopup = ({value}) => {
     const NotAge = () => {
         SetNotAge("You're not old enough to visit Weedx.io")
     }
-    
+
     return (
         <div>
             <Dialog open={open}

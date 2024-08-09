@@ -43,52 +43,62 @@ export default function Home({ initialData }) {
 }
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
+  
   const handleError = (error) => {
     console.error('Error fetching data:', error);
     return {
       props: {
-        initialData: [],
+        initialData: {
+          topbanner: [],
+          category: [],
+          bottembannner: [],
+          brand: []
+        },
         error: 'Failed to fetch data',
       },
     };
   };
 
   try {
+    const fetchWithTimeout = async (url, options = {}, timeout = 5000) => {
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), timeout);
+      const response = await fetch(url, { ...options, signal: controller.signal });
+      clearTimeout(id);
+      return response;
+    };
+
     const [banner, callcategory, bannner2, brand] = await Promise.all([
-      fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
-      fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
-      fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
-      fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
+      fetchWithTimeout('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(() => null),
+      fetchWithTimeout('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(() => null),
+      fetchWithTimeout('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(() => null),
+      fetchWithTimeout('https://api.cannabaze.com/UserPanel/Get-AllBrand/').catch(() => null),
     ]);
 
     const [topbanner, category, bottembannner, getbrand] = await Promise.all([
-      banner.json().catch(handleError),
-      callcategory.json().catch(handleError),
-      bannner2.json().catch(handleError),
-      brand.json().catch(handleError)
+      banner ? banner.json().catch(() => []) : [],
+      callcategory ? callcategory.json().catch(() => []) : [],
+      bannner2 ? bannner2.json().catch(() => []) : [],
+      brand ? brand.json().catch(() => []) : []
     ]);
 
-
     const responseData = {
-      topbanner: topbanner,
-      category: category,
-      bottembannner: bottembannner,
-      brand: getbrand
+      topbanner: topbanner || [],
+      category: category || [],
+      bottembannner: bottembannner || [],
+      brand: getbrand || []
     };
 
     return {
       props: {
         initialData: responseData,
       },
-      revalidate: 60,
     };
   } catch (error) {
     return handleError(error);
   }
 }
-
-
 
 
 

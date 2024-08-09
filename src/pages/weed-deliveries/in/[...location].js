@@ -201,7 +201,7 @@ const Deliveries = (props) => {
 
 
                     {Boolean(props?.store) &&
-                        <WebContent modifystr={modifystr} product={props?.product} Store={props?.store} state={state} from={"delivery"} url={'deliveries'} location={props?.location}></WebContent>
+                        <WebContent modifystr={modifystr} product={props?.product} Store={props?.store} state={state} from={"delivery"} url={'deliveries'} location={locations}></WebContent>
                     }
                 </div>
             </div>
@@ -213,6 +213,10 @@ export default Deliveries
 
 
 export const getServerSideProps = async (context) => {
+    context.res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+    )
     const { req, query } = context;
     const { headers: { referer }, url } = req;
     const isDirectHit = !referer || referer === req.url;

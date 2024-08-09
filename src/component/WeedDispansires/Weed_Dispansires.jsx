@@ -12,6 +12,7 @@ import dynamic from 'next/dynamic'
 const WebContent = dynamic(() => import('../WeedDispansires/Webcontent'), { ssr: true });
 import { modifystr } from "../../hooks/utilis/commonfunction";
 const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata, product, location }) => {
+    console.log(location)
     const { state } = useContext(Createcontext)
     const  router =  useRouter()
     return (

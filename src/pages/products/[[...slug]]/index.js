@@ -106,8 +106,8 @@ const Product = (props) => {
     async function moreProduct() {
         const object = {
             City: "",
-            Country: 'United States',
-            State: 'New York',
+            Country: 'United-States',
+            State: 'New-York',
             limit: Product.length + 10
         };
         const response = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {

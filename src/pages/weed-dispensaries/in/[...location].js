@@ -52,6 +52,7 @@ const Dispensaries = (props) => {
     const [value, setValue] = React.useState(0);
     const [contentdata, setcontentdata] = React.useState([])
     const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: props.formatted_address  ||state.Location }]
+    const locations = props?.location.formatted_address || state.Location
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -240,16 +241,16 @@ const Dispensaries = (props) => {
                             </Box>
                             <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
                                 <TabPanel value={value} index={0}>
-                                    <WeedDispansires Store={props.store} location={props.location} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
                                 </TabPanel>
                                 <TabPanel value={value} index={1}>
-                                    <WeedDispansires Store={props.store} location={props.location} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
                                 </TabPanel>
                                 <TabPanel value={value} index={2}>
-                                    <WeedDispansires Store={props.store} location={props.location} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
                                 </TabPanel>
                                 <TabPanel value={value} index={3}>
-                                    <WeedDispansires Store={props.store} location={props.location} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
                                 </TabPanel>
                             </Box>
 
@@ -267,267 +268,12 @@ const Dispensaries = (props) => {
     );
 };
 
-// export default Dispensaries;
-
-
-// export const getStaticPaths = async () => {
-//     const locales = ['en', 'fr', 'true  '];
-//     const locations = [
-//         ['united-states', 'new-york',],
-//     ];
-
-//     const paths = locations.map(location => (
-//         {params: { location }, } ));
-
-//     return { paths, fallback: "blocking" };
-// };
-
-// export const getServerSideProps = async (context) => {
-//     const { req, res } = context;
-//     const { headers: { referer }, url } = req;
-//     const isDirectHit = !referer || referer === req.url;
-//     console.log(referer, isDirectHit);
-
-//     const transformString = (str) => {
-//         if (typeof str !== "string" || !str.trim()) {
-//             return '';
-//         }
-
-//         return str
-//             .replace(/-/g, " ")  // Replace hyphens with spaces
-//             .split(' ')          // Split the string into an array of words
-//             .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())  // Capitalize the first letter of each word
-//             .join(' ');          // Join the words back into a single string
-//     };
-
-//     const locationParams = context.params.location;
-//     var country1 = "", state = "", city = "",route = "" ,  formatted_address = ""
-
-//     let type = {
-//         country: locationParams[0] || "",
-//         state: locationParams[1] || "",
-//         city: locationParams[2] || "",
-//         route: locationParams[3] || ""
-//     }
-
-//     if (isDirectHit) {
-//         const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
-//         const k = await Location(decodedLocation, type)
-//         console.log(k)
-//         country1 = k.country
-//         state = k.state
-//         city = k.city
-//         formatted_address = k.formatted_address
-
-//     }
-//     else {
-//         country1 = locationParams[0] || ""
-//         state = locationParams[1] || ""
-//         city = locationParams[2] || ""
-//     }
-
-
-//     const object = {
-//         City: transformString(city) || '',
-//         Country: transformString(country1) || '',
-//         State: transformString(state) || '',
-//     };
-//     const object1 = {
-//         City: transformString(city) || '',
-//         Country: transformString(country1) || '',
-//         State: transformString(state) || '',
-//         limit: 10
-//     };
-//     let product = [];
-//     try {
-//         const response = await fetch('https://api.cannabaze.com/UserPanel/Get-Dispensaries/', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(object)
-//         });
-
-//         if (!response.ok) {
-//             throw new Error('Failed to fetch');
-//         }
-
-//         const data = await response.json();
-
-//         const GetProduct = async (obj) => {
-//             const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify(obj)
-//             });
-
-//             if (!productResponse.ok) {
-//                 throw new Error('Failed to fetch products');
-//             }
-
-//             const productData = await productResponse.json();
-//             return productData;
-//         };
-
-//         const productData = await GetProduct(object1);
-//         product = productData?.filter(item => item.Store_Type === "dispensary");
-
-
-//         // console.log(object, object1)
-//         if (data === "No Dispensary in your area") {
-//             res.setHeader(
-//                 'Cache-Control',
-//                 'public, s-maxage=3600, stale-while-revalidate=3600'
-//             )
-//             return {
-//                 props: {
-//                     store: [],
-//                     product: [],
-//                     location: {
-//                         country: country1,
-//                         state: state,
-//                         city: city,
-//                     },
-//                     formatted_address: formatted_address,
-//                     isDirectHit
-//                 },
-//                 // revalidate: 60
-//             };
-//         } else {
-//             res.setHeader(
-//                 'Cache-Control',
-//                 'public, s-maxage=3600, stale-while-revalidate=3600'
-//             )
-//             return {
-//                 props: {
-//                     store: data,
-//                     product: product,
-//                     location: {
-//                         country: country1,
-//                         state: state,
-//                         city: city,
-//                     },
-//                     formatted_address: formatted_address,
-//                     isDirectHit
-//                 },
-//                 // revalidate: 60
-//             };
-//         }
-//     } catch (error) {
-//         console.error('Error fetching data:', error);
-//         return {
-//             notFound: true,
-//         };
-//     }
-// };
-// Dispensaries.getInitialProps = async (context) => {
-//     const transformString = (str) => {
-//       if (typeof str !== "string" || !str.trim()) {
-//         return '';
-//       }
-
-//       return str
-//         .replace(/-/g, " ")  // Replace hyphens with spaces
-//         .split(' ')          // Split the string into an array of words
-//         .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())  // Capitalize the first letter of each word
-//         .join(' ');          // Join the words back into a single string
-//     };
-
-//     const { req, res } = context;
-//     const locationParams = context.query.location;  // context.query for client-side fetching
-//     const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
-
-//     let country1 = "", state = "", city = "", formatted_address = "";
-//     let type = {
-//       country: locationParams[0] || "",
-//       state: locationParams[1] || "",
-//       city: locationParams[2] || "",
-//       route: locationParams[3] || ""
-//     };
-
-//     // Fetch location data
-//     const k = await Location(decodedLocation, type);
-//     country1 = k.country;
-//     state = k.state;
-//     city = k.city;
-//     formatted_address = k.formatted_address;
-
-//     const object = {
-//       City: transformString(city) || '',
-//       Country: transformString(country1) || '',
-//       State: transformString(state) || '',
-//     };
-
-//     const object1 = {
-//       City: transformString(city) || '',
-//       Country: transformString(country1) || '',
-//       State: transformString(state) || '',
-//       limit: 10
-//     };
-
-//     let product = [];
-
-//     try {
-//       const response = await fetch('https://api.cannabaze.com/UserPanel/Get-Dispensaries/', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(object)
-//       });
-
-//       if (!response.ok) {
-//         throw new Error('Failed to fetch');
-//       }
-
-//       const data = await response.json();
-
-//       const GetProduct = async (obj) => {
-//         const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
-//           method: 'POST',
-//           headers: {
-//             'Content-Type': 'application/json'
-//           },
-//           body: JSON.stringify(obj)
-//         });
-
-//         if (!productResponse.ok) {
-//           throw new Error('Failed to fetch products');
-//         }
-
-//         const productData = await productResponse.json();
-//         return productData;
-//       };
-
-//       const productData = await GetProduct(object1);
-//       product = productData?.filter(item => item.Store_Type === "dispensary");
-
-//       if (data === "No Dispensary in your area") {
-//         return {
-//           store: [],
-//           product: [],
-//           location: object,
-//           formatted_address: formatted_address
-//         };
-//       } else {
-//         return {
-//           store: data,
-//           product: product,
-//           location: object,
-//           formatted_address: formatted_address
-//         };
-//       }
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//       return {
-//         notFound: true,
-//       };
-//     }
-//   };
 
 export const getServerSideProps = async (context) => {
+    context.res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+    )
     const { req , query } = context;
     const { headers: { referer }, url } = req;
     const isDirectHit = !referer || referer === req.url;

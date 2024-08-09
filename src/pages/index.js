@@ -42,9 +42,13 @@ export default function Home({ initialData }) {
   );
 }
 
+<<<<<<< HEAD
 
 export async function getServerSideProps() {
   
+=======
+export async function getServerSideProps() {
+>>>>>>> b44fc31 (store page)
   const handleError = (error) => {
     console.error('Error fetching data:', error);
     return {
@@ -94,6 +98,10 @@ export async function getServerSideProps() {
       props: {
         initialData: responseData,
       },
+<<<<<<< HEAD
+=======
+      // revalidate: 60,
+>>>>>>> b44fc31 (store page)
     };
   } catch (error) {
     return handleError(error);
@@ -101,5 +109,8 @@ export async function getServerSideProps() {
 }
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b44fc31 (store page)

@@ -49,7 +49,6 @@ const Currentlocation = () => {
     const handleLocationUpdate = async () => {
       let locationData;
       const fetchedLocation = cookies.get('fetchlocation');
-      console.log(fetchedLocation)
       if (fetchedLocation) {
         locationData = fetchedLocation
       }
@@ -101,7 +100,10 @@ const Currentlocation = () => {
         // cookies.remove('fetchlocation');
         const date = new Date();
         date.setTime(date.getTime() + 60 * 60 * 24 * 365); // 1 year expiry
-        cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
+        cookies.set('fetchlocation', JSON.stringify(setLocation), { 
+          expires: date, 
+          path: '/' // Set the path where the cookie is accessible
+        });
       }
     };
 

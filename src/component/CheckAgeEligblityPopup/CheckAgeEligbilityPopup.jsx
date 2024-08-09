@@ -29,7 +29,10 @@ const CheckAgeEligbilityPopup = ({value}) => {
                 city: 'New York',
                 formatted_address: 'New York, NY, USA'
               };
-            cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
+            cookies.set('fetchlocation', JSON.stringify(setLocation), { 
+        expires: date, 
+        path: '/' // Set the path where the cookie is accessible
+      });
             dispatch({ type: 'DefalutLocation', DefalutLocation: 'New York' });
         } else {
             const setLocation = {
@@ -38,7 +41,10 @@ const CheckAgeEligbilityPopup = ({value}) => {
                 city: '',
                 formatted_address: 'Canada'
               };
-            cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
+            cookies.set('fetchlocation', JSON.stringify(setLocation), { 
+        expires: date, 
+        path: '/' // Set the path where the cookie is accessible
+      });
             dispatch({ type: 'DefalutLocation', DefalutLocation: "Canada" });
         }
     }

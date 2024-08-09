@@ -194,7 +194,10 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
       cookies.remove('fetchlocation');
       const date = new Date();
       date.setTime(date.getTime() + 60 * 60 * 24 * 365);
-      cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
+      cookies.set('fetchlocation', JSON.stringify(setLocation), { 
+        expires: date, 
+        path: '/' // Set the path where the cookie is accessible
+      });
 
       router.pathname === "/products/[[...slug]]" &&  router.replace(router.asPath);
       dispatch({ type: 'location_Api', location_Api: false })

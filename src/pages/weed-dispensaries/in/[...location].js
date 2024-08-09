@@ -156,7 +156,10 @@ const Dispensaries = (props) => {
           };
           const date = new Date();
           date.setTime(date.getTime() + 60 * 60 * 24 * 365); // 1 year expiry
-          props.isDirectHit  && cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
+          props.isDirectHit  && cookies.set('fetchlocation', JSON.stringify(setLocation), { 
+            expires: date, 
+            path: '/' // Set the path where the cookie is accessible
+          });
 
 {        const { country, state, city,route } = props.location || {};
     

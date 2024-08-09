@@ -62,49 +62,49 @@ const NewProductDetails = (props) => {
     //     navigate.push('/404')
     //   }
     //   else {
-        // const validation =  `/products/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}` || `/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`
-        // if((location.pathname !==  validation)){
-        //   if(location.pathname === `/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`){
-        //     navigate.push(`/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`)
-        //   }
-        //   else{
+    // const validation =  `/products/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}` || `/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`
+    // if((location.pathname !==  validation)){
+    //   if(location.pathname === `/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`){
+    //     navigate.push(`/menu-integration/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`)
+    //   }
+    //   else{
 
-        //     navigate.push(`/products/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`)
-        //   }
-        //   }
-        // SetProduct(() => {
-        //   return response.data[0]
-        // })
+    //     navigate.push(`/products/${modifystr(response.data[0].category_name)}/${modifystr(response.data[0].SubcategoryName)}/${modifystr(response.data[0].Product_Name)}/${response.data[0].id}`)
+    //   }
+    //   }
+    // SetProduct(() => {
+    //   return response.data[0]
+    // })
 
-        // h(response.data[0].Prices[0].Price?.filter((data) => {
-        //   if (data.id === parseInt(Price[0]?.Item_id)) {
-        //     return data
-        //   }
-        //   else {
-        //     if (data.id === 1) {
-        //       return data
-        //     }
-        //   }
-        // })
-        // )
-        Axios.get(`https://api.cannabaze.com/UserPanel/Get-StoreById/${props.data[0]?.Store_id}`, {
-        }).then(response => {
-          SetDespens(response.data[0])
+    // h(response.data[0].Prices[0].Price?.filter((data) => {
+    //   if (data.id === parseInt(Price[0]?.Item_id)) {
+    //     return data
+    //   }
+    //   else {
+    //     if (data.id === 1) {
+    //       return data
+    //     }
+    //   }
+    // })
+    // )
+    Axios.get(`https://api.cannabaze.com/UserPanel/Get-StoreById/${props.data[0]?.Store_id}`, {
+    }).then(response => {
+      SetDespens(response.data[0])
 
-        })
-        Axios.post(`https://api.cannabaze.com/UserPanel/YouMayAlsoLike/`,
-          {
-            category: props.data[0].category_id,
-            store_id: props.data[0].Store_id
-          }
-        ).then(response => {
-          SetStoreProduct(response.data)
-        }).catch(
-          function (error) {
-          })
-      
+    })
+    Axios.post(`https://api.cannabaze.com/UserPanel/YouMayAlsoLike/`,
+      {
+        category: props.data[0].category_id,
+        store_id: props.data[0].Store_id
+      }
+    ).then(response => {
+      SetStoreProduct(response.data)
+    }).catch(
+      function (error) {
+      })
+
     // }
-    
+
     // .catch(
     //   function (error) {
     //     navigate.push('/404')
@@ -184,7 +184,7 @@ const NewProductDetails = (props) => {
       console.error(e)
     })
   }, [props.data[0], api])
-  
+
   function handleDelete(id) {
     Delete_Review(id).then((res) => {
       res.data.status === 'success' && SetApi(!api)
@@ -229,13 +229,13 @@ const NewProductDetails = (props) => {
     return location?.pathname?.includes('/menu-integration') ? '' : <Loader />
   }
 
-//  React.useEffect(()=>{
-//   console.log(location.pathname === `products/${modifystr(Product.category_name)}/${modifystr(Product.SubcategoryName)}/${modifystr(Product.Product_Name)}/${Product.id}`)
-//   if (location.pathname === `products/${modifystr(Product.category_name)}/${modifystr(Product.SubcategoryName)}/${modifystr(Product.Product_Name)}/${Product.id}`) {
-//     console.log("true")
-//    }
-//  },[Product])
-// console.log(`${modifystr(Product.category_name)}/${modifystr(Product.SubcategoryName)}/${modifystr(Product.Product_Name)}` )
+  //  React.useEffect(()=>{
+  //   console.log(location.pathname === `products/${modifystr(Product.category_name)}/${modifystr(Product.SubcategoryName)}/${modifystr(Product.Product_Name)}/${Product.id}`)
+  //   if (location.pathname === `products/${modifystr(Product.category_name)}/${modifystr(Product.SubcategoryName)}/${modifystr(Product.Product_Name)}/${Product.id}`) {
+  //     console.log("true")
+  //    }
+  //  },[Product])
+  // console.log(`${modifystr(Product.category_name)}/${modifystr(Product.SubcategoryName)}/${modifystr(Product.Product_Name)}` )
 
 
   return (
@@ -254,20 +254,34 @@ const NewProductDetails = (props) => {
           Description={props.data[0].Product_Description}
           Productnm={props.data[0].Product_Name} Productname={`Buy ${props.data[0].Product_Name} at ${props.data[0].StoreName} on WeedX.io - Your Trusted Marketplace`} ProductCategory={props.data[0].category_name} StoreName={props.data[0].StoreName} City={props.data[0].Store_City} State={props.data[0].Store_State} location={location.pathname}
           TotalRating={props.data[0].TotalRating}
-          ></ProductDetailsSeo>
-     }
+        ></ProductDetailsSeo>
+      }
 
-      <span onClick={() => {
-        location.pathname.slice(0, 9) === "/products" ?
-        navigate.push(location?.state !== null ? (location?.state?.prevuisurl !== '/products' ? location?.state?.prevuisurl : '/products') : '/products')
-        : navigate.push(-1)
-      }} className="BackPageBtn"> <AiOutlineLeft size={22} /> Back to products </span>
+      <span
+        onClick={() => {
+          const isOnProductsPage = location.pathname.slice(0, 9) === "/products";
+          const prevUrl = location?.state?.prevuisurl;
+
+          if (isOnProductsPage) {
+            if (prevUrl && prevUrl !== '/products') {
+              navigate.push(prevUrl);
+            } else {
+              navigate.push('/products');
+            }
+          } else {
+            navigate.push(-1); // Go back to the previous page
+          }
+        }}
+        className="BackPageBtn"
+      >
+        <AiOutlineLeft size={22} /> Back to products
+      </span>
       <NewProductDetailsCards link={location.pathname.slice(0, 9) === "/products" ? props.data[0].Store_Type === "dispensary" ? "weed-dispensaries" : "weed-deliveries" : "menu-integration"} dynamicWeight={dynamicWeight} setdynamicWeight={setdynamicWeight} quentity={quentity} setquentity={setquentity} Product={props.data[0]} DiscountedValue={discount} Price={Price} SetPrice={SetPrice} />
-          {  Boolean(props.data[0]?.copuon?.length) && <div className="offerlist">
+      {Boolean(props.data[0]?.copuon?.length) && <div className="offerlist">
         <h2 className="section_main_title">Offers</h2>
         <div className="offerlistwrapper">
           {
-            props.data[0].copuon?.map((item , index) => {
+            props.data[0].copuon?.map((item, index) => {
               return <div className="offercard" key={index}>
                 <div className="leftcoupon">
                   <span>Use Code</span>
@@ -287,9 +301,9 @@ const NewProductDetails = (props) => {
         </div>
       </div>}
       {Boolean(StoreProduct?.length !== 0) &&
-      <ProductSearchResult link={location.pathname.slice(0, 9) === "/products" ? "products" : "menu-integration"} RelatedProductResult={StoreProduct} currentProductID={props.data[0].id} title={'You may also like'}  CategoryName={props.data[0]}/>
-     }
-     
+        <ProductSearchResult link={location.pathname.slice(0, 9) === "/products" ? "products" : "menu-integration"} RelatedProductResult={StoreProduct} currentProductID={props.data[0].id} title={'You may also like'} CategoryName={props.data[0]} />
+      }
+
       <Review
         delBtn={Despen}
         reviewloading={reviewloading}
@@ -312,9 +326,9 @@ const NewProductDetails = (props) => {
 export default NewProductDetails
 
 export const getStaticPaths = async () => {
-  return { 
-    paths: [], 
-    fallback: "blocking" 
+  return {
+    paths: [],
+    fallback: "blocking"
   };
 };
 
@@ -327,8 +341,8 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      data ,
-      id : id // Pass the fetched data to your component as a prop
+      data,
+      id: id // Pass the fetched data to your component as a prop
     }
   };
 }

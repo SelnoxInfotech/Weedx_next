@@ -20,7 +20,6 @@ const DeliveryItemsCard = dynamic(() => import('../../../component/DeliveriesCom
 const Text = dynamic(() => import('../../../layout/text'), { ssr: true });
 // import DeliveryItemsCard from "../../../component/DeliveriesComponent/DeliveryMenuBar/DeliveryItemsCards";
 import { Delivery } from '../../../component/ScoPage/Deliveries';
-import { GetAllDelivery } from "../../../hooks/apicall/api"
 import Wronglocation from "../../../component/skeleton/Wronglocation"
 import Loader from "../../../component/Loader/Loader";
 // import Neighborhood from "../Dispansires/DispansiresComponent/loactoncomponent/Neighborhood";
@@ -63,7 +62,10 @@ const Deliveries = (props) => {
           };
           const date = new Date();
           date.setTime(date.getTime() + 60 * 60 * 24 * 365); // 1 year expiry
-          props.isDirectHit &&   cookies.set('fetchlocation', JSON.stringify(setLocation), { expires: date });
+          props.isDirectHit &&  cookies.set('fetchlocation', JSON.stringify(setLocation), { 
+            expires: date, 
+            path: '/' // Set the path where the cookie is accessible
+          });
         {
             const { country, state, city, route } = props.location || {};
 
@@ -104,20 +106,20 @@ const Deliveries = (props) => {
         if (Boolean(city)) {
             dispatch({ type: 'route', route: "" })
             dispatch({ type: 'Location', Location: state.City })
-            navigate.push(`/weed-deliveries/in/${modifystr(state.Country.toLowerCase())}/${modifystr(state.State.toLowerCase())}/${modifystr(state.City.toLowerCase())}`)
+            navigate.replace(`/weed-deliveries/in/${modifystr(state.Country.toLowerCase())}/${modifystr(state.State.toLowerCase())}/${modifystr(state.City.toLowerCase())}`)
         }
         else if (Boolean(state1)) {
             dispatch({ type: 'Location', Location: state.State })
             dispatch({ type: 'City', City: "" })
             dispatch({ type: 'route', route: "" })
-            navigate.push(`/weed-deliveries/in/${modifystr(state.Country)}/${modifystr(state?.State)}`)
+            navigate.replace(`/weed-deliveries/in/${modifystr(state.Country)}/${modifystr(state?.State)}`)
         }
         else if (Boolean(country)) {
             dispatch({ type: 'State', State: "" })
             dispatch({ type: 'City', City: "" })
             dispatch({ type: 'route', route: "" })
             dispatch({ type: 'Location', Location: state.Country })
-            navigate.push(`/weed-deliveries/in/${modifystr(state.Country.toLowerCase())}/`)
+            navigate.replace(`/weed-deliveries/in/${modifystr(state.Country.toLowerCase())}/`)
         }
 
     }
@@ -210,7 +212,51 @@ const Deliveries = (props) => {
     )
 }
 export default Deliveries
+export async function GetAllDelivery(object) {
+    try {
+        const response = await fetch('https://api.cannabaze.com/UserPanel/Get-DeliveryStores/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(object),
+        });
 
+        const data = await response.json();
+
+        if (data.length) {
+            const result = data.reduce((acc, current) => {
+                const x = acc.find(item => item.id === current.id);
+                if (!x) {
+                    const newCurr = {
+                        Store_Name: current.Store_Name,
+                        Category: [{ [current.Category]: current.ProductCount }],
+                        id: current.id,
+                        Store_Image: current.Store_Image,
+                        Store_Address: current.Store_Address,
+                        rating: current.rating,
+                        TotalRating: current.TotalRating,
+                        DeliveryTime: current.SetbyMin,
+                        DeliveryPrice: current.DeliveryPrice,
+                    };
+                    return acc.concat([newCurr]);
+                } else {
+                    const currData = x.Category.filter(d => d === current.Category);
+                    if (!currData.length) {
+                        x.Category.push({ [current.Category]: current.ProductCount });
+                    }
+                    return acc;
+                }
+            }, []);
+
+            return result;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        return [];
+    }
+}
 
 export const getServerSideProps = async (context) => {
     context.res.setHeader(

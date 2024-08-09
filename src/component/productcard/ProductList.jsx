@@ -47,9 +47,15 @@ const ProductList = ({ arr , link="products" }) => {
   const [paginateddata,setpaginateddata]= React.useState([])
   const [Price, SetPrice] = React.useState([]);
   const [AddTOCard, SetAddToCard] = React.useState(() => {
-  const saved = localStorage.getItem("items");
-  const initialValue = JSON.parse(saved);
-  return initialValue || [];
+    if (typeof window !== "undefined") {
+      // This code will only run on the client side
+      const saved = localStorage.getItem("items");
+      const initialValue = JSON.parse(saved);
+      return initialValue || [];
+    } else {
+      // If SSR, return an empty array or any other default value
+      return [];
+    }
   });
   const [NewData, SetNewData] = React.useState([]);
   const Addtocard = async (Event) => {
@@ -337,7 +343,9 @@ const ProductList = ({ arr , link="products" }) => {
     
   }
   React.useEffect(() => {
+    if (typeof window !== "undefined") {
     localStorage.setItem("items", JSON.stringify(AddTOCard));
+    }
   }, [AddTOCard]);
   const classes = useStyles();
   const handleWhishList = (id) => {
@@ -426,7 +434,7 @@ const ProductList = ({ arr , link="products" }) => {
                         </IconButton>
                       </span>
                       <div className="prod_cat_cont" onClick={() => {
-                        Navigate(`/${link}/${modifystr(ele.category_name)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.Product_Name)}/${ele.id}`, {
+                        Navigate.push(`/${link}/${modifystr(ele.category_name)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.Product_Name)}/${ele.id}`, {
                           state: {
                             prevuisurl: location.pathname,
                           }

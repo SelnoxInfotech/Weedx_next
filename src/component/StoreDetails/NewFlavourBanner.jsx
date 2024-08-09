@@ -22,7 +22,6 @@ const NewFlavourBanner = ({ delBtn }) => {
         const myTimeout = setTimeout(() => {
             setshopopen(isShopOpen(delBtn))
         }, 0);
-        window.scrollTo({ top: 0, left: 0 })
     }, [new Date().getMinutes(), delBtn])
     return (
         <React.Fragment>
@@ -36,10 +35,10 @@ const NewFlavourBanner = ({ delBtn }) => {
                                     <div className="col-md-2 col-sm-4  col-3 newFlavour_image_container_height">
                                         <div className='newFlavourimage_div'>
                                             <Image
-                                            unoptimized={true}
-                                              width={100}
-                                              height={100}
-                                              quality={100}
+                                                unoptimized={true}
+                                                width={100}
+                                                height={100}
+                                                quality={100}
                                                 className='newFlavour_image'
                                                 src={`${data?.Store_Image}`}
                                                 alt={data.Store_Name}
@@ -72,66 +71,66 @@ const NewFlavourBanner = ({ delBtn }) => {
                                                     <p className='m-0'><TbCircleFilled id="new_flavCircle" /></p>
                                                     <Link
                                                         href={location.pathname.includes("weed-dispensaries")
-                                                            ? `                                                                                             ${modifystr(data.Store_Name)}/store-details/${delBtn[0].id}`
+                                                            ? `${modifystr(data.Store_Name)}/store-details/${delBtn[0].id}`
                                                             :
                                                             location.pathname.includes("/weed-deliveries") &&
 
-                                                    `/weed-deliveries/${modifystr(data.Store_Name)}/store-details/${delBtn[0].id}`}>
+                                                            `/weed-deliveries/${modifystr(data.Store_Name)}/store-details/${delBtn[0].id}`}>
 
-                                                    <p className='marginLeftnewFlavStore '>Store details</p></Link>
+                                                        <p className='marginLeftnewFlavStore '>Store details</p></Link>
+                                                </div>
+
+                                                <div className='newFlav_inner_div new_flavour_flex New_flavour_font_size_paragraph newFlav_margin'>
+                                                    <p className='m-0'><TbCircleFilled id="new_flavCircle" color={shopopen ? "#31B665" : "red"} /></p>
+                                                    <p id='NewFlav_margins' className={shopopen ? "newFlav_open" : "newFlav_closed"}>{shopopen ? "Open" : "Closed"}</p>
+                                                </div>
+
+
                                             </div>
+                                            {!location.pathname.includes('/menu-integration') && <div className='col-lg-12  col-md-8 col-sm-8 col-12 mt-sm-4 mt-2 d-flex newFlav_btn_height'>
+                                                {
+                                                    data.StoreEmail !== "" && data.StoreEmail !== null &&
 
-                                            <div className='newFlav_inner_div new_flavour_flex New_flavour_font_size_paragraph newFlav_margin'>
-                                                <p className='m-0'><TbCircleFilled id="new_flavCircle" color={shopopen ? "#31B665" : "red"} /></p>
-                                                <p id='NewFlav_margins' className={shopopen ? "newFlav_open" : "newFlav_closed"}>{shopopen ? "Open" : "Closed"}</p>
-                                            </div>
+                                                    <Box
+                                                        className={`${classes.loadingBtnTextAndBack}`}
+                                                    >
 
+                                                        <LoadingButton style={{ height: "30px", maxWidth: '250px', width: '100%' }} variant="outlined">Email</LoadingButton>
+                                                    </Box>
+                                                }
+
+                                                {
+                                                    data.Stores_MobileNo !== '' && data.Stores_MobileNo !== null && <Box
+                                                        className={`mx-2 ${classes.loadingBtnTextAndBack}`}    >
+                                                        <Link href={`tel:${delBtn[0].Stores_MobileNo}`}>
+                                                            <LoadingButton style={{ height: "30px", maxWidth: '250px', width: '100%' }} variant="outlined">Call</LoadingButton>
+                                                        </Link>
+                                                    </Box>
+
+                                                }
+                                            </div>}
+                                        </div>
+                                    </div>
+                                    {
+                                        !location.pathname.includes('/menu-integration') && <div className='shareiconcontainer position-absolute w-auto top-0 p-2 end-0'>
+
+                                            {/* <RWebShare
+                                                // data={{ url: window.location.href }}
+                                                sites={["facebook", "twitter", "whatsapp", "telegram", "linkedin", 'mail', 'copy']}
+                                                onClick={() => console.info("share successful!")}
+                                                color="#31B665" >
+                                                <BsShareFill />
+                                            </RWebShare> */}
 
                                         </div>
-                                        {!location.pathname.includes('/menu-integration') && <div className='col-lg-12  col-md-8 col-sm-8 col-12 mt-sm-4 mt-2 d-flex newFlav_btn_height'>
-                                            {
-                                                data.StoreEmail !== "" && data.StoreEmail !== null &&
-
-                                                <Box
-                                                    className={`${classes.loadingBtnTextAndBack}`}
-                                                >
-
-                                                    <LoadingButton style={{ height: "30px", maxWidth: '250px', width: '100%' }} variant="outlined">Email</LoadingButton>
-                                                </Box>
-                                            }
-
-                                            {
-                                                data.Stores_MobileNo !== '' && data.Stores_MobileNo !== null && <Box
-                                                    className={`mx-2 ${classes.loadingBtnTextAndBack}`}    >
-                                                    <Link href={`tel:${delBtn[0].Stores_MobileNo}`}>
-                                                        <LoadingButton style={{ height: "30px", maxWidth: '250px', width: '100%' }} variant="outlined">Call</LoadingButton>
-                                                    </Link>
-                                                </Box>
-
-                                            }
-                                        </div>}
-                                    </div>
+                                    }
                                 </div>
-                                    {
-                                !location.pathname.includes('/menu-integration') && <div className='shareiconcontainer position-absolute w-auto top-0 p-2 end-0'>
-
-                                    <RWebShare
-                                        data={{ url: window.location.href }}
-                                        sites={["facebook", "twitter", "whatsapp", "telegram", "linkedin", 'mail', 'copy']}
-                                        onClick={() => console.info("share successful!")}
-                                        color="#31B665" >
-                                        <BsShareFill />
-                                    </RWebShare>
-
-                                </div>
-                            }
-                                </div>
-                )
+                            )
                         })
                     }
-            </div>
+                </div>
 
-        </div>
+            </div>
         </React.Fragment >
     )
 }

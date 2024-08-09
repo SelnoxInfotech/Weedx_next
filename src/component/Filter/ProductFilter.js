@@ -153,7 +153,7 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
 
 
             }).then(response => {
-                Setarr1(response.data)
+                Setarr1=response.data
                 dispatch({ type: 'Loading', Loading: false })
             }).catch(
                 function (error) {
@@ -183,48 +183,52 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
                  store: Store_id,
                  unit: true,
                }).then((res) => {
-                 Setarr1(res?.data);
+                 Setarr1=res?.data;
                });
           }else{
             Axios.get(
                 `https://api.cannabaze.com/UserPanel/Get-ProductAccordingToDispensaries/${id}`,
                 {}
               ).then((response) => {
-                Setarr1(response?.data);
+                Setarr1=response?.data;
               });
          }
         }
     }
+
     React.useEffect(()=>{
        if(weightitems.length !== 0){
          Axios.post('https://api.cannabaze.com/UserPanel/WeightFilter/',{
                 "store":Store_id,
                 "weight":weightitems,
          }).then((res)=>{
-            Setarr1(res.data)
+            Setarr1=res.data
          })
        }else{
         Axios.get(`https://api.cannabaze.com/UserPanel/Get-ProductAccordingToDispensaries/${id}`, {
         }).then(response => {
-            Setarr1(response.data)
+            Setarr1=response.data
         })
        }
     },[weightitems])
+
     React.useEffect(()=>{
         if(stainitems.length !== 0){
           Axios.post('https://api.cannabaze.com/UserPanel/StrainFilterProduct/',{
                  "store":Store_id,
                  "strain":stainitems,
           }).then((res)=>{
-             Setarr1(res.data)
+             Setarr1=res.data
           })
         }else{
          Axios.get(`https://api.cannabaze.com/UserPanel/Get-ProductAccordingToDispensaries/${id}`, {
          }).then(response => {
-             Setarr1(response.data)
+             Setarr1=response.data
          })
         }
      },[stainitems])
+
+
     function FilterSubCategorydata(SubCategoryid, SubCategory_name, categoryName) {
        {!location.pathname.includes('/menu-integration') &&  dispatch({ type: 'Loading', Loading: true })}
         Axios.post(`https://api.cannabaze.com/UserPanel/Get-filterProductbyStoreandSubCategory/`, {
@@ -232,7 +236,7 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
             "SubCategory_Id": SubCategoryid
         }).then(async response => {
             dispatch({ type: 'Loading', Loading: false })
-            Setarr1(response.data)
+            Setarr1=response.data
             // navigate(`${location.pathname.slice(0, 16) === "/weed-deliveries" ? "/weed-deliveries" : "/weed-dispensaries"}/${StoreName.replace(/\s/g, '-').toLowerCase()}/${"menu"}/${categoryName?.toLowerCase()}/${SubCategory_name?.toLowerCase().replace(/\s/g, '-')}/${SubCategoryid}`)
         }).catch(
             function (error) {
@@ -241,6 +245,7 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
                 alert("Something Goes Wrong")
             })
     }
+    
     const handleChange = (event) => {
 
         setselect(event.target.value)
@@ -250,7 +255,7 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
 
                     return res
                 })
-                Setarr1(newdata)
+                Setarr1=newdata
             }).catch((error) => {
                 console.trace(error)
 
@@ -261,7 +266,7 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
 
                     return res
                 })
-                Setarr1(newdata.reverse())
+                Setarr1=newdata.reverse()
             }).catch((error) => {
                 console.trace(error)
 
@@ -272,7 +277,7 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
 
                     return res[0]
                 })
-                Setarr1(newdata)
+                Setarr1=newdata
 
             }).catch((error) => {
                 console.trace(error)
@@ -284,7 +289,7 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
                     return res[0]
                 })
                 let aee= newdata.reverse()
-                Setarr1(aee)
+                Setarr1=aee
 
             }).catch((error) => {
                 console.trace(error)
@@ -308,14 +313,14 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
                     let newdata = response.data.filter((item) => {
                         return item.Store_id === Store_id
                     })
-                    Setarr1(newdata)
+                    Setarr1=newdata
                     dispatch({ type: 'Loading', Loading: false })
                 }).catch(
                     function (error) {
                 })
             } else {
                
-                Setarr1(arr)
+                Setarr1=arr
             }
 
       }, 1500);
@@ -330,7 +335,7 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id  , id}) => {
         value !== undefined && 
       
         PriceFilter(value,Store_id).then((res) => {
-            Setarr1(res?.data)
+            Setarr1 = res?.data
             dispatch({ type: 'Loading', Loading: false })
             }).catch(() => {
                 // navigate('/fourzerothree')   

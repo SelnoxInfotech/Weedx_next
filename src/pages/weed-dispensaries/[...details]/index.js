@@ -241,6 +241,8 @@ export default function DispensoriesDetails(props) {
 
         }
     }, [reviewtype, id, api])
+
+
     React.useEffect(() => {
         if (state.login && state.Profile.id !== undefined && id !== undefined) {
             Store_Get_UserComment(state.Profile.id, id).then((res) => {
@@ -263,6 +265,10 @@ export default function DispensoriesDetails(props) {
 
         }
     }, [state.Profile, id, api])
+
+
+
+
     const onSubmit = () => {
 
         const formdata = new FormData();
@@ -297,17 +303,18 @@ export default function DispensoriesDetails(props) {
         })
     };
     const [scroll, SetScroll] = React.useState(true)
-    React.useEffect(() => {
-        if (scroll) {
-            document.documentElement.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: "instant",
-            });
-            SetScroll(() => false)
-        }
 
-    }, [])
+    // React.useEffect(() => {
+    //     if (scroll) {
+    //         document.documentElement.scrollTo({
+    //             top: 0,
+    //             left: 0,
+    //             behavior: "instant",
+    //         });
+    //         SetScroll(() => false)
+    //     }
+
+    // }, [])
     // const Swal = require('sweetalert2')
     function handleDelete(id) {
         Swal.fire({
@@ -370,7 +377,8 @@ export default function DispensoriesDetails(props) {
 
     return (
         <div>{
-            !Despen.length ? <Loader /> : <div>
+            !Despen.length ? <Loader /> : 
+            <div>
                 <p> {(location.pathname.slice(0, 18) === "/weed-dispensaries" || location.pathname.slice(0, 16) === "/weed-deliveries") &&
                     <div style={{ fontSize: '12px' }} > <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.pathname.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries")}> {location.pathname.slice(0, 18) === "/weed-dispensaries" ? 'weed-dispensaries' : "weed-deliveries"}</span>
                         {" >"} <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.pathname.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries", params.StoreName, id)}> {params.StoreName}</span>

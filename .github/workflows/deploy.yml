@@ -22,13 +22,21 @@ jobs:
 
     - name: Sync files to EC2
       run: |
+<<<<<<< HEAD
         rsync -avz --delete -e "ssh -i ${{ secrets.AWS_SSH_KEY }} -o StrictHostKeyChecking=no" ./ ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx
+=======
+        rsync -avz --delete -e "ssh -i ${{ secrets.AWS_SSH_KEY }} -o StrictHostKeyChecking=no" ./ ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/react-app
+>>>>>>> b44fc31 (store page)
 
     - name: Install dependencies and build on EC2
       run: |
         ssh -i ${{ secrets.AWS_SSH_KEY }} ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
           cd /home/ubuntu/react-app
+<<<<<<< HEAD
           npm install
+=======
+          npm install --force
+>>>>>>> b44fc31 (store page)
           npm run build
           pm2 restart all || pm2 start npm --name "react-app" -- start
         EOF

@@ -22,7 +22,7 @@ jobs:
 
     - name: Sync files to EC2
       run: |
-        rsync -avz --delete -e "ssh -i ${{ secrets.AWS_SSH_KEY }} -o StrictHostKeyChecking=no" ./ ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/react-app
+        rsync -avz --delete -e "ssh -i ${{ secrets.AWS_SSH_KEY }} -o StrictHostKeyChecking=no" ./ ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx
 
     - name: Install dependencies and build on EC2
       run: |

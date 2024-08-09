@@ -28,7 +28,7 @@ jobs:
       run: |
         ssh -i ${{ secrets.AWS_SSH_KEY }} ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
           cd /home/ubuntu/react-app
-          npm install --force
+          npm install
           npm run build
           pm2 restart all || pm2 start npm --name "react-app" -- start
         EOF

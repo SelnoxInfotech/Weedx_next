@@ -28,7 +28,7 @@ export   function MapContainer(props) {
 
  export default  GoogleApiWrapper ({
   LoadingContainer: () => <div className="loader_container">
-  <span className="newloader shine"><Image src={logo.src} alt='weedx.io logo' width={100} height={100}  title='weedx.io logo'/></span>
+  <span className="newloader shine"><img src='/weedx.iologo.png' alt='weedx.io logo'  title='weedx.io logo'/></span>
 </div>,
   apiKey: 'AIzaSyBRchIzUTBZskwvoli9S0YxLdmklTcOicU'
 })(MapContainer);

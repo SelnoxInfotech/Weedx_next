@@ -11,10 +11,12 @@ import Createcontext from "../../../hooks/context"
 // import { use  navigate.replace } from "react-router-dom";
 import { useRouter } from 'next/router';
 // import 'dns-polyfill';
-
+import Cookies from 'universal-cookie';
 export default function SearchingLocation({ openLocation, SearchBarWidth, open1, setOpenLocation, path }) {
   const classes = useStyles()
+  const cookies = new Cookies();
   const   navigate=  useRouter();
+  const router = useRouter();
   const [formatted_address, Setformatted_address] = React.useState('')
   const { state, dispatch } = React.useContext(Createcontext)
   const {
@@ -49,6 +51,8 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         object[l] = data.long_name
         short[l] = data?.short_name
       })
+
+
       if (Boolean(object.country)) {
         Coun = object.country.replace(/\s/g, '-');
         dispatch({ type: 'Country', Country: Coun });
@@ -138,9 +142,6 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         }
 
       }
-
-
-
       if (ci !== undefined && sta !== undefined && Coun !== undefined && route !== undefined) {
         window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
         window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
@@ -183,22 +184,24 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
       if (sta === undefined) {
         dispatch({ type: 'State', State: '' })
       }
-      dispatch({ type: 'Location', Location: placeDetails?.formatted_address })
-      const addressdata={
-        country:Coun,
-        state:sta,
-        city:ci,
-        route:route,
+      const setLocation={
+        country:Coun || '',
+        state:sta || "",
+        city:ci || '',
+        route:route || '',
         formatted_address:placeDetails.formatted_address
       }
+      cookies.remove('fetchlocation');
+      const date = new Date();
+      date.setTime(date.getTime() + 60 * 60 * 24 * 365);
+      cookies.set('fetchlocation', JSON.stringify(setLocation), { 
+        expires: date, 
+        path: '/' // Set the path where the cookie is accessible
+      });
 
-
-      //  redis.set('data', JSON.stringify(addressdata));
-      // localStorage.setItem("Address", JSON.stringify(addressdata));
-      // const expirationDate = new Date();
-      // expirationDate.setFullYear(expirationDate.getFullYear() + 100);
-      // setCookie('Address', addressdata, expirationDate);
-
+      router.pathname === "/products/[[...slug]]" &&  router.replace(router.asPath);
+      dispatch({ type: 'location_Api', location_Api: false })
+      dispatch({ type: 'Location', Location: placeDetails?.formatted_address })
     })
   }
   function OnBlur() {

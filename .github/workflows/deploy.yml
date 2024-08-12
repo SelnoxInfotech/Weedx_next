@@ -1,0 +1,41 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Change this to the branch you want to trigger deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install --force
+
+    - name: Build project
+      run: npm run build
+
+    - name: Zip .next folder
+      run: zip -r build.zip .next public package.json package-lock.json
+
+    - name: Send build to EC2
+      run: |
+        scp -o StrictHostKeyChecking=no -i "weedxpem.pem" build.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
+
+    - name: Deploy on EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no -i "weedxpem.pem" ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
+          cd /home/ubuntu/Weedx
+          unzip -o build.zip
+          npm install --production
+          pm2 restart all || pm2 start npm --name "next-app" -- run start
+        EOF

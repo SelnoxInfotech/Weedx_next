@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import Createcontext from "../../hooks/context"
 import React from "react"
-function DispensariesSco({location}) {
+function DispensariesSco({location , format_Address}) {
     const { state } = React.useContext(Createcontext)
     return (
         <Head>
-            <title>{` Weed Dispensaries in ${state?.Location?.replace(/-/g, " ")}| weedx.io |`}</title>
-            <meta name="title" content={` Weed Dispensaries in ${state?.Location?.replace(/-/g, " ")}| weedx.io |`}/>
+            <title>{` Weed Dispensaries in ${format_Address}| weedx.io |`}</title>
+            <meta name="title" content={` Weed Dispensaries in ${format_Address}| weedx.io |`}/>
             <meta name='description' content={`Find Nearby Dispensaries in ${state?.Location} for Recreational & Medical weed. Browse Top Cannabis Products and Place Orders from Trusted Local Dispensaries.`} />
             <link rel="canonical" href={`https://www.weedx.io${location}`} /> 
             <meta name="robots" content="INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"></meta>
@@ -26,4 +26,4 @@ function DispensariesSco({location}) {
     )
 }
 
-export { DispensariesSco }
+export default DispensariesSco

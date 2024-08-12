@@ -1,23 +1,20 @@
 
 import React, { useContext } from "react";
-import { useRouter } from "next/router";
 import Dispensoriescart from './Dispensoriescart'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { DispensariesSco } from "../ScoPage/dispensariessco"
 import Createcontext from "../../hooks/context";
 import dynamic from 'next/dynamic'
-const WebContent = dynamic(() => import('../WeedDispansires/Webcontent') , {ssr:true});
+const WebContent = dynamic(() => import('../WeedDispansires/Webcontent'), { ssr: true });
 import { modifystr } from "../../hooks/utilis/commonfunction";
-const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata , product , location }) => {
+const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata, product, location }) => {
     const { state } = useContext(Createcontext)
-    const locaton = useRouter();
+ 
     return (
         <React.Fragment>
 
-            <DispensariesSco location={locaton?.pathname}></DispensariesSco>
             <div className="container">
                 <div className="row">
                     <div className="col-12 dispensories_main_container">
@@ -39,7 +36,7 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata , prod
 
                         <div className="d-flex flex-wrap gap-4 py-3">
                             {Store?.map((ele, index) => {
-                                return (<Dispensoriescart ele={ele} key={index}/> )
+                                return (<Dispensoriescart ele={ele} key={index} />)
                             })}
                         </div>
                     </div>

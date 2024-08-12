@@ -9,6 +9,8 @@ const Createcontext = createContext();
 const cookies = new Cookies();
 const login = cookies.get("User_Token_access")
 const log = login ? true : false
+
+
 const initialUser = {
 
     login: log,
@@ -66,7 +68,8 @@ const initialUser = {
       countrycode:"",
       citycode:"",
       statecode:"",
-
+//    call locatonapi in delivery dispansier
+       location_Api:true
 
 
 }

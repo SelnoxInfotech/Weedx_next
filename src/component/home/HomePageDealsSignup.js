@@ -6,6 +6,7 @@ import Axios from 'axios';
 import  newsletters from '../../../public/newsletters.png'
 import React from 'react';
 import Image from 'next/image';
+import { useCallback } from 'react';
 const HomePageDealsSignup = () => {
     const classes = useStyles()
     const [submited,setsubmited]= React.useState(false)
@@ -31,10 +32,11 @@ const HomePageDealsSignup = () => {
             )
         })
     }
-    const handleChange = event => {
+    const handleChange = useCallback((event) => {
         event.preventDefault();
         setEmail(event.target.value);
-    };
+    }, [setEmail]);
+    
 
     return (
         <div className="mt-4">
@@ -48,19 +50,15 @@ const HomePageDealsSignup = () => {
                         <div className='col-md-6  col-12'>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="contentarea">
-
-                                {/* <div className="envelop_icon ">
-                                    <span className=''><HiOutlineEnvelope color='#fff' fontSize={70} /></span>
-                                </div> */}
                                 <div className=" homePageSignup_heading   ">
-                                    <h3>Subscribe To Our Newsletters</h3>
+                                    <h3>{`Subscribe To Our Newsletters`}</h3>
                                 </div>
                                 <div className=" homePageSignup_paragraph   ">
-                                    <p>Subscribe to our weekly newsletter and be a part of our journey to self discovery and love.</p>
+                                    <p>{`Subscribe to our weekly newsletter and be a part of our journey to self discovery and love.`}</p>
                                 </div>
                             
                             {
-                                submited ? <h2 className='thankforsubscribe'>Thanks For Subscribe</h2>:
+                                submited ? <h2 className='thankforsubscribe'>{`Thanks For Subscribe`}</h2>:
                                 <div className='newsletterFormFeild'>
                                     <TextField
                                         className={classes.homePageDealSignup_TextFields}
@@ -90,7 +88,7 @@ const HomePageDealsSignup = () => {
 
                                     />
                                     <span className='newsletter_btn'>
-                                        <Button className={` ${classes.homePageButton}`} type='submit' >Subscribe</Button>
+                                        <Button className={` ${classes.homePageButton}`} type='submit' >{`Subscribe`}</Button>
                                     </span>
                                 </div>
                                 }

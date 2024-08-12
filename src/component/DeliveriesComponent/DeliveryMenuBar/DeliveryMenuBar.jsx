@@ -10,7 +10,6 @@ import Createcontext from "../../../../../Hooks/Context"
 import { Delivery } from '../../../../Component/ScoPage/Deliveries';
 import { GetAllDelivery } from "../../../../../Api/Api"
 import { useLocation } from 'react-router-dom';
-import Loader from '@/component/Loader/Loader';
 const DeliveryMenuBar = () => {
     const location =  useLocation()
     const { state } = React.useContext(Createcontext)
@@ -58,7 +57,7 @@ const DeliveryMenuBar = () => {
                     </TabContext>
                 </Box>
             </div>
-          {idload &&  <Loader/>}
+          {/* {idload &&  <Loader/>} */}
         </React.Fragment>
     )
 }

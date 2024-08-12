@@ -35,7 +35,7 @@ const HomePageBanner = ({props}) => {
                                         <SwiperSlide key={index}>
                                             <div className='col-12 homePageBanner_container'>
                                                 <a href={items?.Link !== null ? items?.Link : "#"}>
-                                                    <Image  src={items?.Banner}
+                                                    <img  src={items?.Banner}
                                                         alt="Weedx.io Promotion banner"
                                                         title="Weedx.io Promotion banner"
                                                         width={1500}

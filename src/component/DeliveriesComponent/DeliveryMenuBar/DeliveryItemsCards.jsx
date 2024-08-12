@@ -42,7 +42,7 @@ const DeliveryItemsCard = ({ Deliverie }) => {
                                                         <div className="d-flex dispensories_content_paragraphs">
                                                             <span className='disOPenResRating'>{items.rating === null ? 0 : items.rating.toFixed(0) +".0"}</span>
 
-                                                            <Rating className={`mx-2 ${classes.homePageStarIcons}`} color='green' name="read-only" value={items.rating === null ? 0 : items.rating?.toFixed(1)} readOnly />
+                                                            <Rating className={`mx-2 ${classes.homePageStarIcons}`} color='green' name="read-only"   value={items.rating === null ? 0 : parseFloat(items.rating.toFixed(1))}readOnly />
                                                             {/* < span style={{color:"black"}}>{items.rating === null ? 0 : items.rating.toFixed(0) +".0"}</span> */}
                                                         </div>
                                                     </Link>

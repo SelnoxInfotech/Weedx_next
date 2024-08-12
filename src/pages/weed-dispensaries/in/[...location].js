@@ -7,16 +7,15 @@ import Box from '@mui/material/Box';
 import useStyles from "@/styles/style";
 import dynamic from 'next/dynamic'
 const WeedDispansires = dynamic(() => import('../../../component/WeedDispansires/Weed_Dispansires'));
+const DispensariesSco = dynamic(() => import('../../../component/ScoPage/dispensariessco') ,  {ssr:true});
+// import { DispensariesSco } from "../ScoPage/dispensariessco"
 import Createcontext from "@/hooks/context"
-// import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
-// import { useSession } from 'next-session';
 import { useRouter } from 'next/router';
-import axios, { Axios } from "axios";
-import { DespensioriesItem } from '../../../hooks/apicall/api';
 import Wronglocation from "../../../component/skeleton/Wronglocation";
 import { modifystr } from "../../../hooks/utilis/commonfunction";
-import Loader from "../../../component/Loader/Loader";
 import Location from '../../../hooks/utilis/getlocation';
+import Cookies from 'universal-cookie';
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -46,18 +45,16 @@ function a11yProps(index) {
 }
 
 
-
 const Dispensaries = (props) => {
-
+    const cookies = new Cookies();
     const classes = useStyles()
     const [searchtext, setsearchtext] = React.useState("");
     const navigate = useRouter()
-    const Location = useRouter()
     const { state, dispatch } = React.useContext(Createcontext)
     const [value, setValue] = React.useState(0);
-
     const [contentdata, setcontentdata] = React.useState([])
-    const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: props.location.formatted_address }]
+    const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: props.formatted_address  ||state.Location }]
+    const locations = props?.location.formatted_address || state.Location
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -131,18 +128,65 @@ const Dispensaries = (props) => {
     //         return () => clearTimeout(timeoutId);
     //     }
     // }, [searchtext, state])
+    //   console.log( props.location)
 
-React.useEffect(()=>{
-    dispatch({ type: 'Location', Location: props.location.formatted_address })
-    dispatch({ type: 'permission', permission: true });
-    dispatch({ type: 'Country', Country: props.location.country});
-    dispatch({ type: 'countrycode', countrycode: props.location.countrycode });
-    dispatch({ type: 'State', State: props.location.state });
-    dispatch({ type: 'statecode', statecode: props.location.statecode });
-    dispatch({ type: 'City', City: props.location.city })
-    dispatch({ type: 'citycode', citycode: props.location.citycode});
-    dispatch({ type: 'route', route: props.location.route });
-},[props])
+
+    // React.useEffect(() => {
+    //     dispatch({ type: 'Location', Location: props?.formatted_address  })
+ 
+    //     // navigate.push(`/weed-dispensaries/${props.location.country || 'default-country'}/${props.location.state || 'default-state'}/${props.location.city || 'default-city'}`,undefined ,  { shallow: false });
+    // }, [props])
+
+
+    React.useEffect(() => {
+        props.isDirectHit &&   dispatch({ type: 'Location', Location: props?.formatted_address  })
+
+        if(props.isDirectHit)
+       dispatch({ type: 'permission', permission: true });
+        dispatch({ type: 'Country', Country: props?.location?.country });
+        dispatch({ type: 'countrycode', countrycode: props.location?.countrycode });
+        dispatch({ type: 'State', State: props?.location?.state });
+        dispatch({ type: 'statecode', statecode: props?.location?.statecode });
+        dispatch({ type: 'City', City: props?.location?.city })
+        dispatch({ type: 'citycode', citycode: props?.location?.citycode });
+        dispatch({ type: 'route', route: props?.location?.route });
+        const setLocation = {
+            country: props?.location?.country,
+            state: props?.location?.state,
+            city: props?.location?.city,
+            formatted_address:props?.formatted_address
+          };
+          const date = new Date();
+          date.setTime(date.getTime() + 60 * 60 * 24 * 365); // 1 year expiry
+          props.isDirectHit  && cookies.set('fetchlocation', JSON.stringify(setLocation), { 
+            expires: date, 
+            path: '/' // Set the path where the cookie is accessible
+          });
+
+{        const { country, state, city,route } = props.location || {};
+    
+        // Build the URL based on available location data
+        let url = '/weed-dispensaries/in/';
+        if(route){
+            url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}/${modifystr(route)}`;
+        }
+        else if (city) {
+          url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}`;
+        } else if (state) {
+          url += `${modifystr(country) || 'default-country'}/${modifystr(state)}`;
+        } else if (country) {
+          url += modifystr(country);
+        } else {
+          url = '/weed-dispensaries/default-country'; // Fallback URL
+        }
+    
+        // Use shallow routing to navigate to the constructed URL
+
+       navigate.replace(url, 0, { shallow: true });
+    }      
+      }, [props.location]);
+
+
 
     function breadcrumCountry(country, state1, city) {
         if (Boolean(city)) {
@@ -165,114 +209,128 @@ React.useEffect(()=>{
         }
 
     }
-
     return (
-                <div className="w-100 mx-auto  dispensaries_centers">
-                    <div className="w-100">
-                        <div className="headerBoxdescription">
-                            <div style={{ cursor: "pointer" }}>
+        <div className="w-100 mx-auto  dispensaries_centers">
+             <DispensariesSco location={navigate?.asPath} format_Address={props?.formatted_address} ></DispensariesSco>
+            <div className="w-100">
+                <div className="headerBoxdescription">
+                    <div style={{ cursor: "pointer" }}>
 
-                                <span onClick={() => navigate.push("/")}>{"Home"}</span>
-                                {Boolean(props.location.country) && <span> {">"} <span onClick={() => breadcrumCountry("Country")}>{props.location.country}</span></span>}
-                                {Boolean(props.location.state) && <span> {">"} <span onClick={() => breadcrumCountry("Country", "state")}>{props.location.state}</span></span>}
-                                {Boolean(props.location.city) && <span> {">"} <span onClick={() => { Boolean(props.location.route) && breadcrumCountry("Country", "state", "City") }}>{props.location.city}</span></span>}
-                                {Boolean(props.location.route) && <span> {">"} <span>{props.location.route}</span></span>}
+                        <span onClick={() => navigate.push("/")}>{"Home"}</span>
+                        {Boolean(props.location.country) && <span> {">"} <span onClick={() => breadcrumCountry("Country")}>{props.location.country}</span></span>}
+                        {Boolean(props.location.state) && <span> {">"} <span onClick={() => breadcrumCountry("Country", "state")}>{props.location.state}</span></span>}
+                        {Boolean(props.location.city) && <span> {">"} <span onClick={() => { Boolean(props.location.route) && breadcrumCountry("Country", "state", "City") }}>{props.location.city}</span></span>}
+                        {Boolean(props.location.route) && <span> {">"} <span>{props.location.route}</span></span>}
+                    </div>
+                    {DispensorShopLocation?.map((ele, index) => {
+                        return (
+                            <div key={index}>
+
+                                <h1 className="m-0"> <span className="dispensories_name">{ele.name}</span> <span className="dispensories_city">{ele.city}</span></h1>
                             </div>
-                            {DispensorShopLocation?.map((ele, index) => {
-                                return (
-                                    <div key={index}>
-
-                                        <h1 className="m-0"> <span className="dispensories_name">{ele.name}</span> <span className="dispensories_name">{ele.city}</span></h1>
-                                    </div>
-                                )
-                            })}
-                            <p className="m-0">{`Find Nearby Dispensaries in ${props.location.formatted_address} for Recreational & Medical weed. Browse Top Cannabis Products and Place Orders from Trusted Local Dispensaries.`}</p>
-                        </div>
-                    </div>
-                    <div className="w-100 dispensory_menu my-2">
-                        {
-                                (props.store?.length !== 0 ?
-                                    <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
-                                        <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                            <Tabs scrollButtons={false} variant="scrollable" sx={{ justifyContent: 'space-around' }} value={value} onChange={handleChange} aria-label="basic tabs example">
-                                                <Tab label="Open" {...a11yProps(0)} />
-                                                <Tab label="Storefronts" {...a11yProps(1)} />
-                                                <Tab label="delivery" {...a11yProps(2)} />
-                                                <Tab label="Order online" {...a11yProps(3)} />
-                                            </Tabs>
-                                        </Box>
-                                        <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
-                                            <TabPanel value={value} index={0}>
-                                                <WeedDispansires Store={props.store} location={props.location} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                            </TabPanel>
-                                            <TabPanel value={value} index={1}>
-                                                <WeedDispansires Store={props.store} location={props.location} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                            </TabPanel>
-                                            <TabPanel value={value} index={2}>
-                                                <WeedDispansires Store={props.store} location={props.location}  product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                            </TabPanel>
-                                            <TabPanel value={value} index={3}>
-                                                <WeedDispansires Store={props.store} location={props.location} product={props.product}  searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
-                                            </TabPanel>
-                                        </Box>
-
-                                    </Box>
-                                    :
-
-                                     <Wronglocation title={' No dispensaries available'} description={'We apologize, but it appears that there are no dispensaries available in your location. Would you like to enter a different address to search for a nearby dispensary?'} />
-                                    
-                                    
-                                )
-                        }
-
-                    </div>
+                        )
+                    })}
+                    <p className="m-0">{`Find Nearby Dispensaries in ${props.formatted_address} for Recreational & Medical weed. Browse Top Cannabis Products and Place Orders from Trusted Local Dispensaries.`}</p>
                 </div>
+            </div>
+            <div className="w-100 dispensory_menu my-2">
+                {
+                    (props.store?.length !== 0 ?
+                        <Box className={`dispensories_tabss ${classes.dispensory_tab_background}`} sx={{ width: '100%' }}>
+                            <Box className={classes.open_dispensory_tab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <Tabs scrollButtons={false} variant="scrollable" sx={{ justifyContent: 'space-around' }} value={value} onChange={handleChange} aria-label="basic tabs example">
+                                    <Tab label="Open" {...a11yProps(0)} />
+                                    <Tab label="Storefronts" {...a11yProps(1)} />
+                                    <Tab label="delivery" {...a11yProps(2)} />
+                                    <Tab label="Order online" {...a11yProps(3)} />
+                                </Tabs>
+                            </Box>
+                            <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
+                                <TabPanel value={value} index={0}>
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                </TabPanel>
+                                <TabPanel value={value} index={1}>
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                </TabPanel>
+                                <TabPanel value={value} index={2}>
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                </TabPanel>
+                                <TabPanel value={value} index={3}>
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                </TabPanel>
+                            </Box>
+
+                        </Box>
+                        :
+
+                        <Wronglocation title={' No dispensaries available'} description={'We apologize, but it appears that there are no dispensaries available in your location. Would you like to enter a different address to search for a nearby dispensary?'} />
+
+
+                    )
+                }
+
+            </div>
+        </div>
     );
 };
 
-export default Dispensaries;
 
-
-export const getStaticPaths = async () => {
-    // Fetch the list of locations or define them statically
-    const locations = [
-        ['united-states', 'new-york',],
-    ];
-
-    const paths = locations.map(location => ({
-        params: { location },
-    }));
-
-    return { paths, fallback: "blocking" };
-};
-
-export const getStaticProps = async (context) => {
-
-    
-    const locationParams = context.params.location;
-    const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
-    const k = await Location(decodedLocation)
+export const getServerSideProps = async (context) => {
+    context.res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+    )
+    const { req , query } = context;
+    const { headers: { referer }, url } = req;
+    const isDirectHit = !referer || referer === req.url;
+// console.log(req.url , "urlx")
 
     const transformString = (str) => {
+        if (typeof str !== "string" || !str.trim()) {
+            return '';
+        }
+
         return str
             .replace(/-/g, " ")  // Replace hyphens with spaces
             .split(' ')          // Split the string into an array of words
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize the first letter of each word
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())  // Capitalize the first letter of each word
             .join(' ');          // Join the words back into a single string
     };
 
+    const locationParams = context.params.location || [];
+    let country1 = "", state = "", city = "", formatted_address = "";
+
+    let type = {
+        country: locationParams[0] || "",
+        state: locationParams[1] || "",
+        city: locationParams[2] || "",
+        route: locationParams[3] || ""
+    };
+
+    if (isDirectHit) {
+        const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
+        const k = await Location(decodedLocation, type);
+        country1 = k.country || "";
+        state = k.state || "";
+        city = k.city || "";
+        formatted_address = k.formatted_address || "";
+    } else {
+        country1 = locationParams[0] || "";
+        state = locationParams[1] || "";
+        city = locationParams[2] || "";
+    }
+
     const object = {
-        City: transformString(k.city || ''),
-        Country: transformString(k.country || ''),
-        State: transformString(k.state || ''),
+        City: transformString(city) || '',
+        Country: transformString(country1) || '',
+        State: transformString(state) || '',
     };
+
     const object1 = {
-        City: transformString(k.city || ''),
-        Country: transformString(k.country || ''),
-        State: transformString(k.state || ''),
-        limit:10
+        ...object,
+        limit: 10
     };
-    let product = [];
+
     try {
         const response = await fetch('https://api.cannabaze.com/UserPanel/Get-Dispensaries/', {
             method: 'POST',
@@ -283,54 +341,62 @@ export const getStaticProps = async (context) => {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch');
+            throw new Error('Failed to fetch dispensaries');
         }
 
         const data = await response.json();
 
-        const GetProduct = async (obj) => {
-            const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(obj)
-            });
+        const productResponse = await fetch('https://api.cannabaze.com/UserPanel/Get-AllProduct/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(object1)
+        });
 
-            if (!productResponse.ok) {
-                throw new Error('Failed to fetch products');
-            }
+        if (!productResponse.ok) {
+            throw new Error('Failed to fetch products');
+        }
 
-            const productData = await productResponse.json();
-            return productData;
-        };
- 
-        const productData = await GetProduct(object1);
-        product = productData?.filter(item => item.Store_Type === "dispensary");
+        const productData = await productResponse.json();
+        const products = productData?.filter(item => item.Store_Type === "dispensary");
 
         if (data === "No Dispensary in your area") {
             return {
                 props: {
                     store: [],
                     product: [],
-                    location:k
-                },
-                revalidate: 60
+                    location: {
+                        country: country1,
+                        state: state,
+                        city: city,
+                    },
+                    formatted_address: formatted_address,
+                    isDirectHit
+                }
             };
         } else {
             return {
                 props: {
                     store: data,
-                    product: product ,
-                    location:k
-                },
-                revalidate: 60
+                    product: products,
+                    location: {
+                        country: country1,
+                        state: state,
+                        city: city,
+                    },
+                    formatted_address: formatted_address,
+                    isDirectHit
+                }
             };
         }
     } catch (error) {
         console.error('Error fetching data:', error);
         return {
-            notFound: true,
+            notFound: true
         };
     }
 };
+
+
+export default Dispensaries;

@@ -185,7 +185,11 @@ const reducer = (state, action) => {
           {
             return { ...state, statecode: action.statecode }
           }
-    
+          case "location_Api":
+            {
+              return { ...state, location_Api: action.location_Api }
+            }
+      
   
       default: return state
     }

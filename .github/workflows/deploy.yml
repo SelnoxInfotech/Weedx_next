@@ -25,17 +25,17 @@ jobs:
       run: npm run build
 
     - name: Zip .next folder
-      run: zip -r build.zip .next public package.json package-lock.json
+      run: zip -r .next public package.json package-lock.json
 
     - name: Send build to EC2
       run: |
-        scp -o StrictHostKeyChecking=no -i "weedxpem.pem" build.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
+        scp -o StrictHostKeyChecking=no -i "weedxpem.pem" .next.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
 
     - name: Deploy on EC2
       run: |
         ssh -o StrictHostKeyChecking=no -i "weedxpem.pem" ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
           cd /home/ubuntu/Weedx
-          unzip -o build.zip
+          unzip -o .next.zip
           npm install --production
           pm2 restart all || pm2 start npm --name "next-app" -- run start
         EOF

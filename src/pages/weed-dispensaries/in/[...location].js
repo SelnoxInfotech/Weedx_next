@@ -54,7 +54,7 @@ const Dispensaries = (props) => {
     const [value, setValue] = React.useState(0);
     const [contentdata, setcontentdata] = React.useState([])
     const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: props.formatted_address  ||state.Location }]
-    const locations = props?.location.formatted_address || state.Location
+    const locations = props?.formatted_address 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };

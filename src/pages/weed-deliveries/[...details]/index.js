@@ -350,8 +350,8 @@ export default function DispensoriesDetails(props) {
                                             <div id='error-text'>
                                                 <Image unoptimized={true} width={100} height={100} src={gifimage.src} alt="no product" />
                                                 <span>{`Menu Not Available`}</span>
-                                                <p class="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses`}</p>
-                                                <span onClick={() => { navigate.push(-1) }} class="back">{`VIEW OTHER BUSINESSES`}</span>
+                                                <p className="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses`}</p>
+                                                <span onClick={() => { navigate.push(-1) }} className="back">{`VIEW OTHER BUSINESSES`}</span>
                                             </div>
                                         </div>
                                     ) :
@@ -372,8 +372,8 @@ export default function DispensoriesDetails(props) {
                                                 <div id='error-text'>
                                                     <Image unoptimized={true} width={100} height={100} src={gifimage.src} alt="no product" />
                                                     <span>{`Menu Not Available`}</span>
-                                                    <p class="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses `}</p>
-                                                    <span class="back">{`VIEW OTHER BUSINESSES`}</span>
+                                                    <p className="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses `}</p>
+                                                    <span className="back">{`VIEW OTHER BUSINESSES`}</span>
                                                 </div>
                                             </div>)
                                         :
@@ -438,6 +438,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const storeId = _.findIndex(context.params.details, item => !isNaN(parseInt(item)));
+    console.log(context.params.details[storeId])
     // console.log(context.params.details[storeId])
     let data = [];
     let productdata = []

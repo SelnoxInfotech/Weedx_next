@@ -15,7 +15,7 @@ import Wronglocation from "../../../component/skeleton/Wronglocation";
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Location from '../../../hooks/utilis/getlocation';
 import Cookies from 'universal-cookie';
-
+import cookie from 'cookie';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -139,7 +139,7 @@ const Dispensaries = (props) => {
 
 
     React.useEffect(() => {
-        props.isDirectHit &&   dispatch({ type: 'Location', Location: props?.formatted_address  })
+         dispatch({ type: 'Location', Location: props?.formatted_address  })
 
         if(props.isDirectHit)
        dispatch({ type: 'permission', permission: true });
@@ -276,6 +276,8 @@ const Dispensaries = (props) => {
 
 
 export const getServerSideProps = async (context) => {
+
+    const cookies = cookie.parse(context.req.headers.cookie || '');
     context.res.setHeader(
         'Cache-Control',
         'public, s-maxage=10, stale-while-revalidate=59'
@@ -315,6 +317,7 @@ export const getServerSideProps = async (context) => {
         city = k.city || "";
         formatted_address = k.formatted_address || "";
     } else {
+        formatted_address =JSON.parse(cookies.fetchlocation).formatted_address  
         country1 = locationParams[0] || "";
         state = locationParams[1] || "";
         city = locationParams[2] || "";

@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to trigger deployment
+      - main  # Adjust to your branch as needed
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '18'  # Ensure compatibility with Next.js
 
     - name: Install dependencies
       run: npm install --force
@@ -24,18 +24,20 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Zip .next folder
-      run: zip -r build.zip .next public package.json package-lock.json
-
-    - name: Send build to EC2
+    - name: Zip build artifacts
       run: |
-        scp -o StrictHostKeyChecking=no -i "weedxpem.pem" build.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
+        zip -r build.zip build public package.json package-lock.json
 
-    - name: Deploy on EC2
+    - name: Deploy to EC2
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
       run: |
-        ssh -o StrictHostKeyChecking=no -i "weedxpem.pem" ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
+        echo "$SSH_PRIVATE_KEY" > private_key.pem
+        chmod 600 private_key.pem
+        scp -o StrictHostKeyChecking=no -i private_key.pem build.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
+        ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
           cd /home/ubuntu/Weedx
           unzip -o build.zip
           npm install --production
-          pm2 restart all || pm2 start npm --name "next-app" -- run start
+          pm2 restart Weedx || pm2 start npm --name "Weedx" -- run start
         EOF

@@ -7,6 +7,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Createcontext from "../../../hooks/context"
 // import { useLocation, usenavigate.push, Link } from "react-router-dom"
+import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
 import axios from "axios"
 import Box from '@mui/material/Box';
@@ -29,9 +30,10 @@ import { modifystr } from "../../../hooks/utilis/commonfunction";
 import RoutingDespen from '../../../hooks/utilis/Routingdespen';
 import Location from '../../../hooks/utilis/getlocation';
 import Cookies from 'universal-cookie';
-
+import cookie from 'cookie';
 const Deliveries = (props) => {
     const cookies = new Cookies();
+    // console.log(props)
     const { state, dispatch } = React.useContext(Createcontext)
     const locations = props.formatted_address
     const Location = useRouter()
@@ -42,7 +44,7 @@ const Deliveries = (props) => {
 
 
     React.useEffect(() => {
-        props.isDirectHit && dispatch({ type: 'Location', Location: props?.formatted_address })
+        dispatch({ type: 'Location', Location: props?.formatted_address })
 
         if (props.isDirectHit)
             dispatch({ type: 'permission', permission: true });
@@ -145,7 +147,7 @@ const Deliveries = (props) => {
                     </div>
 
                     <div className="col-lg-12 col-11 delivery_menuBar_container px-0 mt-4">
-                        <Delivery location={Location.asPath}></Delivery>
+                        <Delivery location={Location.asPath} formatted_address={props?.formatted_address} ></Delivery>
                         {
                             (Boolean(props?.store.length) ?
 
@@ -211,6 +213,7 @@ const Deliveries = (props) => {
     )
 }
 export default Deliveries
+
 export async function GetAllDelivery(object) {
     try {
         const response = await fetch('https://api.cannabaze.com/UserPanel/Get-DeliveryStores/', {
@@ -258,6 +261,8 @@ export async function GetAllDelivery(object) {
 }
 
 export const getServerSideProps = async (context) => {
+
+    const cookies = cookie.parse(context.req.headers.cookie || '');
     context.res.setHeader(
         'Cache-Control',
         'public, s-maxage=10, stale-while-revalidate=59'
@@ -298,6 +303,7 @@ export const getServerSideProps = async (context) => {
         formatted_address = k.formatted_address || "";
 
     } else {
+        formatted_address =JSON.parse(cookies.fetchlocation).formatted_address
         country1 = locationParams[0] || "";
         state = locationParams[1] || "";
         city = locationParams[2] || "";

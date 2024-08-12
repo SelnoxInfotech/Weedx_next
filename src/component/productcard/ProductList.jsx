@@ -376,6 +376,7 @@ const ProductList = ({ arr , link="products" }) => {
       let assa = showdata.slice((value*productperpage)-productperpage, value*productperpage)
       setpaginateddata(assa)
   };
+
   React.useEffect(() => {
     let newdata = arr.filter((item) => {
       return item.Prices[0]?.Price[0]?.Stock === "IN Stock"
@@ -391,6 +392,7 @@ const ProductList = ({ arr , link="products" }) => {
       setpaginateddata(newdata.concat(newdata2))
     }
   }, [arr]);
+
   React.useEffect(()=>{
     let width= window.innerWidth
     if(width>=1400){
@@ -399,6 +401,8 @@ const ProductList = ({ arr , link="products" }) => {
       setproductperPage(6)
     }
   },[])
+
+
   return (
     <>
       {(showdata?.length !== 0 && typeof(showdata) !== "string") ? (
@@ -433,20 +437,22 @@ const ProductList = ({ arr , link="products" }) => {
                           )}
                         </IconButton>
                       </span>
-                      <div className="prod_cat_cont" onClick={() => {
-                        Navigate.push(`/${link}/${modifystr(ele.category_name)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.Product_Name)}/${ele.id}`, {
-                          state: {
-                            prevuisurl: location.pathname,
-                          }
-                        })
-                      }}>
+                      <div className="prod_cat_cont"
+                      //  onClick={() => {
+                      //   Navigate.push(`/${link}/${modifystr(ele.category_name)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.Product_Name)}/${ele.id}`, {
+                      //     state: {
+                      //       prevuisurl: location.pathname,
+                      //     }
+                      //   })
+                      // }}
+                      >
 
                         <div className="col-12  p-0 prod_cat_img position-relative">
                           <Link href={`/${link}/${modifystr(ele.category_name)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.Product_Name)}/${ele.id}`} state={{
                             prevuisurl: location.pathname,
                           }}>
                             <Image
-                              onClick={() => { Navigate(`/${link}/${modifystr(ele.category_name)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.Product_Name)}/${ele.id}`) }}
+                              onClick={() => { Navigate.push(`/${link}/${modifystr(ele.category_name)}/${modifystr(ele.SubcategoryName)}/${modifystr(ele.Product_Name)}/${ele.id}`) }}
                               className="product_search_result_image"
                              width={100}
                              unoptimized={true}

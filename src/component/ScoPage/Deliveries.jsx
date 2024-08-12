@@ -2,11 +2,11 @@ import Head from 'next/head';
 import Createcontext from '../../hooks/context';
 import React from 'react';
 
-function Delivery({ location }) {
+function Delivery({ location ,formatted_address }) {
   const { state } = React.useContext(Createcontext);
 
   // Construct the title string
-  const title = `Weed Delivery in ${state?.Location} | weedx.io |`;
+  const title = `Weed Delivery in ${formatted_address} | weedx.io |`;
 
   return (
     <Head>
@@ -14,7 +14,7 @@ function Delivery({ location }) {
       <meta name="title" content={title} />
       <meta
         name="description"
-        content={`Find Nearby Weed Delivery in ${state.Location} for Recreational & Medical Uses. Browse Top Cannabis Products and Place Orders from Trusted weed delivery near you.`}
+        content={`Find Nearby Weed Delivery in ${formatted_address} for Recreational & Medical Uses. Browse Top Cannabis Products and Place Orders from Trusted weed delivery near you.`}
       />
       <link rel="canonical" href={`https://www.weedx.io${location}`} />
       <meta

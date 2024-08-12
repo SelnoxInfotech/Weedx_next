@@ -1,4 +1,4 @@
-name: Deploy React App to EC2
+name: Deploy Next.js to EC2
 
 on:
   push:
@@ -11,24 +11,13 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install SSH key
-      uses: shimataro/ssh-key-action@v2
+      uses: webfactory/ssh-agent@v0.5.3
       with:
-        key: ${{ secrets.AWS_SSH_KEY }}
-        known_hosts: |
-          ec2-44-203-3-121.compute-1.amazonaws.com
+        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-    - name: Sync files to EC2
+    - name: Deploy to EC2
       run: |
-        rsync -avz --delete -e "ssh -i ${{ secrets.AWS_SSH_KEY }} -o StrictHostKeyChecking=no" ./ ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx
-
-    - name: Install dependencies and build on EC2
-      run: |
-        ssh -i ${{ secrets.AWS_SSH_KEY }} ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
-          cd /home/ubuntu/Weedx
-          npm install --force
-          npm run build
-          pm2 restart all || pm2 start npm --name "react-app" -- start
-        EOF
+        ssh -o StrictHostKeyChecking=no -i "weedxpem.pem" ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com 'bash -s' < /home/ubuntu/Weedx/deploy.sh

@@ -33,8 +33,7 @@ import Cookies from 'universal-cookie';
 const Deliveries = (props) => {
     const cookies = new Cookies();
     const { state, dispatch } = React.useContext(Createcontext)
-    const locations = props?.location.formatted_address || state.Location
-
+    const locations = props.formatted_address
     const Location = useRouter()
     const navigate = useRouter()
     // console.log(props)

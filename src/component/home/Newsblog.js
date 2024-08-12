@@ -31,9 +31,9 @@ const Newsblog = () => {
         <React.Fragment>
             <div className="px-sm-0 px-3">
                    <div className="d-flex align-items-center justify-content-between">
-                      <h3 className="section_main_title">Trendings</h3>
+                      <h3 className="section_main_title">{`Trendings`}</h3>
                       <Link href={'/cannabis-news'}>
-                        <span className="viewallbtn">View All <FaArrowRight   /></span>
+                        <span className="viewallbtn">{`View All`} <FaArrowRight/></span>
                       </Link>
                     </div>
                     <div className="blogs_card_slider">

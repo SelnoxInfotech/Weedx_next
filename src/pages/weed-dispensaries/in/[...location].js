@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import useStyles from "@/styles/style";
 import dynamic from 'next/dynamic'
 const WeedDispansires = dynamic(() => import('../../../component/WeedDispansires/Weed_Dispansires'));
+const DispensariesSco = dynamic(() => import('../../../component/ScoPage/dispensariessco') ,  {ssr:true});
+// import { DispensariesSco } from "../ScoPage/dispensariessco"
 import Createcontext from "@/hooks/context"
 import { useRouter } from 'next/router';
 import Wronglocation from "../../../component/skeleton/Wronglocation";
@@ -209,6 +211,7 @@ const Dispensaries = (props) => {
     }
     return (
         <div className="w-100 mx-auto  dispensaries_centers">
+             <DispensariesSco location={navigate?.asPath} format_Address={props?.formatted_address} ></DispensariesSco>
             <div className="w-100">
                 <div className="headerBoxdescription">
                     <div style={{ cursor: "pointer" }}>

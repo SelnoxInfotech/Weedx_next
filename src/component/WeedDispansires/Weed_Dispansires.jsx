@@ -1,24 +1,20 @@
 
 import React, { useContext } from "react";
-import { useRouter } from "next/router";
 import Dispensoriescart from './Dispensoriescart'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { DispensariesSco } from "../ScoPage/dispensariessco"
 import Createcontext from "../../hooks/context";
 import dynamic from 'next/dynamic'
 const WebContent = dynamic(() => import('../WeedDispansires/Webcontent'), { ssr: true });
 import { modifystr } from "../../hooks/utilis/commonfunction";
 const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata, product, location }) => {
-    console.log(location)
     const { state } = useContext(Createcontext)
-    const  router =  useRouter()
+ 
     return (
         <React.Fragment>
 
-            <DispensariesSco location={router?.asPath}></DispensariesSco>
             <div className="container">
                 <div className="row">
                     <div className="col-12 dispensories_main_container">

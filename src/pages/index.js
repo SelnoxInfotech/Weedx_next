@@ -9,12 +9,10 @@ const HomePageWeedBanner = dynamic(() => import('../component/home/HomePageWeedB
 const Map = dynamic(() => import('../component/home/map/map'));
 const Staticcontent = dynamic(() => import('../component/home/staticcontent'));
 const NewsBlog = dynamic(() => import('../component/home/Newsblog'));
-const HomePageDealsSignup = dynamic(() => import('../component/home/HomePageDealsSignup'));
+// const HomePageDealsSignup = dynamic(() => import('../component/home/HomePageDealsSignup'));
 const FeaturedBrand = dynamic(() => import('@/component/home/FeaturedBrand'));
 import Createcontext from "../hooks/context"
 export default function Home({ initialData }) {
-  const { state } = React.useContext(Createcontext)
-  const [Category, SetCategory] = React.useState([])
   const [Skeleton, SetSkeleton] = React.useState(true)
 
   function ShowCategoryProduct(id, name) {
@@ -37,7 +35,7 @@ export default function Home({ initialData }) {
       </div>
       <Staticcontent></Staticcontent>
       <NewsBlog></NewsBlog>
-      <HomePageDealsSignup></HomePageDealsSignup>
+      {/* <HomePageDealsSignup></HomePageDealsSignup> */}
     </>
   );
 }

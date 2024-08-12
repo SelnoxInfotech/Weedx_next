@@ -199,7 +199,7 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         path: '/' // Set the path where the cookie is accessible
       });
 
-      router.pathname === "/products/[[...slug]]" &&  router.replace(router.asPath);
+       router.replace(router.asPath);
       dispatch({ type: 'location_Api', location_Api: false })
       dispatch({ type: 'Location', Location: placeDetails?.formatted_address })
     })

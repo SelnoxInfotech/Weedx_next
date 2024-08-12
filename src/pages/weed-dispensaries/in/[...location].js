@@ -15,7 +15,7 @@ import Wronglocation from "../../../component/skeleton/Wronglocation";
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Location from '../../../hooks/utilis/getlocation';
 import Cookies from 'universal-cookie';
-import cookie from 'cookie';
+    import cookie from 'cookie';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -140,7 +140,6 @@ const Dispensaries = (props) => {
 
     React.useEffect(() => {
          dispatch({ type: 'Location', Location: props?.formatted_address  })
-
         if(props.isDirectHit)
        dispatch({ type: 'permission', permission: true });
         dispatch({ type: 'Country', Country: props?.location?.country });

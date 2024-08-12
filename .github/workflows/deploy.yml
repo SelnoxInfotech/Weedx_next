@@ -3,41 +3,31 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Adjust to your branch as needed
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'  # Ensure compatibility with Next.js
+      - name: Install Node.js and dependencies
+        run: |
+          npm install --force
+          npm run build
 
-    - name: Install dependencies
-      run: npm install --force
+      - name: Zip build artifacts
+        run: zip -r build.zip .next build public package.json package-lock.json
 
-    - name: Build project
-      run: npm run build
-
-    - name: Zip build artifacts
-      run: |
-        zip -r build.zip build public package.json package-lock.json
-
-    - name: Deploy to EC2
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-      run: |
-        echo "$SSH_PRIVATE_KEY" > weedxpem.pem
-        chmod 600 weedxpem.pem
-        scp -o StrictHostKeyChecking=no -i weedxpem.pem build.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
-        ssh -o StrictHostKeyChecking=no -i weedxpem.pem ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
-          cd /home/ubuntu/Weedx
-          unzip -o build.zip
-          npm install --production
-          pm2 restart Weedx || pm2 start npm --name "Weedx" -- run start
-        EOF
+      - name: Deploy to EC2
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          ssh -o StrictHostKeyChecking=no -i <(echo "$SSH_PRIVATE_KEY") ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
+            cd /home/ubuntu/Weedx
+            unzip -o build.zip
+            npm install --production
+            pm2 restart Weedx || pm2 start npm --name "Weedx" -- run start
+          EOF

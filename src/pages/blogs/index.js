@@ -1,37 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react'
-// import { getAllNews } from '../../../../Api/Api.jsx';
+import React, { useState } from 'react'
 import { AiFillHeart, AiFillEye } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
-// import { Link, userouter } from 'react-router-dom';
 import Link from 'next/link';
-// import SearchBar from '@mkyy/mui-search-bar';
-// import useStyles from "@/styles/style.jsx";
 import axios from "axios";
 import { useRouter } from 'next/router';
-import { BlogLike, Post_BlogLike } from "@/hooks/apicall/api.js"
+import { Post_BlogLike } from "@/hooks/apicall/api.js"
 import { FaRegHeart } from "react-icons/fa";
 import { BsShareFill } from "react-icons/bs";
 import { NewsSeo } from "@/component/ScoPage/NewsSeo";
-// import DeliveryItemsCardSkeleton from '@/component/skeleton/DeliveryItemsCardSkeleton.jsx';
 import _ from "lodash";
 import Image from 'next/image';
 import Createcontext from '@/hooks/context.js';
 import { RWebShare } from "react-web-share";
 import Cookies from 'universal-cookie';
-// import {useNavigate} from 'react-router-dom'
-// import Loader from '@/component/Loader/Loader.js';
 import { modifystr } from "@/hooks/utilis/commonfunction"
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
 import Blogheaders from '@/component/Pageheaders/Blogheaders'
 const Allblogs = (props) => {
-  const [allblogs, setallblogs] = useState(props.initialData)
   const router = useRouter()
   const { state } = React.useContext(Createcontext)
-  // const [value, SetValue] = React.useState([])
-  // const [allLikes, SetallLikes] = React.useState([])
-  // const [isdata, setisdata] = useState(true)
-  // const [loader, setloader] = React.useState(true)
-  // const classes = useStyles()
   const cookies = new Cookies();
   let token_data = cookies.get('User_Token_access')
   let accessToken
@@ -39,60 +26,7 @@ const Allblogs = (props) => {
     accessToken = localStorage.getItem('User_Token_access');
   }
   if (Boolean(accessToken)) { token_data = accessToken }
-  //   useEffect(() => {
-  //       document.documentElement.scrollTo({
-  //         top: 0,
-  //         left: 0,
-  //         behavior: "instant",
-  //       }); 
-  //       if (state.login) {
-  //             if(router.pathname.substring(1)==='blogs'){
-  //               axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyBlog/').then(async (res) => {
-  //                 let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
-  //                 setallblogs(as)
-  //                 setloader(false)
-  //                 setisdata(true)
-  //               }).catch((err) => {
-  //                 console.trace(err)
-  //                 setloader(false)
-  //               })
-  //             }else{
-  //                 axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyCANNABISNEWS/').then(async (res) => {
-  //                 let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
-  //                 setallblogs(as)
-  //                 setloader(false)
-  //                 setisdata(true)
-  //                 }).catch((err) => {
-  //                   console.trace(err)
-  //                 })
-  //             }
-  //       }else{
-  //         if(router.pathname.substring(1)==='blogs'){
-  //           axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyBlog/').then(async (res) => {
-  //             let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
-  //             setallblogs(as)
-  //             setloader(false)
-  //             setisdata(true)
-  //           }).catch((err) => {
-  //             console.trace(err)
-  //             setloader(false)
-  //           })
-  //         }else{
-  //             axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyCANNABISNEWS/').then(async (res) => {
-  //             let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
-  //             setallblogs(as)
-  //             setloader(false)
-  //             setisdata(true)
-  //             }).catch((err) => {
-  //               console.trace(err)
-  //             })
-  //         }
-  //       }
-  //   }, [router.pathname])
-
-//  console.log(props).initialData
-
-
+  
   function PostLike(item) {
 
     if (state.login) {
@@ -134,8 +68,7 @@ const Allblogs = (props) => {
                     <div className='col-3 p-0 d-flex align-items-center'>
                       <div className='blogCardImg'>
                         <Link href={`/${router.pathname.substring(1)}/${items.Url_slug === ("" || null || undefined) ? modifystr(items.Title) : modifystr(items.Url_slug)}/${items.id}`} key={index}>
-                          <Image unoptimized={true} width={500} height={500}
-                            src={`${items.Image}`} alt={items.Alt_Text} title={items.Alt_Text} />
+                          <Image unoptimized={true} width={500} height={500} src={`${items.Image}`} alt={items.Alt_Text} title={items.Alt_Text} />
                         </Link>
                       </div>
                     </div>
@@ -201,14 +134,7 @@ const Allblogs = (props) => {
                         <div className='col-3'>
                           <span className='action_icons'>
 
-                            {/* <RWebShare
-                                data={{ url: router.href}}
-                                sites={["facebook", "twitter", "whatsapp", "telegram", "linkedin", 'mail', 'copy']}
-                                onClick={() => console.info("share successful!")}
-                                color="#31B665"
-                              > */}
-                            {/* <BsShareFill /> */}
-                            {/* </RWebShare> */}
+                           
                           </span>
                         </div>
                       </div>

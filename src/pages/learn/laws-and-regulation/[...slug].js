@@ -3,6 +3,7 @@ import LawStateContent from "@/component/LawsComponent/LawStateContent";
 import Content from "@/component/LawsComponent/LawContentsJson";
 import Bgheader from "@/component/bgheader/Bgheader";
 import _ from "lodash";
+import classes from '@/styles/customstyle.module.scss'
 
 const Index = (props) => {
   const ref = useRef(null);
@@ -37,7 +38,7 @@ const Index = (props) => {
                     </React.Fragment>
                   );
                 })}
-                  <p>{`By understanding the cannabis laws and regulations in ${props.initialData?.name}, residents and visitors alike can ensure they are compliant and informed. Whether you're purchasing, consuming, or considering cultivation, it's crucial to stay updated with the latest legal guidelines.`}</p>
+                  <p className={classes.lawDisclaimer}> <b>{`Note :-`}</b> {`By understanding the cannabis laws and regulations in ${props.initialData?.name}, residents and visitors alike can ensure they are compliant and informed. Whether you're purchasing, consuming, or considering cultivation, it's crucial to stay updated with the latest legal guidelines.`}</p>
               </div>
               <div className={"col-4 hidiingBLog "}> 
                 <LawStateContent head={props?.initialData?.content} refrence={ref} />

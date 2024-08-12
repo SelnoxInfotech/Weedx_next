@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import { BrowserRouter as Router } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import "@/styles/globals.css";
+import "@/styles/customstyle.module.css"
 import layout from "../layout/layout"
 import layout1 from "../layout/layout1"
 import { Context } from "../hooks/context"

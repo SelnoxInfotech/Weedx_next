@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-// import { getAllNews } from '../../../../Api/Api.jsx';
 import { AiFillHeart, AiFillEye } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
-// import { Link, userouter } from 'react-router-dom';
 import Link from 'next/link';
 import SearchBar from '@mkyy/mui-search-bar';
 import useStyles from "@/styles/style.jsx";
@@ -18,17 +16,13 @@ import Image from 'next/image';
 import Createcontext from '@/hooks/context.js';
 import { RWebShare } from "react-web-share";
 import Cookies from 'universal-cookie';
-// import {useNavigate} from 'react-router-dom'
 import Blogheaders from '@/component/Pageheaders/Blogheaders';
 import Loader from '@/component/Loader/Loader.js';
 import { modifystr } from "@/hooks/utilis/commonfunction"
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
 const Allblogs = (props) => {
-  // console.log(props)
   const [allblogs, setallblogs] = useState(props.initialData)
   const router = useRouter()
-  //   let router= userouter();
-  //   const navigate = useNavigate()
   const { state } = React.useContext(Createcontext)
   const [value, SetValue] = React.useState([])
   const [allLikes, SetallLikes] = React.useState([])
@@ -44,67 +38,7 @@ const Allblogs = (props) => {
     accessToken = localStorage.getItem('User_Token_access');
   }
   if (Boolean(accessToken)) { token_data = accessToken }
-  //   useEffect(() => {
-  //       document.documentElement.scrollTo({
-  //         top: 0,
-  //         left: 0,
-  //         behavior: "instant",
-  //       }); 
-
-  //       if (state.login) {
-
-  //             if(router.pathname.substring(1)==='blogs'){
-  //               axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyBlog/').then(async (res) => {
-
-  //                 let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
-  //                 setallblogs(as)
-  //                 setloader(false)
-  //                 setisdata(true)
-  //               }).catch((err) => {
-  //                 console.trace(err)
-  //                 setloader(false)
-
-  //               })
-  //             }else{
-  //                 axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyCANNABISNEWS/').then(async (res) => {
-
-  //                 let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
-  //                 setallblogs(as)
-  //                 setloader(false)
-  //                 setisdata(true)
-  //                 }).catch((err) => {
-  //                   console.trace(err)
-  //                 })
-  //             }
-  //       }else{
-  //         if(router.pathname.substring(1)==='blogs'){
-  //           axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyBlog/').then(async (res) => {
-
-  //             let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
-  //             setallblogs(as)
-  //             setloader(false)
-  //             setisdata(true)
-  //           }).catch((err) => {
-  //             console.trace(err)
-  //             setloader(false)
-
-  //           })
-  //         }else{
-  //             axios.get('https://api.cannabaze.com/UserPanel/Get-NewsbyCategorybyCANNABISNEWS/').then(async (res) => {
-
-  //             let as = _.orderBy(res.data, [ 'created' ],  [ 'asc', 'desc' ]);
-  //             setallblogs(as)
-  //             setloader(false)
-  //             setisdata(true)
-  //             }).catch((err) => {
-  //               console.trace(err)
-  //             })
-  //         }
-  //       }
-  //   }, [router.pathname])
-
-//  console.log(props).initialData
-
+  
 
   function PostLike(item) {
 
@@ -137,15 +71,9 @@ const Allblogs = (props) => {
       <NewsSeo router={router.pathname.substring(1)} ></NewsSeo>
       {state.permission === false && <Currentlocation></Currentlocation>}
       <div>
-
-        {/* <div className='p-md-0 p-2 d-md-flex  justify-content-between align-items-center'>
-          <div className='col-lg-3'>
-            <h1 className='section_main_title'>  {router.pathname.substring(1) === 'blogs' ? "Blogs" : " Latest news "}   </h1>
-          </div>
-        </div> */}
         <Blogheaders title={'Latest news'}/>
         {
-          // false ?
+       
            <div className='blogListWrapper'>
             {
               props.initialData.map((items, index) => {
@@ -168,7 +96,6 @@ const Allblogs = (props) => {
                         <Link href={`/${router.pathname.substring(1)}/${modifystr(items.Title)}/${items.id}`} key={index}>
                           <p className='blogcardDescription'>   <div dangerouslySetInnerHTML={{ __html: items?.Description.split('</p>')[0] }} /></p>
                         </Link>
-                        {/* <p onClick={handlechmnag}>click</p>  */}
                         <div className='row extra_function extra_function_destop '>
                           <div className='col-3'>
                             <span className='action_icons'><AiFillEye /></span>
@@ -197,7 +124,7 @@ const Allblogs = (props) => {
                               </RWebShare>
 
                             </span>
-                            <span>Share</span>
+                            <span>{`Share`}</span>
                           </div>
                         </div>
                       </div>
@@ -222,15 +149,6 @@ const Allblogs = (props) => {
                         </div>
                         <div className='col-3'>
                           <span className='action_icons'>
-
-                            {/* <RWebShare
-                                data={{ url: router.href}}
-                                sites={["facebook", "twitter", "whatsapp", "telegram", "linkedin", 'mail', 'copy']}
-                                onClick={() => console.info("share successful!")}
-                                color="#31B665"
-                              > */}
-                            {/* <BsShareFill /> */}
-                            {/* </RWebShare> */}
                           </span>
 
                         </div>
@@ -246,12 +164,8 @@ const Allblogs = (props) => {
             }
 
           </div>
-            // : <DeliveryItemsCardSkeleton></DeliveryItemsCardSkeleton>
         }
-        {/* {
-          loader && <Loader />
-        } */}
-
+     
       </div>
     </React.Fragment>
   )

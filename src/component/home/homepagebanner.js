@@ -1,25 +1,11 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Autoplay } from 'swiper/modules';
-import { Homepagebanner } from '../../hooks/apicall/api';
-import Skeleton from '@mui/material/Skeleton';
-// import 'swiper.css';
-import { Link } from "react-router-dom";
 import Image from 'next/image';
 import HomePageBannerSkeleton from '../skeleton/DashBoardSkeleton/HomePageBannerSkeleton.jsx';
 const HomePageBanner = ({props}) => {
     
-    const [HomePageBannerImage, SetHomePageBannerImage] = React.useState(props)
     const [Skeletoncom, SetSkeleton] = React.useState(false)
-    // const classes = useStyles()
-    // React.useEffect(() => {
-    //     Homepagebanner().then((res) => {
-
-    //         SetHomePageBannerImage(res.data)
-    //         SetSkeleton(false)
-    //     })
-    // }, [])
 
     const handleImageError = (event) => {
         //  console.log(event.type === "error")
@@ -49,12 +35,12 @@ const HomePageBanner = ({props}) => {
                                         <SwiperSlide key={index}>
                                             <div className='col-12 homePageBanner_container'>
                                                 <a href={items?.Link !== null ? items?.Link : "#"}>
-                                                    <img  src={items?.Banner}
+                                                    <Image  src={items?.Banner}
                                                         alt="Weedx.io Promotion banner"
                                                         title="Weedx.io Promotion banner"
-                                                        width={100}
+                                                        width={1500}
                                                         quality={75}
-                                                        height={10}
+                                                        height={500}
                                                         loader={imageLoader}
                                                         unoptimized={true}
                                                         className='HomePageBanner_image'
@@ -79,14 +65,14 @@ const HomePageBanner = ({props}) => {
                                             <div className='col-12 homePageBanner_container'>
                                                 <a href={items?.Link !== null ? items?.Link : "#"} >
 
-                                                    <img
+                                                    <Image
                                                         unoptimized={true}
                                                         src={items?.mobile}
                                                         alt="Weedx.io Promotion banner"
                                                         title="Weedx.io Promotion banner"
-                                                        width={100}
+                                                        width={500}
                                                         height={10}
-                                                        quality={100}
+                                                        quality={300}
                                                         className='HomePageBanner_image'
                                         
                                                         loader={imageLoader}

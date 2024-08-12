@@ -2552,12 +2552,7 @@ scrollbar-width: none;  /* Firefox */
   display: grid;
   justify-content: center;
 } */
-.dispensories_city {
-  font-size: 1.5rem;
-  color: rgb(96, 100, 111);
-  font-weight: 400;
-  margin-left: 10px;
-}
+
 /* end */
 
 /* DispensoriesOpenResult */
@@ -9041,11 +9036,6 @@ footer .footer_sub_heading{
     .dispensories_name {
       font-size: 20px;
     }
-  
-    .dispensories_city {
-      font-size: 20px;
-      margin-left: 0;
-    }
     .newFlavourimage_div {
       height: 70px;
       width: 70px;
@@ -9054,13 +9044,11 @@ footer .footer_sub_heading{
       height: auto;
       padding: 20px 0 10px;
     }
-    
     .newFlavour_image_container_height {
       height: auto;
     }
     .newFlavourContent_height {
       height: auto;
-   
     }
     .newFlavour_image {
       height: 100%;
@@ -9095,14 +9083,12 @@ footer .footer_sub_heading{
       height: 300px;
       overflow-y: hidden;
     }
-  
     .DeliveryServicesSkeleton {
       padding: 0px 10px;
     }
     .deliveryItemRightSide {
       display: none;
     }
-  
     .DeliveryItemsCardRightSkeletonBtn {
       justify-content: flex-start;
     }
@@ -9115,18 +9101,14 @@ footer .footer_sub_heading{
       padding: 0px 10px;
       overflow-y: hidden;
     }
-  
     .dispensoriesAddressSkeletonPadding {
       padding: 0px 10px;
     }
-  
     .dispensoriesAddressSkeletonPadding {
       height: 514px;
     }
-  
     .dispensoriesAddressSkeletonPadding {
       overflow-y: hidden;
-  
     }
     .LatestServiceskeleton {
       height: 350px;
@@ -10753,6 +10735,7 @@ footer .footer_sub_heading{
 #oopss #error-text img {
   margin: 0 auto;
   height: 280px;
+  width: 250px;
 }
 #oopss #error-text span {
   font-size: 28px;
@@ -11253,7 +11236,7 @@ margin: 0;
     border-radius: 8px;
     margin: 0 auto;
     margin-bottom: 15px;
-    width: 90%;
+    width: 100%;
   }
   .blogListWrapper .blogcardText .blogDate {
     text-align: end;
@@ -12008,6 +11991,9 @@ font-size: 24px;
 }
 }
 @media only screen and (max-width:480px){
+  .customsearchbarbox {
+    width: 100%;
+  }
   .AboutUsjourney_container {
     padding: 20px;
 }

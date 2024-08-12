@@ -182,7 +182,7 @@ React.useEffect(()=>{
                                 return (
                                     <div key={index}>
 
-                                        <h1 className="m-0"> <span className="dispensories_name">{ele.name}</span> <span className="dispensories_city">{ele.city}</span></h1>
+                                        <h1 className="m-0"> <span className="dispensories_name">{ele.name}</span> <span className="dispensories_name">{ele.city}</span></h1>
                                     </div>
                                 )
                             })}

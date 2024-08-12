@@ -125,6 +125,7 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
             sliderdata.video=element.videos
             sliderdata.index=a
     }
+
     return (
         <React.Fragment>
             <div className='container-fluid'>
@@ -254,9 +255,9 @@ const RelatedReview = ({ handleEdit, storeDetails, AllReview, handleDelete, Hell
                                                     <div className="related_img_container">
                                                         <div className="related_review_image">
                                                             <Image
-                                                            unoptimized={true}
-                                                               width={100} 
-                                                               height={100}
+                                                               unoptimized={true}
+                                                                width={100} 
+                                                                height={100}
                                                                 className='realted_review_images'
                                                                 src={`${storeDetails?.Store_Image}`}
                                                                 alt={storeDetails?.Store_Image}

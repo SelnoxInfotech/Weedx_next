@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import ScrollContainer from "react-indiana-drag-scroll"
 // import parse from 'html-react-parser';
 import { useParams } from "react-router-dom";
@@ -8,18 +8,20 @@ import Image from "next/image";
 const RecentPost = () => {
  const id = useParams()
    const [News, SetNews] = React.useState([])
-    React.useEffect(() => {
-        const getApi = async () => {
+   useEffect(() => {
+    const fetchData = async () => {
+        try {
             const res = await fetch("https://api.cannabaze.com/UserPanel/Get-News/");
             const data = await res.json();
-            let newdata= data.filter((item )=>{
-                return item.id != id.id
-            })
-            SetNews(newdata)
+            const newdata = data.filter((item) => item.id !== id.id);
+            SetNews(newdata);
+        } catch (error) {
+            console.error("Error fetching data:", error);
         }
-        getApi()
+    };
+    fetchData();
+}, [id]);
 
-    }, [id])
     return (
         <React.Fragment>
             <div className="  my-3 my-md-5">

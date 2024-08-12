@@ -14,29 +14,34 @@ const Openingtime = ({storeDetails , heading , type ,key}) => {
     <React.Fragment>
       <div className='destop_view'>
          <div className="opning_time mt-2">
-            
               <h4>{heading}</h4>
               <hr></hr>
-            {
-                  type?.map((items , idxe )=>{
-                    if(items.close){
-                      return<p key={idxe} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items.day} `}</span> <span className='w-50'>Close</span> </p>
+              {
+                    type?.map((items , idxe )=>{
+                      console.log(items)
+                      if(items.close){
+                        return<p key={idxe} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items.day} `}</span> <span className='w-50'>Close</span> </p>
+                      }else{
+                        return items.Open?.map((ite,index)=>{
+                          console.log(ite)
+                          if(index === 0 ){
+                             if(ite.Time1 ==="24 Hours"  ||  ite.Time2 === '24 Hours'){
+                              return <p key={index} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items?.day} `}</span> <span className='w-50'>{`24 Hours`}</span> </p>
+                       
+                             }else if(ite.Time1 ==="00:00"  ||  ite.Time2 === '00:00'){
+                              return <p key={index} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items?.day} `}</span> <span className='w-50'>{`24 Hours`}</span> </p>
+                       
+                             }else{
 
-                    }else{
-                     return items.Open?.map((ite,index)=>{
-                       if(index === 0 ){
-                        return <p key={index} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items?.day} `}</span> <span className='w-50'>{` ${ite.Time1}-${ite.Time2}`}</span> </p>
-
-                       }else{
-                        return <p  key={index} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>  </span> <span className='w-50'>{` ${ite.Time1}-${ite.Time2}`}</span> </p>
-
-                       }
-                    })
-                    }
-                })
-            }
-
-               
+                            return <p key={index} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items?.day} `}</span> <span className='w-50'>{` ${ite.Time1}-${ite.Time2}`}</span> </p>
+                          }
+                         
+                         
+                          }
+                        })
+                      }
+                  })
+              }
          </div>
       </div>
       <div className='mobile_view'>
@@ -51,19 +56,23 @@ const Openingtime = ({storeDetails , heading , type ,key}) => {
             </AccordionSummary>
             <AccordionDetails>
             {
-                storeDetails[0]?.[type] !== null &&  storeDetails[0]?.[type]?.map((items , idxe )=>{
+               type !== null &&  type?.map((items , idxe )=>{
                     if(items.close){
                       return<p  key={idxe} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items.day} `}</span> <span className='w-50'>Close</span> </p>
 
                     }else{
                      return items.Open?.map((ite,index)=>{
-                       if(index === 0 ){
-                        return <p key={index} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items?.day} `}</span> <span className='w-50'>{` ${ite.Time1}-${ite.Time2}`}</span> </p>
+                      if(index === 0 ){
+                        if(ite.Time1 ==="24 Hours"  ||  ite.Time2 === '24 Hours'){
+                         return <p key={index} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items?.day} `}</span> <span className='w-50'>{`24 Hours`}</span> </p>
+                  
+                        }else{
 
-                       }else{
-                        return <p key={index} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>  </span> <span className='w-50'>{` ${ite.Time1}-${ite.Time2}`}</span> </p>
-
-                       }
+                       return <p key={index} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items?.day} `}</span> <span className='w-50'>{` ${ite.Time1}-${ite.Time2}`}</span> </p>
+                     }
+                    
+                    
+                     }
                     })
                     }
                 })

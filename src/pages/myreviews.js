@@ -99,18 +99,18 @@ const Myreview = () => {
         [days, hours, minutes, secs] = [Math.floor(days), Math.floor(hours), Math.floor(minutes), Math.floor(secs)];
 
         if (months !== 0) {
-            return months + " Month ago";
+            return months + "Month ago";
         } else if (days !== 0) {
-            return days + " days ago";
+            return days + "days ago";
         } else if (hours !== 0) {
-            return hours + " hours ago";
+            return hours + "hours ago";
         } else if (minutes !== 0) {
-            return minutes + " minutes ago";
+            return minutes + "minutes ago";
         } else {
-            return secs + " secs ago";
+            return secs + "secs ago";
         }
     };
-
+    console.log(allstorereviews)
     return (
         <div className='container'>
             <div className='myreviewContainer'>

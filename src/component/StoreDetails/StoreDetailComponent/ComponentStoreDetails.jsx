@@ -14,6 +14,7 @@ import { MdSecurity } from "react-icons/md";
 import Openingtime from "./Openingtime";
 const StoreDetail1 = ({ storeDetails }) => {
   // console.log(storeDetails ,'storeDetails')
+  console.log(storeDetails[0])
   return (
     <div className="container-fluid container-lg-full mt-3">
       <div className="amenities_container">
@@ -117,7 +118,7 @@ const StoreDetail1 = ({ storeDetails }) => {
 
             <div className="row mx-0">
               {
-                storeDetails[0]?.CurbSide_Pickup && 
+                (storeDetails[0]?.CurbSide_Pickup && Boolean(storeDetails[0]?.CurbSidePickupHours)) && 
                   <div className="p-md-2 p-0 col-md-5 col-12">
                     <Openingtime
                       storeDetails={storeDetails}
@@ -128,7 +129,7 @@ const StoreDetail1 = ({ storeDetails }) => {
                   </div>
                 }
               {
-                storeDetails[0]?.StoreFront  && (
+                (storeDetails[0]?.StoreFront && Boolean(storeDetails[0]?.Hours)) && (
                   <div className="p-md-2 p-0 col-md-5 col-12">
                     <Openingtime
                       storeDetails={storeDetails}
@@ -139,7 +140,7 @@ const StoreDetail1 = ({ storeDetails }) => {
                   </div>
                 )}
               {
-                storeDetails[0]?.Delivery && (
+               ( storeDetails[0]?.Delivery && Boolean(storeDetails[0]?.DeliveryHours))&& (
                   <div className="p-md-2 p-0 col-md-5 col-12">
                     <Openingtime
                       storeDetails={storeDetails}

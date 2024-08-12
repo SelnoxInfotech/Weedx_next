@@ -150,7 +150,7 @@ const Deliveries = (props) => {
                     <div className="headerBoxdescription">
                         <h1 className="m-0">
                             <span className="dispensories_name">Weed Delivery In </span>
-                            <span className="dispensories_city">{props.location.formatted_address}</span></h1>
+                            <span className="dispensories_name">{props.location.formatted_address}</span></h1>
                         <p className="m-0">{`Find Nearby Weed Delivery in  ${props.location.formatted_address}  for Recreational & Medical Uses. Browse Top Cannabis Products and Place Orders from Trusted weed delivery near you.`}</p>
 
                     </div>

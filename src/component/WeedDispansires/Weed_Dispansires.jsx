@@ -37,7 +37,7 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata , prod
                             </div>
                         </div>
 
-                        <div className="d-flex justify-content-between flex-wrap gap-4 py-3">
+                        <div className="d-flex flex-wrap gap-4 py-3">
                             {Store?.map((ele, index) => {
                                 return (<Dispensoriescart ele={ele} key={index}/> )
                             })}

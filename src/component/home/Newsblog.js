@@ -25,8 +25,6 @@ const Newsblog = () => {
         getApi()
 
     }, [])
-
-
     return (
         <React.Fragment>
             <div className="px-sm-0 px-3">

@@ -12,14 +12,13 @@ import useStyles from "@/styles/style"
 import Createcontext from "@/hooks/context"
 import { FiEdit } from "react-icons/fi";
 import Link from 'next/link';
-
 const DeliveryOption = ({ SetShowData, DeliveryOptionData, address  , Hours  ,Time, SetTime}) => {
 
     const { state, dispatch } = React.useContext(Createcontext)
     const method = useForm()
     const classes = useStyles()
     const [ShowDeliveryRestData, SetShowDeliveryRestData] = React.useState(true)
-    const [changetime , setchangetime] = React.useState(false)
+    // const [changetime , setchangetime] = React.useState(false)
     const [Checkbox, SetCheckbox] = React.useState({
         deliveryinstructions: "",
         DeliveryTime: "",
@@ -52,8 +51,7 @@ const DeliveryOption = ({ SetShowData, DeliveryOptionData, address  , Hours  ,Ti
                     const t1 =  Hours?.map((data)=>data?.Open.map((data)=> data?.Time1))
                     const t2 =  Hours?.map((data)=>data?.Open.map((data)=> data?.Time2))
                     SetTime(h[0] + " " +t1[0][0]+"-"+t2[0][0])
-            }
-            else{
+            }else{
                 SetTime(`Monday 00:30-23:30`)
             }
         }

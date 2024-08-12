@@ -16,6 +16,7 @@ import  Law from '@/component/ScoPage/LearnSeo';
 const Index = (props) => {
     const router = useRouter();
     const classes = useStyles();
+    console.log(router ,'router')
     const [value, setValue] = useState(router?.pathname);
     const handleChange = (event, newValue) => {
         setValue(newValue);

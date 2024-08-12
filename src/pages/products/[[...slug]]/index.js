@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import CategoryProduct from "../../../component/category/category"
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-// import { useLocation, usenavigate.push, useParams } from "react-router-dom"
 import { useRouter } from "next/router";
 import useStyles from "../../../styles/style"
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -15,6 +14,7 @@ import _ from "lodash"
 import { GetProduct, CategoryProductsearch, SubcategoryProduct , SubCategoryApibyname } from "../../../hooks/apicall/api"
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Currentlocation from "@/component/currentlocation/CurrentLocation";
+import Image from 'next/image'
 const Product = () => {
     const navigate= useRouter();
     const { slug } = navigate.query;
@@ -161,7 +161,7 @@ const Product = () => {
                                         setIsDropdownOpen(!isDropdownOpen)
                                     }}>
                                         {selectedOption && (
-                                            <img  src={`${selectedOption.SubCategoryImage}`} alt={selectedOption.name} title={selectedOption.name} className="dropdown-option-image" />
+                                            <Image width={400} height={100}  src={`${selectedOption.SubCategoryImage}`} alt={selectedOption.name} title={selectedOption.name} className="dropdown-option-image" />
                                         )}
                                         <span className="dropdown-option-label">
                                             {selectedOption ? selectedOption.name : 'Sort by Subcategory '}
@@ -171,7 +171,7 @@ const Product = () => {
                                     <ul className={`dropdown-menu image_dropdown ${isDropdownOpen ? 'open' : ''}`}>
                                         {subcategories?.map((option, index) => (
                                             <li key={index} onClick={() => selectOption(option)}>
-                                                <img  src={`${option.SubCategoryImage}`} alt={option.name} title={option.name} className="dropdown-option-image" />
+                                                <Image width={400} height={100} src={`${option.SubCategoryImage}`} alt={option.name} title={option.name} className="dropdown-option-image" />
                                                 <span className="dropdown-option-label">{option.name}</span>
                                             </li>
                                         ))}
@@ -226,51 +226,3 @@ const Product = () => {
     )
 }
 export default Product
-
-
-
-// export async function getStaticProps() {
-//     const handleError = (error) => {
-//       console.error('Error fetching data:', error);
-//       return {
-//         props: {
-//           initialData: [],
-//           error: 'Failed to fetch data',
-//         },
-//       };
-//     };
-  
-//     try {
-//       const [banner, callcategory, bannner2 , brand] = await Promise.all([
-//         fetch('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(handleError),
-//         fetch('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(handleError),
-//         fetch('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(handleError),
-//         fetch('https://api.cannabaze.com/UserPanel/Get-AllBrand/ ').catch(handleError),
-//       ]);
-  
-//       const [topbanner, category, bottembannner , getbrand] = await Promise.all([
-//         banner.json().catch(handleError),
-//         callcategory.json().catch(handleError),
-//         bannner2.json().catch(handleError),
-//         brand.json().catch(handleError)
-//       ]);
-  
-   
-//       const responseData = {
-//         topbanner: topbanner,
-//         category: category,
-//         bottembannner: bottembannner,
-//         brand:getbrand
-//       };
-  
-//       return {
-//         props: {
-//           initialData: responseData,
-//         },
-//         revalidate: 60,
-//       };
-//     } catch (error) {
-//       return handleError(error);
-//     }
-//   }
-  

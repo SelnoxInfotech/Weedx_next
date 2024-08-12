@@ -1,29 +1,7 @@
 import { Map, GoogleApiWrapper } from 'google-maps-react';
-
-// import {Fa500Px } from "react-icons/fa";
+import Image from 'next/image'
+import logo from '../../../../public/weedx.iologo.png'
 export   function MapContainer(props) {
-  // const locations = [
-  //   { latitude: 40.727019, longitude: -74.037536, name: 'First Marker' },
-  //   { latitude: 40.719941, longitude: -74.049308, name: 'First Marker' },
-  //   { latitude: 40.726186, longitude: -74.042616, name: 'First Marker' },
-  //   { latitude: 40.724494, longitude: -74.041242, name: 'First Marker' },
-  //   { latitude: 40.72283, longitude: -74.036, name: 'First Marker' }]
-
-  // const displayMarkers = () => {
-
-  //   return locations.map((store, index) => {
-  //     return (
-  //       <Marker key={index} id={index}
-  //         position={{
-  //           lat: store.latitude,
-  //           lng: store.longitude,
-  //         }}
-  //         title="title"
-  //         icon={Fa500Px}
-  //       />
-  //       )
-  //   })
-  // }
   function _mapLoaded(mapProps, map) {
     map.setOptions({
       styles: props.Theme
@@ -34,9 +12,6 @@ export   function MapContainer(props) {
 
   return (
 
-    // <div className='container'>
-    //   <div className='row'>
-    //     <div className='col-12  ' >
           <Map
             style={{ height: props?.height, width: props.width ,backgroundColor: 'black' }}
             google={window.google}
@@ -47,18 +22,13 @@ export   function MapContainer(props) {
             streetViewControl={false}
             mapTypeControl={false}
           >
-            {/* {displayMarkers()} */}
           </Map>
-    //     </div>
-    //   </div>   
-    // </div>
-
   );
 }
 
  export default  GoogleApiWrapper ({
   LoadingContainer: () => <div className="loader_container">
-  <span className="newloader shine"><img src='/weedx.iologo.png' alt='weedx.io logo'  title='weedx.io logo'/></span>
+  <span className="newloader shine"><Image src={logo.src} alt='weedx.io logo' width={100} height={100}  title='weedx.io logo'/></span>
 </div>,
   apiKey: 'AIzaSyBRchIzUTBZskwvoli9S0YxLdmklTcOicU'
 })(MapContainer);

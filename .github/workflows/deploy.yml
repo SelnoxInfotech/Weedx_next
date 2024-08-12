@@ -75,7 +75,7 @@ jobs:
           fi
 
           # Install production dependencies
-          npm install --production
+          npm install --force
 
           # Restart or start the PM2 process
           pm2 restart Weedx || pm2 start npm --name "Weedx" -- run start

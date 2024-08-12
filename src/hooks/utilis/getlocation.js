@@ -1,7 +1,6 @@
 import React from 'react';
 
 async function location(value, type) {
-  console.log("its runing location ")
   try {
     const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=AIzaSyBRchIzUTBZskwvoli9S0YxLdmklTcOicU`);
     const data = await response.json();

@@ -24,6 +24,7 @@ const usePlaceholderStyles = makeStyles(theme => ({
   }
 }));
 const NewProductDetails = (props) => {
+  console.log(props.data[0]?.Store_id , "potpduct")  
   const { id } = props.id;
   const [discount, setdiscount] = React.useState({
     Product: id,

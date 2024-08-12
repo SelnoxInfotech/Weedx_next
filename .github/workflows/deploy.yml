@@ -13,17 +13,29 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install SSH key
-      uses: webfactory/ssh-agent@v0.5.3
+    - name: Install Node.js
+      uses: actions/setup-node@v3
       with:
-        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+        node-version: '16'
 
-    - name: Deploy to EC2
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
+
+    - name: Zip .next folder
+      run: zip -r build.zip .next public package.json package-lock.json
+
+    - name: Send build to EC2
+      run: |
+        scp -o StrictHostKeyChecking=no -i "weedxpem.pem" build.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
+
+    - name: Deploy on EC2
       run: |
         ssh -o StrictHostKeyChecking=no -i "weedxpem.pem" ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
           cd /home/ubuntu/Weedx
-          git pull origin main
-          npm install
-          npm run build
+          unzip -o build.zip
+          npm install --production
           pm2 restart all || pm2 start npm --name "next-app" -- run start
         EOF

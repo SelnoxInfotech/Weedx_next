@@ -1,9 +1,9 @@
-name: Deploy Next.js to EC2
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main
+      - main  # Change this to the branch you want to trigger deployment
 
 jobs:
   deploy:
@@ -22,5 +22,8 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no -i "weedxpem.pem" ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
           cd /home/ubuntu/Weedx
-          ./deploy.sh
+          git pull origin main
+          npm install
+          npm run build
+          pm2 restart all || pm2 start npm --name "next-app" -- run start
         EOF

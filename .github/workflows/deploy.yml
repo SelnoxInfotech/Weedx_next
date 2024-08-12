@@ -20,4 +20,7 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no -i "weedxpem.pem" ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com 'bash -s' < /home/ubuntu/Weedx/deploy.sh
+        ssh -o StrictHostKeyChecking=no -i "weedxpem.pem" ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
+          cd /home/ubuntu/Weedx
+          ./deploy.sh
+        EOF

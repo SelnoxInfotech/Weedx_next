@@ -23,10 +23,13 @@ jobs:
 
     - name: Build project
       run: npm run build
-
+      
+    - name: Zip .next folder
+      run: |
+        zip -r .next.zip .next
     - name: Zip build artifacts
       run: |
-        zip -r build.zip .next build public package.json package-lock.json
+        zip -r build.zip .next.zip build public package.json package-lock.json
 
     - name: Deploy to EC2
       env:
@@ -38,6 +41,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no -i weedxpem.pem ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
           cd /home/ubuntu/Weedx
           unzip -o build.zip
+           unzip -o .next.zip
           npm install --production
           pm2 restart Weedx || pm2 start npm --name "Weedx" -- run start
         EOF

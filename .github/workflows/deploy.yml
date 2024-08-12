@@ -29,10 +29,7 @@ jobs:
 
     - name: Create build artifacts zip
       run: |
-        zip -r build.zip public package.json package-lock.json
-
-    - name: Combine zips
-      run: zip -r combined.zip .next.zip build.zip
+        zip -r build.zip .next.zip package.json package-lock.json
 
     - name: Deploy to EC2
       env:
@@ -41,7 +38,7 @@ jobs:
         # Setup SSH key and transfer files
         echo "$SSH_PRIVATE_KEY" > weedxpem.pem
         chmod 600 weedxpem.pem
-        scp -o StrictHostKeyChecking=no -i weedxpem.pem combined.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
+        scp -o StrictHostKeyChecking=no -i weedxpem.pem build.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
 
         # SSH into EC2 and deploy
         ssh -o StrictHostKeyChecking=no -i weedxpem.pem ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
@@ -51,7 +48,8 @@ jobs:
           cd /home/ubuntu/Weedx
 
           # Unzip combined artifacts
-          unzip -o combined.zip
+          unzip -o build.zip
+          unzip -o .next.zip
 
           # Ensure correct Node.js version is used
           if ! command -v node &> /dev/null; then
@@ -75,7 +73,7 @@ jobs:
           fi
 
           # Install production dependencies
-          npm install --legacy-peer-deps
+          npm install --force
 
           # Restart or start the PM2 process
           pm2 restart Weedx || pm2 start npm --name "Weedx" -- run start

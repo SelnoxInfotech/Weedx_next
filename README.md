@@ -46,3 +46,4 @@ react-lazy-load-image-component# Weedx_next
 # Weedx_next
 scp -i "weedxpem.pem" .next.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx
     ssh -i "weedxpem.pem" ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com
+    

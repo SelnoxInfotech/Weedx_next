@@ -143,36 +143,36 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
 
       }
       if (ci !== undefined && sta !== undefined && Coun !== undefined && route !== undefined) {
-        window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
-        window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
+        window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.push(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
+        window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.push(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
         dispatch({ type: 'havecity', havecity: true });
 
       }
       else {
         if (sta !== undefined && Coun !== undefined && ci !== undefined) {
           dispatch({ type: 'route', route: '' });
-          window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}`)
-          window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}`)
+          window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.push(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}`)
+          window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.push(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}`)
           dispatch({ type: 'havecity', havecity: true });
         }
         else if (Coun !== undefined && sta !== undefined) {
           dispatch({ type: 'route', route: '' });
-          window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}`)
-          window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}`)
+          window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.push(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}`)
+          window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.push(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}`)
           dispatch({ type: 'havestate', havestate: true });
           dispatch({ type: 'havecity', havecity: false });
         }
         else if (Coun !== undefined) {
           dispatch({ type: 'route', route: '' });
-          window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}`)
-          window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}`)
+          window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.push(`${Coun?.toLowerCase()}`)
+          window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.push(`${Coun?.toLowerCase()}`)
           dispatch({ type: 'havecountry', havecountry: true });
           dispatch({ type: 'havestate', havestate: false });
           dispatch({ type: 'havecity', havecity: false });
         }
         // else if (Coun === undefined) {
-        //   window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`weed-dispensaries/${route?.toLowerCase()}`)
-        //   window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${route?.toLowerCase()}`)
+        //   window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.push(`weed-dispensaries/${route?.toLowerCase()}`)
+        //   window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.push(`${route?.toLowerCase()}`)
         // }
         else {
           Setformatted_address(state.Location)

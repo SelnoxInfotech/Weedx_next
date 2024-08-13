@@ -1,6 +1,7 @@
 import React from 'react';
 
 async function location(value, type) {
+  console.log(value)
   try {
     const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=AIzaSyBRchIzUTBZskwvoli9S0YxLdmklTcOicU`);
     const data = await response.json();
@@ -26,6 +27,7 @@ async function location(value, type) {
 
     const object = {}
     const short = {}
+    console.log(addressComponents)
     addressComponents.map((data) => {
       let l = data.types[0]
       if (data.types[0] === "political") {

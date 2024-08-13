@@ -25,8 +25,7 @@ export default function Home({ initialData }) {
 
   return (
     <>
-     {state.permission && <Currentlocation>
-      </Currentlocation>}
+     {state.permission && <Currentlocation></Currentlocation>}
       <HomePageSco location={useRouter().pathname}></HomePageSco>
         <HomePageBanner props={initialData.topbanner}> </HomePageBanner>
         <CategoryProduct Category={initialData.category} ShowCategoryProduct={ShowCategoryProduct} Skeleton={false}></CategoryProduct>
@@ -64,7 +63,6 @@ export async function getServerSideProps(context) {
     Country: transformString(cookies.country) || '',
     limit: 10
   };
-  console.log(object)
   const handleError = (error) => {
     console.error('Error fetching data:', error);
     return {

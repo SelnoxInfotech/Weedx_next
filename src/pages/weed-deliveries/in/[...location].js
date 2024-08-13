@@ -174,10 +174,6 @@ const Deliveries = (props) => {
 
                         }
                     </div>
-                    {/* <div className="col-12 webContent">
-                        <h2 className="section_main_title">{contentdata?.Title}</h2>
-                        <div dangerouslySetInnerHTML={{ __html: contentdata?.Content }} />
-                    </div> */}
                     {contentdata.length !== 0 &&
                         contentdata?.Faq[0]?.title !== '' &&
                         <>  <h3 className="section_main_title">FAQs</h3>

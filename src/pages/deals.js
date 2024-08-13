@@ -6,7 +6,7 @@ const Deals = () => {
     const { state } = React.useContext(Createcontext)
     return (
         <div>
-               {state.permission === false && <Currentlocation></Currentlocation>}
+               {state.permission && <Currentlocation></Currentlocation>}
             <MainDeals></MainDeals>
         </div>
     );

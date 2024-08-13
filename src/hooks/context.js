@@ -26,7 +26,7 @@ const initialUser = {
     DefalutLocation: "",
     // Set Location From  Google  AutoComplete
     Location: "",
-    permission: false,
+    permission: true,
     LocationData: [],
     cookies: 1,
     CookiesMarketing: 1,

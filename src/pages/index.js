@@ -12,30 +12,33 @@ const NewsBlog = dynamic(() => import('../component/home/Newsblog'));
 // const HomePageDealsSignup = dynamic(() => import('../component/home/HomePageDealsSignup'));
 const FeaturedBrand = dynamic(() => import('@/component/home/FeaturedBrand'));
 import cookie from 'cookie';
+import Currentlocation from "@/component/currentlocation/CurrentLocation";
+import Createcontext from "@/hooks/context";
 export default function Home({ initialData }) {
+  const { state, dispatch } = React.useContext(Createcontext);
   const [Skeleton, SetSkeleton] = React.useState(true)
-
+  const Navigate =  useRouter()
   function ShowCategoryProduct(id, name) {
 
-    Navigate(`/products/${name.replace(/%20| /g, "-").toLowerCase()}/${id}`);
+    Navigate.push(`/products/${name.replace(/%20| /g, "-").toLowerCase()}/${id}`);
   }
-  // console.log(initialData.brand)
+
   return (
     <>
-      {/* <Currentlocation></Currentlocation> */}
+     {state.permission && <Currentlocation>
+      </Currentlocation>}
       <HomePageSco location={useRouter().pathname}></HomePageSco>
-      <HomePageBanner props={initialData.topbanner}> </HomePageBanner>
-      <CategoryProduct Category={initialData.category} ShowCategoryProduct={ShowCategoryProduct} Skeleton={false}></CategoryProduct>
-      <DeliveryServices Skeleton={Skeleton} link={"weed-deliveries"} title={"Delivery services"} data={initialData.GetDelivery} location={initialData.formatted_address}></DeliveryServices>
-      <HomePageWeedBanner props={initialData.bottembannner}></HomePageWeedBanner>
-      <DeliveryServices Skeleton={Skeleton} link={"weed-dispensaries"} title={"Shop Dispensaries Near You"}  data={initialData.Dispensaries} location={initialData.formatted_address}></DeliveryServices>
-      <FeaturedBrand CardDataArray={initialData.brand} />
-      <div className="col-12 border" style={{ height: "300px", position: "relative", top: "15px" }}>
-        <Map height={"297px"} width={"100%"}></Map>
-      </div>
-      <Staticcontent></Staticcontent>
-      <NewsBlog></NewsBlog>
-      {/* <HomePageDealsSignup></HomePageDealsSignup> */}
+        <HomePageBanner props={initialData.topbanner}> </HomePageBanner>
+        <CategoryProduct Category={initialData.category} ShowCategoryProduct={ShowCategoryProduct} Skeleton={false}></CategoryProduct>
+        <DeliveryServices Skeleton={Skeleton} link={"weed-deliveries"} title={"Delivery services"} data={initialData.GetDelivery} location={initialData.formatted_address}></DeliveryServices>
+        <HomePageWeedBanner props={initialData.bottembannner}></HomePageWeedBanner>
+        <DeliveryServices Skeleton={Skeleton} link={"weed-dispensaries"} title={"Shop Dispensaries Near You"} data={initialData.Dispensaries} location={initialData.formatted_address}></DeliveryServices>
+        <FeaturedBrand CardDataArray={initialData.brand} />
+        <div className="col-12 border" style={{ height: "300px", position: "relative", top: "15px" }}>
+          <Map height={"297px"} width={"100%"}></Map>
+        </div>
+        <Staticcontent></Staticcontent>
+        <NewsBlog></NewsBlog>
     </>
   );
 }
@@ -53,14 +56,15 @@ const transformString = (str) => {
 };
 
 export async function getServerSideProps(context) {
-  const cookies = cookie.parse(context.req.headers.cookie || '');
+  // console.log(context.req.headers['x-fetchlocation'], "index page")
+  const cookies = JSON.parse(context.req.headers['x-fetchlocation'] || '');
   const object = {
-    City: transformString(JSON.parse(cookies.fetchlocation).city) || '',
-    Country: transformString(JSON.parse(cookies.fetchlocation).country) || '',
-    State: transformString(JSON.parse(cookies.fetchlocation).state) || '',
-    limit:10 
+    City: transformString(cookies.city) || '',
+    State: transformString(cookies.state) || '',
+    Country: transformString(cookies.country) || '',
+    limit: 10
   };
-
+  console.log(object)
   const handleError = (error) => {
     console.error('Error fetching data:', error);
     return {
@@ -85,7 +89,7 @@ export async function getServerSideProps(context) {
       return response;
     };
 
-    const [banner, callcategory, bannner2, brand, GetDelivery , Dispensaries] = await Promise.all([
+    const [banner, callcategory, bannner2, brand, GetDelivery, Dispensaries] = await Promise.all([
       fetchWithTimeout('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(() => null),
       fetchWithTimeout('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(() => null),
       fetchWithTimeout('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(() => null),
@@ -106,7 +110,7 @@ export async function getServerSideProps(context) {
       }).catch(() => null),
     ]);
 
-    const [topbanner, category, bottembannner, getbrand, GetDelivery1 , Dispensaries1] = await Promise.all([
+    const [topbanner, category, bottembannner, getbrand, GetDelivery1, Dispensaries1] = await Promise.all([
       banner ? banner.json().catch(() => []) : [],
       callcategory ? callcategory.json().catch(() => []) : [],
       bannner2 ? bannner2.json().catch(() => []) : [],
@@ -120,8 +124,8 @@ export async function getServerSideProps(context) {
       bottembannner: bottembannner || [],
       brand: getbrand || [],
       GetDelivery: GetDelivery1 || [],
-      Dispensaries :Dispensaries1 || [],
-      formatted_address:JSON.parse(cookies.fetchlocation).formatted_address  
+      Dispensaries: Dispensaries1 || [],
+      formatted_address: cookies.formatted_address
     };
 
     return {

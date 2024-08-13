@@ -11,8 +11,6 @@ import Box from '@mui/material/Box';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Createcontext from "../../hooks/context"
-import DeliverServiceSkeleton from '../../component/skeleton/DeliveryServicesSkeleton';
-import axios from 'axios';
 import { modifystr } from '../../hooks/utilis/commonfunction';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,7 +21,7 @@ const DeliveryServices = ({ link, title, data , location }) => {
     const { state } = React.useContext(Createcontext)
     const classes = useStyles()
     const ref = React.useRef(null);
-    
+
 
     const handleImageError = (event) => {
         event.target.onerror = null; // Reset to prevent infinite loop

@@ -63,6 +63,7 @@ export async function generateStaticParams() {
     }))
 }
 
+
 export async function getServerSideProps(context) {
   let responseData = {}
   await Content?.forEach((data)=>{

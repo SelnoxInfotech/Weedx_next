@@ -33,7 +33,7 @@ import { modifystr } from "@/hooks/utilis/commonfunction";
 import { useRouter } from "next/router";
 import Link from "next/link";
 const Blogs = (props) => {
-    let News =  props.data[0]
+    let News = props.data[0]
     const ref = useRef(null)
     const classes = useStyles()
     const router = useRouter()
@@ -47,11 +47,11 @@ const Blogs = (props) => {
     const [ViewCount, SetViewCount] = React.useState(0)
     const cookies = new Cookies();
     let token_data = cookies.get('User_Token_access')
-    let accessToken 
+    let accessToken
     if (typeof window !== 'undefined') {
-         accessToken = localStorage.getItem('User_Token_access');
+        accessToken = localStorage.getItem('User_Token_access');
     }
-    if(  Boolean(accessToken) ){ token_data  =  accessToken}
+    if (Boolean(accessToken)) { token_data = accessToken }
 
     function PostLike(like) {
         if (state.login) {
@@ -77,12 +77,12 @@ const Blogs = (props) => {
         })
         return l
     }
-//  React.useEffect(()=>{
-//    Boolean(Boolean(Object.keys(News).length)) && 
-   
-//    name !== (News.Url_slug === ("" || null || undefined) ?  modifystr(News.Title) : modifystr(News.Url_slug)) && navigate( `/${News.category_name === "BLOGS" ? "blogs" :"cannabis-news"}/${News.Url_slug === ("" || null || undefined) ?  modifystr(News.Title) : modifystr(News.Url_slug)}/${News.id}` , { replace: true });
+    //  React.useEffect(()=>{
+    //    Boolean(Boolean(Object.keys(News).length)) && 
 
-//  },[News])
+    //    name !== (News.Url_slug === ("" || null || undefined) ?  modifystr(News.Title) : modifystr(News.Url_slug)) && navigate( `/${News.category_name === "BLOGS" ? "blogs" :"cannabis-news"}/${News.Url_slug === ("" || null || undefined) ?  modifystr(News.Title) : modifystr(News.Url_slug)}/${News.id}` , { replace: true });
+
+    //  },[News])
 
     const [ShowCards, SetShowCards] = React.useState(false)
     const [CommentCardArrays, SetCommentCardArray] = React.useState()
@@ -148,116 +148,206 @@ const Blogs = (props) => {
 
 
     if (!Object.keys(News).length) {
-        return <BlogSkeleton/>
+        return <BlogSkeleton />
     }
 
- 
-    else{
 
-    // console.log(News)
-    return (
-        <React.Fragment>
-            <SingleNewsSeo Title={News?.Meta_title} Description={News?.Meta_Description} location={props.url}></SingleNewsSeo>
-            <div className="container" >
-                <div className="row mx-1" ref={ref}>
-                    <div className="col-12 w-100 row align-items-center justify-content-between blog_searchBar_container px-0">
-                        <section className=" col-2 backButton_section">
-                            <div className="col-12 backBtnCol_searchBar_height">
-                                <Link href={props.category === 'blogs'  ?  "/blogs":"/cannabis-news"}><span style={{ marginLeft: "-4px", cursor: 'pointer' }}> <IoChevronBack color="#000000" size={20} /></span></Link>
-                                <Link href={props.category === 'blogs'  ?  "/blogs":"/cannabis-news"}><span onClick={() => { Location?.pathname?.split('/')[1] === "cannabis-news" ? router.push(Location?.pathname?.split('/')[1] === "cannabis-news" ? '/cannabis-news' : '/blogs') : router.push('/blogs') }} style={{ cursor: 'pointer' }} className="blogBackSpan">Back</span></Link>
-                            </div>
-                        </section>
-                    </div>
+    else {
 
-                    <div className="p-0 blogEditorContainer">
-                        <div className=" UserNmae_Blog">
-
-                            <div className="UserNmae">
-
-                            </div>
+        // console.log(News)
+        return (
+            <React.Fragment>
+                <SingleNewsSeo Title={News?.Meta_title} Description={News?.Meta_Description} location={props.url}></SingleNewsSeo>
+                <div className="container" >
+                    <div className="row mx-1" ref={ref}>
+                        <div className="col-12 w-100 row align-items-center justify-content-between blog_searchBar_container px-0">
+                            <section className=" col-2 backButton_section">
+                                <div className="col-12 backBtnCol_searchBar_height">
+                                    <Link href={props.category === 'blogs' ? "/blogs" : "/cannabis-news"}><span style={{ marginLeft: "-4px", cursor: 'pointer' }}> <IoChevronBack color="#000000" size={20} /></span></Link>
+                                    <Link href={props.category === 'blogs' ? "/blogs" : "/cannabis-news"}><span onClick={() => { Location?.pathname?.split('/')[1] === "cannabis-news" ? router.push(Location?.pathname?.split('/')[1] === "cannabis-news" ? '/cannabis-news' : '/blogs') : router.push('/blogs') }} style={{ cursor: 'pointer' }} className="blogBackSpan">Back</span></Link>
+                                </div>
+                            </section>
                         </div>
-                        <section className="blog_Image" style={{ backgroundImage: `url(${News.Image})` }} >
-                            <div className="overlay_blog"></div>
-                            <h1 className="blog_Title ">{News?.Title}</h1>
-                        </section>
-                        <div className="blog_text_container"  >
-                            <div className="blogEditorPaddings ">
 
-                                <div className="linkTaginsideEditer" dangerouslySetInnerHTML={{ __html: News?.Description }} />
+                        <div className="p-0 blogEditorContainer">
+                            <div className=" UserNmae_Blog">
+
+                                <div className="UserNmae">
+
+                                </div>
                             </div>
-                        </div>
-                        <div className="blog_text_container" >
-                         
-                            <div className="col-12 Linkofblog ">
-                                <div className="col BlogSocal" id="center1">
+                            <section className="blog_Image" style={{ backgroundImage: `url(${News.Image})` }} >
+                                <div className="overlay_blog"></div>
+                                <h1 className="blog_Title ">{News?.Title}</h1>
+                            </section>
+                            <div className="blog_text_container"  >
+                                <div className="blogEditorPaddings ">
 
-                                    <RWebShare
-                                        data={{ url: "https://www.weedx.io" + props.url }}
-                                        sites={["facebook", "twitter", "whatsapp", "telegram", "linkedin", 'mail', 'copy']}
-                                        onClick={() => console.info("share successful!")}
-                                        color="#31B665" >
+                                    <div className="linkTaginsideEditer" dangerouslySetInnerHTML={{ __html: News?.Description }} />
+                                </div>
+                            </div>
+                            <div className="blog_text_container" >
+
+                                <div className="col-12 Linkofblog ">
+                                    <div className="col BlogSocal" id="center1">
+
+                                        <RWebShare
+                                            data={{ url: "https://www.weedx.io" + props.url }}
+                                            sites={["facebook", "twitter", "whatsapp", "telegram", "linkedin", 'mail', 'copy']}
+                                            onClick={() => console.info("share successful!")}
+                                            color="#31B665" >
+                                            <IconButton>
+                                                <BsFillShareFill size={16}></BsFillShareFill>
+                                            </IconButton>
+                                        </RWebShare>
+
+                                        <div className="blogViewCounts destop_view">Share</div>
+                                    </div>
+                                    <div className="col viewsBlog" id="center1">
                                         <IconButton>
-                                            <BsFillShareFill size={16}></BsFillShareFill>
+                                            <IoEyeSharp></IoEyeSharp>
                                         </IconButton>
-                                    </RWebShare>
 
-                                    <div className="blogViewCounts destop_view">Share</div>
+                                        <span className="blogViewCounts">{News.ViewCount} <span className="destop_view">Views</span></span>
+
+
+                                    </div>
+
+                                    <div className="col viewsBlog BlogSocal" id="center1" onClick={scrolltocomment}>
+
+                                        <IconButton>
+                                            <BiCommentDetail />
+                                        </IconButton>
+                                        <span className="blogViewCounts">{Getcommnet.CommentCounts} <span className="destop_view"> Comment</span> </span>
+
+                                    </div>
+                                    <div className="col viewsBlog BlogSocal like" id="center1">
+                                        <IconButton onClick={(() => { PostLike(color()?.like) })}>
+                                            <AiFillHeart 
+                                            // color={state?.login && color()?.like && "#31B665"}
+                                            ></AiFillHeart>
+                                        </IconButton>
+                                        <span className="blogViewCounts">{value?.LinkCount}</span>
+                                    </div>
                                 </div>
-                                <div className="col viewsBlog" id="center1">
-                                    <IconButton>
-                                        <IoEyeSharp></IoEyeSharp>
-                                    </IconButton>
-
-                                    <span className="blogViewCounts">{News.ViewCount} <span className="destop_view">Views</span></span>
 
 
-                                </div>
-
-                                <div className="col viewsBlog BlogSocal" id="center1" onClick={scrolltocomment}>
-
-                                    <IconButton>
-                                        <BiCommentDetail />
-                                    </IconButton>
-                                    <span className="blogViewCounts">{Getcommnet.CommentCounts} <span className="destop_view"> Comment</span> </span>
-
-                                </div>
-                                <div className="col viewsBlog BlogSocal like" id="center1">
-                                    <IconButton onClick={(() => { PostLike(color()?.like) })}>
-                                        <AiFillHeart color={state?.login && color()?.like && "#31B665"}></AiFillHeart>
-                                    </IconButton>
-                                    <span className="blogViewCounts">{value?.LinkCount}</span>
-                                </div>
                             </div>
-
-                          
                         </div>
-                    </div>
-                    {WishList && <WhisList open1={WishList} SetWishList={SetWishList}></WhisList>}
-                    <RecentPost />
-                    <RecentPostComment scrolltocomment={scrolltocomment} id={id} GetUserComment={Getcommnet} SetUserComment={Setcommnet} Get={GetComment} />
-                    <div>
-                        <section className="px-0" id="blodComment">
-                            <div className="col-12 blogsCommentCountCol">
-                                <div className="col-6">
-                                    <h2 className="blogsCommentheadings">Comments ({CommentCardArrays?.length})</h2>
+                        {WishList && <WhisList open1={WishList} SetWishList={SetWishList}></WhisList>}
+                        <RecentPost />
+                        <RecentPostComment scrolltocomment={scrolltocomment} id={id} GetUserComment={Getcommnet} SetUserComment={Setcommnet} Get={GetComment} />
+                        <div>
+                            <section className="px-0" id="blodComment">
+                                <div className="col-12 blogsCommentCountCol">
+                                    <div className="col-6">
+                                        <h2 className="blogsCommentheadings">Comments ({CommentCardArrays?.length})</h2>
+                                    </div>
+                                    <div className="col-6 blogCommentCardArrowBtn">
+                                        {ShowCards ? (
+                                            <IconButton onClick={() => SetShowCards(!ShowCards)}><IoIosArrowUp /></IconButton>
+                                        ) : (
+                                            <IconButton onClick={() => SetShowCards(!ShowCards)}><IoIosArrowDown /></IconButton>
+
+                                        )}
+
+                                    </div>
                                 </div>
-                                <div className="col-6 blogCommentCardArrowBtn">
-                                    {ShowCards ? (
-                                        <IconButton onClick={() => SetShowCards(!ShowCards)}><IoIosArrowUp /></IconButton>
-                                    ) : (
-                                        <IconButton onClick={() => SetShowCards(!ShowCards)}><IoIosArrowDown /></IconButton>
+                                {
+                                    ShowCards && (
+                                        <section>
 
-                                    )}
+                                            {
+                                                (state.login && Boolean(usercomment?.length)) &&
+                                                usercomment?.map((val, index) => {
 
-                                </div>
-                            </div>
-                            {
-                                ShowCards && (
-                                    <section>
+                                                    const CommentDate = val.created_at.slice(0, 10).split("-").reverse().join("-")
+                                                    return (
+                                                        <div className="border blogCommentEachCards" key={index}>
 
-                                        {
-                                            (state.login && Boolean(usercomment?.length)) &&
-                                            usercomment?.map((val, index) => {
+                                                            <div className="col-12 blogsCommentCardDateCol">
+                                                                <span className="blogsCommentCardDate">{CommentDate}</span>
+
+                                                            </div>
+                                                            <div className="col-12 d-flex align-items-center">
+                                                                <div className="commentCardImages">
+                                                                    <div className="imageContainer">
+                                                                        <Image unoptimized={true} width={500} height={500} src={`${val.image}`} className="blogsCommentImages" alt={val.username} title={val.username} />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="commentCradContentSection">
+                                                                    <h2 className="blogCommentName">{val.username}</h2>
+                                                                    <div className="col-12">
+                                                                        <p className="blogUserComments">{val.comment}</p>
+                                                                    </div>
+
+                                                                </div>
+                                                                {state.login && state?.Profile?.id === val.user && (
+                                                                    <div className="col d-flex justify-content-center align-items-center">
+                                                                        {/* <IconButton> <BsThreeDotsVertical color="#31B665" size={20} /></IconButton> */}
+                                                                        <span className='userreviewaction'> {
+                                                                            <Select
+
+                                                                                IconComponent={BsThreeDotsVertical} labelId="demo-simple-select-error-label"
+                                                                                sx={{
+                                                                                    boxShadow: "none",
+                                                                                    padding: '0',
+
+                                                                                    ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                                                                                    "&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
+                                                                                    {
+                                                                                        border: 0,
+                                                                                        outline: "none"
+
+                                                                                    },
+                                                                                    "& .MuiSelect-select": {
+                                                                                        padding: '0 10px !important'
+                                                                                    },
+                                                                                    "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                                                                                    {
+                                                                                        border: 0,
+                                                                                        outline: "none"
+                                                                                    },
+                                                                                    "&.Mui-focused .MuiSelect-icon": { color: "#31B665" },
+                                                                                    "&:hover": {
+                                                                                        ".MuiSelect-icon": {
+                                                                                            color: "#31B665"
+                                                                                        }
+                                                                                    },
+                                                                                }}
+                                                                            >
+                                                                                <List className={classes.orderEditList}>
+
+
+                                                                                    <ListItem button className={classes.orderEditListitem} onClick={() => handleDelete(val.id)}>
+                                                                                        <AiFillDelete color='31B665' />
+                                                                                        Delete
+                                                                                    </ListItem>
+                                                                                    <ListItem button className={classes.orderEditListitem}>
+
+                                                                                        <FaEdit color='31B665' />
+                                                                                        Edit
+                                                                                    </ListItem>
+
+
+
+                                                                                </List>
+                                                                            </Select>
+
+                                                                        }</span>
+                                                                    </div>
+                                                                )}
+
+
+
+
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+
+                                            {newdata?.map((val, index) => {
 
                                                 const CommentDate = val.created_at.slice(0, 10).split("-").reverse().join("-")
                                                 return (
@@ -267,10 +357,11 @@ const Blogs = (props) => {
                                                             <span className="blogsCommentCardDate">{CommentDate}</span>
 
                                                         </div>
-                                                        <div className="col-12 d-flex align-items-center">
+                                                        <div className="col-12 d-flex justify-content-center">
                                                             <div className="commentCardImages">
                                                                 <div className="imageContainer">
-                                                                    <Image unoptimized={true} width={500} height={500}  src={`${val.image}`} className="blogsCommentImages" alt={val.username} title={val.username} />
+                                                                    <Image unoptimized={true} width={500} height={500}
+                                                                        src={`${val.image}`} className="blogsCommentImages" alt={val.username} title={val.username} />
                                                                 </div>
                                                             </div>
                                                             <div className="commentCradContentSection">
@@ -282,57 +373,8 @@ const Blogs = (props) => {
                                                             </div>
                                                             {state.login && state?.Profile?.id === val.user && (
                                                                 <div className="col d-flex justify-content-center align-items-center">
-                                                                    {/* <IconButton> <BsThreeDotsVertical color="#31B665" size={20} /></IconButton> */}
-                                                                    <span className='userreviewaction'> {
-                                                                        <Select
+                                                                    <IconButton> <BsThreeDotsVertical color="#31B665" size={20} /></IconButton>
 
-                                                                            IconComponent={BsThreeDotsVertical} labelId="demo-simple-select-error-label"
-                                                                            sx={{
-                                                                                boxShadow: "none",
-                                                                                padding: '0',
-
-                                                                                ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                                                                                "&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
-                                                                                {
-                                                                                    border: 0,
-                                                                                    outline: "none"
-
-                                                                                },
-                                                                                "& .MuiSelect-select": {
-                                                                                    padding: '0 10px !important'
-                                                                                },
-                                                                                "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                                                                {
-                                                                                    border: 0,
-                                                                                    outline: "none"
-                                                                                },
-                                                                                "&.Mui-focused .MuiSelect-icon": { color: "#31B665" },
-                                                                                "&:hover": {
-                                                                                    ".MuiSelect-icon": {
-                                                                                        color: "#31B665"
-                                                                                    }
-                                                                                },
-                                                                            }}
-                                                                        >
-                                                                            <List className={classes.orderEditList}>
-
-
-                                                                                <ListItem button className={classes.orderEditListitem} onClick={() => handleDelete(val.id)}>
-                                                                                    <AiFillDelete color='31B665' />
-                                                                                    Delete
-                                                                                </ListItem>
-                                                                                <ListItem button className={classes.orderEditListitem}>
-
-                                                                                    <FaEdit color='31B665' />
-                                                                                    Edit
-                                                                                </ListItem>
-
-
-
-                                                                            </List>
-                                                                        </Select>
-
-                                                                    }</span>
                                                                 </div>
                                                             )}
 
@@ -342,98 +384,70 @@ const Blogs = (props) => {
                                                         </div>
                                                     </div>
                                                 )
-                                            })
-                                        }
+                                            })}
 
-                                        {newdata?.map((val, index) => {
+                                            <BlogPaginate
+                                                postsPerPage={postsPerPage}
+                                                totalPosts={CommentCardArrays.length}
+                                                paginate={paginate}
+                                                previousPage={previousPage}
+                                                nextPage={nextPage}
+                                            />
+                                        </section>
+                                    )}
+                            </section>
+                        </div>
 
-                                            const CommentDate = val.created_at.slice(0, 10).split("-").reverse().join("-")
-                                            return (
-                                                <div className="border blogCommentEachCards" key={index}>
-
-                                                    <div className="col-12 blogsCommentCardDateCol">
-                                                        <span className="blogsCommentCardDate">{CommentDate}</span>
-
-                                                    </div>
-                                                    <div className="col-12 d-flex justify-content-center">
-                                                        <div className="commentCardImages">
-                                                            <div className="imageContainer">
-                                                                <Image  unoptimized={true} width={500} height={500}
-                                                                    src={`${val.image}`} className="blogsCommentImages" alt={val.username} title={val.username} />
-                                                            </div>
-                                                        </div>
-                                                        <div className="commentCradContentSection">
-                                                            <h2 className="blogCommentName">{val.username}</h2>
-                                                            <div className="col-12">
-                                                                <p className="blogUserComments">{val.comment}</p>
-                                                            </div>
-
-                                                        </div>
-                                                        {state.login && state?.Profile?.id === val.user && (
-                                                            <div className="col d-flex justify-content-center align-items-center">
-                                                                <IconButton> <BsThreeDotsVertical color="#31B665" size={20} /></IconButton>
-
-                                                            </div>
-                                                        )}
-
-
-
-
-                                                    </div>
-                                                </div>
-                                            )
-                                        })}
-
-                                        <BlogPaginate
-                                            postsPerPage={postsPerPage}
-                                            totalPosts={CommentCardArrays.length}
-                                            paginate={paginate}
-                                            previousPage={previousPage}
-                                            nextPage={nextPage}
-                                        />
-                                    </section>
-                                )}
-                        </section>
                     </div>
-
                 </div>
-            </div>
-            <Newsletter />
-        </React.Fragment>
-    )
-}
+                <Newsletter />
+            </React.Fragment>
+        )
+    }
 }
 
 
 export async function getStaticPaths() {
-    // Fetch all possible paths here
-    // Example: const paths = [{ params: { storeId: '1' } }, { params: { storeId: '2' } }];
-    const paths = []; // Return an empty array to generate no pages at build time
+    // No paths pre-generated at build time
+    const paths = [];
 
     return {
         paths,
-        fallback: 'blocking', // Set to 'blocking' to generate pages on-demand
+        fallback: 'blocking', // Generate pages on-demand
     };
 }
 
-
 export async function getStaticProps(context) {
-
     try {
-        const res = await fetch(`https://api.cannabaze.com/UserPanel/Get-GetNewsById/${context.params.id }`);
+        const { id, blogcategoryname } = context.params;
+
+        const res = await fetch(`https://api.cannabaze.com/UserPanel/Get-GetNewsById/${id}`);
+        if (!res.ok) {
+            throw new Error('Failed to fetch');
+        }
+
         const data = await res.json();
-        return { props: {data:data , url :context.resolvedUrl , category:context.params.blogcategoryname} };
+        console.log(data)
+        return {
+            props: {
+            
+                    data: data,
+                    url: "context.resolvedUrl",
+                    category: blogcategoryname,
+                
+            },
+        };
     } catch (error) {
+        console.error("Error fetching data:", error);
         return {
             redirect: {
                 destination: '/404',
-                permanent: false, // Set to true for permanent redirection
+                permanent: false,
             },
         };
     }
-  }
-  
-  export default Blogs
-  
-  
-  
+}
+
+export default Blogs
+
+

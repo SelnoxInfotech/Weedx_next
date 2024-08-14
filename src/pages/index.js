@@ -8,7 +8,7 @@ const DeliveryServices = dynamic(() => import('../component/home/deliveryservice
 const HomePageWeedBanner = dynamic(() => import('../component/home/HomePageWeedBanner'));
 const Map = dynamic(() => import('../component/home/map/map'));
 const Staticcontent = dynamic(() => import('../component/home/staticcontent'));
-const NewsBlog = dynamic(() => import('../component/home/Newsblog'));
+const NewsBlog = dynamic(() => import('../component/home/Newsblog'),  { ssr: true });
 // const HomePageDealsSignup = dynamic(() => import('../component/home/HomePageDealsSignup'));
 const FeaturedBrand = dynamic(() => import('@/component/home/FeaturedBrand'));
 import cookie from 'cookie';

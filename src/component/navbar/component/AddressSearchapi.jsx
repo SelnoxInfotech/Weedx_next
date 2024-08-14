@@ -193,8 +193,9 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         expires: date,
         path: '/' // Set the path where the cookie is accessible
       });
-
-      router.replace(router.asPath);
+      if (router.asPath === '/products' || router.asPath === '/') {
+        router.replace(router.asPath);
+    }
       dispatch({ type: 'location_Api', location_Api: false })
       dispatch({ type: 'Location', Location: placeDetails?.formatted_address })
     })

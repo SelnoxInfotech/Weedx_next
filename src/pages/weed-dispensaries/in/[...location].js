@@ -187,8 +187,6 @@ const Dispensaries = (props) => {
         }
     }, [props.location]);
 
-
-
     function breadcrumCountry(country, state1, city) {
         if (Boolean(city)) {
             dispatch({ type: 'route', route: "" })
@@ -210,6 +208,7 @@ const Dispensaries = (props) => {
         }
 
     }
+
     return (
         <div className="w-100 mx-auto  dispensaries_centers">
             <DispensariesSco location={navigate?.asPath} format_Address={props?.formatted_address} ></DispensariesSco>
@@ -277,7 +276,6 @@ const Dispensaries = (props) => {
 
 
 export const getServerSideProps = async (context) => {
-
     const cookies = cookie.parse(context.req.headers.cookie || '');
     context.res.setHeader(
         'Cache-Control',

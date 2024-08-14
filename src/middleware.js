@@ -7,7 +7,6 @@ export async function middleware(req) {
   // Access cookies from the request
   const cookies = req.cookies;
   let location = cookies.get('fetchlocation');
-
   if (!location) {
     // response.headers.set('X-Custom-Header', 'Custom header value');
   // response.cookies.set('customCookie', 'cookieValue');

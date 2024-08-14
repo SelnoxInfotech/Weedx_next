@@ -4,6 +4,7 @@ import React from "react";
 
 function StoreDetails({ Despen, locationStore }) {
     const location = useRouter();
+    console.log(location.pathname.slice(0, 16) === "/weed-deliveries" , location.pathname.slice(0, 16))
     const tab = location.query.details ? location.query.details[1] : '';
 
     // Set default meta tags
@@ -13,7 +14,7 @@ function StoreDetails({ Despen, locationStore }) {
     };
 
     // Customize meta tags based on conditions
-    if (location.pathname.slice(0, 16) !== "/weed-deliveries") {
+    if (location.pathname.slice(0, 16) === "/weed-deliveries") {
         if (tab === undefined) {
             metaTag = {
                 title: `Weed dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Weedx.io`,
@@ -57,7 +58,8 @@ function StoreDetails({ Despen, locationStore }) {
                     break;
             }
         }
-    } else {
+    } 
+    else {
         if (tab === undefined) {
             metaTag = {
                 title: `Weed Delivery in ${Despen[0]?.City || ''}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Weedx.io`,

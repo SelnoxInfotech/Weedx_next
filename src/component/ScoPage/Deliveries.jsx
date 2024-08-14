@@ -26,7 +26,7 @@ function Delivery({ location ,formatted_address }) {
       <meta property="og:title" content={title} />
       <meta
         property="og:description"
-        content="In weedx.io, find high quality Recreational and Medical Marijuana Dispensaries & Delivery Near you. Order online and get best deals on your weed near you."
+        content={`Find Nearby Weed Delivery in ${formatted_address} for Recreational & Medical Uses. Browse Top Cannabis Products and Place Orders from Trusted weed delivery near you.`}
       />
       {/* End Facebook tags */}
       {/* Twitter tags */}

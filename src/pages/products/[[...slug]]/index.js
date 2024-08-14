@@ -24,6 +24,7 @@ import { setCookie } from 'nookies';
 const Product = (props) => {
     const navigate = useRouter();
     const { slug } = navigate.query;
+    const Category =  props.category
     const params = slug ? (slug[_.findIndex(slug, item => !isNaN(parseInt(item)))] || 0) : 0;
     const classes = useStyles()
     const { state, dispatch } = React.useContext(Createcontext)
@@ -48,6 +49,7 @@ const Product = (props) => {
 
     };
     const [Category, SetCategory] = React.useState([])
+
     React.useEffect(() => {
         const fetchData = async () => {
             const apidata = await fetch("https://api.cannabaze.com/UserPanel/Get-Categories/");
@@ -57,6 +59,7 @@ const Product = (props) => {
         fetchData()
 
     }, [])
+
     React.useEffect(() => {
         SetLoading(() => {
             return props.loading
@@ -99,6 +102,7 @@ const Product = (props) => {
             navigate.push(`/products/${categoryfind.name.toLowerCase()}/${categoryfind.id}`)
         }
     }
+
     async function moreProduct() {
         const object = {
             City: "",
@@ -126,8 +130,8 @@ const Product = (props) => {
                 {(navigate?.query?.slug !== undefined) && <span> {">"} <span onClick={() => breadcrumCountry("categoryname", navigate?.query?.slug[0])}>{navigate?.query?.slug[0]}</span></span>}
                 {(navigate?.query?.slug !== undefined && navigate?.query?.slug?.length === 3) && <span> {">"} <span >{navigate?.query?.slug[1]}</span></span>}
             </div>
-            {!params.id ? <ProductSeo location={navigate?.pathname}></ProductSeo> :
-                <ProductCategorySeo categoryname={slug[0]} location={navigate?.pathname} ></ProductCategorySeo>}
+            {!params.id ? <ProductSeo location={navigate?.asPath}></ProductSeo> :
+                <ProductCategorySeo categoryname={slug[0]} location={navigate?.asPath} ></ProductCategorySeo>}
             <div className="row">
                 <div className="col-12 mt-4">
                     <CategoryProduct Category={Category} ShowCategoryProduct={ShowCategoryProduct}></CategoryProduct>
@@ -210,7 +214,7 @@ const Product = (props) => {
         </React.Fragment>)}
 export default Product
 export const getServerSideProps = async (context) => {
-
+   
     const { req, res } = context;
     let allCookies
     
@@ -260,6 +264,8 @@ export const getServerSideProps = async (context) => {
 
     let product = [];
     try {
+        const apidata = await fetch("https://api.cannabaze.com/UserPanel/Get-Categories/");
+        const category = await apidata.json()
         switch (true) {
             case context.params.slug?.length === 2:
                 try {
@@ -313,7 +319,8 @@ export const getServerSideProps = async (context) => {
             props: {
                 product: product,
                 loading: false,
-                location: locationData
+                location: locationData,
+                category: category
             },
         };
 

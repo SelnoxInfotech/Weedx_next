@@ -53,7 +53,7 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
             <div className="col-12 webContent">
                 <h2 className="section_main_title">{`Discover the Best Cannabis ${from} in ${location}`} </h2>
                 <div style={{ display: "grid", gap: "8px" }}>
-                    <p>{`Explore top-rated weed ${from} in ${location} with Weedx.io. Our platform simplifies the search for trusted recreational and medical ${from} conveniently located near you in ${location.formatted_address} `}</p>
+                    <p>{`Explore top-rated weed ${from} in ${location} with Weedx.io. Our platform simplifies the search for trusted recreational and medical ${from} conveniently located near you in ${location} `}</p>
                     <h3>{`Top Weed  ${from} in ${location}`}</h3>
                     {Boolean(Store?.length) && <ul>
                         {Store?.filter((item) => item.rating >= 4)?.map((items, index) => {

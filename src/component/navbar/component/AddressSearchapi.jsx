@@ -15,7 +15,7 @@ import Cookies from 'universal-cookie';
 export default function SearchingLocation({ openLocation, SearchBarWidth, open1, setOpenLocation, path }) {
   const classes = useStyles()
   const cookies = new Cookies();
-  const   navigate=  useRouter();
+  const navigate = useRouter();
   const router = useRouter();
   const [formatted_address, Setformatted_address] = React.useState('')
   const { state, dispatch } = React.useContext(Createcontext)
@@ -36,6 +36,15 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
     Setformatted_address(state?.Location)
   }, [state])
 
+  const navigateToPath = (path) => {
+    if (typeof window !== 'undefined') {
+      const isWeedDispensaries = window.location.pathname.startsWith('/weed-dispensaries/in');
+      const isWeedDeliveries = window.location.pathname.startsWith('/weed-deliveries/in');
+      if (isWeedDispensaries || isWeedDeliveries) {
+        router.push(path);
+      }
+    }
+  };
   function handlechnage(e, value) {
     placesService?.getDetails({ placeId: value?.place_id }, (placeDetails) => {
       Setformatted_address(placeDetails.formatted_address);
@@ -72,22 +81,22 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         if (Boolean(object.administrative_area_level_3)) {
           ci = object.administrative_area_level_3.replace(/\s/g, '-')
           dispatch({ type: 'City', City: ci })
-          dispatch({ type: 'citycode', citycode: short.administrative_area_level_3});
+          dispatch({ type: 'citycode', citycode: short.administrative_area_level_3 });
         }
         if (Boolean(object.sublocality) && Boolean(object.locality)) {
           ci = object.sublocality.replace(/\s/g, '-')
           dispatch({ type: 'City', City: ci })
-          dispatch({ type: 'citycode', citycode: short.sublocality});
+          dispatch({ type: 'citycode', citycode: short.sublocality });
         }
         else if (Boolean(object.locality)) {
           ci = object.locality.replace(/\s/g, '-')
           dispatch({ type: 'City', City: ci })
-          dispatch({ type: 'citycode', citycode: short.locality});
+          dispatch({ type: 'citycode', citycode: short.locality });
         }
         else if (Object.keys(object).length !== 1 && Boolean(object.establishment)) {
           ci = object.establishment.replace(/\s/g, '-')
           dispatch({ type: 'City', City: ci })
-          dispatch({ type: 'citycode', citycode: short.establishment});
+          dispatch({ type: 'citycode', citycode: short.establishment });
         }
         else if (Boolean(object.sublocality_level_1)) {
           ci = object.sublocality_level_1.replace(/\s/g, '-')
@@ -97,24 +106,24 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         if (Boolean(object.sublocality_level_1) && Boolean(object.locality)) {
           ci = object.sublocality_level_1.replace(/\s/g, '-')
           dispatch({ type: 'City', City: ci })
-          dispatch({ type: 'citycode', citycode: short.sublocality_level_1});
+          dispatch({ type: 'citycode', citycode: short.sublocality_level_1 });
         }
         if (Boolean(object.sublocality_level_1) && Boolean(object.locality)) {
           ci = object.sublocality_level_1.replace(/\s/g, '-')
           dispatch({ type: 'City', City: ci })
-          dispatch({ type: 'citycode', citycode: short.sublocality_level_1});
+          dispatch({ type: 'citycode', citycode: short.sublocality_level_1 });
         }
         if ((Boolean(object.administrative_area_level_3) && Boolean(object.locality)) && (Boolean(object.administrative_area_level_1) && Boolean(object.locality))) {
           ci = object.locality.replace(/\s/g, '-')
           dispatch({ type: 'City', City: ci })
-          dispatch({ type: 'citycode', citycode: short.locality});
+          dispatch({ type: 'citycode', citycode: short.locality });
         }
         else {
           if (!Boolean(object.administrative_area_level_3) && !Boolean(object.establishment) && !Boolean(object.locality) && !Boolean(object.sublocality) && Boolean(object.administrative_area_level_2)) {
             if (!ci) {
               ci = object.administrative_area_level_2.replace(/\s/g, '-')
               dispatch({ type: 'City', City: ci })
-              dispatch({ type: 'citycode', citycode: short.administrative_area_level_2});
+              dispatch({ type: 'citycode', citycode: short.administrative_area_level_2 });
             }
           }
         }
@@ -142,64 +151,51 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
         }
 
       }
-      if (ci !== undefined && sta !== undefined && Coun !== undefined && route !== undefined) {
-        window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
-        window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
+      if (ci && sta && Coun && route) {
+        navigateToPath(`${Coun.toLowerCase()}/${sta.toLowerCase()}/${ci.toLowerCase()}/${route.toLowerCase()}`);
         dispatch({ type: 'havecity', havecity: true });
+      } else if (ci && sta && Coun) {
+        dispatch({ type: 'route', route: '' });
+        navigateToPath(`${Coun.toLowerCase()}/${sta.toLowerCase()}/${ci.toLowerCase()}`);
+        dispatch({ type: 'havecity', havecity: true });
+      } else if (sta && Coun) {
+        dispatch({ type: 'route', route: '' });
+        navigateToPath(`${Coun.toLowerCase()}/${sta.toLowerCase()}`);
+        dispatch({ type: 'havestate', havestate: true });
+        dispatch({ type: 'havecity', havecity: false });
+      } else if (Coun) {
+        dispatch({ type: 'route', route: '' });
+        navigateToPath(`${Coun.toLowerCase()}`);
+        dispatch({ type: 'havecountry', havecountry: true });
+        dispatch({ type: 'havestate', havestate: false });
+        dispatch({ type: 'havecity', havecity: false });
+      } else {
+        Setformatted_address(state.Location);
+      }
 
+      if (!ci) {
+        dispatch({ type: 'City', City: '' });
       }
-      else {
-        if (sta !== undefined && Coun !== undefined && ci !== undefined) {
-          dispatch({ type: 'route', route: '' });
-          window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}`)
-          window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}`)
-          dispatch({ type: 'havecity', havecity: true });
-        }
-        else if (Coun !== undefined && sta !== undefined) {
-          dispatch({ type: 'route', route: '' });
-          window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}`)
-          window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}`)
-          dispatch({ type: 'havestate', havestate: true });
-          dispatch({ type: 'havecity', havecity: false });
-        }
-        else if (Coun !== undefined) {
-          dispatch({ type: 'route', route: '' });
-          window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}`)
-          window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}`)
-          dispatch({ type: 'havecountry', havecountry: true });
-          dispatch({ type: 'havestate', havestate: false });
-          dispatch({ type: 'havecity', havecity: false });
-        }
-        // else if (Coun === undefined) {
-        //   window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`weed-dispensaries/${route?.toLowerCase()}`)
-        //   window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${route?.toLowerCase()}`)
-        // }
-        else {
-          Setformatted_address(state.Location)
-        }
+      if (!sta) {
+        dispatch({ type: 'State', State: '' });
       }
-      if (ci === undefined) {
-        dispatch({ type: 'City', City: '' })
-      }
-      if (sta === undefined) {
-        dispatch({ type: 'State', State: '' })
-      }
-      const setLocation={
-        country:Coun || '',
-        state:sta || "",
-        city:ci || '',
-        route:route || '',
-        formatted_address:placeDetails.formatted_address
+      const setLocation = {
+        country: Coun || '',
+        state: sta || "",
+        city: ci || '',
+        route: route || '',
+        formatted_address: placeDetails.formatted_address
       }
       cookies.remove('fetchlocation');
       const date = new Date();
       date.setTime(date.getTime() + 60 * 60 * 24 * 365);
-      cookies.set('fetchlocation', JSON.stringify(setLocation), { 
-        expires: date, 
+      cookies.set('fetchlocation', JSON.stringify(setLocation), {
+        expires: date,
         path: '/' // Set the path where the cookie is accessible
       });
-
-      router.pathname === "/products/[[...slug]]" &&  router.replace(router.asPath);
+      if (router.asPath === '/products' || router.asPath === '/') {
+        router.replace(router.asPath);
+    }
       dispatch({ type: 'location_Api', location_Api: false })
       dispatch({ type: 'Location', Location: placeDetails?.formatted_address })
     })
@@ -266,25 +262,25 @@ export default function SearchingLocation({ openLocation, SearchBarWidth, open1,
 
               })
               if (sta !== undefined && ci !== undefined && route !== undefined) {
-                window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
-                window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
+                window.location.pathname.slice(0, 18) === '/weed-dispensaries' && navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
+                window.location.pathname.slice(0, 16) === '/weed-deliveries' && navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}/${route?.toLowerCase()}`)
 
               }
               else {
                 if (sta !== undefined && ci !== undefined && Coun !== undefined) {
-                  window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}`)
-                  window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}`)
+                  window.location.pathname.slice(0, 18) === '/weed-dispensaries' && navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}`)
+                  window.location.pathname.slice(0, 16) === '/weed-deliveries' && navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}/${ci?.toLowerCase()}`)
 
                 }
                 else if (Coun !== undefined && sta !== undefined) {
 
-                  window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}`)
-                  window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}`)
+                  window.location.pathname.slice(0, 18) === '/weed-dispensaries' && navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}`)
+                  window.location.pathname.slice(0, 16) === '/weed-deliveries' && navigate.replace(`${Coun?.toLowerCase()}/${sta?.toLowerCase()}`)
                 }
                 else if (Coun !== undefined) {
 
-                  window.location.pathname.slice(0, 18) === '/weed-dispensaries' &&   navigate.replace(`${Coun?.toLowerCase()}`)
-                  window.location.pathname.slice(0, 16) === '/weed-deliveries' &&   navigate.replace(`${Coun?.toLowerCase()}`)
+                  window.location.pathname.slice(0, 18) === '/weed-dispensaries' && navigate.replace(`${Coun?.toLowerCase()}`)
+                  window.location.pathname.slice(0, 16) === '/weed-deliveries' && navigate.replace(`${Coun?.toLowerCase()}`)
                 }
                 else {
                   Setformatted_address(state.Location)

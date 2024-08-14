@@ -11158,6 +11158,7 @@ margin: 0;
   line-height: normal;
 }
 .blogListWrapper .blogListCard .blogcardText a .blogcardDescription {
+
   display: -webkit-box;
   overflow: hidden;
   color: #5A7184;
@@ -11169,6 +11170,7 @@ margin: 0;
 }
 .blogListWrapper .blogListCard .blogcardText a .blogcardDescription h1, .blogListWrapper .blogListCard .blogcardText a .blogcardDescription h2, .blogListWrapper .blogListCard .blogcardText a .blogcardDescription h3, .blogListWrapper .blogListCard .blogcardText a .blogcardDescription h4, .blogListWrapper .blogListCard .blogcardText a .blogcardDescription h5, .blogListWrapper .blogListCard .blogcardText a .blogcardDescription h6 {
   display: none !important;
+
 }
 .blogListWrapper .blogListCard .blogcardText .extra_function {
   display: flex;
@@ -11253,6 +11255,7 @@ margin: 0;
     display: none !important;
   }
   .blogListWrapper .blogListCard .blogcardText a .blogcardDescription p {
+    cursor: pointer;
     margin-bottom: 0;
   }
   .blogListWrapper .blogListCard .blogcardText a h2.blogcardHeading {
@@ -12046,3 +12049,12 @@ font-size: 24px;
     transform: rotate(360deg);
   }
 } */
+
+
+.Lawsection_New{
+  margin: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #31B665;
+}

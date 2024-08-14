@@ -87,7 +87,7 @@ const Deliveries = (props) => {
 
             // Use shallow routing to navigate to the constructed URL
 
-            navigate.replace(url, 0, { shallow: true });
+            props.isDirectHit &&   navigate.replace(url, 0, { shallow: true });
         }
     }, [props.location]);
 
@@ -174,10 +174,6 @@ const Deliveries = (props) => {
 
                         }
                     </div>
-                    {/* <div className="col-12 webContent">
-                        <h2 className="section_main_title">{contentdata?.Title}</h2>
-                        <div dangerouslySetInnerHTML={{ __html: contentdata?.Content }} />
-                    </div> */}
                     {contentdata.length !== 0 &&
                         contentdata?.Faq[0]?.title !== '' &&
                         <>  <h3 className="section_main_title">FAQs</h3>
@@ -295,7 +291,7 @@ export const getServerSideProps = async (context) => {
     };
 
     if (isDirectHit) {
-        const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
+        const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).reverse().join(' ');
         const k = await Location(decodedLocation, type);
         country1 = k.country || "";
         state = k.state || "";

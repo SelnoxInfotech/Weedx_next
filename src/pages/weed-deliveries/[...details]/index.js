@@ -25,7 +25,8 @@ const ComponentStoreDetails = dynamic(() => import('../../../component/StoreDeta
 import { AiOutlineDeploymentUnit } from "react-icons/ai";
 // import { ProductHelpFull } from '../../Product/ProductApi'
 import Review from "../../../component/Review/Review";
-import { StoreDetails } from "../../../component/ScoPage/StoreDetails"
+const StoreDetails = dynamic(() => import('../../../component/ScoPage/StoreDetails'), { ssr: true });
+// import { StoreDetails } from "../../../component/ScoPage/StoreDetails"
 import { Store_Add_Review, Store_OverAllGet_Review, Store_Get_UserComment, Store_Get_Review, Delete_StoreReview, StoreHelpFull } from "../../../hooks/apicall/api";
 import Createcontext from "../../../hooks/context"
 import Loader from "../../../component/Loader/Loader";
@@ -39,9 +40,9 @@ import Image from "next/image";
 export default function DispensoriesDetails(props) {
     const navigate = useRouter()
     const { id, storeData, product } = props.params
-  let  tab  = (navigate.query.details.length === 2) ? "menu" :  navigate.query.details[1] 
+    let tab = (navigate.query.details.length === 2) ? "menu" : navigate.query.details[1]
     const Despen = [storeData] || []
-    const DespensariesData = product    
+    const DespensariesData = product
     const data = false
     const { state, dispatch } = React.useContext(Createcontext)
     const location = useRouter()
@@ -117,10 +118,10 @@ export default function DispensoriesDetails(props) {
     function SelectionTab(item) {
         if (Boolean(location.asPath.slice(0, 16) === "/weed-deliveries") || Boolean(location.asPath.slice(0, 18) === "/weed-dispensaries")) {
 
-            navigate.replace(`${location.asPath.slice(0, 16) === "/weed-deliveries" ? "/weed-deliveries" : "/weed-dispensaries"}/${modifystr(Despen[0]?.Store_Name.toLowerCase())}/${modifystr(item.toLowerCase())}/${id}`, 0,{ shallow: true })
+            navigate.replace(`${location.asPath.slice(0, 16) === "/weed-deliveries" ? "/weed-deliveries" : "/weed-dispensaries"}/${modifystr(Despen[0]?.Store_Name.toLowerCase())}/${modifystr(item.toLowerCase())}/${id}`, 0, { shallow: true })
         }
         else {
-            navigate.replace(`/menu-integration/${modifystr(Despen[0]?.Store_Name.toLowerCase())}/${modifystr(item.toLowerCase())}/${id}` , 0,{ shallow: true })
+            navigate.replace(`/menu-integration/${modifystr(Despen[0]?.Store_Name.toLowerCase())}/${modifystr(item.toLowerCase())}/${id}`, 0, { shallow: true })
 
         }
 
@@ -303,12 +304,22 @@ export default function DispensoriesDetails(props) {
     }
     console.log(params.asPath ,'dfhgfhxfn fdb xhxf')
     return (
-        <div>
-            {!Despen.length ? <Loader /> : <div>
-                <div> 
-                    {(location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries") &&
-                        <div style={{ fontSize: '12px' }} >
-                            <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() =>  navigate.push('/')}> {`Home > `} </span>
+      
+            // !Despen.length ? <Loader /> 
+            // : 
+            <div>
+                <div> {(location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries") &&
+                    <div style={{ fontSize: '12px' }} > <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries")}> {location.asPath.slice(0, 18) === "/weed-dispensaries" ? 'weed-dispensaries' : "weed-deliveries"}</span>
+                        {" >"} <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries", params.StoreName, id)}> {params.StoreName}</span>
+                        {Boolean(params?.tab) && <span> {" > "}{params?.tab}</span>}
+                    </div>
+                }</div>
+                {Boolean((location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries"))
+                    ?
+                    <StoreDetails Despen={Despen} locationStore={location.asPath}></StoreDetails>
+                    :
+                    // <Embedded Despen={Despen} locationStore={location.asPath}></Embedded>
+                    ""
 
                             <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries")}> {location.asPath.slice(0, 18) === "/weed-dispensaries" ? 'weed-dispensaries' : "weed-deliveries"}</span>
                             {" >"} 
@@ -417,8 +428,7 @@ export default function DispensoriesDetails(props) {
                     </div>
                 </div>
             </div>
-        }
-        </div>
+
     )
 }
 
@@ -450,7 +460,7 @@ export async function getStaticProps(context) {
         console.error('Error fetching data:', error);
     }
 
-    if (data.length === 0 ) {
+    if (data.length === 0) {
         return {
             notFound: true, // Redirect to 404 if no data found
         };

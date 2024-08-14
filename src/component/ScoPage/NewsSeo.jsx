@@ -1,6 +1,7 @@
 import Head from "next/head"
 
 function NewsSeo({location}) {
+    console.log(location)
  
     if(location === 'blogs'){
         return (

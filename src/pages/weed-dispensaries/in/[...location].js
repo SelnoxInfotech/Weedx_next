@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import useStyles from "@/styles/style";
 import dynamic from 'next/dynamic'
 const WeedDispansires = dynamic(() => import('../../../component/WeedDispansires/Weed_Dispansires'));
-const DispensariesSco = dynamic(() => import('../../../component/ScoPage/dispensariessco') ,  {ssr:true});
+const DispensariesSco = dynamic(() => import('../../../component/ScoPage/dispensariessco'), { ssr: true });
 // import { DispensariesSco } from "../ScoPage/dispensariessco"
 import Createcontext from "@/hooks/context"
 import { useRouter } from 'next/router';
@@ -53,8 +53,8 @@ const Dispensaries = (props) => {
     const { state, dispatch } = React.useContext(Createcontext)
     const [value, setValue] = React.useState(0);
     const [contentdata, setcontentdata] = React.useState([])
-    const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: props.formatted_address  ||state.Location }]
-    const locations = props?.location.formatted_address || state.Location
+    const DispensorShopLocation = [{ name: "Weed Dispensaries in", city: props.formatted_address || state.Location }]
+    const locations = props?.formatted_address
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -133,16 +133,16 @@ const Dispensaries = (props) => {
 
     // React.useEffect(() => {
     //     dispatch({ type: 'Location', Location: props?.formatted_address  })
- 
+
     //     // navigate.push(`/weed-dispensaries/${props.location.country || 'default-country'}/${props.location.state || 'default-state'}/${props.location.city || 'default-city'}`,undefined ,  { shallow: false });
     // }, [props])
 
 
     React.useEffect(() => {
-         dispatch({ type: 'Location', Location: props?.formatted_address  })
-
-        if(props.isDirectHit)
-       dispatch({ type: 'permission', permission: true });
+        console.log(props.isDirectHit , props.location)
+        dispatch({ type: 'Location', Location: props?.formatted_address })
+        if (props.isDirectHit)
+            dispatch({ type: 'permission', permission: true });
         dispatch({ type: 'Country', Country: props?.location?.country });
         dispatch({ type: 'countrycode', countrycode: props.location?.countrycode });
         dispatch({ type: 'State', State: props?.location?.state });
@@ -154,39 +154,38 @@ const Dispensaries = (props) => {
             country: props?.location?.country,
             state: props?.location?.state,
             city: props?.location?.city,
-            formatted_address:props?.formatted_address
-          };
-          const date = new Date();
-          date.setTime(date.getTime() + 60 * 60 * 24 * 365); // 1 year expiry
-          props.isDirectHit  && cookies.set('fetchlocation', JSON.stringify(setLocation), { 
-            expires: date, 
+            formatted_address: props?.formatted_address
+        };
+        const date = new Date();
+        date.setTime(date.getTime() + 60 * 60 * 24 * 365); // 1 year expiry
+        props.isDirectHit && cookies.set('fetchlocation', JSON.stringify(setLocation), {
+            expires: date,
             path: '/' // Set the path where the cookie is accessible
-          });
+        });
 
-{        const { country, state, city,route } = props.location || {};
-    
-        // Build the URL based on available location data
-        let url = '/weed-dispensaries/in/';
-        if(route){
-            url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}/${modifystr(route)}`;
+        {
+            const { country, state, city, route } = props.location || {};
+
+            // Build the URL based on available location data
+            let url = '/weed-dispensaries/in/';
+            if (route) {
+                url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}/${modifystr(route)}`;
+            }
+            else if (city) {
+                url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}`;
+            } else if (state) {
+                url += `${modifystr(country) || 'default-country'}/${modifystr(state)}`;
+            } else if (country) {
+                url += modifystr(country);
+            } else {
+                url = '/weed-dispensaries/default-country'; // Fallback URL
+            }
+
+            // Use shallow routing to navigate to the constructed URL
+
+            props.isDirectHit && navigate.replace(url, 0, { shallow: true });
         }
-        else if (city) {
-          url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}`;
-        } else if (state) {
-          url += `${modifystr(country) || 'default-country'}/${modifystr(state)}`;
-        } else if (country) {
-          url += modifystr(country);
-        } else {
-          url = '/weed-dispensaries/default-country'; // Fallback URL
-        }
-    
-        // Use shallow routing to navigate to the constructed URL
-
-       navigate.replace(url, 0, { shallow: true });
-    }      
-      }, [props.location]);
-
-
+    }, [props.location]);
 
     function breadcrumCountry(country, state1, city) {
         if (Boolean(city)) {
@@ -209,9 +208,10 @@ const Dispensaries = (props) => {
         }
 
     }
+
     return (
         <div className="w-100 mx-auto  dispensaries_centers">
-             <DispensariesSco location={navigate?.asPath} format_Address={props?.formatted_address} ></DispensariesSco>
+            <DispensariesSco location={navigate?.asPath} format_Address={props?.formatted_address} ></DispensariesSco>
             <div className="w-100">
                 <div className="headerBoxdescription">
                     <div style={{ cursor: "pointer" }}>
@@ -265,16 +265,15 @@ const Dispensaries = (props) => {
     );
 };
 export const getServerSideProps = async (context) => {
-
     const cookies = cookie.parse(context.req.headers.cookie || '');
     context.res.setHeader(
         'Cache-Control',
         'public, s-maxage=10, stale-while-revalidate=59'
     )
-    const { req , query } = context;
+    const { req, query } = context;
     const { headers: { referer }, url } = req;
     const isDirectHit = !referer || referer === req.url;
-// console.log(req.url , "urlx")
+    // console.log(req.url , "urlx")
 
     const transformString = (str) => {
         if (typeof str !== "string" || !str.trim()) {
@@ -299,14 +298,14 @@ export const getServerSideProps = async (context) => {
     };
 
     if (isDirectHit) {
-        const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).join(' ');
+        const decodedLocation = locationParams.map((param) => decodeURIComponent(param)).reverse().join(' ');
         const k = await Location(decodedLocation, type);
         country1 = k.country || "";
         state = k.state || "";
         city = k.city || "";
         formatted_address = k.formatted_address || "";
     } else {
-        formatted_address =JSON.parse(cookies.fetchlocation).formatted_address  
+        formatted_address = JSON.parse(cookies.fetchlocation).formatted_address
         country1 = locationParams[0] || "";
         state = locationParams[1] || "";
         city = locationParams[2] || "";

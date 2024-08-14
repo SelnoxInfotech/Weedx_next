@@ -13,10 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'  # Ensure compatibility with Next.js
+        node-version: '20'  # Ensure compatibility with Next.js
 
     - name: Install dependencies
       run: npm install --force
@@ -24,20 +24,57 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Zip build artifacts
+    - name: Create .next.zip
+      run: zip -r .next.zip .next
+
+    - name: Create build artifacts zip
       run: |
-        zip -r build.zip build public package.json package-lock.json
+        zip -r build.zip .next.zip package.json package-lock.json
 
     - name: Deploy to EC2
       env:
         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
       run: |
-        echo "$SSH_PRIVATE_KEY" > private_key.pem
-        chmod 600 private_key.pem
-        scp -o StrictHostKeyChecking=no -i private_key.pem build.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
-        ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
+        # Setup SSH key and transfer files
+        echo "$SSH_PRIVATE_KEY" > weedxpem.pem
+        chmod 600 weedxpem.pem
+        scp -o StrictHostKeyChecking=no -i weedxpem.pem build.zip ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com:/home/ubuntu/Weedx/
+
+        # SSH into EC2 and deploy
+        ssh -o StrictHostKeyChecking=no -i weedxpem.pem ubuntu@ec2-44-203-3-121.compute-1.amazonaws.com << 'EOF'
+          set -e  # Exit on error
+
+          # Navigate to the project directory
           cd /home/ubuntu/Weedx
+
+          # Unzip combined artifacts
           unzip -o build.zip
-          npm install --production
+          unzip -o .next.zip
+
+          # Ensure correct Node.js version is used
+          if ! command -v node &> /dev/null; then
+            echo "Node.js not found. Installing Node.js..."
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+            source ~/.nvm/nvm.sh
+            nvm install 20
+            nvm use 20
+          fi
+
+          # Ensure npm is installed
+          if ! command -v npm &> /dev/null; then
+            echo "npm not found. Installing npm..."
+            npm install -g npm
+          fi
+
+          # Ensure PM2 is installed
+          if ! command -v pm2 &> /dev/null; then
+            echo "PM2 not found. Installing PM2..."
+            npm install -g pm2
+          fi
+
+          # Install production dependencies
+          npm install --force
+
+          # Restart or start the PM2 process
           pm2 restart Weedx || pm2 start npm --name "Weedx" -- run start
         EOF

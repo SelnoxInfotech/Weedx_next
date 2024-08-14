@@ -72,12 +72,6 @@ export async function getServerSideProps(context) {
       }
     })
   })
-
-  // axios.post(`https://api.cannabaze.com/UserPanel/Update-SiteMap/13`, {
-  //     j: 'https://www.weedx.io' + router.pathname
-  // }).then((res) => {
-  // }).catch((err) => {
-  // });
   responseData = await JSON.stringify(responseData)
   responseData = await JSON.parse(responseData)
   return {

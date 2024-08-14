@@ -16,7 +16,6 @@ import  Law from '@/component/ScoPage/LearnSeo';
 const Index = (props) => {
     const router = useRouter();
     const classes = useStyles();
-    console.log(router ,'router')
     const [value, setValue] = useState(router?.pathname);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -31,8 +30,10 @@ const Index = (props) => {
                         <Box className={`${classes.learn_tab_background} ${classes.learn_tab}`} sx={{ marginLeft: "-5px", borderColor: 'divider' }}>
                             <TabList scrollButtons={false} variant="scrollable" onChange={handleChange} aria-label="lab API tabs example">
                                 <Tab label="Law" value="/learn/laws-and-regulation" />
-                                <Tab label="All News" value="" onClick={()=>{ router.push('/cannabis-news')}} />
-                                <Tab label="Blogs" value="" onClick={()=>{ router.push('/blogs')}} />
+                                    <p className='Lawsection_New' onClick={()=>{ router.push('/cannabis-news')}}> {`All News`}</p>
+                                    <p  className='Lawsection_New' onClick={()=>{ router.push('/blogs')}}> {`Blogs`}</p>
+                                {/* <Tab label="All News" value="" onClick={()=>{ router.push('/cannabis-news')}} /> */}
+                                {/* <Tab label="Blogs" value="" onClick={()=>{ router.push('/blogs')}} /> */}
 
                                     </TabList>
                                 </Box>
@@ -60,6 +61,17 @@ const Index = (props) => {
 };
 
 export default Index;
+
+// export async function getStaticPaths() {
+//     // Fetch all possible paths here
+//     // Example: const paths = [{ params: { storeId: '1' } }, { params: { storeId: '2' } }];
+//     const paths = []; // Return an empty array to generate no pages at build time
+
+//     return {
+//         paths,
+//         fallback: 'blocking', // Set to 'blocking' to generate pages on-demand
+//     };
+// }
 
 export async function getStaticProps() {
     let posts = await JSON.stringify(Content)

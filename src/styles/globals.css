@@ -12061,3 +12061,12 @@ font-size: 24px;
     transform: rotate(360deg);
   }
 } */
+
+
+.Lawsection_New{
+  margin: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #31B665;
+}

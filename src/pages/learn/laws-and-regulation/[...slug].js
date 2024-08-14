@@ -61,6 +61,7 @@ export async function generateStaticParams() {
       category: product.name,
       product: product.id,
     }))
+    
 }
 
 

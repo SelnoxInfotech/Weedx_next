@@ -301,26 +301,26 @@ export default function DispensoriesDetails(props) {
             }
         }
     }
-
+    console.log(params.asPath ,'dfhgfhxfn fdb xhxf')
     return (
-        <div>{
-            !Despen.length ? <Loader /> : <div>
-                <div> {(location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries") &&
-                    <div style={{ fontSize: '12px' }} > <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries")}> {location.asPath.slice(0, 18) === "/weed-dispensaries" ? 'weed-dispensaries' : "weed-deliveries"}</span>
-                        {" >"} <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries", params.StoreName, id)}> {params.StoreName}</span>
-                        {Boolean(params?.tab) && <span> {" > "}{params?.tab}</span>}
-                    </div>
-                }</div>
-                {Boolean((location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries"))
-                    ?
-                    <StoreDetails Despen={Despen} locationStore={location.asPath}></StoreDetails>
-                    :
-                    // <Embedded Despen={Despen} locationStore={location.asPath}></Embedded>
-                    ""
+        <div>
+            {!Despen.length ? <Loader /> : <div>
+                <div> 
+                    {(location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries") &&
+                        <div style={{ fontSize: '12px' }} >
+                            <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() =>  navigate.push('/')}> {`Home > `} </span>
 
+                            <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries")}> {location.asPath.slice(0, 18) === "/weed-dispensaries" ? 'weed-dispensaries' : "weed-deliveries"}</span>
+                            {" >"} 
+                            <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries", Despen[0]?.Store_Name.replaceAll(' ' , '-').toLowerCase() , id)}>{Despen[0]?.Store_Name}</span>
+                            {Boolean(params?.tab) && <span> {" > "}{params?.tab}</span>}
+                        </div>
+                    }
+                </div>
+                {Boolean((location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries"))
+                    ? <StoreDetails Despen={Despen} locationStore={location.asPath}></StoreDetails>  :  ""
                 }
                 <div className="container-fluid product_container" >
-
                     {!location.asPath.includes('/menu-integration') && <NewFlavourBanner delBtn={Despen}></NewFlavourBanner>}
                     <div className="row">
                         <div className="col-12">
@@ -351,7 +351,7 @@ export default function DispensoriesDetails(props) {
                                                 <Image unoptimized={true} width={100} height={100} src={gifimage.src} alt="no product" />
                                                 <span>{`Menu Not Available`}</span>
                                                 <p className="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses`}</p>
-                                                <span onClick={() => { navigate.push(-1) }} className="back">{`VIEW OTHER BUSINESSES`}</span>
+                                                <span onClick={() => { navigate.push(`/weed-deliveries/in/${Despen[0]?.Country &&  Despen[0]?.Country.replaceAll(" " , '-').toLowerCase()}/${Despen[0]?.State &&  Despen[0]?.State.replaceAll(" " , '-').toLowerCase()}/${Despen[0]?.City &&  Despen[0]?.City.replaceAll(" " , '-').toLowerCase()}`) }} className="back">{`VIEW OTHER BUSINESSES`}</span>
                                             </div>
                                         </div>
                                     ) :
@@ -435,7 +435,6 @@ export async function getStaticPaths() {
         fallback: 'blocking', // Set to 'blocking' to generate pages on-demand
     };
 }
-
 export async function getStaticProps(context) {
     const storeId = _.findIndex(context.params.details, item => !isNaN(parseInt(item)));
     console.log(context.params.details[storeId])

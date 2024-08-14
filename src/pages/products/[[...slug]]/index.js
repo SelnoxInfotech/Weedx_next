@@ -48,7 +48,6 @@ const Product = (props) => {
 
     };
     const [Category, SetCategory] = React.useState([])
-
     React.useEffect(() => {
         const fetchData = async () => {
             const apidata = await fetch("https://api.cannabaze.com/UserPanel/Get-Categories/");
@@ -58,7 +57,6 @@ const Product = (props) => {
         fetchData()
 
     }, [])
-
     React.useEffect(() => {
         SetLoading(() => {
             return props.loading
@@ -70,7 +68,6 @@ const Product = (props) => {
         dispatch({ type: 'City', City: props?.location?.city })
         dispatch({ type: 'route', route: props?.location?.route });
     }, [props]);
-
     React.useEffect(() => {
         if (slug?.length === 3) {
             SubCategoryApibyname(slug[0].toUpperCase()).then((response) => {
@@ -93,7 +90,6 @@ const Product = (props) => {
             }
         }
     }, [state.Location, params])
-
     function breadcrumCountry(params, name) {
         if (params === "Product") {
             navigate.push(`/products`)
@@ -117,18 +113,13 @@ const Product = (props) => {
             },
             body: JSON.stringify(object)
         });
-
         const data = await response.json();
         if (data !== "No Product Found" && data.length !== 0) {
-
             SetProduct(data);
         }
-
     }
-
     return (
         <React.Fragment>
-            {/* {state.permission === false && <Currentlocation></Currentlocation>} */}
             <div style={{ cursor: "pointer" }}>
                 <span onClick={() => navigate.push("/")}>{"Home"}</span>
                 {<span> {">"} <span onClick={() => breadcrumCountry("Product")}>Product</span></span>}
@@ -185,7 +176,7 @@ const Product = (props) => {
 
                                 <div className="col-12 mt-sm-4 mt-0">
                                     <ProductSearchResult RelatedProductResult={props.product} title={navigate.query?.slug ? slug[0] : "All Product"} />
-                                    <button onClick={moreProduct}>more Product</button>
+                                    {/* <button onClick={moreProduct}>more Product</button> */}
                                 </div>
                                 :
                                 <div className="container-fluid Product_Empty_container">
@@ -216,13 +207,8 @@ const Product = (props) => {
                                 </div>}
                 </div>
             </div>
-        </React.Fragment>
-    )
-}
+        </React.Fragment>)}
 export default Product
-
-
-
 export const getServerSideProps = async (context) => {
 
     const { req, res } = context;

@@ -3,21 +3,22 @@ import LawStateContent from "@/component/LawsComponent/LawStateContent";
 import Content from "@/component/LawsComponent/LawContentsJson";
 import Bgheader from "@/component/bgheader/Bgheader";
 import _ from "lodash";
-import classes from '@/styles/customstyle.module.scss'
-
+import classes from '@/styles/customstyle.module.scss';
+import LawState from '../../../component/ScoPage/LearnSeo';
+import  {useRouter} from "next/router";
 const Index = (props) => {
   const ref = useRef(null);
+  const router  = useRouter()
   return (
     <React.Fragment>
-      {/* <LawState Title={`Cannabis Law in ${GetContant?.name}`} State={GetContant?.Country} location={useLocation().pathname}></LawState> */}
+      <LawState Title={`Cannabis Law in ${props?.initialData?.name}`} State={props?.initialData?.Country} location={router.asPath}></LawState>
       <div className="container-fluid">
         <div className="row">
           <Bgheader text={props.initialData?.name} />
           <div className="law_contertn">
             <div className="col-12 lawStateDescriptionHeadings">
               <h1 className="LawStateDescriptionHeading">
-                {`Cannabis Law in `}
-                {props.initialData?.name}
+                {`Cannabis Law in `}{props.initialData?.name}
               </h1>
               <hr />
             </div>

@@ -145,7 +145,7 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
 
   return (
     <div className="col-12 Add_product_cart_right_container_summary">
-      <div className="col-12 fontStyle AddProdCartFont_weight">
+      <div className="col-12 AddProdCartFont_weight">
         <h5>Order Summary</h5>
       </div>
       {(Boolean(navigate.pathname !== "/checkout") || Boolean(navigate.pathname !== "/checkout")) ? (
@@ -244,7 +244,7 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
       </div>
       <div className="col-12 mt-2">
         {OpenPickup && (
-          <div className="col-lg-12  pickup_div fontStyle">
+          <div className="col-lg-12  pickup_div">
             <h3 className="addresHeading"> Pickup Address</h3>
             <p>{state.AllProduct[0]?.StoreAddress}</p>
           </div>
@@ -254,41 +254,37 @@ const AddToCartSummary = ({ SubmitData, CheckOut_Loading, SetLoading, SetDetails
         <div className=" add_prod_cart_summary_p">
           <p>Subtotal</p>
         </div>
-        <div className=" fontStyle">
+       
           <p>${state.Cart_subTotal}</p>
-        </div>
+        
       </div>
       <div className="col-12 order_summary_flex">
         <div className=" add_prod_cart_summary_p">
           <p>Est. excise tax</p>
         </div>
-        <div className=" fontStyle">
+      
           <p>$0</p>
-        </div>
+      
       </div>
       <div className="col-12 order_summary_flex">
         <div className=" add_prod_cart_summary_p">
           <p>State tax</p>
         </div>
-        <div className=" fontStyle">
           <p>$0</p>
-        </div>
       </div>
       <div className="col-12 order_summary_flex">
         <div className=" add_prod_cart_summary_p">
           <p>Delivery fee</p>
         </div>
-        <div className=" fontStyle">
           <p>${state.DeliveryPrice}</p>
-        </div>
       </div>
       <div className="col-12 order_Summary_total_container">
         <div className=" order_summary_flex">
-          <div className=" fontStyle add_prod_cart_summary_p">
+          <div className=" add_prod_cart_summary_p">
             <p className="m-0">Total Amount</p>
             {Boolean(state.CoupounAmount) && <p className="m-0">Discount Amount</p>}
           </div>
-          <div className=" fontStyle">
+          <div className=" ">
             {Boolean(state.CoupounAmount) ? <del   ><span className="m-0" style={{ color: '#fff', textDecoration: 'line-through 2px #000' }}>${state.Cart_subTotal}</span></del> : <p className="m-0">${state.Cart_subTotal}</p>}
             {Boolean(state.CoupounAmount) && <p className="m-0">${state.Cart_subTotal - state.CoupounAmount}</p>}
           </div>

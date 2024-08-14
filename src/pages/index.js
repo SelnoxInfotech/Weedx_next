@@ -9,15 +9,13 @@ const HomePageWeedBanner = dynamic(() => import('../component/home/HomePageWeedB
 const Map = dynamic(() => import('../component/home/map/map'));
 const Staticcontent = dynamic(() => import('../component/home/staticcontent'));
 const NewsBlog = dynamic(() => import('../component/home/Newsblog'));
-// const HomePageDealsSignup = dynamic(() => import('../component/home/HomePageDealsSignup'));
 const FeaturedBrand = dynamic(() => import('@/component/home/FeaturedBrand'));
-import Createcontext from "../hooks/context"
 export default function Home({ initialData }) {
   const [Skeleton, SetSkeleton] = React.useState(true)
-
+  const router= useRouter()
   function ShowCategoryProduct(id, name) {
 
-    Navigate(`/products/${name.replace(/%20| /g, "-").toLowerCase()}/${id}`);
+    router.push(`/products/${name.replace(/%20| /g, "-").toLowerCase()}/${id}`);
   }
   // console.log(initialData.brand)
   return (
@@ -35,7 +33,6 @@ export default function Home({ initialData }) {
       </div>
       <Staticcontent></Staticcontent>
       <NewsBlog></NewsBlog>
-      {/* <HomePageDealsSignup></HomePageDealsSignup> */}
     </>
   );
 }

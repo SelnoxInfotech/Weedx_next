@@ -107,7 +107,7 @@ export function Menuintegration_login({ open, setOpen }) {
            
             <Dialog open={open}  onClose={handleClose}>
                     <div className="login_signup_reset_container ">
-                        <div className='col-12 fontStyle signup_head'>
+                        <div className='col-12 signup_head'>
                             <h1>Log In</h1>
                         </div>
                         <form onSubmit={method.handleSubmit(Submit)}>

@@ -118,7 +118,7 @@ const Myreview = () => {
                     <span><IconButton onClick={() => router.push('-1')}><MdOutlineKeyboardArrowLeft color="#000000" /></IconButton></span>
                     <span onClick={() => router.push(-1)} className="BackPageBtn">Back</span>
                 </div>
-                <div className="col-12 mt-sm-4 mt-2 fontStyle"><h1 className="section_main_title">My Reviews</h1></div>
+                <div className="col-12 mt-sm-4 mt-2"><h1 className="section_main_title">My Reviews</h1></div>
                 <div className='reviews'>
                     {allstorereviews?.map((item) => (
                         <div className='myreviewBox' key={item.review.id}>

@@ -44,7 +44,7 @@ const RecentPost = () => {
                                                         style={{ pointerEvents: "none" }} />
                                                     </div>
                                                     <div className="new_blog_card_text">  
-                                                        <span className="fontStyle latest_font_size  ">
+                                                        <span className="latest_font_size  ">
                                                             {ele.Title}
                                                         </span>
                                                     </div>

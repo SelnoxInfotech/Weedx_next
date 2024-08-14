@@ -222,14 +222,10 @@ const Dispensaries = (props) => {
                         {Boolean(props.location.city) && <span> {">"} <span onClick={() => { Boolean(props.location.route) && breadcrumCountry("Country", "state", "City") }}>{props.location.city}</span></span>}
                         {Boolean(props.location.route) && <span> {">"} <span>{props.location.route}</span></span>}
                     </div>
-                    {DispensorShopLocation?.map((ele, index) => {
-                        return (
+                    {DispensorShopLocation?.map((ele, index) => {return (
                             <div key={index}>
-
-                                <h1 className="m-0"> <span className="dispensories_name">{ele.name}</span> <span className="dispensories_city">{ele.city}</span></h1>
-                            </div>
-                        )
-                    })}
+                                <h1 className="m-0"> <span className="dispensories_name">{ele.name}</span> <span className="dispensories_name">{ele.city}</span></h1>
+                            </div> )})}
                     <p className="m-0">{`Find Nearby Dispensaries in ${props.formatted_address} for Recreational & Medical weed. Browse Top Cannabis Products and Place Orders from Trusted Local Dispensaries.`}</p>
                 </div>
             </div>
@@ -259,22 +255,15 @@ const Dispensaries = (props) => {
                                     <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
                                 </TabPanel>
                             </Box>
-
                         </Box>
                         :
-
                         <Wronglocation title={' No dispensaries available'} description={'We apologize, but it appears that there are no dispensaries available in your location. Would you like to enter a different address to search for a nearby dispensary?'} />
-
-
                     )
                 }
-
             </div>
         </div>
     );
 };
-
-
 export const getServerSideProps = async (context) => {
 
     const cookies = cookie.parse(context.req.headers.cookie || '');

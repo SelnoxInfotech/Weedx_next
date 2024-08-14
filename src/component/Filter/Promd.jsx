@@ -467,7 +467,7 @@ const ProductFilter = ({ ProductFilterData, arr, Setarr1, Store_id }) => {
                                         {(Id === OpenSortedData) ? <FiChevronLeft /> : ""}
 
                                     </li>
-                                    <li className="fontStyle">{name}</li>
+                                    <li className="">{name}</li>
                                     <li>
                                         {(Id === OpenSortedData) ? "" : <FiChevronRight />}
 

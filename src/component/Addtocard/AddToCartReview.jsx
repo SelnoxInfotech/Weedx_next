@@ -248,7 +248,7 @@ const AddToCartReview = () => {
                                             </div>
                                         </div>
                                         <div className="col-2 text-center">
-                                            <span className="add_prod_span_amount fontStyle">${parseInt(ele.Price.SalePrice)}</span>
+                                            <span className="add_prod_span_amount ">${parseInt(ele.Price.SalePrice)}</span>
                                         </div>
                                         <div className="col-2 text-center">
                                             <div className='AddToCartReviewBtn ' >
@@ -265,7 +265,7 @@ const AddToCartReview = () => {
                                             </div>
                                         </div>
                                         <div className="col-2 text-center">
-                                            <span className="add_prod_span_amount fontStyle" value={ele.Price.SalePrice * ele.Cart_Quantity} >${parseInt(ele.Price.SalePrice * ele.Cart_Quantity)}</span>
+                                            <span className="add_prod_span_amount " value={ele.Price.SalePrice * ele.Cart_Quantity} >${parseInt(ele.Price.SalePrice * ele.Cart_Quantity)}</span>
                                         </div>
                                         <div className="col-1 text-center">
                                             <span><LoadingButton loading={LoadingDelete} className="center" style={{ width: "15px" }} onClick={(() => { DeleteItem(ele.Product_id, ele.id) })}> <RiDeleteBin6Line size={20} color='gray' /></LoadingButton></span>
@@ -295,7 +295,7 @@ const AddToCartReview = () => {
                                             </div>
                                         </div>
                                         <div className="col-2 text-center">
-                                            <span className="add_prod_span_amount fontStyle">${parseInt(ele.Price.SalePrice)}</span>
+                                            <span className="add_prod_span_amount ">${parseInt(ele.Price.SalePrice)}</span>
                                         </div>
                                         <div className="col-2 text-center">
                                             <div className='AddToCartReviewBtn ' >
@@ -367,7 +367,7 @@ const AddToCartReview = () => {
 
                                                 </div>
                                             </div>
-                                            <span className="add_prod_span_amount fontStyle" value={ele.Price.SalePrice * ele.Cart_Quantity} >${parseInt(ele.Price.SalePrice * ele.Cart_Quantity)}</span>
+                                            <span className="add_prod_span_amount " value={ele.Price.SalePrice * ele.Cart_Quantity} >${parseInt(ele.Price.SalePrice * ele.Cart_Quantity)}</span>
                                         </div>
                                     </div>
 

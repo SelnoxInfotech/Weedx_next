@@ -133,8 +133,14 @@ const Allblogs = (props) => {
                         </div>
                         <div className='col-3'>
                           <span className='action_icons'>
-
-                           
+                              <RWebShare
+                                data={{ url: `https://www.weedx.io/${router.pathname.substring(1)}/${modifystr(items.Title)}/${items.id}` }}
+                                sites={["facebook", "twitter", "whatsapp", "telegram", "linkedin", 'mail', 'copy']}
+                                onClick={() => console.info("share successful!")}
+                                color="#31B665"
+                              >
+                                <BsShareFill size={18} />
+                              </RWebShare>
                           </span>
                         </div>
                       </div>

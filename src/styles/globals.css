@@ -633,6 +633,41 @@ overflow-x: hidden; */
   .Dispansires_map {
     bottom: 0px;
   }
+  .StoreHeaderCard{
+    padding: 15px;
+  }
+  .StoreHeaderCard .newFlavour_image_container_height{
+    height: auto;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .StoreHeaderCard .newFlavour_image_container_height .newFlavourimage_div{
+    width: 80px;
+    height: auto;
+  }
+  .StoreHeaderCard .newFlavour_image_container_height .newFlavourimage_div img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid #31B655;
+  }
+  .StoreHeaderCard .newFlavour_image_container_height .New_flavour_font_size_head{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .StoreHeaderCard .newFlavour_image_container_height .newFlavourBannerSubHead{
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #474747;
+  }
+  .StoreHeaderCard .newFlavourContent_height .newFlav_btn_height{
+    width: 100%;
+    display: flex;
+  }
+ 
 }
 
 /* end */
@@ -1183,10 +1218,6 @@ scrollbar-width: none;  /* Firefox */
 }
 .x_icon{
   font-size: 18px;
-}
-
-.product_container{
-  /* height: 341px; */
 }
 
 
@@ -2980,7 +3011,6 @@ scrollbar-width: none;  /* Firefox */
   height: 245px;
   display: flex;
   align-items: center;
-  padding: 0px;
 }
 .new_flavourList_container{
   display: flex;
@@ -3008,20 +3038,9 @@ scrollbar-width: none;  /* Firefox */
   cursor: pointer;
 }
 
-
-
-.newFlavour_row {
-  /* display: grid; */
-  place-content: center;
-}
-
 .New_flavour_font_size_head {
   font-size: 16px;
   font-weight: 700;
-}
-
-.new_flavour_flex {
-  display: flex;
 }
 
 #NewFlav_star {
@@ -3036,10 +3055,6 @@ scrollbar-width: none;  /* Firefox */
 
 #new_flavCircle {
   font-size: 12px;
-}
-
-#NewFlav_margins {
-  margin-left: 5px;
 }
 
 .newFlav_closed {
@@ -9036,17 +9051,8 @@ footer .footer_sub_heading{
     .dispensories_name {
       font-size: 20px;
     }
-    .newFlavourimage_div {
-      height: 70px;
-      width: 70px;
-    }
     .newFlavour_container {
-      height: auto;
-      padding: 20px 0 10px;
-    }
-    .newFlavour_image_container_height {
-      height: auto;
-    }
+      height: auto;    }
     .newFlavourContent_height {
       height: auto;
     }
@@ -9882,9 +9888,7 @@ footer .footer_sub_heading{
     .delivery_items_card_flex .deliverItemCard_icons{
       flex-wrap: wrap;
     }
-    .dispensories_content_paragraphs span:last-child{
-      display: none;
-    }
+   
   }
   @media(max-width:320px) {
     
@@ -11170,7 +11174,7 @@ margin: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  border-top: 1px solid rgba(116, 116, 116, 0.4392156863);
+  border-top: 1px solid rgba(116, 116, 116, 0.43);
   font-weight: 700;
   font-size: 14px;
   padding: 10px 0 0;
@@ -11197,9 +11201,8 @@ margin: 0;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
 @media (max-width: 992px) {
-  .blogEditorContainer .blog_Image .blog_Title {
+  .blogEditorContainer .blog_Image .blog_Title{
     font-weight: 700;
     font-size: 20px;
     width: 70%;
@@ -11207,22 +11210,22 @@ margin: 0;
   .blog_text_container h1 {
     font-size: 26px;
   }
-  .blog_text_container h2 {
+  .blogEditorContainer .blog_text_container h2  {
     font-size: 22px;
   }
-  .blog_text_container h3 {
+  .blogEditorContainer .blog_text_container h3 {
     font-size: 20px;
   }
-  .blog_text_container h4 {
+  .blogEditorContainer  .blog_text_container h4 {
     font-size: 16px;
   }
-  .blog_text_container h5 {
+  .blogEditorContainer .blog_text_container h5 {
     font-size: 14px;
   }
-  .blog_text_container h6 {
+  .blogEditorContainer .blog_text_container h6 {
     font-size: 12px;
   }
-  .blog_text_container p {
+  .blogEditorContainer .blog_text_container p {
     font-size: 14px;
   }
 }
@@ -11249,10 +11252,10 @@ margin: 0;
   .extra_function_destop {
     display: none !important;
   }
-  .blogcardDescription p {
+  .blogListWrapper .blogListCard .blogcardText a .blogcardDescription p {
     margin-bottom: 0;
   }
-  .blogcardHeading {
+  .blogListWrapper .blogListCard .blogcardText a h2.blogcardHeading {
     font-size: 14px;
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -11260,18 +11263,18 @@ margin: 0;
     overflow: hidden;
     margin-bottom: 4px;
   }
-  .blogcardDescription {
+.blogListWrapper .blogListCard .blogcardText a .blogcardDescription {
     font-size: 12px;
   }
 }
 @media (max-width: 480px) {
-  .blogcardText .blogcardDescription {
+  .blogListWrapper .blogListCard .blogcardText a .blogcardDescription {
     height: 75px;
   }
-  .blogListCard {
+  .blogListWrapper .blogListCard {
     width: 100%;
   }
-  .blog_Title {
+  .blogEditorContainer .blog_Image .blog_Title{
     font-weight: 700;
     font-size: 24px;
     width: 90%;
@@ -11279,19 +11282,19 @@ margin: 0;
   .blog_text_container h1 {
     font-size: 24px;
   }
-  .blog_text_container h2 {
+  .blogEditorContainer .blog_text_container h2 {
     font-size: 22px;
   }
-  .blog_text_container h3 {
+  .blogEditorContainer .blog_text_container h3 {
     font-size: 20px;
   }
-  .blog_text_container h4 {
+  .blogEditorContainer .blog_text_container h4 {
     font-size: 14px;
   }
-  .blog_text_container h6 {
+  .blogEditorContainer .blog_text_container h6 {
     font-size: 12px;
   }
-  .blog_text_container p {
+  .blogEditorContainer .blog_text_container p {
     font-size: 16px;
   }
   .blog_Image {
@@ -11299,9 +11302,6 @@ margin: 0;
   }
 }
 /*# sourceMappingURL=Blogs.css.map */
-
-
-
 .AddProductCartContainerinner {
   display: block;
   height: auto;
@@ -11315,7 +11315,6 @@ margin: 0;
 .add_prod_cart_p p{
   color: #b7b7b7db;
   font-size: 14px;
- 
 }
 .addToCart_deliver {
   height: 59px;
@@ -11340,34 +11339,27 @@ margin: 0;
 .Add_prod_content_cont{
  flex: 1;
 }
-
 .add_prod_para_font h5 {
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
 }
-
 .add_prod_para_margin {
   margin-top: 0px;
 }
-
 .Add_prod_sub_minus_cont {
   border: 1px solid #dee2e6;
   height: 30px;
   width: 14.666667% !important;
 }
-
-
 .addprod_quant {
   width: 39px !important;
 }
-
 .addprod_quant p {
   margin-left: 14px;
   font-weight: 700;
   font-size: 18px;
 }
-
 .add_prod_cart_btn {
   border-style: none;
   background-color: white;
@@ -11377,23 +11369,19 @@ margin: 0;
   width: 29px;
   font-weight: 700;
 }
-
-
 .add_prod_btn_amount {
   display: flex;
 }
-
 .AddToCartReviewBtn {
-border: 1px solid #dee2e6;
-width: 120px;
-height: 28px;
-display: flex;
-align-items: center;
-justify-content: space-between;
+  border: 1px solid #dee2e6;
+  width: 120px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
 .addToCart_btn {
-width: 50px;
+  width: 50px;
 }
 
 .AddToCartCount {

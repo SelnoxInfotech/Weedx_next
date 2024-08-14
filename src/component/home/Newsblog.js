@@ -21,6 +21,7 @@ const Newsblog = () => {
            let newdata= _.sortBy(data,
                 [function (o) { return o.Publish_Date; }]).reverse()
                 SetNews(newdata)
+                console.log(newdata)
          }
         getApi()
 
@@ -37,7 +38,7 @@ const Newsblog = () => {
                     <div className="blogs_card_slider">
                        { Boolean(News.length !==0) ? <ScrollContainer className="ScrollContainerRelative">
                            
-                                {News?.slice(1,8)?.map((ele, index) => {
+                                {News?.slice(0,8)?.map((ele, index) => {
                                     return (
                                         <Link href={`/${ ele.Category_Name==='BLOGS'? "blogs":'cannabis-news'}/${modifystr(ele.Title)}/${ele.id}`} key={index}> 
                                             <div className="new_blog_card">
@@ -52,7 +53,7 @@ const Newsblog = () => {
                                                     style={{ pointerEvents: "none" }} />
                                                 </div>
                                                 <div className="new_blog_card_text">  
-                                                    <span className="fontStyle latest_font_size text-capitalize">
+                                                    <span className=" latest_font_size text-capitalize">
                                                         {ele.Title}
                                                     </span>
                                                   

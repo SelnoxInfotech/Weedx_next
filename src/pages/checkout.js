@@ -174,7 +174,7 @@ const CheckOutMainPage = () => {
                         </div>
 
                         <div className="row m-2">
-                            <div className="col-lg-12 mx-auto checkout_main_page_addtocart_review fontStyle font_size_paragraph">
+                            <div className="col-lg-12 mx-auto checkout_main_page_addtocart_review font_size_paragraph">
                                 <p>Review</p>
                                 <AddToCartReview />
                             </div>

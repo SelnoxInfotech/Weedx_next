@@ -62,7 +62,7 @@ const DeliveryOption = ({ SetShowData, DeliveryOptionData, address  , Hours  ,Ti
                 <div className="row">
                     <div className="col-12 center">
                         <div className="col-12 col-lg-12 col-md-12 col-sm-12  DeliveryOption_container">
-                            <div className="col-12 height_for_inner_div fontStyle " style={{    display: 'flex' ,justifyContent: 'space-between' , marginBottom:"12px"}}>
+                            <div className="col-12 height_for_inner_div" style={{    display: 'flex' ,justifyContent: 'space-between' , marginBottom:"12px"}}>
                                 <h1 className='font_size_paragraph'>{state.selectDeliveryoptions === "delivery_btn" ? "Delivery" : "Pickup" }  Options</h1>
                                
                                {

@@ -19,7 +19,7 @@ const StoreDetail1 = ({ storeDetails }) => {
     <div className="container-fluid container-lg-full mt-3">
       <div className="amenities_container">
         <div className="row center">
-          <div className="col-12  fontStyle">
+          <div className="col-12  ">
             <h2 className="amenties_nameHeading">Amenities</h2>
           </div>
         </div>
@@ -86,7 +86,7 @@ const StoreDetail1 = ({ storeDetails }) => {
         <div className="col-lg-8 store_detail_container my-2 order-sm-first order-last">
           <div className="row">
             <div className="destop_view">
-              <div className="col-12 StoreDetail_paragraph fontStyle store_middle_content_top ">
+              <div className="col-12 StoreDetail_paragraph  store_middle_content_top ">
                 <p>About Us</p>
               </div>
               <div
@@ -102,7 +102,7 @@ const StoreDetail1 = ({ storeDetails }) => {
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-                  <div className="col-12 StoreDetail_paragraph fontStyle store_middle_content_top ">
+                  <div className="col-12 StoreDetail_paragraph  store_middle_content_top ">
                     <p>About Us</p>
                   </div>
                 </AccordionSummary>
@@ -155,7 +155,7 @@ const StoreDetail1 = ({ storeDetails }) => {
         </div>
         <div className="col-lg-4 storeDetail_container my-2">
           <div className="">
-            <h3 className="fontStyle store_detail_menu_heading">
+            <h3 className=" store_detail_menu_heading">
               {storeDetails[0]?.Store_Name}
             </h3>
             <div className="col-12">

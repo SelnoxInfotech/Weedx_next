@@ -42,9 +42,6 @@ const Login = () => {
 
         },
         ).then(response => {
-
-
-
             if (response.data !== "Not Authorised") {
                 let date = new Date();
                 date.setTime(date.getTime() + 60 * 60 * 24 * 365)
@@ -97,7 +94,7 @@ const Login = () => {
     return (
         <div className="login_signup_reset_container ">
             {state.permission === false && <Currentlocation></Currentlocation>}
-            <div className='col-12 fontStyle signup_head'>
+            <div className='col-12 signup_head'>
                 <h1>Log In</h1>
             </div>
             <form onSubmit={method.handleSubmit(Submit)}>

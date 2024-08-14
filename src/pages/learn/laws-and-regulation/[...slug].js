@@ -61,7 +61,9 @@ export async function generateStaticParams() {
       category: product.name,
       product: product.id,
     }))
+    
 }
+
 
 export async function getServerSideProps(context) {
   let responseData = {}

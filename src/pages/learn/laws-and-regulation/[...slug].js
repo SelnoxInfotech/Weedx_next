@@ -4,7 +4,7 @@ import Content from "@/component/LawsComponent/LawContentsJson";
 import Bgheader from "@/component/bgheader/Bgheader";
 import _ from "lodash";
 import classes from '@/styles/customstyle.module.scss';
-import LawState from '../../../component/ScoPage/LearnSeo';
+import {LawState} from '../../../component/ScoPage/LearnSeo';
 import  {useRouter} from "next/router";
 const Index = (props) => {
   const ref = useRef(null);

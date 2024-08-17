@@ -1,7 +1,3 @@
 {
-  "extends": ["next", "next/core-web-vitals"],
-  "rules": {
-    "no-console": "off", // Disable the no-console rule
-    "semi": ["error", "always"] // Ensure semicolons are used (example rule)
-  }
+  "extends": "next/core-web-vitals"
 }

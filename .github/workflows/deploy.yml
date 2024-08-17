@@ -56,8 +56,8 @@ jobs:
             echo "Node.js not found. Installing Node.js..."
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
             source ~/.nvm/nvm.sh
-            nvm install 20
-            nvm use 20
+            nvm install 21
+            nvm use 21
           fi
 
           # Ensure npm is installed

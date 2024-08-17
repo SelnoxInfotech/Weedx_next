@@ -18,12 +18,12 @@ const Openingtime = ({storeDetails , heading , type ,key}) => {
               <hr></hr>
               {
                     type?.map((items , idxe )=>{
-                      console.log(items)
+                      // console.log(items)
                       if(items.close){
                         return<p key={idxe} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items.day} `}</span> <span className='w-50'>Close</span> </p>
                       }else{
                         return items.Open?.map((ite,index)=>{
-                          console.log(ite)
+                          // console.log(ite)
                           if(index === 0 ){
                              if(ite.Time1 ==="24 Hours"  ||  ite.Time2 === '24 Hours'){
                               return <p key={index} className={day.getDay()-1 === idxe ? 'currentDay d-flex' : 'd-flex'}><span className='w-50'>{`${items?.day} `}</span> <span className='w-50'>{`24 Hours`}</span> </p>

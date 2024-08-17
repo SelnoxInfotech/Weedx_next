@@ -302,7 +302,7 @@ export default function DispensoriesDetails(props) {
             }
         }
     }
-    console.log(params.asPath ,'dfhgfhxfn fdb xhxf')
+    // console.log(params.asPath ,'dfhgfhxfn fdb xhxf')
     return (
       
             // !Despen.length ? <Loader /> 

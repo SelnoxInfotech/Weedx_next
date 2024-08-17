@@ -199,7 +199,7 @@ export async function getStaticProps(context) {
   try {
     const res = await axios.get('https://api.cannabaze.com/UserPanel/Get-News/');
     const data = _.orderBy(res.data, ['created'], ['desc']); // Assuming 'created' is a date field  
-    console.log(data)
+    // console.log(data)
     return {
       props: {
         initialData: data,

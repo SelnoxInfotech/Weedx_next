@@ -110,7 +110,7 @@ const Myreview = () => {
             return secs + "secs ago";
         }
     };
-    console.log(allstorereviews)
+    // console.log(allstorereviews)
     return (
         <div className='container'>
             <div className='myreviewContainer'>

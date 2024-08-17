@@ -32,7 +32,7 @@ const Product = (props) => {
     const [subcategories, setsubcategories] = useState([])
     const [Product, SetProduct] = React.useState(props.product)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState(null); 
 
     async function ShowCategoryProduct(id, name) {
         SetLoading(true);
@@ -48,17 +48,6 @@ const Product = (props) => {
         navigate.replace(`/products/${modifystr(slug[0].toLowerCase())}/${modifystr(option.name.toLowerCase())}/${option.id}`)
 
     };
-    const [Category, SetCategory] = React.useState([])
-
-    React.useEffect(() => {
-        const fetchData = async () => {
-            const apidata = await fetch("https://api.cannabaze.com/UserPanel/Get-Categories/");
-            const data = await apidata.json()
-            SetCategory(data)
-        }
-        fetchData()
-
-    }, [])
 
     React.useEffect(() => {
         SetLoading(() => {

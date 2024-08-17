@@ -24,9 +24,9 @@ const CheckAgeEligbilityPopup = ({value}) => {
         cookies.set('CheckAge', 0, { expires: date });
         if (Country === "USA") {
             const setLocation = {
-                country: 'United States',
-                state: 'New York',
-                city: 'New York',
+                country: 'United-States',
+                state: 'New-York',
+                city: 'New-York',
                 formatted_address: 'New York, NY, USA'
               };
             cookies.set('fetchlocation', JSON.stringify(setLocation), { 

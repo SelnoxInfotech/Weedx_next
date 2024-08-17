@@ -28,10 +28,10 @@ const NewFlavourBanner = ({ delBtn }) => {
             <div className={location.pathname.includes('/menu-integration') ? 'row integratdclass  newFlavour_row' : "row  newFlavour_row"} >
                 <div className="col-12 newFlavour_container  position-relative">
                     {
-                        delBtn?.map((data) => {
+                        delBtn?.map((data ,index)  => {
                             return (
                                 <React.Fragment>
-                                    <div className="d-md-block d-none">
+                                    <div key={index} className="d-md-block d-none">
                                         <div className="row" >
                                             <div className="col-md-2 col-sm-4  col-3 newFlavour_image_container_height">
                                                 <div className='newFlavourimage_div'>

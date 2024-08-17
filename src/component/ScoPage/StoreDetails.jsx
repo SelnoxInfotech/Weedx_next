@@ -4,7 +4,7 @@ import React from "react";
 
 function StoreDetails({ Despen, locationStore }) {
     const location = useRouter();
-    console.log(location.pathname.slice(0, 16) === "/weed-deliveries" , location.pathname.slice(0, 16))
+    // console.log(location.pathname.slice(0, 16) === "/weed-deliveries" , location.pathname.slice(0, 16))
     const tab = location.query.details ? location.query.details[1] : '';
 
     // Set default meta tags

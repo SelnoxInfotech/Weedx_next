@@ -302,31 +302,36 @@ export default function DispensoriesDetails(props) {
             }
         }
     }
-    console.log(params.asPath ,'dfhgfhxfn fdb xhxf')
+    // console.log(params.asPath ,'dfhgfhxfn fdb xhxf')
     return (
       
             // !Despen.length ? <Loader /> 
             // : 
             <div>
-                <div> {(location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries") &&
+                <div> 
+                    {(location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries") &&
                     <div style={{ fontSize: '12px' }} > <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries")}> {location.asPath.slice(0, 18) === "/weed-dispensaries" ? 'weed-dispensaries' : "weed-deliveries"}</span>
                         {" >"} <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries", params.StoreName, id)}> {params.StoreName}</span>
                         {Boolean(params?.tab) && <span> {" > "}{params?.tab}</span>}
                     </div>
-                }</div>
-                {Boolean((location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries"))
+                }
+                </div>
+                <div>
+                    {Boolean((location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries"))
                     ?
                     <StoreDetails Despen={Despen} locationStore={location.asPath}></StoreDetails>
                     :
                     // <Embedded Despen={Despen} locationStore={location.asPath}></Embedded>
                     ""
+}
+                        <div>
 
                             <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries")}> {location.asPath.slice(0, 18) === "/weed-dispensaries" ? 'weed-dispensaries' : "weed-deliveries"}</span>
                             {" >"} 
                             <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries", Despen[0]?.Store_Name.replaceAll(' ' , '-').toLowerCase() , id)}>{Despen[0]?.Store_Name}</span>
                             {Boolean(params?.tab) && <span> {" > "}{params?.tab}</span>}
                         </div>
-                    }
+                    
                 </div>
                 {Boolean((location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries"))
                     ? <StoreDetails Despen={Despen} locationStore={location.asPath}></StoreDetails>  :  ""

@@ -195,7 +195,7 @@ export default Allblogs
 // }
 
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   try {
     const res = await axios.get('https://api.cannabaze.com/UserPanel/Get-News/');
     const data = _.orderBy(res.data, ['created'], ['desc']); // Assuming 'created' is a date field  
@@ -204,6 +204,7 @@ export async function getStaticProps(context) {
       props: {
         initialData: data,
       },
+      //  revalidate: 60,
     };
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -211,6 +212,7 @@ export async function getStaticProps(context) {
       props: {
         initialData: [],
       },
+      //  revalidate: 60,
     };
   }
 }

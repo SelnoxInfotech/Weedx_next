@@ -30,8 +30,8 @@ const NewFlavourBanner = ({ delBtn }) => {
                     {
                         delBtn?.map((data ,index)  => {
                             return (
-                                <React.Fragment>
-                                    <div key={index} className="d-md-block d-none">
+                                <React.Fragment key={index}>
+                                    <div  className="d-md-block d-none">
                                         <div className="row" >
                                             <div className="col-md-2 col-sm-4  col-3 newFlavour_image_container_height">
                                                 <div className='newFlavourimage_div'>

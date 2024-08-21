@@ -15,7 +15,7 @@ import { modifystr } from '../../hooks/utilis/commonfunction';
 import Image from 'next/image';
 import Link from 'next/link';
 // import { DespensioriesItem } from '@/hooks/apicall/api';
-const DeliveryServices = ({ link, title, data , location }) => {
+const DeliveryServices = ({ link, title, data , location , initialData }) => {
     let DeliveryService = data || []
     const navigate = useRouter()
     const { state } = React.useContext(Createcontext)
@@ -27,7 +27,34 @@ const DeliveryServices = ({ link, title, data , location }) => {
         event.target.onerror = null; // Reset to prevent infinite loop
         event.target.src = "/weedx.iologo.png"; // Replace with your fallback image source
     };
-
+    const getDeliveryHref = () => {
+        if (state.Country && state.State && state.City && state.route) {
+          return `/weed-deliveries/in/${state.Country.toLowerCase()}/${state.State.toLowerCase()}/${state.City.toLowerCase()}/${state.route.toLowerCase()}`;
+        } else if (state.Country && state.State && state.City) {
+          return `/weed-deliveries/in/${state.Country.toLowerCase()}/${state.State.toLowerCase()}/${state.City.toLowerCase()}`;
+        } else if (state.Country && state.State) {
+          return `/weed-deliveries/in/${state.Country.toLowerCase()}/${state.State.toLowerCase()}`;
+        } else if (state.Country) {
+          return `/weed-deliveries/in/${state.Country.toLowerCase()}`;
+        } else {
+          return '/'; // Default fallback if no valid state is provided
+        }
+      };
+      const getDispensariesHref = () => {
+        if (state?.Country && state?.State && state?.City && state?.route) {
+          return `/weed-dispensaries/in/${state?.Country.toLowerCase()}/${state.State.toLowerCase()}/${state?.City.toLowerCase()}/${state?.route.toLowerCase()}`;
+        } else if (state?.Country && state?.State && state?.City) {
+          return `/weed-dispensaries/in/${state.Country.toLowerCase()}/${state.State.toLowerCase()}/${state.City.toLowerCase()}`;
+        } else if (state?.Country && state?.State) {
+          return `/weed-dispensaries/in/${state.Country.toLowerCase()}/${state.State.toLowerCase()}`;
+        } else if (state?.Country) {
+          return `/weed-dispensaries/in/${state.Country.toLowerCase()}`;
+        } else {
+          return '/'; // Default fallback if no valid state is provided
+        }
+      };
+    
+    
 
     return (
         <React.Fragment>
@@ -41,7 +68,7 @@ const DeliveryServices = ({ link, title, data , location }) => {
                                     <h2 className='section_main_title'>{title}</h2>
                                     {link === "weed-deliveries" && <h3 className='section_main_subtitle'>{location}</h3>}
                                 </div>
-                                <Link href={`/${link}/in/${state?.Country?.toLowerCase()}/${state?.State?.toLowerCase()}/${state?.City?.toLowerCase()}`}>
+                                <Link href={link === "weed-deliveries" ?getDeliveryHref() : getDispensariesHref()}>
                                     <span className="viewallbtn">View All <FaArrowRight /></span>
                                 </Link>
                             </div>

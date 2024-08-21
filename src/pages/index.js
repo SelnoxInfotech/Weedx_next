@@ -29,9 +29,9 @@ export default function Home({ initialData }) {
       <HomePageSco location={useRouter().pathname}></HomePageSco>
         <HomePageBanner props={initialData.topbanner}> </HomePageBanner>
         <CategoryProduct Category={initialData.category} ShowCategoryProduct={ShowCategoryProduct} Skeleton={false}></CategoryProduct>
-        <DeliveryServices Skeleton={Skeleton} link={"weed-deliveries"} title={"Delivery services"} data={initialData.GetDelivery} location={initialData.formatted_address}></DeliveryServices>
+        <DeliveryServices Skeleton={Skeleton} link={"weed-deliveries"} title={"Delivery services"} data={initialData.GetDelivery}  initialData={initialData} location={initialData.formatted_address}></DeliveryServices>
         <HomePageWeedBanner props={initialData.bottembannner}></HomePageWeedBanner>
-        <DeliveryServices Skeleton={Skeleton} link={"weed-dispensaries"} title={"Shop Dispensaries Near You"} data={initialData.Dispensaries} location={initialData.formatted_address}></DeliveryServices>
+        <DeliveryServices Skeleton={Skeleton} link={"weed-dispensaries"} title={"Shop Dispensaries Near You"} data={initialData.Dispensaries} initialData={initialData} location={initialData.formatted_address}></DeliveryServices>
         <FeaturedBrand CardDataArray={initialData.brand} />
         <div className="col-12 border" style={{ height: "300px", position: "relative", top: "15px" }}>
           <Map height={"297px"} width={"100%"}></Map>
@@ -123,7 +123,10 @@ export async function getServerSideProps(context) {
       brand: getbrand || [],
       GetDelivery: GetDelivery1 || [],
       Dispensaries: Dispensaries1 || [],
-      formatted_address: cookies.formatted_address
+      formatted_address: cookies.formatted_address,
+      City: transformString(cookies.city) || '',
+      State: transformString(cookies.state) || '',
+      Country: transformString(cookies.country) || '',
     };
 
     return {

@@ -37,7 +37,7 @@ export default function Home({ initialData }) {
           <Map height={"297px"} width={"100%"}></Map>
         </div>
         <Staticcontent></Staticcontent>
-        <NewsBlog></NewsBlog>
+        <NewsBlog data={initialData.news}></NewsBlog>
     </>
   );
 }
@@ -87,7 +87,7 @@ export async function getServerSideProps(context) {
       return response;
     };
 
-    const [banner, callcategory, bannner2, brand, GetDelivery, Dispensaries] = await Promise.all([
+    const [banner, callcategory, bannner2, brand, GetDelivery, Dispensaries, news] = await Promise.all([
       fetchWithTimeout('https://api.cannabaze.com/UserPanel/Get-AllHomePageBanner/').catch(() => null),
       fetchWithTimeout('https://api.cannabaze.com/UserPanel/Get-Categories/').catch(() => null),
       fetchWithTimeout('https://api.cannabaze.com/UserPanel/Get-PromotionalBanners/').catch(() => null),
@@ -106,15 +106,17 @@ export async function getServerSideProps(context) {
         },
         body: JSON.stringify(object)
       }).catch(() => null),
+      fetchWithTimeout('https://apiv2.cannabaze.com/UserPanel/Get-News/').catch(() => null),
     ]);
 
-    const [topbanner, category, bottembannner, getbrand, GetDelivery1, Dispensaries1] = await Promise.all([
+    const [topbanner, category, bottembannner, getbrand, GetDelivery1, Dispensaries1 , news1] = await Promise.all([
       banner ? banner.json().catch(() => []) : [],
       callcategory ? callcategory.json().catch(() => []) : [],
       bannner2 ? bannner2.json().catch(() => []) : [],
       brand ? brand.json().catch(() => []) : [],
       GetDelivery ? GetDelivery.json().catch(() => []) : [],
-      Dispensaries ? Dispensaries.json().catch(() => []) : []
+      Dispensaries ? Dispensaries.json().catch(() => []) : [],
+      news ? news.json().catch(() => []) : []
     ]);
     const responseData = {
       topbanner: topbanner || [],
@@ -123,6 +125,7 @@ export async function getServerSideProps(context) {
       brand: getbrand || [],
       GetDelivery: GetDelivery1 || [],
       Dispensaries: Dispensaries1 || [],
+      news:news1,
       formatted_address: cookies.formatted_address,
       City: transformString(cookies.city) || '',
       State: transformString(cookies.state) || '',

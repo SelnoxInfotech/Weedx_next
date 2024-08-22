@@ -10,22 +10,8 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import { modifystr } from "../../hooks/utilis/commonfunction";
 import DeliverServiceSkeleton from '@/component/skeleton/DeliveryServicesSkeleton'
 import Image from "next/image";
-const Newsblog = () => {
-    const [News, SetNews] = useState([])
-    useEffect(() => {
-        const getApi = async () => {
-            const res = await fetch("https://api.cannabaze.com/UserPanel/Get-News/");
-            const data = await res.json();
-            // SetNews(data)
-          
-           let newdata= _.sortBy(data,
-                [function (o) { return o.Publish_Date; }]).reverse()
-                SetNews(newdata)
-                // console.log(newdata)
-         }
-        getApi()
-
-    }, [])
+const Newsblog = (props) => {
+     const News =  props.data
     return (
         <React.Fragment>
             <div className="px-sm-0 px-3">
@@ -38,7 +24,7 @@ const Newsblog = () => {
                     <div className="blogs_card_slider">
                        { Boolean(News.length !==0) ? <ScrollContainer className="ScrollContainerRelative">
                            
-                                {News?.slice(0,8)?.map((ele, index) => {
+                                {News?.map((ele, index) => {
                                     return (
                                         <Link href={`/${ ele.Category_Name==='BLOGS'? "blogs":'cannabis-news'}/${modifystr(ele.Title)}/${ele.id}`} key={index}> 
                                             <div className="new_blog_card">

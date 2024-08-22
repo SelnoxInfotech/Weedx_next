@@ -73,7 +73,7 @@ const Allblogs = (props) => {
       <NewsSeo location={router.pathname.substring(1)} />
       {state.permission && <Currentlocation />}
       <div>
-        <Blogheaders title="Latest news" />
+        <Blogheaders title="Blogs" />
         <div className="blogListWrapper">
           {props?.initialData.map((items, index) => {
             const modifiedSlug = items.Url_slug ? modifystr(items.Url_slug) : modifystr(items.Title);
@@ -170,7 +170,7 @@ const Allblogs = (props) => {
                       </span>
                     </div>
                     <div className="col-3">
-                      {/* Additional actions can be added here */}
+                         <button> loadmore</button>
                     </div>
                   </div>
                 </div>
@@ -198,7 +198,16 @@ export default Allblogs
 
 export async function getStaticProps(context) {
   try {
-    const res = await fetch('https://api.cannabaze.com/UserPanel/Get-News/');
+    const res = await fetch('https://apiv2.cannabaze.com/UserPanel/Get-GetNewsbycategory/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "category": 2,
+        "limit": 10
+    })
+    }).catch(() => null);
     const json =  await  res.json()
     const data = _.orderBy(json, ['created'], ['desc']); // Assuming 'created' is a date field  
     // console.log(data)

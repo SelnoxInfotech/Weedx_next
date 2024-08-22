@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import useStyles from '../../../styles/style';
 import Link from 'next/link';
 import Content from '@/component/LawsComponent/LawContentsJson'
-import  Law from '@/component/ScoPage/LearnSeo';
+import  {Law} from '@/component/ScoPage/LearnSeo';
 const Index = (props) => {
     const router = useRouter();
     const classes = useStyles();
@@ -23,6 +23,7 @@ const Index = (props) => {
     };
     return (
         <div className='container-fluid'>
+            <Law location={router.asPath}></Law>
                 <div className='row'>
             <div className='col-12'>
                 <Box className={``} sx={{ width: '100%', typography: 'body1', }}>
@@ -42,7 +43,7 @@ const Index = (props) => {
                                     <div>
                                         {/* <Law location={useLocation().pathname}></Law> */}
                                         <div className="row ">
-                                            <h2 className="canabisLawMainHeadings">{`Cannabis Law in USA, Canada & Internationals`}</h2>
+                                            <h1 className="canabisLawMainHeadings">{`Cannabis Law in USA, Canada & Internationals`}</h1>
                                             <Bgheader  text="Law"/>
                                             <LawsOptions data={props?.data} />
                                         </div>

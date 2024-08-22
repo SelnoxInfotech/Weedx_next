@@ -4,18 +4,19 @@ import Tooltip from '@mui/material/Tooltip';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import ProductSearchResult from "../../../../../../component/productcard/ProductSearchResult"
 import Axios from "axios";
-import style from "../../../../../../styles/style"
+import dynamic from 'next/dynamic'
 // import { useParams, usenavigate.push, useLocation } from 'react-router-dom';
 import { useRouter } from "next/router";
 import Review from "../../../../../../component/Review/Review"
 import { AiOutlineLeft } from "react-icons/ai";
-import { ProductDetailsSeo } from "../../../../../../component/ScoPage/ProductSeo"
+const ProductDetailsSeo = dynamic(() => import('../../../../../../component/ScoPage/ProductDetailsSeo'), { ssr: true });
+// import { ProductDetailsSeo } from "../../../../../../component/ScoPage/ProductSeo"
 import { product_OverAllGet_Review, Product_Add_Review, Product_Get_UserComment, Product_Get_Review, Delete_Review, ProductHelpFull } from "../../../../../../hooks/utilis/ProductApi"
 import Createcontext from "../../../../../../hooks/context"
 import _ from 'lodash'
 import Link from "next/link";
 import { makeStyles } from "@material-ui/core/styles";
-import Loader from "../../..../../../../../../component/Loader/Loader";
+import Loader from "../../../../../../component/Loader/Loader";
 import { modifystr } from "../../../../../../hooks/utilis/commonfunction";
 const usePlaceholderStyles = makeStyles(theme => ({
   placeholder: {
@@ -24,6 +25,7 @@ const usePlaceholderStyles = makeStyles(theme => ({
   }
 }));
 const NewProductDetails = (props) => {
+  //  const {ProductDetailsSeo} =  Seo
   // console.log(props.data[0]?.Store_id , "potpduct")  
   const { id } = props.id;
   const [discount, setdiscount] = React.useState({
@@ -203,9 +205,9 @@ const NewProductDetails = (props) => {
   }
 
 
-  React.useEffect(() => {
-    h(Price.length !== 0 && Product.Prices[0].Price.filter((data) => data.id === parseInt(Price[0].Item_id)))
-  }, [Price])
+  // React.useEffect(() => {
+  //   h(Price.length !== 0 && Product.Prices[0].Price.filter((data) => data.id === parseInt(Price[0].Item_id)))
+  // }, [Price])
 
   function discountype(type, amount) {
     switch (type) {
@@ -241,23 +243,26 @@ const NewProductDetails = (props) => {
 
   return (
     <div className="container-fluid">
-      {Object.keys(Product).length !== 0
-        &&
-        <ProductDetailsSeo
-          robot={location.pathname.slice(0, 9) === "/products" ? "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1" : "NOINDEX,INDEXIFEMBEDDED"}
-          rating={props.data[0]?.rating || 0}
-          image={props.data[0]?.images[0]?.image || "/image/weedx.io%20logo.png"}
-          category={props.data[0].category_name}
-          Subcategorge={props.data[0].SubcategoryName}
-          id={props.data[0].id}
-          price={props.data[0]?.Prices[0]?.Price[0]?.SalePrice}
-          sellername={props.data[0].StoreName}
-          Description={props.data[0].Product_Description}
-          Productnm={props.data[0].Product_Name} Productname={`Buy ${props.data[0].Product_Name} at ${props.data[0].StoreName} on WeedX.io - Your Trusted Marketplace`} ProductCategory={props.data[0].category_name} StoreName={props.data[0].StoreName} City={props.data[0].Store_City} State={props.data[0].Store_State} location={location.pathname}
-          TotalRating={props.data[0].TotalRating}
-        ></ProductDetailsSeo>
-      }
 
+      <ProductDetailsSeo
+        robot={location.pathname.slice(0, 9) === "/products" ? "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1" : "NOINDEX,INDEXIFEMBEDDED"}
+        rating={props.data[0]?.rating || 0}
+        image={props.data[0]?.images[0]?.image || "/image/weedx.io%20logo.png"}
+        category={props.data[0].category_name}
+        Subcategorge={props.data[0].SubcategoryName}
+        id={props.data[0].id}
+        price={props.data[0]?.Prices[0]?.Price[0]?.SalePrice}
+        sellername={props.data[0].StoreName}
+        Description={props.data[0].Product_Description}
+        Productnm={props.data[0].Product_Name}
+        Productname={`Buy ${props.data[0].Product_Name} at ${props.data[0].StoreName} on WeedX.io - Your Trusted Marketplace`}
+        ProductCategory={props.data[0].category_name}
+        StoreName={props.data[0].StoreName}
+        City={props.data[0].Store_City}
+        State={props.data[0].Store_State}
+        location={location.pathname}
+        TotalRating={props.data[0].TotalRating}
+      ></ProductDetailsSeo>
       <span
         onClick={() => {
           const isOnProductsPage = location.pathname.slice(0, 9) === "/products";
@@ -321,19 +326,22 @@ const NewProductDetails = (props) => {
         SetReview={SetReview}
         type={"product"}
       ></Review>
+
+
+
     </div>
   )
 }
 export default NewProductDetails
 
-export const getStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: "blocking"
-  };
-};
+// export const getStaticPaths = async () => {
+//   return {
+//     paths: [],
+//     fallback: "blocking"
+//   };
+// };
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const { id } = context.params;
 
   // Replace `id` with actual dynamic value in your API call

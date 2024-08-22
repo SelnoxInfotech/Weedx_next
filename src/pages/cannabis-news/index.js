@@ -77,7 +77,6 @@ const Allblogs = (props) => {
           {props?.initialData.map((items, index) => {
             const modifiedSlug = items.Url_slug ? modifystr(items.Url_slug) : modifystr(items.Title);
             const blogUrl = `/${router.pathname.substring(1)}/${modifiedSlug}/${items.id}`;
-            const sanitizedHtml = items.Description?.split('</p>')[0];
             return (
               <div className="row blogListCard mx-0" key={index}>
                 <div className="col-3 p-0 d-flex align-items-center">
@@ -205,7 +204,7 @@ export async function getStaticProps(context) {
       },
       body: JSON.stringify({
         "category": 1,
-        "limit": 10
+        "limit": 1000
     })
     }).catch(() => null);
     const json =  await  res.json()

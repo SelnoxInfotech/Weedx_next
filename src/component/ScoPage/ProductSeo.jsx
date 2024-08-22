@@ -127,7 +127,7 @@ function ProductCategorySeo({ categoryname, location }) {
 
 
 
-export { ProductDetailsSeo, ProductSeo, ProductCategorySeo }
+export { ProductSeo, ProductCategorySeo }
 
 
 

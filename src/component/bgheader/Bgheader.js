@@ -5,7 +5,7 @@ const Bgheader = ({text}) => {
   return (
     <div className='bgHedaer'>
       <div className='text_on_Learn_banner'>
-        <h1>{text}</h1>
+        <h2>{text}</h2>
         </div>
     </div>
   )

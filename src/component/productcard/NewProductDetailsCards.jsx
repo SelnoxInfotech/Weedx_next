@@ -51,9 +51,11 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
     const { state, dispatch } = React.useContext(Createcontext)
 
     const [AddTOCard, SetAddToCard] = React.useState(() => {
+        if (typeof window !== 'undefined') {
         const saved = localStorage.getItem("items");
         const initialValue = JSON.parse(saved);
         return initialValue || []
+        }
     })
     const [NewData, SetNewData] = React.useState([])
     const [Whishlist, SetWishList] = React.useState(false)
@@ -573,13 +575,13 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                                 }
                             </IconButton>
                             <span className="shareiconcontainer">
-                                <RWebShare
-                                    data={{ url: window.location.href }}
+                                {/* <RWebShare
+                                    // data={{ url: window.location.href }}
                                     sites={["facebook", "twitter", "whatsapp", "telegram", "linkedin", 'mail', 'copy']}
                                     onClick={() => console.info("share successful!")}
                                     color="#31B665" >
                                     <BsShareFill />
-                                </RWebShare>
+                                </RWebShare> */}
                             </span>
 
                         </div>

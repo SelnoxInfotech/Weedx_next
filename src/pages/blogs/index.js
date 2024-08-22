@@ -205,7 +205,7 @@ export async function getStaticProps(context) {
       },
       body: JSON.stringify({
         "category": 2,
-        "limit": 10
+        "limit": 1000
     })
     }).catch(() => null);
     const json =  await  res.json()

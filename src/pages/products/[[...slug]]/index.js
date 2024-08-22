@@ -111,6 +111,8 @@ const Product = (props) => {
             SetProduct(data);
         }
     }
+    // categorya
+
     return (
         <React.Fragment>
             <div style={{ cursor: "pointer" }}>
@@ -119,11 +121,11 @@ const Product = (props) => {
                 {(navigate?.query?.slug !== undefined) && <span> {">"} <span onClick={() => breadcrumCountry("categoryname", navigate?.query?.slug[0])}>{navigate?.query?.slug[0]}</span></span>}
                 {(navigate?.query?.slug !== undefined && navigate?.query?.slug?.length === 3) && <span> {">"} <span >{navigate?.query?.slug[1]}</span></span>}
             </div>
-            {!params.id ? <ProductSeo location={navigate?.asPath}></ProductSeo> :
+            {!Boolean(props.id) ? <ProductSeo location={navigate?.asPath}></ProductSeo> :
                 <ProductCategorySeo categoryname={slug[0]} location={navigate?.asPath} ></ProductCategorySeo>}
             <div className="row">
                 <div className="col-12 mt-4">
-                    <CategoryProduct Category={Category} ShowCategoryProduct={ShowCategoryProduct}></CategoryProduct>
+                    <CategoryProduct Category={Category} ShowCategoryProduct={ShowCategoryProduct} ></CategoryProduct>
                 </div>
                 {
                     slug?.length <= 3 &&
@@ -303,13 +305,14 @@ export const getServerSideProps = async (context) => {
                 }
                 break;
         }
-
+console.log(context.params.slug?.length > 1)
         return {
             props: {
                 product: product,
                 loading: false,
                 location: locationData,
-                category: category
+                category: category,
+                id:context.params.slug?.length > 1 ? context?.query?.slug[1] : ''
             },
         };
 

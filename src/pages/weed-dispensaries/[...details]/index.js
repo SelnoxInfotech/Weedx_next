@@ -2,12 +2,13 @@
 import React, { useEffect } from "react";
 // import { useParams, usenavigate.push, useLocation, Link } from "react-router-dom";
 import { useRouter } from "next/router";
-import Image from 'next/image'
 import axios from "axios";
 import dynamic from 'next/dynamic'
 import useStyles from "../../../styles/style"
-import ProductFilter from "../../../component/Filter/ProductFilter";
-import ProductList from "../../../component/productcard/ProductList";
+// import ProductFilter from "../../../component/Filter/ProductFilter";
+const ProductFilter = dynamic(() => import('../../../component/Filter/ProductFilter'), { ssr: true });
+const ProductList = dynamic(() => import('../../../component/productcard/ProductList'), { ssr: true });
+// import ProductList from "../../../component/productcard/ProductList";
 import { BsLayoutSplit } from "react-icons/bs"
 import { MdOutlineBrandingWatermark } from "react-icons/md"
 import { MdOutlinePriceChange } from "react-icons/md"
@@ -16,48 +17,41 @@ import { GiWeightScale } from "react-icons/gi"
 import _ from "lodash"
 // import NewFlavourBanner from "../../../component/StoreDetails/NewFlavourBanner";
 const NewFlavourBanner = dynamic(() => import('../../../component/StoreDetails/NewFlavourBanner'), { ssr: true });
-const StoreDetailMenuItem = dynamic(() => import('../../../component/StoreDetails/StoreDetailComponent/StoreDetailMenuItem'), { ssr: true });
 // import StoreDetailMenuItem from "../../../component/StoreDetails/StoreDetailComponent/StoreDetailMenuItem";
+const StoreDetailMenuItem = dynamic(() => import('../../../component/StoreDetails/StoreDetailComponent/StoreDetailMenuItem'), { ssr: true });
 import CategoryProduct from "../../../component/category/category";
-const ComponentStoreDetails = dynamic(() => import('../../../component/StoreDetails/StoreDetailComponent/ComponentStoreDetails'), { ssr: true });
 // import ComponentStoreDetails from "../../../component/StoreDetails/StoreDetailComponent/ComponentStoreDetails"
+const ComponentStoreDetails = dynamic(() => import('../../../component/StoreDetails/StoreDetailComponent/ComponentStoreDetails'), { ssr: true });
 import { AiOutlineDeploymentUnit } from "react-icons/ai";
 // import { ProductHelpFull } from '../../Product/ProductApi'
 import Review from "../../../component/Review/Review";
-// import { StoreDetails } from "../../../component/ScoPage/StoreDetails"
 const StoreDetails = dynamic(() => import('../../../component/ScoPage/StoreDetails'), { ssr: true });
+// import { StoreDetails } from "../../../component/ScoPage/StoreDetails"
 import { Store_Add_Review, Store_OverAllGet_Review, Store_Get_UserComment, Store_Get_Review, Delete_StoreReview, StoreHelpFull } from "../../../hooks/apicall/api";
 import Createcontext from "../../../hooks/context"
 import Loader from "../../../component/Loader/Loader";
-import gifimage from '../../../../public/image/gif.svg'
-// import { Embedded } from "../../../Component/ScoPage/Embedded";
-// import Menuintregrate from "../../StoreDetail/StoreDetailComponent/Menuintregrate";
-// import { useLoaderData } from 'react-router-dom';
+
 import DispensoriesAddressSkeleton from "../../../component/skeleton/DashBoardSkeleton/DispensoriesAddressSkeleton";
 import { modifystr } from "../../../hooks/utilis/commonfunction";
 import Swal from 'sweetalert2';
+import gifimage from '../../../../public/image/gif.svg'
 import Link from "next/link";
+import Image from "next/image";
 export default function DispensoriesDetails(props) {
     const navigate = useRouter()
     const { id, storeData, product } = props.params
     let tab = (navigate.query.details.length === 2) ? "menu" : navigate.query.details[1]
-    const data = false
     const Despen = [storeData] || []
-    // const params = useParams()
+    const DespensariesData = product
+    const data = false
     const { state, dispatch } = React.useContext(Createcontext)
     const location = useRouter()
     const params = useRouter();
     const [reviewtype, setReviewtype] = React.useState('All')
-    // const index = _.findIndex(params.query.details, item => !isNaN(parseInt(item)));
-    //  const id =12
-
-    // const { tab, Category, StoreName } = params
     const classes = useStyles()
-    const [Category, SetCategory] = React.useState([])
-    const [DespensariesData, SetDespensariesProductData] = React.useState([])
+    const [category, SetCategory] = React.useState([])
     const [reviewloading, setReviewloading] = React.useState(false)
-    const [productload, setProductload] = React.useState(true)
-    // const [Despen, SetDespens] = React.useState([])
+    const [productload, setProductload] = React.useState(false)
     const [Rating, SetRating] = React.useState()
     const [api, SetApi] = React.useState(false)
     const [AllReview, SetReview] = React.useState([])
@@ -74,73 +68,23 @@ export default function DispensoriesDetails(props) {
             SetDespens(data)
             dispatch({ type: 'Embeddedstore', Embeddedstore: data })
         }
-        else {
-            // axios.get(`https://api.cannabaze.com/UserPanel/Get-StoreById/${id}`, {
-            // }).then(response => {
-            //     if (response.data.length === 0) {
-            //         navigate.push("/404")
-            //     } else {
-            //         SetDespens(response.data)
-            //         if (Boolean(location.pathname.slice(0, 16) === "/weed-deliveries") || Boolean(location.pathname.slice(0, 18) === "/weed-dispensaries")) {
-            //             if (Boolean(location.pathname.slice(0, 16) === "/weed-deliveries" && modifystr(response.data[0].Store_Name) !== StoreName)) {
-            //                 if (Boolean(tab)) {
-
-            //                     navigate.push(`/weed-deliveries/${modifystr(response.data[0].Store_Name)}/${tab}/${id}`, { replace: false })
-            //                 }
-            //                 else {
-            //                     navigate.push(`/weed-deliveries/${modifystr(response.data[0].Store_Name)}/${id}`, { replace: false })
-            //                 }
-            //             }
-            //             else {
-            //                 if (modifystr(response.data[0].Store_Name) !== StoreName) {
-            //                     if (Boolean(tab)) {
-
-            //                         navigate.push(`/weed-dispensaries/${modifystr(response.data[0].Store_Name)}/${tab}/${id}`, { replace: false })
-            //                     }
-            //                     else {
-            //                         navigate.push(`/weed-dispensaries/${modifystr(response.data[0].Store_Name)}/${id}`, { replace: false })
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //         else if (Boolean(location.pathname.slice(0, 17) === "/menu-integration")) {
-
-            //             if (Boolean(location.pathname.slice(0, 17) === "/menu-integration" && modifystr(response.data[0].Store_Name) !== StoreName)) {
-            //                 if (Boolean(tab)) {
-
-            //                     navigate.push(`/menu-integration/${modifystr(response.data[0].Store_Name)}/${tab}/${id}`, { replace: false })
-            //                 }
-            //                 else {
-            //                     navigate.push(`/menu-integration/${modifystr(response.data[0].Store_Name)}/${id}`, { replace: false })
-            //                 }
-            //             }
-
-
-
-            //         }
-            //         // Boolean(location.pathname.slice(0 ,16) === "/weed-deliveries" &&  response.data[0].Store_Name !== StoreName) && navigate.push(`/weed-deliveries/${modifystr(response.data[0].Store_Name)}/${id}` , { replace: true })
-            //     }
-
-            // }).catch((error) => {
-            // })
-        }
-
         axios.post("https://api.cannabaze.com/UserPanel/Get-CategoryByStore/ ",
             {
                 "Store_Id": parseInt(id)
             }
         ).then(async response => {
             const d = []
-            response.data.map(async (data) => {
-                await d.push(data[0])
-                var uniqueUsersByID = await _.uniqBy(d, 'id'); //removed if had duplicate id
+            response.data.map((data) => {
+                d.push(data[0])
+                var uniqueUsersByID = _.uniqBy(d, 'id'); //removed if had duplicate id
                 SetCategory(uniqueUsersByID)
                 if (Category !== undefined) {
-                    uniqueUsersByID.forEach((data) => {
+                    uniqueUsersByID.map((data) => {
                         if (Category === data.name.toLowerCase()) {
                             ShowCategoryProduct(data.id, Category)
                         }
                         return data
+
                     })
                 }
 
@@ -149,11 +93,6 @@ export default function DispensoriesDetails(props) {
         }).catch(
             function (error) {
             })
-        axios.get(`https://api.cannabaze.com/UserPanel/Get-ProductAccordingToDispensaries/${id}`, {
-        }).then(response => {
-            SetDespensariesProductData(response.data)
-            setProductload(false)
-        })
     }, [id])
 
     useEffect(() => {
@@ -175,6 +114,7 @@ export default function DispensoriesDetails(props) {
             }).catch(() => { })
         }
     }, [reviewtype, id, api])
+
     function SelectionTab(item) {
         if (Boolean(location.asPath.slice(0, 16) === "/weed-deliveries") || Boolean(location.asPath.slice(0, 18) === "/weed-dispensaries")) {
 
@@ -196,8 +136,8 @@ export default function DispensoriesDetails(props) {
         ).then(response => {
             dispatch({ type: 'Loading', Loading: false })
             if (Category !== name) {
-                if (Boolean(location.pathname.slice(0, 16) === "/weed-deliveries") || Boolean(location.pathname.slice(0, 18) === "/weed-dispensaries")) {
-                    window.history.replaceState(null, '', `${location.pathname.slice(0, 16) === "/weed-deliveries" ? "/weed-deliveries" : "/weed-dispensaries"}/${modifystr(Despen[0]?.Store_Name.toLowerCase())}/${"menu"}/${modifystr(name.toLowerCase())}/${id}`);
+                if (Boolean(location.asPath.slice(0, 16) === "/weed-deliveries") || Boolean(location.asPath.slice(0, 18) === "/weed-dispensaries")) {
+                    window.history.replaceState(null, '', `${location.asPath.slice(0, 16) === "/weed-deliveries" ? "/weed-deliveries" : "/weed-dispensaries"}/${modifystr(Despen[0]?.Store_Name.toLowerCase())}/${"menu"}/${modifystr(name.toLowerCase())}/${id}`);
                 }
             }
             SetDespensariesProductData(response.data)
@@ -214,6 +154,7 @@ export default function DispensoriesDetails(props) {
     { Id: 5, Name: "Weight", Type1: "Any", Type2: "$25", Price: "$100", Icons: <GiWeightScale className={classes.muiIcons} /> },
     { Id: 6, Name: "Unit", Type1: "Any", Type2: "$25", Price: "$100", Icons: <AiOutlineDeploymentUnit className={classes.muiIcons} /> },
     ]
+
     useEffect(() => {
         if (reviewtype === "product") {
             axios.post('https://api.cannabaze.com/UserPanel/GetallProductReviewbyStore/', {
@@ -247,8 +188,6 @@ export default function DispensoriesDetails(props) {
 
         }
     }, [reviewtype, id, api])
-
-
     React.useEffect(() => {
         if (state.login && state.Profile.id !== undefined && id !== undefined) {
             Store_Get_UserComment(state.Profile.id, id).then((res) => {
@@ -271,10 +210,6 @@ export default function DispensoriesDetails(props) {
 
         }
     }, [state.Profile, id, api])
-
-
-
-
     const onSubmit = () => {
 
         const formdata = new FormData();
@@ -308,20 +243,7 @@ export default function DispensoriesDetails(props) {
 
         })
     };
-    const [scroll, SetScroll] = React.useState(true)
 
-    // React.useEffect(() => {
-    //     if (scroll) {
-    //         document.documentElement.scrollTo({
-    //             top: 0,
-    //             left: 0,
-    //             behavior: "instant",
-    //         });
-    //         SetScroll(() => false)
-    //     }
-
-    // }, [])
-    // const Swal = require('sweetalert2')
     function handleDelete(id) {
         Swal.fire({
             title: "Are you sure?",
@@ -380,140 +302,197 @@ export default function DispensoriesDetails(props) {
             }
         }
     }
-    console.log( Despen , 'sdgfdgf h')
+    // console.log(params.asPath ,'dfhgfhxfn fdb xhxf')
     return (
-        <div>{
-            !Despen.length ? <Loader /> : 
-            <div>
-                <p> {(location.pathname.slice(0, 18) === "/weed-dispensaries" || location.pathname.slice(0, 16) === "/weed-deliveries") &&
-                    <div style={{ fontSize: '12px' }} > <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.pathname.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries")}> {location.pathname.slice(0, 18) === "/weed-dispensaries" ? 'weed-dispensaries' : "weed-deliveries"}</span>
-                        {" >"} <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.pathname.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries", params.StoreName, id)}> {params.StoreName}</span>
+
+        // !Despen.length ? <Loader /> 
+        // : 
+        <div>
+            {/* <div>
+                {location.asPath.slice(0, 18) === "/weed-dispensaries" && (
+                    <div style={{ fontSize: '12px' }}>
+                        <span
+                            style={{ fontSize: '12px', cursor: 'pointer' }}
+                            onClick={() => navigationtab('/weed-dispensaries')}
+                        >
+                            weed-dispensaries
+                        </span>
+                        {" >"}
+                        <span
+                            style={{ fontSize: '12px', cursor: 'pointer' }}
+                            onClick={() => navigationtab('/weed-dispensaries', params.StoreName, id)}
+                        >
+                            {params.StoreName}
+                        </span>
                         {Boolean(params?.tab) && <span> {" > "}{params?.tab}</span>}
                     </div>
-                }</p>
-                {Boolean((location.pathname.slice(0, 18) === "/weed-dispensaries" || location.pathname.slice(0, 16) === "/weed-deliveries"))
+                )}
+            </div> */}
+            <div>
+                {Boolean((location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries"))
                     ?
-                    <StoreDetails Despen={Despen} locationStore={location.pathname}></StoreDetails>
+                    <StoreDetails Despen={Despen} locationStore={location.asPath}></StoreDetails>
                     :
-                    // <Embedded Despen={Despen} locationStore={location.pathname}></Embedded>
+                    // <Embedded Despen={Despen} locationStore={location.asPath}></Embedded>
                     ""
-
                 }
-                <div className="container-fluid product_container" >
-            
-                  { !location.pathname.includes('/menu-integration') && <NewFlavourBanner delBtn={Despen}></NewFlavourBanner>}
-                    <div className="row">
-                        <div className="col-12">
-                         {Boolean((location.pathname.slice(0, 18) === "/weed-dispensaries" || location.pathname.slice(0, 16) === "/weed-deliveries")) &&   <StoreDetailMenuItem tab={tab || "Menu"} SelectionTab={SelectionTab}></StoreDetailMenuItem>}
-                        </div>
-                        {
-                            (tab === 'menu' || tab === undefined) &&
-                            <React.Fragment>
-                             {!productload ?<> {!location.pathname.includes('/menu-integration') ? 
-                                 (   Boolean(DespensariesData?.length)?
+                <div>
+
+                    <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries")}> {location.asPath.slice(0, 18) === "/weed-dispensaries" ? 'weed-dispensaries' : "weed-deliveries"}</span>
+                    {" >"}
+                    <span style={{ fontSize: '12px', cursor: 'pointer' }} onClick={() => navigationtab(location.asPath.slice(0, 18) === "/weed-dispensaries" ? '/weed-dispensaries' : "/weed-deliveries", Despen[0]?.Store_Name.replaceAll(' ', '-').toLowerCase(), id)}>{Despen[0]?.Store_Name}</span>
+                    {Boolean(params?.tab) && <span> {" > "}{params?.tab}</span>}
+                </div>
+
+            </div>
+            {Boolean((location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries"))
+                ? <StoreDetails Despen={Despen} locationStore={location.asPath}></StoreDetails> : ""
+            }
+            <div className="container-fluid product_container" >
+                {!location.asPath.includes('/menu-integration') && <NewFlavourBanner delBtn={Despen}></NewFlavourBanner>}
+                <div className="row">
+                    <div className="col-12">
+                        {Boolean((location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries")) && <StoreDetailMenuItem tab={tab || "Menu"} SelectionTab={SelectionTab}></StoreDetailMenuItem>}
+                    </div>
+                    {
+                        (tab === 'menu' || tab === undefined) &&
+                        <React.Fragment>
+                            {!productload ? <> {!location.asPath.includes('/menu-integration') ?
+                                (Boolean(DespensariesData.length) ?
                                     <>
-                                        <CategoryProduct Category={Category} ShowCategoryProduct={ShowCategoryProduct}> </CategoryProduct>
+                                        <CategoryProduct Category={category} ShowCategoryProduct={ShowCategoryProduct}> </CategoryProduct>
                                         <div className="col-12 productCat_cont" style={{ display: "contents" }}>
                                             <ProductFilter Store_id={Despen[0]?.id}
-                                            id={id}
+                                                id={id}
                                                 ProductFilterData={ProductFilterData}
-                                                Setarr1={SetDespensariesProductData}
+                                                Setarr1={DespensariesData}
                                                 arr={DespensariesData}
                                             />
-                                            <div className={location.pathname.includes('/menu-integration') ? "col-12 col-lg-9 col-xxl-10 prod_cat_right_sec":"col-12 col-lg-9 col-xxl-10"}>
-                                                <ProductList arr={DespensariesData}  link={Boolean(location.pathname.slice(0, 18) === "/weed-dispensaries" || location.pathname.slice(0, 16) === "/weed-deliveries") ?"products" :"menu-integration"}/>
+                                            <div className={location.asPath.includes('/menu-integration') ? "col-12 col-lg-9 col-xxl-10 prod_cat_right_sec" : "col-12 col-lg-9 col-xxl-10"}>
+                                                <ProductList arr={DespensariesData} link={Boolean(location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries") ? "products" : "menu-integration"} />
                                             </div>
                                         </div>
                                     </>
                                     :
-                                      <div id='oopss'>
+                                    <div id='oopss'>
                                         <div id='error-text'>
-                                            <Image unoptimized={true} src={gifimage.src} alt="no product" width={400} height={400}/>
+                                            <Image unoptimized={true} width={100} height={100} src={gifimage.src} alt="no product" />
                                             <span>{`Menu Not Available`}</span>
                                             <p className="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses`}</p>
-                                            <span onClick={()=>{navigate.push(-1)}} className="back">{`VIEW OTHER BUSINESSES`}</span>
+                                            <span onClick={() => { navigate.push(`/weed-deliveries/in/${Despen[0]?.Country && Despen[0]?.Country.replaceAll(" ", '-').toLowerCase()}/${Despen[0]?.State && Despen[0]?.State.replaceAll(" ", '-').toLowerCase()}/${Despen[0]?.City && Despen[0]?.City.replaceAll(" ", '-').toLowerCase()}`) }} className="back">{`VIEW OTHER BUSINESSES`}</span>
                                         </div>
-                                      </div>
-                                 ):
-                                    (  !productload ? 
-                                    ( Boolean(DespensariesData.length)?<div className="col-12 productCat_cont" style={{ display: "contents" }}>
+                                    </div>
+                                ) :
+                                (!productload ?
+                                    (Boolean(DespensariesData.length) ? <div className="col-12 productCat_cont" style={{ display: "contents" }}>
                                         <ProductFilter Store_id={Despen[0]?.id}
                                             ProductFilterData={ProductFilterData}
                                             Setarr1={SetDespensariesProductData}
                                             arr={DespensariesData}
                                             id={id}
                                         />
-                                        <div className={location.pathname.includes('/menu-integration') ? "col-12 col-lg-9 col-xxl-10 prod_cat_right_sec":"col-12 col-lg-9 col-xxl-10"}>
-                                            <ProductList arr={DespensariesData}  link={Boolean(location.pathname.slice(0, 18) === "/weed-dispensaries" || location.pathname.slice(0, 16) === "/weed-deliveries") ?"products" :"menu-integration"}/>
+                                        <div className={location.asPath.includes('/menu-integration') ? "col-12 col-lg-9 col-xxl-10 prod_cat_right_sec" : "col-12 col-lg-9 col-xxl-10"}>
+                                            <ProductList arr={DespensariesData} link={Boolean(location.asPath.slice(0, 18) === "/weed-dispensaries" || location.asPath.slice(0, 16) === "/weed-deliveries") ? "products" : "menu-integration"} />
                                         </div>
                                     </div>
+                                        :
+                                        <div id='oopss'>
+                                            <div id='error-text'>
+                                                <Image unoptimized={true} width={100} height={100} src={gifimage.src} alt="no product" />
+                                                <span>{`Menu Not Available`}</span>
+                                                <p className="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses `}</p>
+                                                <span className="back">{`VIEW OTHER BUSINESSES`}</span>
+                                            </div>
+                                        </div>)
                                     :
-                                    <div id='oopss'>
-                                        <div id='error-text'>
-                                            <Image unoptimized={true} width={100} height={100} src={gifimage.src} alt="no product"/>
-                                            <span>{`Menu Not Available`}</span>
-                                            <p className="p-a">{`This business hasn't posted its menu on Weedx.io yet. Click below to discover other nearby businesses `}</p>
-                                            <span className="back">{`VIEW OTHER BUSINESSES`}</span>
-                                        </div>
-                                    </div>)
-                                    :
-                                    <DispensoriesAddressSkeleton/>
-                                    )
-                                }
-                                </>:
-                                <DispensoriesAddressSkeleton/>}
-                            </React.Fragment>
-                        }
-                        {
-                            tab === 'store-details' && <ComponentStoreDetails storeDetails={Despen}></ComponentStoreDetails>
-                        }
-                        {
-                            tab === 'review' && <Review
-                                HellFull={HellFull}
-                                type={`store`}
-                                reviewtype={reviewtype}
-                                setReviewtype={setReviewtype}
-                                delBtn={Despen}
-                                handleEdit={handleEdit}
-                                reviewloading={reviewloading}
-                                handleDelete={handleDelete}
-                                Rating={Rating}
-                                onSubmit={onSubmit}
-                                GetProductReview={GetProductReview}
-                                SetGetProductReview={SetGetProductReview}
-                                AllReview={AllReview}
-                                SetReview={SetReview}></Review>
-                        }
-                        {
-                            tab === 'deals' && <div className="noReview">
-                                <div className="noreviewicon">
-                                    <div className="iconcircl"><Image  unoptimized={true} width={100} height={100} src={'/image/nodeal.png'} className="nodealsicon" alt="no Deals" title="no Deals" /></div>
-                                </div>
-                                <h3 className="noreview_title">{`Discover More Savings Soon!`}</h3>
-                                <p className="noreview_description w-lg-50 ">{`It looks like there are no active deals at the moment at `}<Link target="_blank" href={`/weed-dispensaries/${Despen[0]?.Store_Name.toLowerCase().replaceAll(" ", "-")}/${Despen[0]?.id}`}><b>{Despen[0]?.Store_Name}</b></Link>{`. Don't worry, though – our partnered stores frequently update their promotions. Be sure to check back regularly for exciting discounts and special offers on your favorite products.`}</p>
-                                <p className="noreview_description w-lg-50">{`In the meantime, explore the diverse range of products available at `}<Link target="_blank" href={`/weed-dispensaries/${Despen[0]?.Store_Name.toLowerCase().replaceAll(" ", "-")}/${Despen[0]?.id}`}><b>{Despen[0]?.Store_Name}</b></Link>{`. We're constantly working to bring you the best deals, so stay tuned for upcoming promotions.`}</p>
+                                    <DispensoriesAddressSkeleton />
+                                )
+                            }
+                            </> :
+                                <DispensoriesAddressSkeleton />}
+                        </React.Fragment>
+                    }
+                    {
+                        tab === 'store-details' && <ComponentStoreDetails storeDetails={Despen}></ComponentStoreDetails>
+                    }
+                    {
+                        tab === 'review' && <Review
+                            HellFull={HellFull}
+                            type={`store`}
+                            reviewtype={reviewtype}
+                            setReviewtype={setReviewtype}
+                            delBtn={Despen}
+                            handleEdit={handleEdit}
+                            reviewloading={reviewloading}
+                            handleDelete={handleDelete}
+                            Rating={Rating}
+                            onSubmit={onSubmit}
+                            GetProductReview={GetProductReview}
+                            SetGetProductReview={SetGetProductReview}
+                            AllReview={AllReview}
+                            SetReview={SetReview}></Review>
+                    }
+                    {
+                        tab === 'deals' && <div className="noReview">
+                            <div className="noreviewicon">
+                                <div className="iconcircl"> <Image unoptimized={true} width={100} height={100} src={'/image/nodeal.png'} className="nodealsicon" alt="no Deals" title="no Deals" /></div>
                             </div>
-                        }
-                    </div>
+                            <h3 className="noreview_title">{`Discover More Savings Soon!`}</h3>
+                            <p className="noreview_description w-lg-50 ">{`It looks like there are no active deals at the moment at `}<Link target="_blank" href={`/weed-dispensaries/${Despen[0]?.Store_Name.toLowerCase().replaceAll(" ", "-")}/${Despen[0]?.id}`}><b>{Despen[0]?.Store_Name}</b></Link>{`. Don't worry, though – our partnered stores frequently update their promotions. Be sure to check back regularly for exciting discounts and special offers on your favorite products.`}</p>
+                            <p className="noreview_description w-lg-50">{`In the meantime, explore the diverse range of products available at `}<Link target="_blank" href={`/weed-dispensaries/${Despen[0]?.Store_Name.toLowerCase().replaceAll(" ", "-")}/${Despen[0]?.id}`}><b>{Despen[0]?.Store_Name}</b></Link>{`. We're constantly working to bring you the best deals, so stay tuned for upcoming promotions.`}</p>
+                        </div>
+                    }
                 </div>
             </div>
-        }
         </div>
+
     )
 }
 
 
 
-export async function getServerSideProps(context) {
- 
-     const index = _.findIndex(context.params.details, item => !isNaN(parseInt(item)));
+
+export async function getStaticPaths() {
+    // Fetch all possible paths here
+    // Example: const paths = [{ params: { storeId: '1' } }, { params: { storeId: '2' } }];
+    const paths = []; // Return an empty array to generate no pages at build time
 
     return {
-      props: {
-        params: {
-          id: context.params.details[index] ,
-          tab: !isNaN(parseInt(context.params.details[1])) ? "menu" : context.params.details[1] // Handle case where id might be undefined
-        }
-      }
+        paths,
+        fallback: 'blocking', // Set to 'blocking' to generate pages on-demand
     };
-  }
+}
+export async function getStaticProps(context) {
+    const storeId = _.findIndex(context.params.details, item => !isNaN(parseInt(item)));
+    console.log(context.params.details[storeId])
+    // console.log(context.params.details[storeId])
+    let data = [];
+    let productdata = []
+    try {
+        const response = await axios.get(`https://api.cannabaze.com/UserPanel/Get-StoreById/${context.params.details[storeId]}`);
+        const product = await axios.get(`https://api.cannabaze.com/UserPanel/Get-ProductAccordingToDispensaries/${context.params.details[storeId]}`);
+        productdata = product.data
+        data = response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+
+    if (data.length === 0) {
+        return {
+            notFound: true, // Redirect to 404 if no data found
+        };
+    }
+
+    return {
+        props: {
+            params: {
+                id: context.params.details[storeId],
+                tab: !isNaN(parseInt(context.params.details[1])) ? "menu" : context.params.details[1],
+                storeData: data[0],
+                product: productdata
+            }
+        },
+    };
+}
+
+

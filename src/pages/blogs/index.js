@@ -11,7 +11,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { BsShareFill } from "react-icons/bs";
 import { NewsSeo } from "@/component/ScoPage/NewsSeo";
 import DeliveryItemsCardSkeleton from '@/component/skeleton/DeliveryItemsCardSkeleton.jsx';
-import _ from "lodash";
+import _, { assignWith } from "lodash";
 import Image from 'next/image';
 import Createcontext from '@/hooks/context.js';
 import { RWebShare } from "react-web-share";
@@ -19,6 +19,7 @@ import Cookies from 'universal-cookie';
 import Blogheaders from '@/component/Pageheaders/Blogheaders';
 import { modifystr } from "@/hooks/utilis/commonfunction"
 import Currentlocation from '@/component/currentlocation/CurrentLocation';
+import classes from "@/styles/customstyle.module.scss"
 
 const Allblogs = (props) => {
   // const [allblogs, setallblogs] = useState(props.initialData)
@@ -80,19 +81,19 @@ const Allblogs = (props) => {
             return (
               <div className="row blogListCard mx-0" key={index}>
                 <div className="col-3 p-0 d-flex align-items-center">
-                  <div className="blogCardImage">
                     <Link href={blogUrl}>
+                  <div className={classes.blogCardImage}>
                       <Image
                         unoptimized={true}
-                        width={500}
-                        height={500}
+                        width={280}
+                        height={250}
                         src={items.Image}
-                        alt={items.Alt_Text}
+                        alt={items.Alt_Text || ''}
                         title={items.Alt_Text}
                         onError={(e) => (e.target.src = '/image/blankImage.jpg')}
                       />
-                    </Link>
                   </div>
+                    </Link>
                 </div>
                 <div className="col-9">
                   <div className="blogcardText">
@@ -195,16 +196,17 @@ export default Allblogs
 // }
 
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   try {
-    const res = await axios.get('https://api.cannabaze.com/UserPanel/Get-News/');
-    const data = _.orderBy(res.data, ['created'], ['desc']); // Assuming 'created' is a date field  
+    const res = await fetch('https://api.cannabaze.com/UserPanel/Get-News/');
+    const json =  await  res.json()
+    const data = _.orderBy(json, ['created'], ['desc']); // Assuming 'created' is a date field  
     // console.log(data)
     return {
       props: {
         initialData: data,
       },
-      //  revalidate: 60,
+       revalidate: 60,
     };
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -212,7 +214,7 @@ export async function getServerSideProps(context) {
       props: {
         initialData: [],
       },
-      //  revalidate: 60,
+       revalidate: 60,
     };
   }
 }

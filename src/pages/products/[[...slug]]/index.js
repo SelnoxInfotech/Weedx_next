@@ -305,7 +305,6 @@ export const getServerSideProps = async (context) => {
                 }
                 break;
         }
-console.log(context.params.slug?.length > 1)
         return {
             props: {
                 product: product,

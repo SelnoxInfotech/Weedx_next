@@ -26,8 +26,8 @@ import Box from '@mui/material/Box';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import AddToCartPopUp from "../../component/Addtocard/AddToCartPopUp/AddToCartPopUp";
-// import { WhisList } from '@/component/Whishlist/WhisList'
-// import Loader from "../../component/Loader/Loader";
+import { WhisList } from '@/component/Whishlist/WhisList'
+import Loader from "../../component/Loader/Loader";
 import { modifystr } from "../../hooks/utilis/commonfunction";
 
 const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, quentity, setquentity, dynamicWeight, setdynamicWeight, link = "/products" }) => {

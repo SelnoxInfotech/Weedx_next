@@ -63,6 +63,8 @@ function ProductDetailsSeo({ Productname, Productnm, ProductCategory, StoreName,
            { rating !== 0 &&  <script type="application/ld+json">
                 {JSON.stringify(reviewSchema)}
             </script>}
+
+            
         </Head>
     )
 }

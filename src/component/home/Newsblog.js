@@ -22,11 +22,10 @@ const Newsblog = (props) => {
                       </Link>
                     </div>
                     <div className="blogs_card_slider">
-                       { Boolean(News.length !==0) ? <ScrollContainer className="ScrollContainerRelative">
-                           
+                        <ScrollContainer className="ScrollContainerRelative">
                                 {News?.map((ele, index) => {
                                     return (
-                                        <Link href={`/${ ele.Category_Name==='BLOGS'? "blogs":'cannabis-news'}/${modifystr(ele.Title)}/${ele.id}`} key={index}> 
+                                        <Link href={`/${ ele.CategoryName ==='BLOGS'? "blogs":'cannabis-news'}/${modifystr(ele.Title)}/${ele.id}`} key={index}> 
                                             <div className="new_blog_card">
                                                 <div className="new_blog_card_img">
                                                     <Image 
@@ -49,8 +48,8 @@ const Newsblog = (props) => {
                                     )
                                 })}
                           
-                        </ScrollContainer>:
-                        <DeliverServiceSkeleton></DeliverServiceSkeleton>}
+                        </ScrollContainer>
+                 
                     </div>
                
             </div >

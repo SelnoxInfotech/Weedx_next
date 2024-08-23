@@ -45,7 +45,7 @@ const Index = (props) => {
                                         <div className="row ">
                                             <h1 className="canabisLawMainHeadings">{`Cannabis Law in USA, Canada & Internationals`}</h1>
                                             <Bgheader  text="Law"/>
-                                            <LawsOptions data={props?.data} />
+                                            <LawsOptions data={Content} />
                                         </div>
                                     </div>
                                     </TabPanel>
@@ -63,24 +63,3 @@ const Index = (props) => {
 
 export default Index;
 
-// export async function getStaticPaths() {
-//     // Fetch all possible paths here
-//     // Example: const paths = [{ params: { storeId: '1' } }, { params: { storeId: '2' } }];
-//     const paths = []; // Return an empty array to generate no pages at build time
-
-//     return {
-//         paths,
-//         fallback: 'blocking', // Set to 'blocking' to generate pages on-demand
-//     };
-// }
-
-export async function getStaticProps() {
-    let posts = await JSON.stringify(Content)
-     posts = await JSON.parse(posts)
-  
-    return { props:  
-        {
-            data:posts
-        }
-      }
-  }

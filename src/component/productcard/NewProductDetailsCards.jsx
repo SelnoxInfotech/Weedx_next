@@ -26,25 +26,25 @@ import Box from '@mui/material/Box';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import AddToCartPopUp from "../../component/Addtocard/AddToCartPopUp/AddToCartPopUp";
-import { WhisList } from '@/component/Whishlist/WhisList'
-import Loader from "../../component/Loader/Loader";
+// import { WhisList } from '@/component/Whishlist/WhisList'
+// import Loader from "../../component/Loader/Loader";
 import { modifystr } from "../../hooks/utilis/commonfunction";
 
-const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, quentity, setquentity, dynamicWeight, setdynamicWeight ,link="/products" }) => {
+const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, quentity, setquentity, dynamicWeight, setdynamicWeight, link = "/products" }) => {
 
     const cookies = new Cookies();
     const location = useRouter()
     const [displaypic, Setdisplaypic] = useState('');
     let p = Product?.images === undefined ? "" : Product?.images[0].image;
     const classes = useStyles();
-       let token_data = cookies.get('User_Token_access')
-       let accessToken 
-       if (typeof window !== 'undefined') {
-   
-            accessToken = localStorage.getItem('User_Token_access');
-   
-       }
-    if(  Boolean(accessToken) ){ token_data  =  accessToken};
+    let token_data = cookies.get('User_Token_access')
+    let accessToken
+    if (typeof window !== 'undefined') {
+
+        accessToken = localStorage.getItem('User_Token_access');
+
+    }
+    if (Boolean(accessToken)) { token_data = accessToken };
     const [CartClean, SetCartClean] = React.useState(false)
     const [productdescription, setproductdescription] = React.useState(false)
     const [startload, setstartload] = React.useState(false)
@@ -52,9 +52,9 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
 
     const [AddTOCard, SetAddToCard] = React.useState(() => {
         if (typeof window !== 'undefined') {
-        const saved = localStorage.getItem("items");
-        const initialValue = JSON.parse(saved);
-        return initialValue || []
+            const saved = localStorage.getItem("items");
+            const initialValue = JSON.parse(saved);
+            return initialValue || []
         }
     })
     const [NewData, SetNewData] = React.useState([])
@@ -84,9 +84,9 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                 CoupounField: DiscountedValue.DiscountType === "" ? null : DiscountedValue,
                 PromoCodeid: DiscountedValue.id,
                 CustomerGets: DiscountedValue.DiscountType === 'Buy X get Y' ? DiscountedValue.CustomerGets : null,
-                City:Event.Store_City,
-                State:Event.Store_State,
-                Country:Event.Store_Country
+                City: Event.Store_City,
+                State: Event.Store_State,
+                Country: Event.Store_Country
 
             })
             await axios.post("https://api.cannabaze.com/UserPanel/Add-AddtoCart/",
@@ -106,9 +106,9 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                     CoupounField: DiscountedValue.DiscountType === "" ? null : DiscountedValue,
                     PromoCodeid: DiscountedValue.id,
                     CustomerGets: DiscountedValue.DiscountType === 'Buy X get Y' ? DiscountedValue.CustomerGets : null,
-                    City:Event.Store_City,
-                    State:Event.Store_State,
-                    Country:Event.Store_Country
+                    City: Event.Store_City,
+                    State: Event.Store_State,
+                    Country: Event.Store_Country
                 }
                 , config
             ).then(response => {
@@ -148,9 +148,9 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                 CoupounField: DiscountedValue.DiscountType === "" ? null : DiscountedValue,
                 PromoCodeid: DiscountedValue.id,
                 CustomerGets: DiscountedValue.DiscountType === 'Buy X get Y' ? DiscountedValue.CustomerGets : null,
-                City:Event.Store_City,
-                State:Event.Store_State,
-                Country:Event.Store_Country
+                City: Event.Store_City,
+                State: Event.Store_State,
+                Country: Event.Store_Country
 
             }
             SetNewData(Arry)
@@ -216,7 +216,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
 
     }
     async function PriceSelect(Product1, Item) {
-  
+
         SetPrice(Price => {
             return Price.filter(Price => Price.Product_id !== Product1)
         })
@@ -293,24 +293,22 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
     return (
         <React.Fragment>
             {
-                Product?.length !== 0 &&
-
                 <div className=" w-100">
                     <div className={location.pathname.includes('/menu-integration') ? "menuintregarteproductpage newProductDetailsContainer  position-relative  mt-4" : " newProductDetailsContainer  position-relative  mt-4"}>
                         <div className="newProductDetailsCardLeftCol">
                             <div className="">
                                 <div className="newProductDetailsUpperimage_container">
                                     <Image className="newProductDetails_upper_image"
-                                         width={100}
-                                         unoptimized={true}
-                                         height={100}    
+                                        width={100}
+                                        unoptimized={true}
+                                        height={100}
                                         src={Boolean(displaypic) ? displaypic : Product?.images[0]?.image}
-                                        alt={Product?.Product_Name} 
-                                        title={Product?.Product_Name}/>
+                                        alt={Product?.Product_Name}
+                                        title={Product?.Product_Name} />
 
                                 </div>
                                 {
-                                    Product?.images?.length > 1 ? <div className=" newProductDetailsLowerImage_container">
+                                    Product?.images?.length > 1 && <div className=" newProductDetailsLowerImage_container">
                                         <Swiper
                                             breakpoints={{
                                                 540: {
@@ -350,10 +348,10 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
 
                                                         <div className="col-12 NewProductDetails_image_container">
                                                             <Image
-                                                            unoptimized={true}
+                                                                unoptimized={true}
                                                                 width={100}
-                                                                height={100}   
-                                                                className="NewProductDetails_image" 
+                                                                height={100}
+                                                                className="NewProductDetails_image"
                                                                 src={items.image}
                                                                 alt={Product?.Product_Name}
                                                                 title={Product?.Product_Name}
@@ -367,7 +365,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                                             })}
 
                                         </Swiper>
-                                    </div> : ""
+                                    </div>
                                 }
 
 
@@ -391,7 +389,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                                 <p>
                                     <Rating name="read-only" className={`mx-2 ${classes.homePageStarIconscolor}`} value={Product.rating === null ? 0 : parseInt(Product?.rating)} size="small" readOnly />
                                     <span>
-                                    </span><span className="mx-2">{Product.rating === null ? 0 : Product.rating + ".0"} {Product?.TotalRating !== 0 ? `(${ Product?.TotalRating})` : `(0)`} </span>
+                                    </span><span className="mx-2">{Product.rating === null ? 0 : Product.rating + ".0"} {Product?.TotalRating !== 0 ? `(${Product?.TotalRating})` : `(0)`} </span>
                                 </p>
                             </div>
                             <div className="col-12 productDetailsCardWeigth">
@@ -421,10 +419,10 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                                                 // }}
                                                 value={SelectVariant}
                                                 onChange={(e) => {
-                                                  
+
                                                     PriceSelect(Product.id, e.target.value)
-                                                        // setquentity(1),
-                                                        // k(e.target.value)
+                                                    // setquentity(1),
+                                                    // k(e.target.value)
                                                 }
                                                 }
                                             >
@@ -484,7 +482,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                                                     <strike >{parseInt(dynamicWeight) !== 0 ? dynamicWeight : Product?.Prices?.map((data) => data.Price[0].SalePrice * quentity)}</strike>
                                                 </div>
                                                 :
-                                                parseInt(dynamicWeight) !== 0 ?( dynamicWeight * quentity).toFixed(1) : Product?.Prices?.map((data) => (data.Price[0].SalePrice * quentity).toFixed(1))
+                                                parseInt(dynamicWeight) !== 0 ? (dynamicWeight * quentity).toFixed(1) : Product?.Prices?.map((data) => (data.Price[0].SalePrice * quentity).toFixed(1))
 
 
                                         }
@@ -497,7 +495,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                             </div>
                             <div className="col-12">
                                 {
-                                    Product?.Prices?.map((data , index) => {
+                                    Product?.Prices?.map((data, index) => {
                                         if (dynamicWeight === 0) {
                                             if (data.Price[0]) {
                                                 if (data.Price[0].Stock === "IN Stock") {
@@ -518,7 +516,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                                         }
                                         else {
                                             return (
-                                                data.Price.map((arry , index) => {
+                                                data.Price.map((arry, index) => {
                                                     if (SelectVariant === arry.id) {
                                                         if (arry.Stock === "IN Stock") {
                                                             return (
@@ -551,20 +549,20 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                                 }
                             </div>
                             <div className="productdetailsaccordion">
-                             
-                                  
-                                         <Accordion className={classes.productdescription}>
-                                            <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1-content"
-                                            id="panel1-header"
-                                            >
-                                               Product Details
-                                            </AccordionSummary>
-                                            <AccordionDetails>
-                                               <div className='newProductAboutUs_description'  dangerouslySetInnerHTML={{__html: Product?.Product_Description}}  />
-                                            </AccordionDetails>
-                                        </Accordion>
+
+
+                                <Accordion className={classes.productdescription}>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1-content"
+                                        id="panel1-header"
+                                    >
+                                        Product Details
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <div className='newProductAboutUs_description' dangerouslySetInnerHTML={{ __html: Product?.Product_Description }} />
+                                    </AccordionDetails>
+                                </Accordion>
                             </div>
                         </div>
                         <div className='position-absolute w-auto top-0 p-2  end-0'>
@@ -587,7 +585,7 @@ const NewProductDetailsCards = ({ Product, DiscountedValue, Price, SetPrice, que
                         </div>
                     </div>
 
-                    {(startload && !location?.pathname?.includes('/menu-integration')) && <Loader/>
+                    {location?.pathname?.includes('/menu-integration') && <Loader/>
                     }
                     {Whishlist && <WhisList open1={Whishlist} SetWishList={SetWishList}></WhisList>}
                 </div >

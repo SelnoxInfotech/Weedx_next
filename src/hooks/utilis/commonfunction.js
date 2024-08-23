@@ -29,11 +29,15 @@ function FirstLetterCaps(str){
             }else if (str?.includes("/")) {
                 str = str?.replaceAll("/", "-")
             }
+
              else {
                 a++
             }
-        }
 
+        }
+        if (str.toLowerCase().slice(-1) === '-') {
+            str = str.slice(0, -1); // Remove the trailing hyphen
+          }
         return str.toLowerCase()
     }
 }

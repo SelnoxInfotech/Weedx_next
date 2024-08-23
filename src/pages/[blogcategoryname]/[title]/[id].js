@@ -317,8 +317,6 @@ const Blogs = (props) => {
                                                                                 }}
                                                                             >
                                                                                 <List className={classes.orderEditList}>
-
-
                                                                                     <ListItem button className={classes.orderEditListitem} onClick={() => handleDelete(val.id)}>
                                                                                         <AiFillDelete color='31B665' />
                                                                                         Delete
@@ -327,10 +325,7 @@ const Blogs = (props) => {
 
                                                                                         <FaEdit color='31B665' />
                                                                                         Edit
-                                                                                    </ListItem>
-
-
-
+                                                                                    </ListItem>                                                                                                      
                                                                                 </List>
                                                                             </Select>
 

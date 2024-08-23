@@ -9,8 +9,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from "next/router";
 import Review from "../../../../../../component/Review/Review"
 import { AiOutlineLeft } from "react-icons/ai";
-const ProductDetailsSeo = dynamic(() => import('../../../../../../component/ScoPage/ProductDetailsSeo'), { ssr: true });
-// import { ProductDetailsSeo } from "../../../../../../component/ScoPage/ProductSeo"
+const ProductDetailsSeo = dynamic(() => import('../../../../../../component/ScoPage/ProductDetailsSeo'));
 import { product_OverAllGet_Review, Product_Add_Review, Product_Get_UserComment, Product_Get_Review, Delete_Review, ProductHelpFull } from "../../../../../../hooks/utilis/ProductApi"
 import Createcontext from "../../../../../../hooks/context"
 import _ from 'lodash'
@@ -25,9 +24,11 @@ const usePlaceholderStyles = makeStyles(theme => ({
   }
 }));
 const NewProductDetails = (props) => {
+
   //  const {ProductDetailsSeo} =  Seo
   // console.log(props.data[0]?.Store_id , "potpduct")  
   const { id } = props.id;
+  const StoreProduct =  props.likeproduct
   const [discount, setdiscount] = React.useState({
     Product: id,
     Amount: '',
@@ -41,7 +42,7 @@ const NewProductDetails = (props) => {
   const navigate = useRouter();
   const [Product, SetProduct] = React.useState(props.data[0])
   const [reviewloading, setReviewloading] = React.useState(false)
-  const [StoreProduct, SetStoreProduct] = React.useState([])
+  // const [StoreProduct, SetStoreProduct] = React.useState([])
   const [Despen, SetDespens] = React.useState([])
   const [api, SetApi] = React.useState(false)
   const [Rating, SetRating] = React.useState()
@@ -95,16 +96,16 @@ const NewProductDetails = (props) => {
       SetDespens(response.data[0])
 
     })
-    Axios.post(`https://api.cannabaze.com/UserPanel/YouMayAlsoLike/`,
-      {
-        category: props.data[0].category_id,
-        store_id: props.data[0].Store_id
-      }
-    ).then(response => {
-      SetStoreProduct(response.data)
-    }).catch(
-      function (error) {
-      })
+    // Axios.post(`https://api.cannabaze.com/UserPanel/YouMayAlsoLike/`,
+    //   {
+    //     category: props.data[0].category_id,
+    //     store_id: props.data[0].Store_id
+    //   }
+    // ).then(response => {
+    //   SetStoreProduct(response.data)
+    // }).catch(
+    //   function (error) {
+    //   })
 
     // }
 
@@ -291,9 +292,7 @@ const NewProductDetails = (props) => {
               return <div className="offercard" key={index}>
                 <div className="leftcoupon">
                   <span>Use Code</span>
-
                   <span onClick={() => { navigator.clipboard.writeText(item.CouponCode); setcopyed(item.CouponCode) }}>{item.CouponCode} {copyed === item.CouponCode && <span className="copytooltip"> copied</span>}  </span>
-
                   <span>T&C</span>
                 </div>
                 <div className="rightcoupon">
@@ -307,7 +306,7 @@ const NewProductDetails = (props) => {
         </div>
       </div>}
       {Boolean(StoreProduct?.length !== 0) &&
-        <ProductSearchResult link={location.pathname.slice(0, 9) === "/products" ? "products" : "menu-integration"} RelatedProductResult={StoreProduct} currentProductID={props.data[0].id} title={'You may also like'} CategoryName={props.data[0]} />
+        <ProductSearchResult link={location.pathname.slice(0, 9) === "/products" ? "products" : "menu-integration"} RelatedProductResult={props.likeproduct} currentProductID={props.data[0].id} title={'You may also like'} CategoryName={props.data[0]} />
       }
 
       <Review
@@ -334,24 +333,86 @@ const NewProductDetails = (props) => {
 }
 export default NewProductDetails
 
-// export const getStaticPaths = async () => {
+
+// export async function getServerSideProps(context) {
+//   const { id } = context.params;
+
+//   // Replace `id` with actual dynamic value in your API call
+//   const res = await fetch(`https://api.cannabaze.com/UserPanel/Get-ProductById/${id}`);
+//   const data = await res.json();
+//   const response = await fetch('https://api.cannabaze.com/UserPanel/YouMayAlsoLike/', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({
+//       category: data[0].category_id,
+//       store_id: data[0].Store_id,
+//     }),
+//   });
+
+//   if (!response.ok) {
+//     throw new Error(`HTTP error! Status: ${response.status}`);
+//   }
+
+//   const responseData = await response.json();
+
+
 //   return {
-//     paths: [],
-//     fallback: "blocking"
+//     props: {
+//       data,
+//       id: id ,// Pass the fetched data to your component as a prop
+//       likeproduct: responseData
+//     }
 //   };
-// };
+// }
+
 
 export async function getServerSideProps(context) {
-  const { id } = context.params;
+  const { category, subcategory, name, id } = context.params;
 
-  // Replace `id` with actual dynamic value in your API call
+  // Fetch the product data by id
   const res = await fetch(`https://api.cannabaze.com/UserPanel/Get-ProductById/${id}`);
   const data = await res.json();
+
+  if (!data || data.length === 0) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const actualCategory = modifystr(data[0].category_name); 
+  const actualSubcategory = modifystr(data[0].SubcategoryName); 
+  const actualName = modifystr(data[0].Product_Name); 
+  if (actualCategory !== category || actualSubcategory !== subcategory || actualName !== name || id === data[0].id ) {
+ 
+    return {
+        notFound: true, // Redirect to 404 if no data found
+    };
+  }
+
+  const response = await fetch('https://api.cannabaze.com/UserPanel/YouMayAlsoLike/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      category: data[0].category_id,
+      store_id: data[0].Store_id,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  const responseData = await response.json();
 
   return {
     props: {
       data,
-      id: id // Pass the fetched data to your component as a prop
-    }
+      id, 
+      likeproduct: responseData,
+    },
   };
 }

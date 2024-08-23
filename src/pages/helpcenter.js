@@ -4,9 +4,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Bgheader from '@/component/bgheader/Bgheader/';
+import Bgheader from '@/component/bgheader/Bgheader';
 import useStyles from "@/styles/style";
-import {HelpcenterSeo} from "@/component/ScoPage/Faq"
+import { HelpcenterSeo } from "@/component/ScoPage/Faq"
 const Helpcenter = () => {
     const [allheight, setallheighth] = React.useState([])
     React.useEffect(() => {
@@ -37,7 +37,12 @@ const Helpcenter = () => {
         <div className='helpcenter'>
             <HelpcenterSeo></HelpcenterSeo>
             <div className='container-fluid'>
-                <Bgheader text="Welcome To The WeedX.io Help Center" />
+                {/* <Bgheader text="Welcome To The WeedX.io Help Center" /> */}
+                <div className='bgHedaer'>
+                    <div className='text_on_Learn_banner'>
+                        <h1>{'Welcome To The WeedX.io Help Center'}</h1>
+                    </div>
+                </div>
                 <div className='helpcenterConent row'>
                     <div className="col-lg-8 col-12">
 
@@ -57,7 +62,7 @@ const Helpcenter = () => {
                         </div>
                         <div className="help_contentBox" id='help3'>
                             <h3 className="helpTitle">
-                               {` Updating Your Profile`}
+                                {` Updating Your Profile`}
                             </h3>
                             <p className='helpDescription'>{`Keep your profile statistics current by navigating to the "My Profile" section.
                                 You can change your email, password, and personal info here.`}</p>

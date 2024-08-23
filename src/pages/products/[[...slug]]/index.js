@@ -208,17 +208,11 @@ export const getServerSideProps = async (context) => {
    
     const { req, res } = context;
     let allCookies
-    
-    function getCookies(req) {
-        let cookies = req.headers.cookie;
-        return Object.fromEntries(cookies.split('; ').map(c => c.split('=')));
-    }
-    const cookies = getCookies(req);
-    if (cookies.fetchlocation) {
+
+    if (req.headers["x-fetchlocation"]) {
         try {
-            // Decode and parse the fetchlocation cookie value
-            const decodedString = decodeURIComponent(cookies.fetchlocation);
-            const jsonObject = JSON.parse(decodedString);
+            const jsonObject = JSON.parse(req.headers["x-fetchlocation"]);
+            console.log(jsonObject)
             allCookies=jsonObject
         } catch (error) {
             console.error('Error decoding or parsing cookie:', error);

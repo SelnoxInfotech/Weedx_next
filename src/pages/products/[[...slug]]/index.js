@@ -36,7 +36,7 @@ const Product = (props) => {
 
     async function ShowCategoryProduct(id, name) {
         SetLoading(true);
-        navigate.replace(`/products/${modifystr(name.toLowerCase())}/${id}`);
+        navigate.replace(`/products/${modifystr(name)}/${id}`);
         setSelectedOption(null)
         setsubcategories([])
         // SetLoading(false);
@@ -45,7 +45,7 @@ const Product = (props) => {
         SetLoading(true);
         setSelectedOption(option);
         setIsDropdownOpen(false);
-        navigate.replace(`/products/${modifystr(slug[0].toLowerCase())}/${modifystr(option.name.toLowerCase())}/${option.id}`)
+        navigate.replace(`/products/${modifystr(slug[0])}/${modifystr(option.name)}/${option.id}`)
 
     };
 
@@ -88,7 +88,7 @@ const Product = (props) => {
         }
         else if (params === "categoryname") {
             const categoryfind = _.find(Category, function (o) { return o.name === name.toUpperCase() })
-            navigate.push(`/products/${categoryfind.name.toLowerCase()}/${categoryfind.id}`)
+            navigate.push(`/products/${categoryfind.name}/${categoryfind.id}`)
         }
     }
 
@@ -208,11 +208,9 @@ export const getServerSideProps = async (context) => {
    
     const { req, res } = context;
     let allCookies
-
     if (req.headers["x-fetchlocation"]) {
         try {
             const jsonObject = JSON.parse(req.headers["x-fetchlocation"]);
-            console.log(jsonObject)
             allCookies=jsonObject
         } catch (error) {
             console.error('Error decoding or parsing cookie:', error);

@@ -14,13 +14,14 @@ const FeaturedBrand = dynamic(() => import('@/component/home/FeaturedBrand'));
 import cookie from 'cookie';
 import Currentlocation from "@/component/currentlocation/CurrentLocation";
 import Createcontext from "@/hooks/context";
+import { modifystr } from "@/hooks/utilis/commonfunction";
 export default function Home({ initialData }) {
   const { state, dispatch } = React.useContext(Createcontext);
   const [Skeleton, SetSkeleton] = React.useState(true)
   const Navigate =  useRouter()
   function ShowCategoryProduct(id, name) {
 
-    Navigate.push(`/products/${name.replace(/%20| /g, "-").toLowerCase()}/${id}`);
+    Navigate.push(`/products/${modifystr(name)}/${id}`);
   }
 
   return (
@@ -63,6 +64,14 @@ export async function getServerSideProps(context) {
     Country: transformString(cookies.country) || '',
     limit: 10
   };
+  for (const key in object) {
+    if (object[key] === '') {
+      delete object[key];
+    }
+  }
+
+
+
   const handleError = (error) => {
     console.error('Error fetching data:', error);
     return {

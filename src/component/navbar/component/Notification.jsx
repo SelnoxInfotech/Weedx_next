@@ -7,6 +7,7 @@ import { RxCross2 } from "react-icons/rx";
 import Createcontext from "@/hooks/context"
 import Link from 'next/link';
 import Image from 'next/image';
+import { modifystr } from '@/hooks/utilis/commonfunction';
 export default function Notification({ notify, setnotify,Settotalnotify, Setnotificationdata, notificationdata }) {
     const cookies = new Cookies();
     let token_data = cookies.get('User_Token_access')
@@ -70,7 +71,7 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
                             Image: item.blog[0].Image,
                             title: item.blog[0].Title,
                             date: item.blog[0].created,
-                            link: `/${item.blog[0].category_name==="BLOGS"? "blogs":"cannabis-news"}/${item.blog[0].Title.replace(/ /g, "-").replace("?", "").toLowerCase()}/${item.blog[0].id}`,
+                            link: `/${item.blog[0].category_name==="BLOGS"? "blogs":"cannabis-news"}/${modifystr(item.blog[0].Title)}/${item.blog[0].id}`,
                             Id:item.Notification
                         })
                     }
@@ -95,7 +96,7 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
                
                 if(Boolean(respones?.data)){
                     let newdata = respones.data.Blog.map((data) => {
-                        return { "link": `/${data.category_name==="BLOGS"? "blogs":"cannabis-news"}/${data.Title.replace(/ /g, "-").replace("?", "").toLowerCase()}/${data.id}`, 'title': data.Title, "image": data.Image, 'date': data.created }
+                        return { "link": `/${data.category_name==="BLOGS"? "blogs":"cannabis-news"}/${modifystr(data.Title)}/${data.id}`, 'title': data.Title, "image": data.Image, 'date': data.created }
                     })
                     Setnotificationdata(()=>newdata)
 
@@ -165,7 +166,7 @@ export default function Notification({ notify, setnotify,Settotalnotify, Setnoti
                                 Image: item.blog[0].Image,
                                 title: item.blog[0].Title,
                                 date: item.blog[0].updated,
-                                link: `/cannabis-news/${item.blog[0].Title.replace(/ /g, "-").replace("?", "").toLowerCase()}/${item.blog[0].id}`,
+                                link: `/cannabis-news/${modifystr(item.blog[0].Title)}/${item.blog[0].id}`,
                                 Id:item.Notification
                             })
                         }

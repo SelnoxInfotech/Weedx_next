@@ -15,7 +15,7 @@ const Dispensoriescart = ({ ele }) => {
     
         <div className="row">
             <div className="col-4 disensories_card_image_div">
-                <Link  href={`/weed-dispensaries/${modifystr(ele?.Store_Name.toLowerCase())}/${ele.id}`}>
+                <Link  href={`/weed-dispensaries/${modifystr(ele?.Store_Name)}/${ele.id}`}>
                     <Image unoptimized={true} width={100} height={100} id={ele?.id} src={`${ele.Store_Image}`} alt={ele.Store_Name} title={ele.Store_Name} className="dispensories_card_image" />
                 </Link>
 
@@ -23,7 +23,7 @@ const Dispensoriescart = ({ ele }) => {
             <div className="col-8 dispenosries_card_content_div">
 
                 <div className="col-12 dispensories_content_Header_paragraphs text-truncate">
-                <Link  href={`/weed-dispensaries/${modifystr(ele.Store_Name.toLowerCase())}/${ele.id}`}>
+                <Link  href={`/weed-dispensaries/${modifystr(ele.Store_Name)}/${ele.id}`}>
                     <span className="text-truncate dispensoriesHeadingName">{ele.Store_Name}</span>
                 </Link>
                 </div>
@@ -50,7 +50,7 @@ const Dispensoriescart = ({ ele }) => {
                 }
                     </div>
                     <div className='homecardRating'>
-                    <Link  href={`/weed-dispensaries/${modifystr(ele.Store_Name.toLowerCase())}/${"review"}/${ele.id}`}>
+                    <Link  href={`/weed-dispensaries/${modifystr(ele.Store_Name)}/${"review"}/${ele.id}`}>
                         <div className="col-12 d-flex dispensories_content_paragraphs">
                             <span className='disOPenResRating'>{ele?.rating !== null ? ele?.rating.toFixed(1) : 0}</span>
                             <Rating className={`mx-2 ${classes.homePageStarIcons}`} color='green' name="read-only" value={ele.rating === null ? 0 : ele.rating} readOnly />
@@ -59,7 +59,7 @@ const Dispensoriescart = ({ ele }) => {
                     </div>
                 <div className="col-12">
                     <Box className={classes.loadingBtnTextAndBack}>
-                    <Link  href={`/weed-dispensaries/${modifystr(ele.Store_Name.toLowerCase())}/${ele.id}`}>
+                    <Link  href={`/weed-dispensaries/${modifystr(ele.Store_Name)}/${ele.id}`}>
                         <LoadingButton style={{ width: "100%", height: "30px" }}>Order Pickup</LoadingButton>
                         </Link>
                     </Box>

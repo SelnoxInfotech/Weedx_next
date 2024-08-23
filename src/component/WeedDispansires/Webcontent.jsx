@@ -57,15 +57,15 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
                     <h3>{`Top Weed  ${from} in ${location}`}</h3>
                     {Boolean(Store?.length) && <ul>
                         {Store?.filter((item) => item.rating >= 4)?.map((items, index) => {
-                            return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
+                            return <li key={index}><Link href={`/weed-${url}/${modifystr(items.Store_Name)}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
                         }).length === 0
                             ?
                             Store?.slice(1, 10).map((items, index) => {
-                                return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
+                                return <li key={index}><Link href={`/weed-${url}/${modifystr(items.Store_Name)}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
                             })
                             :
                             Store?.filter((item) => item.rating >= 4)?.map((items, index) => {
-                                return <li key={index}><Link href={`/weed-${url}/${items.Store_Name.replace(/\s/g, '-').toLowerCase()}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
+                                return <li key={index}><Link href={`/weed-${url}/${modifystr(items.Store_Name)}/${"review"}/${items.id}`}>{items.Store_Name}</Link></li>
                             }).slice(0, 10)
                         }
 
@@ -110,9 +110,9 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
                         <AccordionDetails>
                             <p>
                                 {` Some of the top-rated ${from} in ${location} include `}
-                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name.toLowerCase())}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>,
-                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name.toLowerCase())}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link> {`and`}
-                                <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name.toLowerCase())}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link> 
+                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name)}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>,
+                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name)}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link> {`and`}
+                                <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name)}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link> 
                              
                             </p>
                         </AccordionDetails>
@@ -125,10 +125,10 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
                         </AccordionSummary>
                         <AccordionDetails>
                             <p> {`Popular ${from} near ${location} include `}
-                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name.toLowerCase())}/${Store[0].id}`}>{Store[0]?.Store_Name}</Link>,
-                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name.toLowerCase())}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
+                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name)}/${Store[0].id}`}>{Store[0]?.Store_Name}</Link>,
+                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name)}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
                                 {`and`}
-                                <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name.toLowerCase())}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
+                                <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name)}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
                                
                             </p>
                         </AccordionDetails>
@@ -141,10 +141,10 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
                         </AccordionSummary>
                         <AccordionDetails>
                             <p>{`${from} known for their competitive pricing in ${location} include `}
-                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name.toLowerCase())}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>,
-                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name.toLowerCase())}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
+                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name)}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>,
+                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name)}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
                                 {`and `}
-                                <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name.toLowerCase())}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
+                                <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name)}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
                           </p>
                         </AccordionDetails>
                     </Accordion>
@@ -156,9 +156,9 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
                         </AccordionSummary>
                         <AccordionDetails>
                             <p>{`${from} with a wide variety of edibles in ${location} include  `}
-                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name.toLowerCase())}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>,
-                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name.toLowerCase())}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
-                                {` and `} <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name.toLowerCase())}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
+                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name)}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>,
+                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name)}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
+                                {` and `} <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name)}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
                                  </p>
                         </AccordionDetails>
                     </Accordion>
@@ -170,10 +170,10 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
                         </AccordionSummary>
                         <AccordionDetails>
                             <p> {`Friendly and informative ${from} for first-time visitors in ${location} include `}
-                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name.toLowerCase())}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>,
-                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name.toLowerCase())}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
+                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name)}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>,
+                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name)}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
                                 {` and `}
-                                <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name.toLowerCase())}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
+                                <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name)}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
                                
                                                                          </p>
                         </AccordionDetails>
@@ -187,9 +187,9 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
                         <AccordionDetails>
                             <p>
                                 {`${from} offering convenient online ordering and pickup in ${location} include `}
-                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name.toLowerCase())}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>{`,`}
-                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name.toLowerCase())}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
-                                {` and `} <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name.toLowerCase())}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
+                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name)}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>{`,`}
+                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name)}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
+                                {` and `} <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name)}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
                                 
                                 
                             </p>
@@ -203,9 +203,9 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
                         </AccordionSummary>
                         <AccordionDetails>
                             <p>{`Highly recommended medical cannabis ${from} in ${location} include  `}
-                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name.toLowerCase())}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>{`,`}
-                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name.toLowerCase())}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
-                                {` and`}  <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name.toLowerCase())}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
+                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name)}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>{`,`}
+                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name)}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
+                                {` and`}  <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name)}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
                                
                             </p>
                         </AccordionDetails>
@@ -219,9 +219,9 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
                         <AccordionDetails>
                             <p>
                                 {` ${from} with extended hours in ${location} include `}
-                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name.toLowerCase())}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>{`,`}
-                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name.toLowerCase())}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
-                                {`and`}  <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name.toLowerCase())}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
+                                <Link href={`/weed-${url}/${modifystr(Store[0]?.Store_Name)}/${Store[0]?.id}`}>{Store[0]?.Store_Name}</Link>{`,`}
+                                <Link href={`/weed-${url}/${modifystr(Store[1]?.Store_Name)}/${Store[1]?.id}`}>{Store[1]?.Store_Name}</Link>
+                                {`and`}  <Link href={`/weed-${url}/${modifystr(Store[2]?.Store_Name)}/${Store[2]?.id}`}>{Store[2]?.Store_Name}</Link>
                                </p>
                         </AccordionDetails>
                     </Accordion>

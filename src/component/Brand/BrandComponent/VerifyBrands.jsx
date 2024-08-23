@@ -7,6 +7,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { BrandSeo } from "@/component/ScoPage/BrandsSeo";
+import { modifystr } from "@/hooks/utilis/commonfunction";
 
 
 const VerifyBrands = () => {
@@ -44,7 +45,7 @@ const VerifyBrands = () => {
                             <div className="col-xl-6 col-md-12 col-12 verify_brand_container" key={index}>
                                 <div className="row verifyBrand_row mx-1 my-3">
                             
-                                    <Link   href={`/brands/${items.name.replace(/\s/g, '').toLowerCase()}/${items.id}`}> 
+                                    <Link   href={`/brands/${modifystr(items.name)}/${items.id}`}> 
                                     <div className="col-6  verifyBrand_image_container ">
                                     <Image unoptimized={true} width={100} height={100}  className="verify_brand_image"  src={`${items.Brand_Logo}`}  alt={items.name} title={items.name} />
 

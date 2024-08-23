@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Link from "next/link";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import Image from "next/image";
+import { modifystr } from "@/hooks/utilis/commonfunction";
 const RecentPost = () => {
  const id = useParams()
    const [News, SetNews] = React.useState([])
@@ -32,7 +33,7 @@ const RecentPost = () => {
                                 {News?.map((ele, index) => {
   
                                         return (
-                                            <Link href={`/${ele.Category_Name==='BLOGS'? "blogs":'cannabis-news'}/${ele.Title.replace(/ /g, "-").replace("?", "").toLowerCase()}/${ele.id}`} key={index}> 
+                                            <Link href={`/${ele.Category_Name==='BLOGS'? "blogs":'cannabis-news'}/${modifystr(ele.Title)}/${ele.id}`} key={index}> 
                                                 <div className="new_blog_card">
                                                     <div className="new_blog_card_img">
                                                         <Image width={500} height={500}

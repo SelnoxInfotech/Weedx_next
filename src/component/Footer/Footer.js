@@ -10,6 +10,7 @@ import { HiOutlineMail } from "react-icons/hi"
 import Image from "next/image"
 import logoimage from '../../../public/image/weedx.io logo.png'
 import Link from "next/link"
+import { modifystr } from "@/hooks/utilis/commonfunction"
 const Footer = () => {
     const classes = useStyles()
     const [Categorys, SetCategorys] = React.useState([])
@@ -69,12 +70,12 @@ const Footer = () => {
                                     <p className="footer_menu_heading">{`Category`}</p>
                                     {Categorys.map((ele, index) => {
                                         if (index >= 4) {
-                                            return <Link aria-label="Homepage" href={`/products/${ele.name.replace(/%20| /g, "-").toLowerCase()}/${ele.id}`} key={index} className={morelist ? '' : 'showmoreList'}>
+                                            return <Link aria-label="Homepage" href={`/products/${modifystr(ele.name)}/${ele.id}`} key={index} className={morelist ? '' : 'showmoreList'}>
                                                 <span className="footer_li textCapitalize ellipsis" >{ele.name}</span>
                                             </Link>
                                         } else {
                                             return (
-                                                <Link aria-label="Homepage" href={`/products/${ele.name.replace(/%20| /g, "-").toLowerCase()}/${ele.id}`} key={index}  >
+                                                <Link aria-label="Homepage" href={`/products/${modifystr(ele.name)}/${ele.id}`} key={index}  >
                                                     <span className="footer_li textCapitalize ellipsis" >{ele.name}</span>
                                                 </Link>
                                             )

@@ -55,7 +55,6 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
     }, []);
 
     async function AddToCart(Event, counter, SelectWeight, handleClose) {
-  console.log(Event)
         setadding(Event.id)
         const AddData = _.filter(Event.Prices, Price => Price);
         const PriceArrry = _.find(AddData[0].Price, Price => Price.id === SelectWeight);
@@ -309,7 +308,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                                                                 </IconButton>
                                                             </Box>
                                                         </div>
-                                                        <Link href={`/${link}/${modifystr(items.category_name.toLowerCase())}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${modifystr(items.Product_Name.toLowerCase())}/${items.id}`}
+                                                        <Link href={`/${link}/${modifystr(items.category_name)}/${modifystr(items.SubcategoryName)}/${modifystr(items.Product_Name)}/${items.id}`}
 
                                                             state={{
                                                                 prevuisurl: location.pathname,
@@ -328,7 +327,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                                                         </Link>
                                                     </div>
                                                     <div className=" product_search_result_content_div ">
-                                                        <Link href={`/${link}/${items.category_name.toLowerCase()}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${items.Product_Name.replace(/%20| /g, "-").toLowerCase()}/${items.id}`} state={{
+                                                        <Link href={`/${link}/${modifystr(items.category_name)}/${modifystr(items.SubcategoryName)}/${modifystr(items.Product_Name)}/${items.id}`} state={{
                                                             prevuisurl: location.pathname,
                                                             id: items.id
                                                         }} >
@@ -395,6 +394,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                         {
                             // Boolean( showdata.length !== 0) ?
                             RelatedProductResult?.map((items, index) => {
+                                console.log(items.Store_Type)
                                 if (items.id !== currentProductID) {
                                     return (
                                         <div className="productSearch_result_container" key={index}>
@@ -410,7 +410,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                                                         </IconButton>
                                                     </Box>
                                                 </div>
-                                                <Link href={`/${link}/${modifystr(items.category_name.toLowerCase())}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${modifystr(items.Product_Name.toLowerCase())}/${items.id}`}
+                                                <Link href={`/${link}/${modifystr(items.category_name)}/${items.SubcategoryName.replace(/%20| /g, "-")}/${modifystr(items.Product_Name)}/${items.id}`}
 
                                                     state={{
                                                         prevuisurl: location.pathname,
@@ -429,13 +429,15 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                                                 </Link>
                                             </div>
                                             <div className=" product_search_result_content_div ">
-                                                <Link href={`/${link}/${items.category_name.toLowerCase()}/${items.SubcategoryName.replace(/%20| /g, "-").toLowerCase()}/${items.Product_Name.replace(/%20| /g, "-").toLowerCase()}/${items.id}`} state={{
+                                                <Link href={`/${link}/${modifystr(items.category_name)}/${items.SubcategoryName.replace(/%20| /g, "-")}/${modifystr(items.Product_Name)}/${items.id}`} state={{
                                                     prevuisurl: location.pathname,
                                                     id: items.id
                                                 }} >
                                                     <p className="productSearchResultParagraph text-truncate">{items.Product_Name}</p>
-
+                                                    </Link>
+                                                    <Link href={`/${items.Store_Type === "dispensary" ? "weed-dispensaries" : "weed-deliveries"}/${modifystr(items.StoreName)}/${items.Store_id}`}  >
                                                     <p className="product_search_result_sub_heading text-truncate">by {items.StoreName}</p>
+                                                      </Link>
                                                     <div className="product_category_list">
                                                         <span className="product_search_result_span1">15{items.lab_Result !== "Magnesium" ? '%' : "Mg."} THC | 0.2{items.lab_Result !== "Magnesium" ? '%' : "Mg."} CBD</span>
                                                         <div className="product_cart_review">
@@ -458,7 +460,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                                                         </div>
                                                     }</div>
 
-                                                </Link>
+                                            
                                                 <div className="my-2">
                                                     <Box className={`center ${classes.loadingBtnTextAndBack}`}>
                                                         {

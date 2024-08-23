@@ -9,6 +9,7 @@ import { GiFlowerPot } from "react-icons/gi"
 import Link from 'next/link';
 import { Rating } from '@mui/material';
 import Image from 'next/image';
+import { modifystr } from '@/hooks/utilis/commonfunction';
 const DeliveryItemsCard = ({ Deliverie }) => {
     const classes = useStyles()
     return (
@@ -20,7 +21,7 @@ const DeliveryItemsCard = ({ Deliverie }) => {
                             <div className="delivery_items_cards_container mt-4" key={index}>
                                 <div className='d-flex w-100 justify-content-between'>
                                         <div className='delivery_items_card_img_container'>
-                                            <Link href={`/weed-deliveries/${items.Store_Name.replace(/\s/g,'-').toLowerCase()}/${items.id}`}>
+                                            <Link href={`/weed-deliveries/${modifystr(items.Store_Name)}/${items.id}`}>
                                                 <Image 
                                                 unoptimized={true}
                                                    width={100}
@@ -38,7 +39,7 @@ const DeliveryItemsCard = ({ Deliverie }) => {
                                             </div>
                                             <div>
                                                 <div className='homecardRating'>
-                                                    <Link href={`/weed-deliveries/${items.Store_Name.replace(/\s/g,'-').toLowerCase()}/${"review"}/${items.id}`}>
+                                                    <Link href={`/weed-deliveries/${modifystr(items.Store_Name)}/${"review"}/${items.id}`}>
                                                         <div className="d-flex dispensories_content_paragraphs">
                                                             <span className='disOPenResRating'>{items.rating === null ? 0 : items.rating.toFixed(0) +".0"}</span>
 
@@ -84,7 +85,7 @@ const DeliveryItemsCard = ({ Deliverie }) => {
                                         
                                         <div className='delivery_btn_div'>
                                             <Box className={`${classes.loadingBtnTextAndBack}`} >
-                                                <Link href={`/weed-deliveries/${items.Store_Name.replace(/\s/g,'-').toLowerCase()}/${items.id}`}><LoadingButton variant="outlined">View Menu</LoadingButton></Link>
+                                                <Link href={`/weed-deliveries/${modifystr(items.Store_Name)}/${items.id}`}><LoadingButton variant="outlined">View Menu</LoadingButton></Link>
                                             </Box>
 
                                         </div>

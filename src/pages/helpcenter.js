@@ -80,6 +80,7 @@ const Helpcenter = () => {
                             <p className='helpDescription'>{`Where is your order? You can track it in real-time by going to the "My Orders" section. You will locate order information and a
                                 live map to reveal the delivery progress here.`}
                             </p>
+                            
                         </div>
                         <div className="help_contentBox" id='help6'>
                             <h3 className="helpTitle">{`Delivery Information`}</h3>

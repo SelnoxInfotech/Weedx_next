@@ -64,7 +64,9 @@ function ProductDetailsSeo({ Productname, Productnm, ProductCategory, StoreName,
                 {JSON.stringify(reviewSchema)}
             </script>}
 
-            
+        
+
+        
         </Head>
     )
 }

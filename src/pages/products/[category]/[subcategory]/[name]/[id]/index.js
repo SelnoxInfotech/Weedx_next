@@ -261,7 +261,7 @@ const NewProductDetails = (props) => {
         StoreName={props.data[0].StoreName}
         City={props.data[0].Store_City}
         State={props.data[0].Store_State}
-        location={location.pathname}
+        location={location.asPath}
         TotalRating={props.data[0].TotalRating}
       ></ProductDetailsSeo>
       <span

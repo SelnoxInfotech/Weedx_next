@@ -3,132 +3,60 @@ import { useRouter } from "next/router";
 import React from "react";
 
 function StoreDetails({ Despen, locationStore }) {
-    const location = useRouter();
-    // console.log(location.pathname.slice(0, 16) === "/weed-deliveries" , location.pathname.slice(0, 16))
-    const tab = location.query.details ? location.query.details[1] : '';
+    const { pathname, query, asPath } = useRouter();
+    const tab = query.details ? query.details[1] : '';
+    const isWeedDelivery = pathname.slice(0, 16) === "/weed-deliveries";
 
-    // Set default meta tags
-    let metaTag = {
+    const defaultMeta = {
         title: `Weed dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Weedx.io`,
-        description: `Shop your favorite cannabis products from ${Despen[0]?.Store_Name} Weed dispensary ${Despen[0]?.City}, ${Despen[0]?.State}. High Quality marijuana products near you. Get the best deals and offers now.`
-        , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
+        description: `Shop your favorite cannabis products from ${Despen[0]?.Store_Name} Weed dispensary ${Despen[0]?.City}, ${Despen[0]?.State}. High Quality marijuana products near you. Get the best deals and offers now.`,
+        robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1",
     };
 
-    // Customize meta tags based on conditions
-    if (location.pathname.slice(0, 16) !== "/weed-deliveries") {
-        if (tab === undefined) {
-            metaTag = {
-                title: `Weed dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Weedx.io`,
-                description: `Shop your favorite cannabis products from ${Despen[0]?.Store_Name} Weed dispensary ${Despen[0]?.City}, ${Despen[0]?.State}. High Quality marijuana products near you. Get the best deals and offers now.`
-                , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
-            };
-        } else {
-            switch (tab) {
-                case 'products':
-                    metaTag = {
-                        title: `Shop Cannabis ${Despen[0]?.Category || ''} | Weed Dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Weedx.io`,
-                        description: `Browse Product of ${Despen[0]?.Store_Name} marijuana dispensary in ${Despen[0]?.City}, ${Despen[0]?.State}. High Quality cannabis products near you`
-                        , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
-                    };
-                    break;
-                case 'store-details':
-                    metaTag = {
-                        title: `Weed dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | ${tab.replace("-", " ")} | Weedx.io`,
-                        description: `Explore weed dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} with ${Despen[0]?.Store_Name}. Check out store deals and find more savings on Weedx.io.`
-                        , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
-                    };
-                    break;
-                case 'review':
-                    metaTag = {
-                        title: `${Despen[0]?.Store_Name || 'Weedx.io'} Reviews | Weedx.io`,
-                        description: `Discover reviews for ${Despen[0]?.Store_Name || 'Weedx.io'} dispensary and delivery service on Weedx.io. Read user feedback, ratings, and experiences to find the best cannabis products and services near you.`
-                        , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
-                    };
-                    break;
-                case 'deal':
-                    metaTag = {
-                        title: `Weed dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | ${tab.replace("-", " ")} | Deals | Weedx.io`,
-                        description: `Best deals from ${Despen[0]?.Store_Name} marijuana dispensary in ${Despen[0]?.City}, ${Despen[0]?.State}. Get the best deals, offers and discounts on your favorite cannabis products.`
-                        , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
-                    };
-                    break;
-                case 'media':
-                case 'menu':
-                    metaTag = {
-                        title: `Weed dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | ${tab.replace("-", " ")} | Weedx.io`,
-                        description: `Discover convenient weed dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} with ${Despen[0]?.Store_Name}. Explore our menu or media on Weedx.io for quality products and easy ordering.`
-                        , robot: "NOINDEX, FOLLOW"
-                    };
-                    break;
-                default:
-                    // Default meta tags if no case matches
-                    break;
-            }
-        }
-    }
-    else {
-        if (tab === undefined) {
-            metaTag = {
-                title: `Weed Delivery in ${Despen[0]?.City || ''}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Weedx.io`,
-                description: `Shop your favorite cannabis products from ${Despen[0]?.Store_Name} Weed delivery ${Despen[0]?.City}, ${Despen[0]?.State}. High Quality marijuana products near you. Get the best deals and offers now.`
-                , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
+    const deliveryMeta = {
+        title: `Weed Delivery in ${Despen[0]?.City || ''}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Weedx.io`,
+        description: `Shop your favorite cannabis products from ${Despen[0]?.Store_Name} Weed delivery ${Despen[0]?.City}, ${Despen[0]?.State}. High Quality marijuana products near you. Get the best deals and offers now.`,
+        robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1",
+    };
 
-            };
-        } else {
-            switch (tab) {
-                case 'products':
-                    metaTag = {
-                        title: `Shop Cannabis ${Despen[0]?.SubCategory || ''} | Weed Delivery in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Weedx.io`,
-                        description: `Shop your favorite cannabis ${Despen[0]?.SubCategory} from ${Despen[0]?.Store_Name} Weed delivery ${Despen[0]?.City}, ${Despen[0]?.State}. High Quality marijuana products near you. Get the best deals and offers now.`
-                        , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
+    const tabMetaMap = {
+        products: {
+            title: `Shop Cannabis ${Despen[0]?.Category || ''} | Weed Dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Weedx.io`,
+            description: `Browse Product of ${Despen[0]?.Store_Name} marijuana dispensary in ${Despen[0]?.City}, ${Despen[0]?.State}. High Quality cannabis products near you.`,
+        },
+        'store-details': {
+            title: `Weed dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Store Details | Weedx.io`,
+            description: `Explore weed dispensary in ${Despen[0]?.City}, ${Despen[0]?.State} with ${Despen[0]?.Store_Name}. Check out store deals and find more savings on Weedx.io.`,
+        },
+        review: {
+            title: `${Despen[0]?.Store_Name || 'Weedx.io'} Reviews | Weedx.io`,
+            description: `Discover reviews for ${Despen[0]?.Store_Name || 'Weedx.io'} dispensary and delivery service on Weedx.io. Read user feedback, ratings, and experiences to find the best cannabis products and services near you.`,
+        },
+        deal: {
+            title: `Weed Delivery in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Deals | Weedx.io`,
+            description: `Best deals from ${Despen[0]?.Store_Name} marijuana delivery in ${Despen[0]?.City}, ${Despen[0]?.State}. Get the best deals, offers and discounts on your favorite cannabis products.`,
+        },
+        media: {
+            title: `Weed Delivery in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Media | Weedx.io`,
+            description: `Browse media or menu from ${Despen[0]?.Store_Name} marijuana delivery in ${Despen[0]?.City}, ${Despen[0]?.State}. Get the best cannabis delivery services with high quality products.`,
+            robot: "NOINDEX, FOLLOW",
+        },
+        menu: {
+            title: `Weed Delivery in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Menu | Weedx.io`,
+            description: `Browse media or menu from ${Despen[0]?.Store_Name} marijuana delivery in ${Despen[0]?.City}, ${Despen[0]?.State}. Get the best cannabis delivery services with high quality products.`,
+            robot: "NOINDEX, FOLLOW",
+        },
+    };
 
-                    };
-                    break;
-                case 'store-details':
-                    metaTag = {
-                        title: `Weed Delivery in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Store Details | Weedx.io`,
-                        description: `Explore weed delivery in ${Despen[0]?.City}, ${Despen[0]?.State} with ${Despen[0]?.Store_Name}. Check out store deals and find more savings on Weedx.io.`
-                        , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
-
-                    };
-                    break;
-                case 'review':
-                    metaTag = {
-                        title: `${Despen[0]?.Store_Name || 'Weedx.io'} Reviews | Weedx.io`,
-                        description: `Discover reviews for ${Despen[0]?.Store_Name || 'Weedx.io'} dispensary and delivery service on Weedx.io. Read user feedback, ratings, and experiences to find the best cannabis products and services near you.`
-                        , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
-
-                    };
-                    break;
-                case 'deal':
-                    metaTag = {
-                        title: `Weed Delivery in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | Deals | Weedx.io`,
-                        description: `Best deals from ${Despen[0]?.Store_Name} marijuana delivery in ${Despen[0]?.City}, ${Despen[0]?.State}. Get the best deals, offers and discounts on your favorite cannabis products.`
-                        , robot: "INDEX, FOLLOW, MAX-IMAGE-PREVIEW:LARGE, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1"
-                    };
-                    break;
-                case 'media':
-                case 'menu':
-                    metaTag = {
-                        title: `Weed Delivery in ${Despen[0]?.City}, ${Despen[0]?.State} | ${Despen[0]?.Store_Name} | ${tab.replace("-", " ")} | Weedx.io`,
-                        description: `Browse media or menu from ${Despen[0]?.Store_Name} marijuana delivery in ${Despen[0]?.City}, ${Despen[0]?.State}. Get the best cannabis delivery services with high quality products.`,
-                        robot: "NOINDEX, FOLLOW"
-                    };
-                    break;
-                default:
-                    // Default meta tags if no case matches
-                    break;
-            }
-        }
-    }
+    const metaTag = isWeedDelivery
+        ? { ...deliveryMeta, ...tabMetaMap[tab] }
+        : { ...defaultMeta, ...tabMetaMap[tab] };
 
     const reviewSchema = {
         "@context": "https://schema.org",
         "@type": "Store",
         "name": Despen[0]?.Store_Name || '',
         "image": Despen[0]?.Store_Image || '',
-        "sku": "0",
-        "mpn": "0",
         "description": Despen[0]?.Stores_Description?.replace(/<\/?[^>]+(>|$)/g, "") || '',
         "address": {
             "@type": "PostalAddress",
@@ -141,8 +69,8 @@ function StoreDetails({ Despen, locationStore }) {
             "@type": "Review",
             "reviewRating": {
                 "@type": "Rating",
-                "bestRating": Despen[0]?.rating ? Despen[0]?.rating.toString() : "0",
-                "ratingValue": Despen[0]?.rating ? Despen[0]?.rating.toString() : "0"
+                "bestRating": Despen[0]?.rating?.toString() || "0",
+                "ratingValue": Despen[0]?.rating?.toString() || "0",
             },
             "author": {
                 "@type": "Person",
@@ -151,22 +79,23 @@ function StoreDetails({ Despen, locationStore }) {
         },
         "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingCount": Despen[0]?.TotalRating ? Despen[0]?.TotalRating.toString() : "0",
-            "ratingValue": Despen[0]?.rating ? Despen[0]?.rating.toString() : "0",
-            "reviewCount": Despen[0]?.TotalRating ? Despen[0]?.TotalRating.toString() : "0",
+            "ratingCount": Despen[0]?.TotalRating?.toString() || "0",
+            "ratingValue": Despen[0]?.rating?.toString() || "0",
+            "reviewCount": Despen[0]?.TotalRating?.toString() || "0",
         }
     };
+
     return (
         <Head>
             <title>{metaTag.title}</title>
             <meta name="title" content={metaTag.title} />
             <meta name="description" content={metaTag.description} />
-            <link rel="canonical" href={`https://weedx.io${location.asPath}`} />
-            <meta name="robots" content={metaTag.robot}></meta>
+            <link rel="canonical" href={`https://weedx.io${asPath}`} />
+            <meta name="robots" content={metaTag.robot} />
             <meta property="og:type" content="website" />
             <meta property="og:title" content={metaTag.title} />
             <meta property="og:description" content={metaTag.description} />
-            <meta property="og:url" content={`https://weedx.io${location.asPath}`} />
+            <meta property="og:url" content={`https://weedx.io${asPath}`} />
             <meta property="og:image" content={Despen[0]?.Store_Image || ''} />
             <meta property="og:image:alt" content={Despen[0]?.Store_Name || ''} />
             <meta property="twitter:card" content="summary_large_image" />

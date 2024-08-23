@@ -42,16 +42,16 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
     const [NewData, SetNewData] = useState([])
     const [showdata, Setshowdata] = useState([])
     const [Whishlist, SetWishList] = useState(false)
-    const [AddTOCard, SetAddToCard] = useState([]);  
+    const [AddTOCard, SetAddToCard] = useState([]);
 
- 
+
     React.useEffect(() => {
-      if (typeof window !== 'undefined') {
-        const saved = localStorage.getItem("items");
-        if (saved) {
-          SetAddToCard(JSON.parse(saved));
+        if (typeof window !== 'undefined') {
+            const saved = localStorage.getItem("items");
+            if (saved) {
+                SetAddToCard(JSON.parse(saved));
+            }
         }
-      }
     }, []);
 
     async function AddToCart(Event, counter, SelectWeight, handleClose) {
@@ -234,12 +234,12 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
 
     //   React.useEffect(  ()=>{
     //     if(currentProductID === undefined){
-        //         let a =  RelatedProductResult.filter((item)=>{
-        //             return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating !== 0
-        //         })
-        //         let b =  RelatedProductResult.filter((item)=>{
-        //             return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating === 0
-        //         })
+    //         let a =  RelatedProductResult.filter((item)=>{
+    //             return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating !== 0
+    //         })
+    //         let b =  RelatedProductResult.filter((item)=>{
+    //             return item?.Prices[0]?.Price[0]?.Stock === "IN Stock" && item.rating === 0
+    //         })
     //         Setshowdata(a.concat(b))
     //     }else{
     //         let ababa=  RelatedProductResult.filter((item)=>{
@@ -261,7 +261,11 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
             <div className="row mx-0 marginProductSearchResult">
                 {Boolean(RelatedProductResult?.length) &&
                     <div className="col-12 mt-sm-4 mt-2 p-0">
-                         <h1 className="section_main_title ">{title}</h1>
+                        {title === "You may also like" ?
+                            <h2 className="section_main_title ">{title}</h2>
+                            :
+                            <h1 className="section_main_title ">{title}</h1>
+                        }
                     </div>}
                 {Boolean(location.pathname.includes('/menu-integration') || (title === 'You may also like')) ?
                     <div className="product_card_wrapper p-0">
@@ -292,6 +296,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                         >
                             {
                                 RelatedProductResult?.map((items, index) => {
+
                                     if (items.id !== currentProductID) {
                                         return (
                                             <SwiperSlide key={index}>
@@ -394,7 +399,6 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                         {
                             // Boolean( showdata.length !== 0) ?
                             RelatedProductResult?.map((items, index) => {
-                                console.log(items.Store_Type)
                                 if (items.id !== currentProductID) {
                                     return (
                                         <div className="productSearch_result_container" key={index}>
@@ -410,7 +414,7 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                                                         </IconButton>
                                                     </Box>
                                                 </div>
-                                                <Link href={`/${link}/${modifystr(items.category_name)}/${items.SubcategoryName.replace(/%20| /g, "-")}/${modifystr(items.Product_Name)}/${items.id}`}
+                                                <Link href={`/${link}/${modifystr(items.category_name)}/${modifystr(items.SubcategoryName)}/${modifystr(items.Product_Name)}/${items.id}`}
 
                                                     state={{
                                                         prevuisurl: location.pathname,
@@ -429,38 +433,38 @@ const ProductSearchResult = ({ RelatedProductResult, CategoryName, currentProduc
                                                 </Link>
                                             </div>
                                             <div className=" product_search_result_content_div ">
-                                                <Link href={`/${link}/${modifystr(items.category_name)}/${items.SubcategoryName.replace(/%20| /g, "-")}/${modifystr(items.Product_Name)}/${items.id}`} state={{
+                                                <Link href={`/${link}/${modifystr(items.category_name)}/${modifystr(items.SubcategoryName)}/${modifystr(items.Product_Name)}/${items.id}`} state={{
                                                     prevuisurl: location.pathname,
                                                     id: items.id
                                                 }} >
                                                     <p className="productSearchResultParagraph text-truncate">{items.Product_Name}</p>
-                                                    </Link>
-                                                    <Link href={`/${items.Store_Type === "dispensary" ? "weed-dispensaries" : "weed-deliveries"}/${modifystr(items.StoreName)}/${items.Store_id}`}  >
+                                                </Link>
+                                                <Link href={`/${items.Store_Type === "dispensary" ? "weed-dispensaries" : "weed-deliveries"}/${modifystr(items.StoreName)}/${items.Store_id}`}  >
                                                     <p className="product_search_result_sub_heading text-truncate">by {items.StoreName}</p>
-                                                      </Link>
-                                                    <div className="product_category_list">
-                                                        <span className="product_search_result_span1">15{items.lab_Result !== "Magnesium" ? '%' : "Mg."} THC | 0.2{items.lab_Result !== "Magnesium" ? '%' : "Mg."} CBD</span>
-                                                        <div className="product_cart_review">
-                                                            {new Array(items.rating).fill(null).map((itwm, index) => (
-                                                                <BsStarFill key={index + 1} size={16} color="#31B665" className="product_search_rating_star" />
-                                                            ))}
+                                                </Link>
+                                                <div className="product_category_list">
+                                                    <span className="product_search_result_span1">15{items.lab_Result !== "Magnesium" ? '%' : "Mg."} THC | 0.2{items.lab_Result !== "Magnesium" ? '%' : "Mg."} CBD</span>
+                                                    <div className="product_cart_review">
+                                                        {new Array(items.rating).fill(null).map((itwm, index) => (
+                                                            <BsStarFill key={index + 1} size={16} color="#31B665" className="product_search_rating_star" />
+                                                        ))}
 
-                                                            {new Array(5 - items.rating).fill(null).map((item, index) => (
-                                                                <BsStar key={index + 1} size={16} color="#31B665" className="product_search_rating_star" />
-                                                            ))}
-                                                            <span className="product_search_result_sub_heading ">({items.TotalRating})</span>
-                                                        </div>
+                                                        {new Array(5 - items.rating).fill(null).map((item, index) => (
+                                                            <BsStar key={index + 1} size={16} color="#31B665" className="product_search_rating_star" />
+                                                        ))}
+                                                        <span className="product_search_result_sub_heading ">({items.TotalRating})</span>
                                                     </div>
-                                                    <div className=" productPriceDivHeight">
-                                                        <p className="productSearch text-truncate"><span className="productSearchPrice">${parseInt(items.Prices[0]?.Price[0]?.SalePrice)}  {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <del className="text-muted">${parseInt(items.Prices[0].Price[0].Price)}</del>} </span> per {items.Prices[0].Price[0].Weight ? items.Prices[0].Price[0].Weight : `${items.Prices[0].Price[0].Unit} Unit`}</p>
+                                                </div>
+                                                <div className=" productPriceDivHeight">
+                                                    <p className="productSearch text-truncate"><span className="productSearchPrice">${parseInt(items.Prices[0]?.Price[0]?.SalePrice)}  {parseInt(items.Prices[0].Price[0].Price) > parseInt(items.Prices[0].Price[0].SalePrice) && <del className="text-muted">${parseInt(items.Prices[0].Price[0].Price)}</del>} </span> per {items.Prices[0].Price[0].Weight ? items.Prices[0].Price[0].Weight : `${items.Prices[0].Price[0].Unit} Unit`}</p>
+                                                </div>
+                                                <div className="discount_boc">{
+                                                    items?.CategoryCoupoun?.length !== 0 || items?.ProductCoupoun?.length !== 0 && <div className="discountinfo">
+                                                        <span className="carddiscountoffer">{discountshoer(items.CategoryCoupoun, items.ProductCoupoun)} </span>  and more Offers
                                                     </div>
-                                                    <div className="discount_boc">{
-                                                        items?.CategoryCoupoun?.length !== 0 || items?.ProductCoupoun?.length !== 0 && <div className="discountinfo">
-                                                            <span className="carddiscountoffer">{discountshoer(items.CategoryCoupoun, items.ProductCoupoun)} </span>  and more Offers
-                                                        </div>
-                                                    }</div>
+                                                }</div>
 
-                                            
+
                                                 <div className="my-2">
                                                     <Box className={`center ${classes.loadingBtnTextAndBack}`}>
                                                         {

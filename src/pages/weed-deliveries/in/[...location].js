@@ -59,17 +59,17 @@ const Deliveries = (props) => {
             country: props?.location?.country,
             state: props?.location?.state,
             city: props?.location?.city,
-            formatted_address:props?.formatted_address
-          };
-          const date = new Date();
-          date.setTime(date.getTime() + 60 * 60 * 24 * 365); // 1 year expiry
-          props.isDirectHit &&  cookies.set('fetchlocation', JSON.stringify(setLocation), { 
-            expires: date, 
+            formatted_address: props?.formatted_address
+        };
+        const date = new Date();
+        date.setTime(date.getTime() + 60 * 60 * 24 * 365); // 1 year expiry
+        props.isDirectHit && cookies.set('fetchlocation', JSON.stringify(setLocation), {
+            expires: date,
             path: '/' // Set the path where the cookie is accessible
-          });
+        });
         {
             const { country, state, city, route } = props.location || {};
-
+            console.log(country, state, city, route)
             // Build the URL based on available location data
             let url = '/weed-deliveries/in/';
             if (route) {
@@ -87,7 +87,7 @@ const Deliveries = (props) => {
 
             // Use shallow routing to navigate to the constructed URL
 
-            props.isDirectHit &&   navigate.replace(url, 0, { shallow: true });
+            props.isDirectHit && navigate.replace(url, 0, { shallow: true });
         }
     }, [props.location]);
 
@@ -281,7 +281,7 @@ export const getServerSideProps = async (context) => {
     };
 
     const locationParams = context.params.location || [];
-    let country1 = "", state = "", city = "", formatted_address = "";
+    let country1 = "", state = "", city = "", formatted_address = "" , route="";
 
     let type = {
         country: locationParams[0] || "",
@@ -296,13 +296,15 @@ export const getServerSideProps = async (context) => {
         country1 = k.country || "";
         state = k.state || "";
         city = k.city || "";
+        route= k.route ,
         formatted_address = k.formatted_address || "";
 
     } else {
-        formatted_address =JSON.parse(cookies.fetchlocation).formatted_address
+        formatted_address = JSON.parse(cookies.fetchlocation).formatted_address
         country1 = locationParams[0] || "";
         state = locationParams[1] || "";
         city = locationParams[2] || "";
+        route= locationParams[3] || "";
     }
 
     const object = {
@@ -344,6 +346,7 @@ export const getServerSideProps = async (context) => {
                         country: country1,
                         state: state,
                         city: city,
+                        route:route,
                     },
                     formatted_address: formatted_address,
                     isDirectHit
@@ -358,6 +361,7 @@ export const getServerSideProps = async (context) => {
                         country: country1,
                         state: state,
                         city: city,
+                        route:route,
                     },
                     formatted_address: formatted_address,
                     isDirectHit

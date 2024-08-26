@@ -139,7 +139,7 @@ const Dispensaries = (props) => {
 
 
     React.useEffect(() => {
-        console.log(props.isDirectHit , props.location)
+        console.log(props.isDirectHit, props.location)
         dispatch({ type: 'Location', Location: props?.formatted_address })
         if (props.isDirectHit)
             dispatch({ type: 'permission', permission: true });
@@ -165,17 +165,16 @@ const Dispensaries = (props) => {
 
         {
             const { country, state, city, route } = props.location || {};
-
             // Build the URL based on available location data
             let url = '/weed-dispensaries/in/';
-            if (route) {
+            if (Boolean(route)) {
                 url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}/${modifystr(route)}`;
             }
-            else if (city) {
+            else if (Boolean(city)) {
                 url += `${modifystr(country) || 'default-country'}/${modifystr(state) || 'default-state'}/${modifystr(city)}`;
-            } else if (state) {
+            } else if (Boolean(state)) {
                 url += `${modifystr(country) || 'default-country'}/${modifystr(state)}`;
-            } else if (country) {
+            } else if (Boolean(country)) {
                 url += modifystr(country);
             } else {
                 url = '/weed-dispensaries/default-country'; // Fallback URL
@@ -222,10 +221,12 @@ const Dispensaries = (props) => {
                         {Boolean(props.location.city) && <span> {">"} <span onClick={() => { Boolean(props.location.route) && breadcrumCountry("Country", "state", "City") }}>{props.location.city}</span></span>}
                         {Boolean(props.location.route) && <span> {">"} <span>{props.location.route}</span></span>}
                     </div>
-                    {DispensorShopLocation?.map((ele, index) => {return (
+                    {DispensorShopLocation?.map((ele, index) => {
+                        return (
                             <div key={index}>
                                 <h1 className="m-0"> <span className="dispensories_name">{ele.name}</span> <span className="dispensories_name">{ele.city}</span></h1>
-                            </div> )})}
+                            </div>)
+                    })}
                     <p className="m-0">{`Find Nearby Dispensaries in ${props.formatted_address} for Recreational & Medical weed. Browse Top Cannabis Products and Place Orders from Trusted Local Dispensaries.`}</p>
                 </div>
             </div>
@@ -288,7 +289,7 @@ export const getServerSideProps = async (context) => {
     };
 
     const locationParams = context.params.location || [];
-    let country1 = "", state = "", city = "", formatted_address = "";
+    let country1 = "", state = "", city = "", formatted_address = "", route = "";
 
     let type = {
         country: locationParams[0] || "",
@@ -303,6 +304,7 @@ export const getServerSideProps = async (context) => {
         country1 = k.country || "";
         state = k.state || "";
         city = k.city || "";
+        route = k.route || ""
         formatted_address = k.formatted_address || "";
     } else {
         formatted_address = JSON.parse(cookies.fetchlocation).formatted_address
@@ -361,6 +363,7 @@ export const getServerSideProps = async (context) => {
                         country: country1,
                         state: state,
                         city: city,
+                        route: route,
                     },
                     formatted_address: formatted_address,
                     isDirectHit
@@ -375,6 +378,7 @@ export const getServerSideProps = async (context) => {
                         country: country1,
                         state: state,
                         city: city,
+                        route: route,
                     },
                     formatted_address: formatted_address,
                     isDirectHit

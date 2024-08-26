@@ -11,6 +11,7 @@ function modifystr(str) {
     return ''
   }
   else {
+    
     str = str?.replace(/[^a-zA-Z0-9/ ]/g, "-");
     str = str?.trim().replaceAll(' ', "-");
     let a = 0;

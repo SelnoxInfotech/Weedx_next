@@ -154,6 +154,7 @@ const Dispensaries = (props) => {
             country: props?.location?.country,
             state: props?.location?.state,
             city: props?.location?.city,
+            route:props?.location?.route,
             formatted_address: props?.formatted_address
         };
         const date = new Date();
@@ -244,21 +245,21 @@ const Dispensaries = (props) => {
                             </Box>
                             <Box sx={{ "& .MuiBox-root": { paddingLeft: "0px", paddingRight: "0px", paddingTop: "20px" } }}>
                                 <TabPanel value={value} index={0}>
-                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata}  urlcscr = {props.location}/>
                                 </TabPanel>
                                 <TabPanel value={value} index={1}>
-                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata}  urlcscr = {props.location}/>
                                 </TabPanel>
                                 <TabPanel value={value} index={2}>
-                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata}  urlcscr = {props.location}/>
                                 </TabPanel>
                                 <TabPanel value={value} index={3}>
-                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} />
+                                    <WeedDispansires Store={props.store} location={locations} product={props.product} searchtext={searchtext} setsearchtext={setsearchtext} contentdata={contentdata} urlcscr = {props.location} />
                                 </TabPanel>
                             </Box>
                         </Box>
                         :
-                        <Wronglocation title={' No dispensaries available'} description={'We apologize, but it appears that there are no dispensaries available in your location. Would you like to enter a different address to search for a nearby dispensary?'} />
+                        <Wronglocation  title={' No dispensaries available'} description={'We apologize, but it appears that there are no dispensaries available in your location. Would you like to enter a different address to search for a nearby dispensary?'} />
                     )
                 }
             </div>

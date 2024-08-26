@@ -59,6 +59,7 @@ const Deliveries = (props) => {
             country: props?.location?.country,
             state: props?.location?.state,
             city: props?.location?.city,
+            route:props?.location?.route,
             formatted_address: props?.formatted_address
         };
         const date = new Date();
@@ -69,7 +70,6 @@ const Deliveries = (props) => {
         });
         {
             const { country, state, city, route } = props.location || {};
-            console.log(country, state, city, route)
             // Build the URL based on available location data
             let url = '/weed-deliveries/in/';
             if (route) {
@@ -200,7 +200,7 @@ const Deliveries = (props) => {
 
 
                     {Boolean(props?.store) &&
-                        <WebContent modifystr={modifystr} product={props?.product} Store={props?.store} state={state} from={"delivery"} url={'deliveries'} location={locations}></WebContent>
+                        <WebContent modifystr={modifystr} product={props?.product} Store={props?.store} state={state} from={"delivery"} url={'deliveries'} location={locations}  urlcscr={props.location }></WebContent>
                     }
                 </div>
             </div>
@@ -257,7 +257,6 @@ export async function GetAllDelivery(object) {
 }
 
 export const getServerSideProps = async (context) => {
-
     const cookies = cookie.parse(context.req.headers.cookie || '');
     context.res.setHeader(
         'Cache-Control',

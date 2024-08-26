@@ -210,6 +210,8 @@ export default function DispensoriesDetails(props) {
 
         }
     }, [state.Profile, id, api])
+
+    
     const onSubmit = () => {
 
         const formdata = new FormData();
@@ -302,7 +304,7 @@ export default function DispensoriesDetails(props) {
             }
         }
     }
-    // console.log(params.asPath ,'dfhgfhxfn fdb xhxf')
+    console.log(!location.asPath.includes('/menu-integration')  ,'dfhgfhxfn fdb xhxf')
     return (
       
             // !Despen.length ? <Loader /> 
@@ -452,7 +454,6 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps(context) {
     const storeId = _.findIndex(context.params.details, item => !isNaN(parseInt(item)));
-    console.log(context.params.details[storeId])
     // console.log(context.params.details[storeId])
     let data = [];
     let productdata = []

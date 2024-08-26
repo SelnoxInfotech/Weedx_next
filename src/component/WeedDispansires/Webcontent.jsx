@@ -7,7 +7,8 @@ import Link from "next/link";
 import Neighborhood from "./loactoncomponent/Neighborhood";
 import Zipcode from "./loactoncomponent/Zipcode";
 import { GetProduct } from '../../hooks/apicall/api'
-const WebContent = ({ state, Store = [], modifystr, from, url, product, location }) => {
+const WebContent = ({ state, Store = [], modifystr, from, url, product, location , urlcscr }) => {
+    // console.log(urlcscr)
 
     function getediblelist() {
         Store?.forEach((item) => {
@@ -118,10 +119,13 @@ const WebContent = ({ state, Store = [], modifystr, from, url, product, location
                         </AccordionDetails>
                     </Accordion>
                 </div>
+                {console.log(urlcscr)}
                 <div className="col-lg-6 webContent my-2">
                     <Accordion>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header" >
-                            <h3 >{` Where can I find cannabis ${from} near [Popular Landmark]? `}</h3>
+                            <h3 >{` Where can I find cannabis ${from} near 
+                                  ${Boolean(urlcscr.route) ? urlcscr.route  :Boolean(urlcscr.city) ? urlcscr.city : Boolean(urlcscr.state) ? urlcscr.state :   Boolean(urlcscr.country ) &&urlcscr.country  }
+                            ? `}</h3>
                         </AccordionSummary>
                         <AccordionDetails>
                             <p> {`Popular ${from} near ${location} include `}

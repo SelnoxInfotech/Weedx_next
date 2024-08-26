@@ -9,7 +9,7 @@ import Createcontext from "../../hooks/context";
 import dynamic from 'next/dynamic'
 const WebContent = dynamic(() => import('../WeedDispansires/Webcontent'), { ssr: true });
 import { modifystr } from "../../hooks/utilis/commonfunction";
-const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata, product, location }) => {
+const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata, product, location  ,  urlcscr}) => {
     const { state } = useContext(Createcontext)
  
     return (
@@ -69,7 +69,7 @@ const Weed_Dispansires = ({ Store, searchtext, setsearchtext, contentdata, produ
                             </div>
                         </>
                     }
-                    <WebContent location={location} product={product} modifystr={modifystr} Store={Store} state={state} from={"dispensary"} url={'dispensaries'}></WebContent>
+                    <WebContent location={location} product={product} modifystr={modifystr} Store={Store} state={state} from={"dispensary"} url={'dispensaries'}  urlcscr={urlcscr }></WebContent>
                 </div>
             </div>
         </React.Fragment>

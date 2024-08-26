@@ -195,7 +195,7 @@ app.prepare().
           break
         case "/sitemap/delivery-stores-sitemap.xml":
           const response6 = await axios.get(`https://api.cannabaze.com/UserPanel/Get-Stores/`)
-          if (response6 && response6.data){
+          if (response6 && response6.data) {
             const dispensaryUrls = response6.data.filter(url => url.Store_Type !== "dispensary")
               .map(url => `
                   <url>
@@ -407,7 +407,8 @@ app.prepare().
     server.get('/robots.txt', (req, res) => {
       res.type('text/plain');
       res.send(`User-agent: *
-   Disallow: /`);
+Disallow: /checkout
+Sitemap: https://www.weedx.io/sitemap.xml`);
     });
 
     // Handle all other routes with Next.js

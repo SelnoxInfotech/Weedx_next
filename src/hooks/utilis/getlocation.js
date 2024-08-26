@@ -27,6 +27,7 @@ async function location(value, type) {
 
     const object = {}
     const short = {}
+    
     addressComponents.map((data) => {
       let l = data.types[0]
       if (data.types[0] === "political") {

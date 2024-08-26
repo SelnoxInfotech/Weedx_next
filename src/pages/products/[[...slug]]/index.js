@@ -12,7 +12,7 @@ import SkeletonCard from '@/component/skeleton/DashBoardSkeleton/DispensoriesAdd
 // import ProductSearchResult from "@/component/productcard/ProductSearchResult"
 import Createcontext from "@/hooks/context"
 import _, { kebabCase } from "lodash"
-import { GetProduct, CategoryProductsearch, SubcategoryProduct, SubCategoryApibyname } from "@/hooks/apicall/api"
+import {SubCategoryApibyname } from "@/hooks/apicall/api"
 import { modifystr } from "@/hooks/utilis/commonfunction";
 import Currentlocation from "@/component/currentlocation/CurrentLocation";
 const CategoryProduct = dynamic(() => import('@/component/category/category'), { ssr: true });
@@ -24,7 +24,7 @@ import { setCookie } from 'nookies';
 const Product = (props) => {
     const navigate = useRouter();
     const { slug } = navigate.query;
-    const Category =  props.category
+    const Category = props.category
     const params = slug ? (slug[_.findIndex(slug, item => !isNaN(parseInt(item)))] || 0) : 0;
     const classes = useStyles()
     const { state, dispatch } = React.useContext(Createcontext)
@@ -32,7 +32,7 @@ const Product = (props) => {
     const [subcategories, setsubcategories] = useState([])
     const [Product, SetProduct] = React.useState(props.product)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null); 
+    const [selectedOption, setSelectedOption] = useState(null);
 
     async function ShowCategoryProduct(id, name) {
         SetLoading(true);
@@ -202,16 +202,17 @@ const Product = (props) => {
                                 </div>}
                 </div>
             </div>
-        </React.Fragment>)}
+        </React.Fragment>)
+}
 export default Product
 export const getServerSideProps = async (context) => {
-   
+
     const { req, res } = context;
     let allCookies
     if (req.headers["x-fetchlocation"]) {
         try {
             const jsonObject = JSON.parse(req.headers["x-fetchlocation"]);
-            allCookies=jsonObject
+            allCookies = jsonObject
         } catch (error) {
             console.error('Error decoding or parsing cookie:', error);
         }
@@ -237,7 +238,7 @@ export const getServerSideProps = async (context) => {
         'Cache-Control',
         'public, s-maxage=60, stale-while-revalidate=59'
     );
-    
+
     const object = {
         City: transformString(locationData.city),
         Country: transformString(locationData.country),
@@ -303,7 +304,7 @@ export const getServerSideProps = async (context) => {
                 loading: false,
                 location: locationData,
                 category: category,
-                id:context.params.slug?.length > 1 ? context?.query?.slug[1] : ''
+                id: context.params.slug?.length > 1 ? context?.query?.slug[1] : ''
             },
         };
 

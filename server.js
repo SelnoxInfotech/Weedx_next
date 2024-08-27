@@ -10,6 +10,7 @@ function modifystr(str) {
   if (typeof str !== 'string') {
     return ''
   }
+    
   else {
     str = str?.replace(/[^a-zA-Z0-9/ ]/g, "-");
     str = str?.trim().replaceAll(' ', "-");

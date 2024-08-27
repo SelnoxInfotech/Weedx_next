@@ -10,6 +10,7 @@ function modifystr(str) {
   if (typeof str !== 'string') {
     return ''
   }
+    
   else {
     str = str?.replace(/[^a-zA-Z0-9/ ]/g, "-");
     str = str?.trim().replaceAll(' ', "-");
@@ -407,7 +408,8 @@ app.prepare().
     server.get('/robots.txt', (req, res) => {
       res.type('text/plain');
       res.send(`User-agent: *
-Disallow: /checkout
+Disallow: /
+
 Sitemap: https://www.weedx.io/sitemap.xml`);
     });
 

@@ -407,7 +407,8 @@ app.prepare().
     server.get('/robots.txt', (req, res) => {
       res.type('text/plain');
       res.send(`User-agent: *
-Disallow: /checkout
+Disallow: /
+
 Sitemap: https://www.weedx.io/sitemap.xml`);
     });
 
